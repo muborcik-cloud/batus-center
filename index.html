@@ -3,46 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BATUS WORLD — Детский центр №1 в Душанбе</title>
+<title>BATUS WORLD — Детский центр будущего | Душанбе</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;800;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --gold:#ffcc00;
-  --neon:#ff7a00;
-  --dark:#020202;
-  --glass:rgba(255,255,255,0.12);
+  --gold:#ffd36a;
+  --gold2:#ffb700;
+  --dark:#030303;
+  --glass:rgba(255,255,255,0.08);
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Inter',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
 
 body{
-  background:#020202;
+  background:#000;
   color:#fff;
   overflow-x:hidden;
 }
 
-/* ===== CINEMA BACKGROUND ===== */
-.bg{
+/* ===== CINEMATIC BACKGROUND ===== */
+.background{
   position:fixed;
   inset:0;
   background:
-    radial-gradient(circle at 15% 20%, rgba(255,204,0,0.35), transparent 45%),
-    radial-gradient(circle at 85% 70%, rgba(255,122,0,0.35), transparent 45%),
-    linear-gradient(180deg,#020202,#050505);
-  animation:move 20s infinite alternate;
+    radial-gradient(circle at 20% 20%, rgba(255,211,106,0.25), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(255,183,0,0.25), transparent 45%),
+    linear-gradient(180deg,#000,#050505);
+  animation:bgmove 18s infinite alternate;
   z-index:-1;
 }
-
-@keyframes move{
-  from{filter:hue-rotate(0deg);}
-  to{filter:hue-rotate(20deg);}
+@keyframes bgmove{
+  from{filter:hue-rotate(0deg)}
+  to{filter:hue-rotate(25deg)}
 }
 
 /* ===== HERO ===== */
@@ -51,193 +45,171 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
-  padding:40px;
+  padding:60px;
 }
 
 .hero-box{
-  max-width:1200px;
-  padding:100px 70px;
-  border-radius:50px;
-  background:linear-gradient(180deg,rgba(255,255,255,0.22),rgba(255,255,255,0.04));
-  backdrop-filter:blur(30px);
+  max-width:1400px;
+  padding:120px 90px;
+  border-radius:60px;
+  background:linear-gradient(180deg,rgba(255,255,255,0.25),rgba(255,255,255,0.04));
+  backdrop-filter:blur(35px);
   border:1px solid rgba(255,255,255,0.25);
-  box-shadow:0 100px 300px rgba(0,0,0,0.9);
+  box-shadow:0 120px 400px rgba(0,0,0,1);
+  text-align:center;
 }
 
 .hero h1{
-  font-size:clamp(64px,10vw,140px);
+  font-size:clamp(80px,12vw,180px);
   font-weight:900;
-  letter-spacing:5px;
+  letter-spacing:6px;
 }
-
 .hero h1 span{
-  background:linear-gradient(135deg,var(--gold),var(--neon));
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
 .hero p{
-  font-size:26px;
-  margin:45px 0 70px;
+  margin:60px auto 90px;
+  font-size:30px;
+  max-width:900px;
   opacity:.95;
 }
 
 .hero a{
   display:inline-block;
-  padding:26px 80px;
-  border-radius:80px;
-  background:linear-gradient(135deg,var(--gold),var(--neon));
+  padding:30px 100px;
+  border-radius:100px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
   color:#000;
   font-weight:900;
-  font-size:22px;
+  font-size:24px;
   text-decoration:none;
-  box-shadow:0 40px 120px rgba(255,180,0,0.9);
+  box-shadow:0 60px 200px rgba(255,200,0,0.9);
   transition:.4s;
 }
-
 .hero a:hover{
-  transform:translateY(-8px) scale(1.05);
+  transform:translateY(-10px) scale(1.06);
 }
 
-/* ===== SECTION ===== */
+/* ===== SECTIONS ===== */
 .section{
-  max-width:1400px;
+  max-width:1500px;
   margin:auto;
-  padding:160px 40px;
+  padding:200px 50px;
 }
 
 .section h2{
-  font-size:72px;
+  font-size:90px;
   text-align:center;
-  margin-bottom:120px;
+  margin-bottom:140px;
   font-weight:900;
 }
 
-/* ===== CARDS ===== */
+/* ===== GRID ===== */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:60px;
+  grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+  gap:80px;
 }
 
 .card{
-  padding:70px 60px;
-  border-radius:50px;
+  padding:90px 70px;
+  border-radius:60px;
   background:var(--glass);
-  backdrop-filter:blur(26px);
-  border:1px solid rgba(255,255,255,0.2);
+  backdrop-filter:blur(30px);
+  border:1px solid rgba(255,255,255,0.18);
   text-align:center;
   transition:.5s;
 }
-
 .card:hover{
-  transform:translateY(-20px) scale(1.02);
-  box-shadow:0 120px 300px rgba(0,0,0,1);
+  transform:translateY(-25px) scale(1.03);
+  box-shadow:0 160px 500px rgba(0,0,0,1);
 }
 
 .card h3{
-  font-size:38px;
-  margin-bottom:20px;
+  font-size:44px;
+  margin-bottom:30px;
   font-weight:800;
 }
-
 .card p{
-  font-size:20px;
+  font-size:22px;
   opacity:.9;
 }
 
 /* ===== PRICE ===== */
 .price{
-  margin-top:30px;
-  font-size:50px;
+  margin-top:40px;
+  font-size:56px;
   font-weight:900;
-  background:linear-gradient(135deg,var(--gold),var(--neon));
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-}
-
-/* ===== REVIEWS ===== */
-.review{
-  font-size:22px;
-  font-style:italic;
-}
-
-.author{
-  margin-top:25px;
-  font-weight:800;
-  color:var(--gold);
 }
 
 /* ===== GALLERY ===== */
 .gallery{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:45px;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:60px;
 }
-
 .gallery div{
-  height:300px;
-  border-radius:45px;
-  background:linear-gradient(135deg,#1b1b1b,#000);
+  height:320px;
+  border-radius:50px;
+  background:linear-gradient(135deg,#1a1a1a,#000);
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:26px;
-  font-weight:800;
-  letter-spacing:3px;
-  opacity:.9;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:4px;
   transition:.4s;
 }
-
-.gallery div:hover{
-  transform:scale(1.08);
-}
+.gallery div:hover{transform:scale(1.1)}
 
 /* ===== CTA ===== */
 .cta{
-  padding:200px 40px;
-  text-align:center;
-  background:linear-gradient(135deg,var(--gold),var(--neon));
+  padding:220px 60px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
   color:#000;
+  text-align:center;
 }
-
 .cta h2{
-  font-size:80px;
-  margin-bottom:50px;
+  font-size:100px;
   font-weight:900;
+  margin-bottom:60px;
 }
-
 .cta a{
   display:inline-block;
-  padding:30px 90px;
+  padding:34px 110px;
   background:#000;
   color:#fff;
-  border-radius:80px;
-  font-size:24px;
+  border-radius:100px;
+  font-size:26px;
   font-weight:900;
   text-decoration:none;
 }
 
 /* ===== FOOTER ===== */
 footer{
-  padding:60px;
+  padding:70px;
   text-align:center;
-  font-size:14px;
   opacity:.6;
+  font-size:15px;
 }
 </style>
 </head>
 
 <body>
-<div class="bg"></div>
+<div class="background"></div>
 
 <section class="hero">
   <div class="hero-box">
     <h1>BATUS <span>WORLD</span></h1>
     <p>
       Детский развлекательный центр нового поколения.  
-      Архитектура эмоций. Мир, в который дети влюбляются с первого шага.
+      Архитектура эмоций. Пространство, которое формирует счастливое детство.
     </p>
     <a href="https://wa.me/992011900303?text=Здравствуйте!%20Хочу%20забронировать%20праздник%20в%20BATUS%20WORLD" target="_blank">
       Забронировать праздник
@@ -246,37 +218,28 @@ footer{
 </section>
 
 <section class="section">
-  <h2>Три мира развлечений</h2>
+  <h2>Три этажа счастья</h2>
   <div class="grid">
-    <div class="card"><h3>Мир малышей</h3><p>Безопасность, забота, счастье</p></div>
-    <div class="card"><h3>Мир драйва</h3><p>Батуты, движение, энергия</p></div>
-    <div class="card"><h3>VIP-мир</h3><p>Шоу, праздники, эксклюзив</p></div>
+    <div class="card"><h3>Мир малышей</h3><p>Безопасность, забота, мягкие зоны</p></div>
+    <div class="card"><h3>Мир драйва</h3><p>Батуты, актив, энергия</p></div>
+    <div class="card"><h3>Мир VIP</h3><p>Шоу, дни рождения, эксклюзив</p></div>
   </div>
 </section>
 
 <section class="section">
   <h2>Пакеты</h2>
   <div class="grid">
-    <div class="card"><h3>Family</h3><p>Идеально для семьи</p><div class="price">500 c</div></div>
-    <div class="card"><h3>Premium</h3><p>Комнаты + шоу</p><div class="price">900 c</div></div>
-    <div class="card"><h3>Exclusive</h3><p>Весь этаж под вас</p><div class="price">1500 c</div></div>
-  </div>
-</section>
-
-<section class="section">
-  <h2>Отзывы родителей</h2>
-  <div class="grid">
-    <div class="card"><p class="review">«Это не центр. Это мир.»</p><div class="author">Нигина</div></div>
-    <div class="card"><p class="review">«Лучший детский проект в Душанбе.»</p><div class="author">Фарход</div></div>
-    <div class="card"><p class="review">«Уровень Европы и Дубая.»</p><div class="author">Зарина</div></div>
+    <div class="card"><h3>Family</h3><p>Для всей семьи</p><div class="price">500 c</div></div>
+    <div class="card"><h3>Premium</h3><p>Шоу + комнаты</p><div class="price">900 c</div></div>
+    <div class="card"><h3>Exclusive</h3><p>Целый этаж</p><div class="price">1500 c</div></div>
   </div>
 </section>
 
 <section class="section">
   <h2>Галерея</h2>
   <div class="gallery">
-    <div>BATUS</div><div>WORLD</div><div>LUX</div>
-    <div>KIDS</div><div>FUN</div><div>JOY</div>
+    <div>BATUS</div><div>WORLD</div><div>KIDS</div>
+    <div>JOY</div><div>FUN</div><div>LUX</div>
   </div>
 </section>
 
@@ -286,7 +249,7 @@ footer{
 </section>
 
 <footer>
-© BATUS WORLD • Душанбе • Международный уровень
+© BATUS WORLD · Душанбе · Премиум уровень
 </footer>
 
 </body>
