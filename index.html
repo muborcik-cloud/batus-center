@@ -3,88 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Батутный центр — Душанбе</title>
+<title>ПАТУТЫ — Батутный центр в Душанбе</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+*{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Inter, sans-serif;
-  background:#0f1115;
-  color:#f2f2f2;
+  font-family:Montserrat, sans-serif;
+  background:linear-gradient(180deg,#0b0f1a,#0f1525);
+  color:#fff;
 }
 header{
-  background:#0b0d11;
-  padding:20px;
+  padding:90px 20px;
   text-align:center;
-  border-bottom:1px solid #222;
+  background:
+    radial-gradient(circle at top,#ffcc33 0%,transparent 35%),
+    linear-gradient(135deg,#1a1f35,#0b0f1a);
 }
 header h1{
+  font-size:52px;
   margin:0;
-  color:#ffd54f;
-  font-size:34px;
+  font-weight:800;
 }
 header p{
-  color:#aaa;
-  margin-top:8px;
+  font-size:20px;
+  opacity:.85;
+  margin-top:14px;
 }
-section{
-  max-width:1100px;
-  margin:auto;
-  padding:60px 20px;
-}
-h2{
-  color:#ffd54f;
-  margin-bottom:20px;
-}
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
-.card{
-  background:#161a22;
-  padding:24px;
-  border-radius:14px;
-  border:1px solid #262b36;
-}
-.card h3{
-  margin-top:0;
-  color:#ffd54f;
-}
-.button{
+.btn{
   display:inline-block;
-  margin-top:20px;
-  padding:14px 26px;
-  background:#ffd54f;
+  margin-top:30px;
+  padding:16px 34px;
+  background:#ffcc33;
   color:#000;
-  border-radius:12px;
+  border-radius:40px;
   font-weight:700;
   text-decoration:none;
 }
+section{
+  max-width:1200px;
+  margin:auto;
+  padding:90px 20px;
+}
+h2{
+  font-size:38px;
+  margin-bottom:30px;
+  color:#ffcc33;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:26px;
+}
+.card{
+  background:linear-gradient(180deg,#1b2140,#14182e);
+  padding:32px;
+  border-radius:22px;
+  box-shadow:0 20px 50px rgba(0,0,0,.4);
+}
+.card h3{
+  margin-top:0;
+  font-size:22px;
+  color:#ffcc33;
+}
+.prices .card{
+  text-align:center;
+}
+.price{
+  font-size:40px;
+  font-weight:800;
+  margin:20px 0;
+}
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+}
+.gallery div{
+  height:200px;
+  background:linear-gradient(135deg,#ffcc33,#ff9900);
+  border-radius:18px;
+}
 footer{
   text-align:center;
-  padding:30px;
-  border-top:1px solid #222;
-  color:#888;
+  padding:40px 20px;
+  background:#0b0f1a;
+  opacity:.8;
 }
 
 /* WhatsApp */
 .whatsapp{
   position:fixed;
-  right:20px;
-  bottom:20px;
-  width:64px;
-  height:64px;
+  right:22px;
+  bottom:22px;
+  width:66px;
+  height:66px;
   background:#25D366;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:30px;
-  color:#fff;
   text-decoration:none;
+  color:#fff;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
 }
 </style>
 </head>
@@ -92,45 +116,74 @@ footer{
 <body>
 
 <header>
-  <h1>Батутный развлекательный центр</h1>
-  <p>Душанбе • 3 этажа • Радость для детей и родителей</p>
+  <h1>ПАТУТЫ</h1>
+  <p>Самый большой батутный центр в Душанбе • 3 этажа радости</p>
+  <a class="btn" href="#prices">Посмотреть цены</a>
 </header>
 
 <section>
-  <h2>О нашем центре</h2>
+  <h2>О нашем батутном центре</h2>
   <p>
-    Наш батутный центр — это большое современное пространство для детей.
-    Трёхэтажное здание, батуты, игровые зоны и безопасные развлечения.
+    «ПАТУТЫ» — это современный батутный развлекательный центр для детей и подростков.
+    Просторное трёхэтажное здание, безопасные зоны, яркие эмоции и радость для всей семьи.
   </p>
 </section>
 
 <section>
   <h2>Что у нас есть</h2>
-  <div class="cards">
+  <div class="grid">
     <div class="card">
-      <h3>🟡 Батутная зона</h3>
-      <p>Большие батуты для детей разного возраста.</p>
+      <h3>🤸 Батуты</h3>
+      <p>Большая профессиональная батутная зона.</p>
     </div>
     <div class="card">
-      <h3>🔵 Игровые площадки</h3>
-      <p>Развлекательные зоны и активные игры.</p>
+      <h3>🎮 Игры</h3>
+      <p>Активные развлечения и игровые площадки.</p>
     </div>
     <div class="card">
-      <h3>🎉 Дни рождения</h3>
-      <p>Праздники, торжества и весёлые мероприятия.</p>
+      <h3>🎂 Праздники</h3>
+      <p>Дни рождения, мероприятия, детские вечеринки.</p>
     </div>
+  </div>
+</section>
+
+<section id="prices" class="prices">
+  <h2>Цены</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Мини</h3>
+      <div class="price">100 сомон</div>
+      <p>Короткое посещение</p>
+    </div>
+    <div class="card">
+      <h3>Стандарт</h3>
+      <div class="price">200 сомон</div>
+      <p>Полный доступ</p>
+    </div>
+    <div class="card">
+      <h3>Праздник</h3>
+      <div class="price">400 сомон</div>
+      <p>Для дней рождения</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Фотогалерея</h2>
+  <div class="gallery">
+    <div></div><div></div><div></div><div></div>
   </div>
 </section>
 
 <section>
   <h2>Контакты</h2>
   <p><strong>Телефон:</strong> +992 011 900 303</p>
-  <p>📍 Заказы и посещения — только в городе Душанбе</p>
-  <a class="button" href="tel:+992011900303">Позвонить</a>
+  <p>📍 Душанбе</p>
+  <a class="btn" href="tel:+992011900303">Позвонить сейчас</a>
 </section>
 
 <footer>
-  © Батутный центр Душанбе
+  © Батутный центр «ПАТУТЫ» — Душанбе
 </footer>
 
 <a class="whatsapp" href="https://wa.me/992011900303" target="_blank">💬</a>
