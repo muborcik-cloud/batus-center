@@ -1,222 +1,56 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Muboriz — Премиум сайты в Душанбе</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-<style>
-:root {
-  --bg: #0b0b0d;
-  --card: #141417;
-  --gold: #c9a24d;
-  --text: #e6e6e6;
-  --muted: #9a9a9a;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-}
-
-header {
-  padding: 80px 20px;
-  text-align: center;
-  background: radial-gradient(circle at top, #1a1a1f, #0b0b0d);
-}
-
-header h1 {
-  font-size: 42px;
-  font-weight: 800;
-  color: var(--gold);
-  letter-spacing: 1px;
-}
-
-header p {
-  max-width: 600px;
-  margin: 20px auto;
-  color: var(--muted);
-  font-size: 18px;
-}
-
-.btns {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.btn {
-  padding: 14px 26px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s;
-}
-
-.btn.gold {
-  background: var(--gold);
-  color: #000;
-}
-
-.btn.gold:hover {
-  opacity: 0.85;
-}
-
-.btn.outline {
-  border: 1px solid var(--gold);
-  color: var(--gold);
-}
-
-section {
-  padding: 80px 20px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-h2 {
-  font-size: 32px;
-  margin-bottom: 20px;
-  color: var(--gold);
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-}
-
-.card {
-  background: var(--card);
-  padding: 30px;
-  border-radius: 14px;
-  border: 1px solid #1f1f24;
-}
-
-.card h3 {
-  margin-bottom: 10px;
-  color: var(--gold);
-}
-
-.card p {
-  color: var(--muted);
-}
-
-.price {
-  font-size: 28px;
-  margin-top: 15px;
-  color: var(--text);
-}
-
-.about {
-  max-width: 700px;
-  color: var(--muted);
-  font-size: 18px;
-}
-
-footer {
-  text-align: center;
-  padding: 40px 20px;
-  border-top: 1px solid #1f1f24;
-  color: var(--muted);
-}
-
-.whatsapp {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  background: #25d366;
-  color: #fff;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
-  text-decoration: none;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <h1>MUBORIZ</h1>
-  <p>Создаю ультра-премиальные сайты для бизнеса в Душанбе.  
-  Дизайн. Маркетинг. Доверие. Статус.</p>
-
-  <div class="btns">
-    <a class="btn gold" href="https://wa.me/992011900303">Написать в WhatsApp</a>
-    <a class="btn outline" href="tel:+992011900303">Позвонить</a>
-  </div>
-</header>
-
-<section>
-  <h2>Что я делаю</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>Премиум-дизайн</h3>
-      <p>Дорогой визуал без яркости. Чётко. Статусно.</p>
-    </div>
-    <div class="card">
-      <h3>Маркетинг</h3>
-      <p>Сайты, которые продают, а не просто «есть».</p>
-    </div>
-    <div class="card">
-      <h3>Доверие</h3>
-      <p>Когда человек заходит — он уже хочет заказать.</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2>Цены</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>Мини-сайт</h3>
-      <p>Стильно. Быстро. Эффективно.</p>
-      <div class="price">100 сомони</div>
-    </div>
-    <div class="card">
-      <h3>Бизнес-сайт</h3>
-      <p>2–5 страниц, структура, доверие.</p>
-      <div class="price">200–300 сомони</div>
-    </div>
-    <div class="card">
-      <h3>Премиум</h3>
-      <p>Большой сайт, статус, бренд.</p>
-      <div class="price">400+ сомони</div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2>Обо мне</h2>
-  <p class="about">
-    Я Мубориз.  
-    Я создаю сайты, которые выглядят дорого и вызывают «вау».  
-    Моя цель — чтобы ваш бизнес выглядел сильнее конкурентов.
-  </p>
-</section>
-
-<footer>
-  © Muboriz. Заказы только в городе Душанбе.
-</footer>
-
-<a class="whatsapp" href="https://wa.me/992011900303">💬</a>
-
-</body>
-</html>
+  <meta charset="UTF-8">
+  <title>Патушка — детский развлекательный центр в Душанбе</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Патушка — современный трёхэтажный детский развлекательный центр в Душанбе. Батуты, игровые зоны, праздники, дни рождения.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f6f8fb;
+      color: #222;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #ff7a18, #ffb347);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+    header p {
+      font-size: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    section {
+      padding: 70px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .block-title {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .floors {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+    .card h3 {
+      font-size: 24
