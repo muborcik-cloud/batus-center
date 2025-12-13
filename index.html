@@ -3,145 +3,208 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BATUS — Детский развлекательный центр в Душанбе</title>
+<title>BATUS — Премиум детский центр</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
+:root {
+  --accent: #ff9f1c;
+  --dark: #0f172a;
+  --glass: rgba(255,255,255,0.15);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 body {
-  background: #ffffff;
-  color: #333;
-  line-height: 1.6;
+  background: radial-gradient(circle at top, #1e293b, #020617);
+  color: #fff;
+  overflow-x: hidden;
 }
 
-/* HERO */
+/* ===== HERO ===== */
 .hero {
   min-height: 100vh;
-  background: linear-gradient(135deg, #ffb703, #fb8500);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 30px;
+  padding: 40px;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255,159,28,0.35), transparent);
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
 }
 
 .hero h1 {
-  font-size: 48px;
-  color: #fff;
-  margin-bottom: 15px;
+  font-size: clamp(48px, 8vw, 92px);
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: var(--accent);
 }
 
 .hero p {
-  font-size: 20px;
-  color: #fff;
-  max-width: 650px;
-  margin-bottom: 30px;
+  font-size: 22px;
+  opacity: 0.9;
+  margin-bottom: 40px;
 }
 
 .hero a {
-  background: #fff;
-  color: #fb8500;
-  padding: 16px 30px;
-  border-radius: 40px;
-  text-decoration: none;
+  display: inline-block;
+  padding: 18px 42px;
+  border-radius: 50px;
+  background: var(--accent);
+  color: #000;
+  font-weight: 700;
   font-size: 18px;
-  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 20px 50px rgba(255,159,28,0.5);
+  transition: 0.3s;
 }
 
-/* SECTION */
+.hero a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 80px rgba(255,159,28,0.8);
+}
+
+/* ===== SECTIONS ===== */
 .section {
-  padding: 70px 20px;
-  max-width: 1100px;
+  padding: 120px 20px;
+  max-width: 1200px;
   margin: auto;
 }
 
 .section h2 {
+  font-size: 48px;
   text-align: center;
-  font-size: 36px;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
 }
 
-/* FLOORS */
+/* ===== CARDS ===== */
 .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 35px;
+}
+
+.card {
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  border-radius: 26px;
+  padding: 35px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: 0.4s;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+}
+
+.card h3 {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.card p {
+  opacity: 0.85;
+}
+
+/* ===== PRICES ===== */
+.price {
+  font-size: 34px;
+  color: var(--accent);
+  font-weight: 800;
+  margin-top: 15px;
+}
+
+/* ===== REVIEWS ===== */
+.review {
+  font-style: italic;
+  font-size: 17px;
+}
+
+.author {
+  margin-top: 15px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* ===== GALLERY ===== */
+.gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 25px;
 }
 
-.card {
-  background: #f7f7f7;
-  padding: 25px;
-  border-radius: 18px;
-  text-align: center;
-}
-
-/* PRICES */
-.price {
-  font-size: 26px;
-  color: #fb8500;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-/* REVIEWS */
-.review {
-  font-style: italic;
-}
-
-.author {
-  margin-top: 10px;
-  font-weight: bold;
-  color: #555;
-}
-
-/* GALLERY */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 15px;
-}
-
 .gallery div {
-  height: 180px;
-  background: #ddd;
-  border-radius: 16px;
+  height: 220px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #334155, #020617);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #666;
-  font-size: 18px;
+  font-size: 20px;
+  opacity: 0.8;
+  transition: 0.4s;
 }
 
-/* CTA */
+.gallery div:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+/* ===== CTA ===== */
 .cta {
-  background: linear-gradient(135deg, #fb8500, #ff9f1c);
-  color: #fff;
+  padding: 140px 20px;
   text-align: center;
-  padding: 70px 20px;
+  background: radial-gradient(circle, #ff9f1c, #fb8500);
+  color: #000;
+}
+
+.cta h2 {
+  font-size: 56px;
+  margin-bottom: 30px;
 }
 
 .cta a {
-  background: #fff;
-  color: #fb8500;
-  padding: 16px 30px;
-  border-radius: 35px;
-  font-size: 18px;
-  font-weight: bold;
+  padding: 20px 50px;
+  background: #000;
+  color: #fff;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: 700;
   text-decoration: none;
 }
 
-/* FOOTER */
+/* ===== FOOTER ===== */
 footer {
   text-align: center;
-  padding: 25px;
-  background: #f2f2f2;
+  padding: 40px;
+  background: #020617;
   font-size: 14px;
+  opacity: 0.7;
 }
 </style>
 </head>
@@ -150,87 +213,63 @@ footer {
 
 <!-- HERO -->
 <section class="hero">
-  <h1>BATUS 🎉</h1>
-  <p>Детский развлекательный центр в Душанбе.  
-  3 этажа радости, батутов и счастливых эмоций.</p>
-
-  <a href="https://wa.me/992011900303?text=Здравствуйте!%20Хочу%20забронировать%20праздник%20в%20BATUS" target="_blank">
-    Забронировать праздник
-  </a>
+  <div class="hero-content">
+    <h1>BATUS <span>Premium</span></h1>
+    <p>Самый красивый детский развлекательный центр в Душанбе.  
+    3 этажа эмоций. 100% восторга. Абсолютный уровень.</p>
+    <a href="https://wa.me/992011900303?text=Здравствуйте!%20Хочу%20забронировать%20праздник%20в%20BATUS" target="_blank">
+      Забронировать в WhatsApp
+    </a>
+  </div>
 </section>
 
 <!-- FLOORS -->
 <section class="section">
-  <h2>🎠 Зоны по этажам</h2>
+  <h2>Пространства</h2>
   <div class="grid">
-    <div class="card"><h3>1 этаж</h3><p>Игровая зона для малышей</p></div>
-    <div class="card"><h3>2 этаж</h3><p>Батуты и активные игры</p></div>
-    <div class="card"><h3>3 этаж</h3><p>Праздники и дни рождения</p></div>
+    <div class="card"><h3>1 этаж</h3><p>Малыши и безопасные игры</p></div>
+    <div class="card"><h3>2 этаж</h3><p>Батуты и активные зоны</p></div>
+    <div class="card"><h3>3 этаж</h3><p>VIP праздники и шоу</p></div>
   </div>
 </section>
 
 <!-- PRICES -->
 <section class="section">
-  <h2>💰 Пакеты праздников</h2>
+  <h2>Пакеты</h2>
   <div class="grid">
-    <div class="card">
-      <h3>Стандарт</h3>
-      <p>2 часа, игровая зона</p>
-      <div class="price">от 300 сомони</div>
-    </div>
-    <div class="card">
-      <h3>Премиум</h3>
-      <p>Батуты + комната</p>
-      <div class="price">от 600 сомони</div>
-    </div>
-    <div class="card">
-      <h3>VIP</h3>
-      <p>Весь этаж + аниматор</p>
-      <div class="price">от 1000 сомони</div>
-    </div>
+    <div class="card"><h3>Standard</h3><p>Игры и веселье</p><div class="price">300 c</div></div>
+    <div class="card"><h3>Premium</h3><p>Комнаты + батуты</p><div class="price">600 c</div></div>
+    <div class="card"><h3>Royal</h3><p>Весь этаж + шоу</p><div class="price">1000 c</div></div>
   </div>
 </section>
 
 <!-- REVIEWS -->
 <section class="section">
-  <h2>❤️ Отзывы родителей</h2>
+  <h2>Нам доверяют</h2>
   <div class="grid">
-    <div class="card">
-      <p class="review">«Лучший центр в Душанбе! Ребёнок был в восторге.»</p>
-      <div class="author">— Мадина</div>
-    </div>
-    <div class="card">
-      <p class="review">«Очень чисто, красиво и безопасно. Спасибо!»</p>
-      <div class="author">— Фаррух</div>
-    </div>
-    <div class="card">
-      <p class="review">«Праздник прошёл идеально. Рекомендуем!»</p>
-      <div class="author">— Сабина</div>
-    </div>
+    <div class="card"><p class="review">«Такого уровня мы не видели даже за границей.»</p><div class="author">Мадина</div></div>
+    <div class="card"><p class="review">«Это не центр — это эмоции.»</p><div class="author">Фаррух</div></div>
+    <div class="card"><p class="review">«Дети не хотели уходить.»</p><div class="author">Сабина</div></div>
   </div>
 </section>
 
 <!-- GALLERY -->
 <section class="section">
-  <h2>📸 Фото-галерея</h2>
+  <h2>Галерея</h2>
   <div class="gallery">
-    <div>Фото 1</div>
-    <div>Фото 2</div>
-    <div>Фото 3</div>
-    <div>Фото 4</div>
-    <div>Фото 5</div>
-    <div>Фото 6</div>
+    <div>Фото</div><div>Фото</div><div>Фото</div>
+    <div>Фото</div><div>Фото</div><div>Фото</div>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cta">
-  <h2>Готовы подарить ребёнку праздник?</h2>
-  <a href="https://wa.me/992011900303" target="_blank">Написать в WhatsApp</a>
+  <h2>Готовы к идеальному празднику?</h2>
+  <a href="https://wa.me/992011900303">Написать в WhatsApp</a>
 </section>
 
 <footer>
-© BATUS — Детский развлекательный центр | Душанбе
+© BATUS Premium • Душанбе
 </footer>
 
 </body>
