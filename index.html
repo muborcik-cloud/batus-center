@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>BATUS — детский развлекательный центр</title>
+  <title>BATUS — Детский развлекательный центр</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -10,58 +10,88 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
     }
 
     body {
-      background: #0b0b0f;
-      color: #ffffff;
+      background: radial-gradient(circle at top, #1a1a2e, #0b0b0f);
+      color: #fff;
+      overflow-x: hidden;
     }
 
-    .screen {
+    .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 60px 20px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,200,0,0.15), transparent 40%),
+        radial-gradient(circle at 80% 60%, rgba(255,100,0,0.15), transparent 40%);
+      z-index: 0;
+    }
+
+    .hero-content {
+      max-width: 900px;
       text-align: center;
-      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 40px;
+      background: linear-gradient(90deg, #ffcc00, #ff7a00);
+      color: #000;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      margin-bottom: 25px;
     }
 
     h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
+      font-size: 56px;
+      line-height: 1.1;
+      margin-bottom: 25px;
     }
 
-    p {
-      font-size: 20px;
-      max-width: 700px;
+    h1 span {
+      background: linear-gradient(90deg, #ffcc00, #ff7a00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 22px;
       opacity: 0.85;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
     }
 
-    .tag {
-      display: inline-block;
-      margin-bottom: 20px;
-      padding: 8px 16px;
-      border-radius: 30px;
-      background: linear-gradient(90deg, #ffcc00, #ff6a00);
-      color: #000;
-      font-weight: bold;
-      font-size: 14px;
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
-  </style>
-</head>
-<body>
 
-  <section class="screen">
-    <div>
-      <div class="tag">Детский развлекательный центр</div>
-      <h1>BATUS</h1>
-      <p>
-        Пространство, где дети счастливы,  
-        а родители спокойны.
-      </p>
-    </div>
-  </section>
+    .btn {
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.3s;
+    }
 
-</body>
-</html>
+    .btn-primary {
+      background: linear-gradient(90deg, #ff
