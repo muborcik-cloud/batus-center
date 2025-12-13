@@ -1,56 +1,208 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Патушка — детский развлекательный центр в Душанбе</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Патушка — современный трёхэтажный детский развлекательный центр в Душанбе. Батуты, игровые зоны, праздники, дни рождения.">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: #f6f8fb;
-      color: #222;
-      line-height: 1.6;
-    }
-    header {
-      background: linear-gradient(135deg, #ff7a18, #ffb347);
-      color: white;
-      padding: 80px 20px;
-      text-align: center;
-    }
-    header h1 {
-      font-size: 48px;
-      font-weight: 800;
-      margin-bottom: 20px;
-    }
-    header p {
-      font-size: 20px;
-      max-width: 800px;
-      margin: auto;
-    }
-    section {
-      padding: 70px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .block-title {
-      font-size: 36px;
-      font-weight: 800;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-    .floors {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-    }
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-    }
-    .card h3 {
-      font-size: 24
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Батутный центр | Душанбе</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{
+background:#0b0b0b;
+color:#fff;
+line-height:1.6;
+}
+
+/* ШАПКА */
+header{
+min-height:100vh;
+background:
+linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.85)),
+url("https://images.unsplash.com/photo-1599058917212-d750089bc07e") center/cover no-repeat;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+header h1{
+font-size:48px;
+color:#ffd700;
+letter-spacing:2px;
+}
+header p{
+max-width:700px;
+margin:20px auto;
+font-size:20px;
+}
+header .btns{
+margin-top:25px;
+}
+.btn{
+display:inline-block;
+padding:14px 28px;
+margin:8px;
+border-radius:50px;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
+.btn-gold{
+background:#ffd700;
+color:#000;
+}
+.btn-gold:hover{transform:scale(1.05)}
+.btn-outline{
+border:2px solid #ffd700;
+color:#ffd700;
+}
+.btn-outline:hover{background:#ffd700;color:#000}
+
+/* СЕКЦИИ */
+section{
+padding:80px 20px;
+max-width:1200px;
+margin:auto;
+}
+h2{
+text-align:center;
+font-size:36px;
+color:#ffd700;
+margin-bottom:40px;
+}
+
+/* КАРТОЧКИ */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+.card{
+background:#111;
+border:1px solid #222;
+border-radius:20px;
+padding:30px;
+text-align:center;
+transition:.3s;
+}
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 30px rgba(255,215,0,.25);
+}
+.card h3{
+margin-bottom:15px;
+color:#ffd700;
+}
+
+/* ЦЕНЫ */
+.price{
+font-size:32px;
+color:#ffd700;
+margin:15px 0;
+}
+
+/* КАРТА */
+iframe{
+width:100%;
+height:350px;
+border-radius:20px;
+border:none;
+}
+
+/* FOOTER */
+footer{
+background:#000;
+padding:30px;
+text-align:center;
+font-size:14px;
+color:#aaa;
+}
+
+/* WHATSAPP КНОПКА */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25d366;
+width:60px;
+height:60px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+color:#fff;
+text-decoration:none;
+box-shadow:0 0 20px rgba(0,0,0,.5);
+z-index:999;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>БАТУТНЫЙ ЦЕНТР</h1>
+<p>Современный трёхэтажный батутный развлекательный центр в Душанбе.  
+Детям — радость, родителям — уверенность, праздникам — максимум эмоций.</p>
+
+<div class="btns">
+<a class="btn btn-gold" href="tel:+992011900303">📞 Позвонить</a>
+<a class="btn btn-outline" href="https://wa.me/992011900303" target="_blank">💬 WhatsApp</a>
+</div>
+</header>
+
+<section>
+<h2>Что у нас есть</h2>
+<div class="grid">
+<div class="card">
+<h3>1 этаж</h3>
+<p>Батутная арена, безопасные зоны для малышей</p>
+</div>
+<div class="card">
+<h3>2 этаж</h3>
+<p>Игровые зоны, лабиринты, аттракционы</p>
+</div>
+<div class="card">
+<h3>3 этаж</h3>
+<p>Дни рождения, праздники, комнаты отдыха</p>
+</div>
+</div>
+</section>
+
+<section>
+<h2>Цены и пакеты</h2>
+<div class="grid">
+<div class="card">
+<h3>Стандарт</h3>
+<div class="price">50 c</div>
+<p>1 час прыжков</p>
+</div>
+<div class="card">
+<h3>Праздник</h3>
+<div class="price">300 c</div>
+<p>Комната + батуты</p>
+</div>
+<div class="card">
+<h3>VIP</h3>
+<div class="price">600 c</div>
+<p>Полный этаж + аниматор</p>
+</div>
+</div>
+</section>
+
+<section>
+<h2>Где мы находимся</h2>
+<iframe src="https://maps.google.com/maps?q=Душанбе&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+</section>
+
+<footer>
+© Батутный центр • Душанбе  
+<br>Телефон: +992 011 900 303
+</footer>
+
+<a class="whatsapp" href="https://wa.me/992011900303" target="_blank">💬</a>
+
+</body>
+</html>
