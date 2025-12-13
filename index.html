@@ -53,3 +53,89 @@
   </section>
 </body>
 </html>
+<!-- Форма заявки + WhatsApp -->
+<style>
+  .contact-box {
+    max-width: 420px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+  }
+
+  .contact-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .contact-box input,
+  .contact-box textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+  }
+
+  .contact-box button {
+    width: 100%;
+    padding: 14px;
+    background: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .contact-box button:hover {
+    opacity: 0.9;
+  }
+
+  .wa-btn {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #25D366;
+  }
+</style>
+
+<div class="contact-box">
+  <h2>Оставить заявку</h2>
+
+  <input id="name" type="text" placeholder="Ваше имя" required>
+  <input id="phone" type="tel" placeholder="Номер телефона" required>
+  <textarea id="msg" placeholder="Комментарий"></textarea>
+
+  <button onclick="sendWhatsApp()">Отправить в WhatsApp</button>
+
+  <a class="wa-btn" href="https://wa.me/992011900303" target="_blank">
+    Написать напрямую в WhatsApp
+  </a>
+</div>
+
+<script>
+  function sendWhatsApp() {
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let msg = document.getElementById("msg").value;
+
+    let text =
+      "Заявка с сайта:%0A" +
+      "Имя: " + name + "%0A" +
+      "Телефон: " + phone + "%0A" +
+      "Комментарий: " + msg;
+
+    window.open(
+      "https://wa.me/992011900303?text=" + text,
+      "_blank"
+    );
+  }
+</script>
+<!-- /Форма заявки + WhatsApp -->
