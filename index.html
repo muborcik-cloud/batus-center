@@ -1,271 +1,244 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>Батутный центр Душанбе — Батуты</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    :root {
-      --main: #ff4d00;
-      --dark: #0f0f14;
-      --gray: #f4f4f4;
-      --text: #333;
-    }
+<meta charset="UTF-8">
+<title>Profit Center — Центр возможностей</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 
-    body {
-      background: #fff;
-      color: var(--text);
-      line-height: 1.6;
-    }
+body{
+  background:#0b0b0b;
+  color:#ffffff;
+}
 
-    header {
-      background: linear-gradient(135deg, #ff4d00, #ff7a00);
-      color: #fff;
-      padding: 80px 20px;
-      text-align: center;
-    }
+header{
+  position:fixed;
+  top:0;left:0;
+  width:100%;
+  background:#000;
+  padding:20px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #222;
+  z-index:1000;
+}
 
-    header h1 {
-      font-size: 48px;
-      margin-bottom: 15px;
-    }
+header h1{
+  color:#ffd700;
+  font-size:22px;
+  letter-spacing:2px;
+}
 
-    header p {
-      font-size: 20px;
-      max-width: 700px;
-      margin: 0 auto 30px;
-    }
+nav a{
+  color:#fff;
+  text-decoration:none;
+  margin-left:25px;
+  font-size:14px;
+  text-transform:uppercase;
+}
 
-    .btn {
-      display: inline-block;
-      background: #fff;
-      color: var(--main);
-      padding: 14px 28px;
-      border-radius: 30px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+nav a:hover{color:#ffd700}
 
-    .btn:hover {
-      transform: scale(1.05);
-    }
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:120px 20px;
+  background:radial-gradient(circle at top,#1c1c1c,#000);
+}
 
-    nav {
-      background: var(--dark);
-      padding: 15px;
-      text-align: center;
-    }
+.hero h2{
+  font-size:58px;
+  margin-bottom:20px;
+}
 
-    nav a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: 500;
-    }
+.hero p{
+  font-size:20px;
+  max-width:900px;
+  margin:auto;
+  color:#ccc;
+}
 
-    section {
-      padding: 70px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
+.buttons{
+  margin-top:40px;
+}
 
-    h2 {
-      text-align: center;
-      font-size: 36px;
-      margin-bottom: 40px;
-    }
+.btn{
+  display:inline-block;
+  padding:18px 35px;
+  margin:10px;
+  border-radius:40px;
+  font-size:16px;
+  text-decoration:none;
+  font-weight:bold;
+}
 
-    .about {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 40px;
-      align-items: center;
-    }
+.btn-gold{
+  background:#ffd700;
+  color:#000;
+}
 
-    .about div {
-      font-size: 18px;
-    }
+.btn-dark{
+  background:#111;
+  color:#fff;
+  border:1px solid #333;
+}
 
-    .prices {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
-    }
+section{
+  padding:100px 20px;
+}
 
-    .price-card {
-      border: 1px solid #eee;
-      border-radius: 20px;
-      padding: 30px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
+.container{
+  max-width:1100px;
+  margin:auto;
+  text-align:center;
+}
 
-    .price-card h3 {
-      font-size: 26px;
-      margin-bottom: 15px;
-      color: var(--main);
-    }
+h3{
+  font-size:40px;
+  margin-bottom:30px;
+  color:#ffd700;
+}
 
-    .price {
-      font-size: 32px;
-      font-weight: bold;
-      margin: 15px 0;
-    }
+p{
+  font-size:18px;
+  color:#ccc;
+  max-width:900px;
+  margin:auto;
+}
 
-    .price-card ul {
-      list-style: none;
-      margin: 20px 0;
-    }
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+  margin-top:60px;
+}
 
-    .price-card li {
-      margin: 10px 0;
-    }
+.card{
+  background:#111;
+  padding:40px 30px;
+  border-radius:30px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+}
 
-    .price-card .btn {
-      background: var(--main);
-      color: #fff;
-    }
+.card h4{
+  font-size:24px;
+  margin-bottom:15px;
+}
 
-    .contact {
-      background: var(--gray);
-      border-radius: 30px;
-      padding: 50px;
-      text-align: center;
-    }
+.price{
+  font-size:30px;
+  color:#ffd700;
+  margin:20px 0;
+}
 
-    .contact p {
-      font-size: 20px;
-      margin-bottom: 20px;
-    }
+.contact{
+  background:#000;
+}
 
-    footer {
-      background: var(--dark);
-      color: #aaa;
-      text-align: center;
-      padding: 30px 15px;
-      font-size: 14px;
-    }
+.contact a{
+  display:block;
+  color:#ffd700;
+  font-size:22px;
+  margin:15px 0;
+  text-decoration:none;
+}
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 34px;
-      }
-      h2 {
-        font-size: 28px;
-      }
-    }
-  </style>
+footer{
+  background:#000;
+  padding:40px 20px;
+  text-align:center;
+  color:#777;
+  font-size:14px;
+}
+</style>
 </head>
 
 <body>
 
+<header>
+  <h1>PROFIT CENTER</h1>
   <nav>
     <a href="#home">Главная</a>
     <a href="#about">О центре</a>
-    <a href="#prices">Цены</a>
-    <a href="#contact">Заказать</a>
+    <a href="#zones">Зоны</a>
+    <a href="#order">Заказать</a>
   </nav>
+</header>
 
-  <header id="home">
-    <h1>Батутinline-blocБатуты»</h1>
+<section class="hero" id="home">
+  <div>
+    <h2>Центр прибыли и возможностей</h2>
     <p>
-      Самый современный детский батутный и развлекательный центр в Душанбе.  
-      Радость, безопасность и эмоции на трёх этажах удовольствия.
+      Profit Center — это современный, двухзонный, красивый и продуманный центр,
+      созданный для роста, движения и результата.
     </p>
-    <a class="btn" href="#contact">Записаться сейчас</a>
-  </header>
 
-  <section id="about">
-    <h2>О нашем центре</h2>
-    <div class="about">
-      <div>
+    <div class="buttons">
+      <a class="btn btn-gold" href="tel:+992011900303">📞 Позвонить</a>
+      <a class="btn btn-dark" href="https://wa.me/992011900303" target="_blank">💬 WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <h3>О Profit Center</h3>
+    <p>
+      Наш профит-центр — это пространство, где всё создано ради результата.
+      Чёткая структура, современный дизайн, сильная концепция.
+      Здесь каждая деталь работает на прибыль.
+    </p>
+  </div>
+</section>
+
+<section id="zones">
+  <div class="container">
+    <h3>Двухзонная структура</h3>
+
+    <div class="cards">
+      <div class="card">
+        <h4>Зона развития</h4>
         <p>
-          «Патуты» — это большой батутный центр в городе Душанбе, созданный для детей и семей.
-          У нас современное оборудование, просторные залы и безопасные зоны для активных игр.
-        </p>
-        <p>
-          Центр расположен в трёхэтажном здании и подходит как для обычных посещений,
-          так и для дней рождения, праздников и групповых мероприятий.
+          Пространство для роста, идей и решений.
+          Комфорт, стиль и энергия движения.
         </p>
       </div>
-      <div>
+
+      <div class="card">
+        <h4>Зона прибыли</h4>
         <p>
-          ✔ Батутные зоны  
-          ✔ Игровые развлечения  
-          ✔ Безопасность и контроль  
-          ✔ Уютная атмосфера  
-          ✔ Профессиональный персонал
+          Место, где идеи превращаются в результат.
+          Максимальная концентрация на ценности.
         </p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="prices">
-    <h2>Цены и пакеты</h2>
-    <div class="prices">
+<section id="order" class="contact">
+  <div class="container">
+    <h3>Заказать / Связаться</h3>
 
-      <div class="price-card">
-        <h3>Базовый</h3>
-        <div class="price">100 сомони</div>
-        <ul>
-          <li>Вход в батутную зону</li>
-          <li>Свободное время</li>
-          <li>Подходит для короткого визита</li>
-        </ul>
-        <a class="btn" href="#contact">Выбрать</a>
-      </div>
+    <a href="tel:+992011900303">📞 +992 011 900 303</a>
+    <a href="https://wa.me/992011900303" target="_blank">💬 Написать в WhatsApp</a>
 
-      <div class="price-card">
-        <h3>Развлекательный</h3>
-        <div class="price">200 сомони</div>
-        <ul>
-          <li>Все батуты</li>
-          <li>Игровые развлечения</li>
-          <li>Отлично для детей</li>
-        </ul>
-        <a class="btn" href="#contact">Выбрать</a>
-      </div>
+    <p style="margin-top:30px;">
+      Мы отвечаем быстро.  
+      Люди звонят снова и снова.
+    </p>
+  </div>
+</section>
 
-      <div class="price-card">
-        <h3>Премиум</h3>
-        <div class="price">400 сомони</div>
-        <ul>
-          <li>Весь центр</li>
-          <li>Праздничный формат</li>
-          <li>Максимум эмоций</li>
-        </ul>
-        <a class="btn" href="#contact">Выбрать</a>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="contact">
-      <h2>Заказать посещение</h2>
-      <p>
-        Напишите или позвоните нам, чтобы забронировать время или задать вопросы.
-      </p>
-      <p>
-        📞 <strong>+992 011 900 303</strong>
-      </p>
-      <a class="btn" href="https://wa.me/992011900303" target="_blank">
-        Написать в WhatsApp
-      </a>
-    </div>
-  </section>
-
-  <footer>
-    © Батутный центр «Батуты», Душанбе. Все права защищены.
-  </footer>
+<footer>
+  © Profit Center  
+  Стоимость идеи — бесконечность
+</footer>
 
 </body>
 </html>
