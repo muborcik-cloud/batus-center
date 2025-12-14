@@ -1,243 +1,222 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-<meta charset="UTF-8">
-<title>Muboriz Ultra — Business Center</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Батутный центр в Душанбе</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
-body{
-  background:#0a0a0a;
-  color:#ffffff;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
 
-header{
-  position:fixed;
-  top:0;
-  width:100%;
-  background:#000;
-  padding:20px 40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #222;
-  z-index:1000;
-}
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+    }
 
-header h1{
-  color:#ffd700;
-  font-size:22px;
-  letter-spacing:2px;
-}
+    header {
+      padding: 30px 10%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-nav a{
-  color:#fff;
-  margin-left:25px;
-  text-decoration:none;
-  font-size:14px;
-  text-transform:uppercase;
-}
+    header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #00ffd5;
+    }
 
-nav a:hover{color:#ffd700}
+    nav a {
+      color: #fff;
+      margin-left: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      opacity: 0.9;
+    }
 
-.hero{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:140px 20px;
-  background:radial-gradient(circle at top,#1c1c1c,#000);
-}
+    nav a:hover {
+      color: #00ffd5;
+    }
 
-.hero h2{
-  font-size:56px;
-  margin-bottom:20px;
-}
+    .hero {
+      padding: 120px 10%;
+      text-align: center;
+    }
 
-.hero p{
-  font-size:20px;
-  max-width:900px;
-  margin:auto;
-  color:#ccc;
-}
+    .hero h2 {
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
 
-.btn{
-  display:inline-block;
-  margin:15px;
-  padding:18px 38px;
-  border-radius:40px;
-  text-decoration:none;
-  font-weight:bold;
-}
+    .hero p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      opacity: 0.9;
+    }
 
-.gold{background:#ffd700;color:#000}
-.dark{background:#111;color:#fff;border:1px solid #333}
+    .buttons a {
+      display: inline-block;
+      padding: 15px 30px;
+      margin: 10px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
 
-section{
-  padding:100px 20px;
-}
+    .btn-main {
+      background: #00ffd5;
+      color: #000;
+    }
 
-.container{
-  max-width:1100px;
-  margin:auto;
-  text-align:center;
-}
+    .btn-main:hover {
+      background: #00c2a6;
+    }
 
-h3{
-  font-size:40px;
-  color:#ffd700;
-  margin-bottom:30px;
-}
+    .btn-outline {
+      border: 2px solid #00ffd5;
+      color: #00ffd5;
+    }
 
-p{
-  font-size:18px;
-  color:#ccc;
-  max-width:900px;
-  margin:auto;
-}
+    .btn-outline:hover {
+      background: #00ffd5;
+      color: #000;
+    }
 
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;
-  margin-top:60px;
-}
+    section {
+      padding: 80px 10%;
+    }
 
-.card{
-  background:#111;
-  padding:40px;
-  border-radius:30px;
-  box-shadow:0 25px 70px rgba(0,0,0,.7);
-}
+    section h3 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #00ffd5;
+    }
 
-.card h4{
-  font-size:24px;
-  margin-bottom:15px;
-}
+    section p {
+      font-size: 17px;
+      max-width: 800px;
+      opacity: 0.9;
+    }
 
-form{
-  max-width:500px;
-  margin:40px auto 0;
-}
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
 
-input,textarea{
-  width:100%;
-  padding:15px;
-  margin-bottom:15px;
-  border-radius:12px;
-  border:none;
-  font-size:16px;
-}
+    .card {
+      background: rgba(255,255,255,0.05);
+      padding: 30px;
+      border-radius: 20px;
+      transition: 0.3s;
+    }
 
-button{
-  width:100%;
-  padding:18px;
-  border-radius:40px;
-  border:none;
-  background:#ffd700;
-  font-size:18px;
-  font-weight:bold;
-  cursor:pointer;
-}
+    .card:hover {
+      transform: translateY(-10px);
+      background: rgba(255,255,255,0.08);
+    }
 
-footer{
-  background:#000;
-  padding:40px 20px;
-  text-align:center;
-  color:#777;
-}
-</style>
+    .card h4 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #00ffd5;
+    }
+
+    footer {
+      padding: 40px 10%;
+      text-align: center;
+      background: rgba(0,0,0,0.3);
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    footer a {
+      color: #00ffd5;
+      text-decoration: none;
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-  <h1>MUBORIZ ULTRA</h1>
+  <h1>Батутный Центр</h1>
   <nav>
-    <a href="#home">Home</a>
-    <a href="#center">Center</a>
-    <a href="#about">About me</a>
-    <a href="#order">Order</a>
+    <a href="#about">О нас</a>
+    <a href="#services">Развлечения</a>
+    <a href="#contact">Контакты</a>
   </nav>
 </header>
 
-<section class="hero" id="home">
-  <div>
-    <h2>Three-Story Business Center</h2>
-    <p>
-      A modern, professional, three-floor business center created for growth,
-      profit and strong results.
-    </p>
-    <a class="btn gold" href="tel:+992011900303">📞 Call</a>
-    <a class="btn dark" href="https://wa.me/992011900303" target="_blank">💬 WhatsApp</a>
-  </div>
-</section>
+<section class="hero">
+  <h2>Дружелюбный батутный центр в Душанбе</h2>
+  <p>
+    Современный, безопасный и весёлый батутный центр для детей и взрослых.  
+    Радость, движение и эмоции — всё в одном месте!
+  </p>
 
-<section id="center">
-  <div class="container">
-    <h3>What is inside</h3>
-    <div class="cards">
-      <div class="card">
-        <h4>1st Floor</h4>
-        <p>Reception, client zone, modern services area.</p>
-      </div>
-      <div class="card">
-        <h4>2nd Floor</h4>
-        <p>Business space, development and profit solutions.</p>
-      </div>
-      <div class="card">
-        <h4>3rd Floor</h4>
-        <p>Premium zone for strategy, growth and results.</p>
-      </div>
-    </div>
+  <div class="buttons">
+    <a class="btn-main" href="tel:+992011900303">Позвонить</a>
+    <a class="btn-outline" href="https://wa.me/992011900303" target="_blank">Написать в WhatsApp</a>
   </div>
 </section>
 
 <section id="about">
-  <div class="container">
-    <h3>About Me</h3>
-    <p>
-      My name is Muboriz.  
-      I create professional business projects, strong websites
-      and modern digital solutions.
-    </p>
-    <p style="margin-top:20px;">
-      📞 Phone: +992 011 900 303
-    </p>
+  <h3>Обо мне</h3>
+  <p>
+    Меня зовут <b>Мубориз</b>.  
+    Я создатель и владелец батутного центра.  
+    Моя цель — создать безопасное, яркое и дружелюбное место,  
+    куда хочется возвращаться снова и снова.
+  </p>
+</section>
+
+<section id="services">
+  <h3>Что есть в нашем центре</h3>
+
+  <div class="cards">
+    <div class="card">
+      <h4>🟢 Батутная зона</h4>
+      <p>Большие и безопасные батуты для активного отдыха.</p>
+    </div>
+
+    <div class="card">
+      <h4>🔵 Для детей и взрослых</h4>
+      <p>Развлечения подходят для всех возрастов.</p>
+    </div>
+
+    <div class="card">
+      <h4>🟣 Праздники и дни рождения</h4>
+      <p>Организуем незабываемые праздники.</p>
+    </div>
   </div>
 </section>
 
-<section id="order">
-  <div class="container">
-    <h3>Order / Application</h3>
-
-    <form onsubmit="sendWhatsApp(event)">
-      <input type="text" id="name" placeholder="Your name" required>
-      <input type="text" id="phone" placeholder="Your phone" required>
-      <textarea id="message" placeholder="What do you want to order?" required></textarea>
-      <button type="submit">Send Application</button>
-    </form>
-  </div>
+<section id="contact">
+  <h3>Контакты и заказы</h3>
+  <p>
+    📞 Телефон: <b>+992 011 900 303</b><br>
+    👤 Имя: <b>Мубориз</b><br><br>
+    Вы можете позвонить или написать в WhatsApp для заказа и консультации.
+  </p>
 </section>
 
 <footer>
-  © Muboriz Ultra — Business Center  
-  Value has no limit
+  © 2025 Батутный центр • Душанбе<br>
+  Сделано с душой 💙
 </footer>
-
-<script>
-function sendWhatsApp(e){
-  e.preventDefault();
-  const name=document.getElementById('name').value;
-  const phone=document.getElementById('phone').value;
-  const msg=document.getElementById('message').value;
-  const text=`New order:%0AName: ${name}%0APhone: ${phone}%0ARequest: ${msg}`;
-  window.open(`https://wa.me/992011900303?text=${text}`,'_blank');
-}
-</script>
 
 </body>
 </html>
