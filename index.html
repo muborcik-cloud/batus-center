@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Profit Center — Центр возможностей</title>
+<title>Muboriz Ultra — Business Center</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 
 body{
-  background:#0b0b0b;
+  background:#0a0a0a;
   color:#ffffff;
 }
 
 header{
   position:fixed;
-  top:0;left:0;
+  top:0;
   width:100%;
   background:#000;
   padding:20px 40px;
@@ -34,8 +34,8 @@ header h1{
 
 nav a{
   color:#fff;
-  text-decoration:none;
   margin-left:25px;
+  text-decoration:none;
   font-size:14px;
   text-transform:uppercase;
 }
@@ -48,12 +48,12 @@ nav a:hover{color:#ffd700}
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:120px 20px;
+  padding:140px 20px;
   background:radial-gradient(circle at top,#1c1c1c,#000);
 }
 
 .hero h2{
-  font-size:58px;
+  font-size:56px;
   margin-bottom:20px;
 }
 
@@ -64,30 +64,17 @@ nav a:hover{color:#ffd700}
   color:#ccc;
 }
 
-.buttons{
-  margin-top:40px;
-}
-
 .btn{
   display:inline-block;
-  padding:18px 35px;
-  margin:10px;
+  margin:15px;
+  padding:18px 38px;
   border-radius:40px;
-  font-size:16px;
   text-decoration:none;
   font-weight:bold;
 }
 
-.btn-gold{
-  background:#ffd700;
-  color:#000;
-}
-
-.btn-dark{
-  background:#111;
-  color:#fff;
-  border:1px solid #333;
-}
+.gold{background:#ffd700;color:#000}
+.dark{background:#111;color:#fff;border:1px solid #333}
 
 section{
   padding:100px 20px;
@@ -101,8 +88,8 @@ section{
 
 h3{
   font-size:40px;
-  margin-bottom:30px;
   color:#ffd700;
+  margin-bottom:30px;
 }
 
 p{
@@ -121,9 +108,9 @@ p{
 
 .card{
   background:#111;
-  padding:40px 30px;
+  padding:40px;
   border-radius:30px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+  box-shadow:0 25px 70px rgba(0,0,0,.7);
 }
 
 .card h4{
@@ -131,22 +118,29 @@ p{
   margin-bottom:15px;
 }
 
-.price{
-  font-size:30px;
-  color:#ffd700;
-  margin:20px 0;
+form{
+  max-width:500px;
+  margin:40px auto 0;
 }
 
-.contact{
-  background:#000;
+input,textarea{
+  width:100%;
+  padding:15px;
+  margin-bottom:15px;
+  border-radius:12px;
+  border:none;
+  font-size:16px;
 }
 
-.contact a{
-  display:block;
-  color:#ffd700;
-  font-size:22px;
-  margin:15px 0;
-  text-decoration:none;
+button{
+  width:100%;
+  padding:18px;
+  border-radius:40px;
+  border:none;
+  background:#ffd700;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
 footer{
@@ -154,7 +148,6 @@ footer{
   padding:40px 20px;
   text-align:center;
   color:#777;
-  font-size:14px;
 }
 </style>
 </head>
@@ -162,83 +155,89 @@ footer{
 <body>
 
 <header>
-  <h1>PROFIT CENTER</h1>
+  <h1>MUBORIZ ULTRA</h1>
   <nav>
-    <a href="#home">Главная</a>
-    <a href="#about">О центре</a>
-    <a href="#zones">Зоны</a>
-    <a href="#order">Заказать</a>
+    <a href="#home">Home</a>
+    <a href="#center">Center</a>
+    <a href="#about">About me</a>
+    <a href="#order">Order</a>
   </nav>
 </header>
 
 <section class="hero" id="home">
   <div>
-    <h2>Центр прибыли и возможностей</h2>
+    <h2>Three-Story Business Center</h2>
     <p>
-      Profit Center — это современный, двухзонный, красивый и продуманный центр,
-      созданный для роста, движения и результата.
+      A modern, professional, three-floor business center created for growth,
+      profit and strong results.
     </p>
+    <a class="btn gold" href="tel:+992011900303">📞 Call</a>
+    <a class="btn dark" href="https://wa.me/992011900303" target="_blank">💬 WhatsApp</a>
+  </div>
+</section>
 
-    <div class="buttons">
-      <a class="btn btn-gold" href="tel:+992011900303">📞 Позвонить</a>
-      <a class="btn btn-dark" href="https://wa.me/992011900303" target="_blank">💬 WhatsApp</a>
+<section id="center">
+  <div class="container">
+    <h3>What is inside</h3>
+    <div class="cards">
+      <div class="card">
+        <h4>1st Floor</h4>
+        <p>Reception, client zone, modern services area.</p>
+      </div>
+      <div class="card">
+        <h4>2nd Floor</h4>
+        <p>Business space, development and profit solutions.</p>
+      </div>
+      <div class="card">
+        <h4>3rd Floor</h4>
+        <p>Premium zone for strategy, growth and results.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="about">
   <div class="container">
-    <h3>О Profit Center</h3>
+    <h3>About Me</h3>
     <p>
-      Наш профит-центр — это пространство, где всё создано ради результата.
-      Чёткая структура, современный дизайн, сильная концепция.
-      Здесь каждая деталь работает на прибыль.
+      My name is Muboriz.  
+      I create professional business projects, strong websites
+      and modern digital solutions.
+    </p>
+    <p style="margin-top:20px;">
+      📞 Phone: +992 011 900 303
     </p>
   </div>
 </section>
 
-<section id="zones">
+<section id="order">
   <div class="container">
-    <h3>Двухзонная структура</h3>
+    <h3>Order / Application</h3>
 
-    <div class="cards">
-      <div class="card">
-        <h4>Зона развития</h4>
-        <p>
-          Пространство для роста, идей и решений.
-          Комфорт, стиль и энергия движения.
-        </p>
-      </div>
-
-      <div class="card">
-        <h4>Зона прибыли</h4>
-        <p>
-          Место, где идеи превращаются в результат.
-          Максимальная концентрация на ценности.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="order" class="contact">
-  <div class="container">
-    <h3>Заказать / Связаться</h3>
-
-    <a href="tel:+992011900303">📞 +992 011 900 303</a>
-    <a href="https://wa.me/992011900303" target="_blank">💬 Написать в WhatsApp</a>
-
-    <p style="margin-top:30px;">
-      Мы отвечаем быстро.  
-      Люди звонят снова и снова.
-    </p>
+    <form onsubmit="sendWhatsApp(event)">
+      <input type="text" id="name" placeholder="Your name" required>
+      <input type="text" id="phone" placeholder="Your phone" required>
+      <textarea id="message" placeholder="What do you want to order?" required></textarea>
+      <button type="submit">Send Application</button>
+    </form>
   </div>
 </section>
 
 <footer>
-  © Profit Center  
-  Стоимость идеи — бесконечность
+  © Muboriz Ultra — Business Center  
+  Value has no limit
 </footer>
+
+<script>
+function sendWhatsApp(e){
+  e.preventDefault();
+  const name=document.getElementById('name').value;
+  const phone=document.getElementById('phone').value;
+  const msg=document.getElementById('message').value;
+  const text=`New order:%0AName: ${name}%0APhone: ${phone}%0ARequest: ${msg}`;
+  window.open(`https://wa.me/992011900303?text=${text}`,'_blank');
+}
+</script>
 
 </body>
 </html>
