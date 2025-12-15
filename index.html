@@ -1,225 +1,181 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Batut Center Premium | Dushanbe</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Батутный центр в Душанбе</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:'Montserrat',sans-serif;
-  background:#000;
-  color:#fff;
-}
-header{
-  position:fixed;top:0;width:100%;z-index:999;
-  background:rgba(0,0,0,.7);
-  backdrop-filter:blur(12px);
-  display:flex;justify-content:space-between;align-items:center;
-  padding:20px 40px;
-}
-.logo{font-size:26px;font-weight:800;color:#ffd700}
-nav a{color:#fff;margin:0 14px;text-decoration:none}
-nav a:hover{color:#ffd700}
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #0f172a;
+      color: #fff;
+      line-height: 1.6;
+    }
 
-.hero{
-  height:100vh;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-.hero video{
-  position:absolute;top:0;left:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  opacity:.35;
-}
-.hero-content{
-  position:relative;
-  max-width:900px;
-}
-.hero h1{
-  font-size:64px;
-  color:#ffd700;
-  animation:fadeUp 1.5s;
-}
-.hero p{
-  font-size:22px;
-  margin:20px 0;
-  color:#eee;
-  animation:fadeUp 2s;
-}
-.hero a{
-  display:inline-block;
-  margin:10px;
-  padding:18px 36px;
-  border-radius:40px;
-  background:#ffd700;
-  color:#000;
-  font-weight:700;
-  text-decoration:none;
-}
+    header {
+      min-height: 100vh;
+      background: linear-gradient(120deg, #ff0080, #7928ca);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
 
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px)}
-  to{opacity:1;transform:translateY(0)}
-}
+    header h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
 
-section{max-width:1200px;margin:auto;padding:120px 20px}
-h2{text-align:center;font-size:44px;color:#ffd700;margin-bottom:50px}
+    header p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      opacity: 0.95;
+    }
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
-.card{
-  background:linear-gradient(145deg,#111,#000);
-  padding:40px;border-radius:20px;
-  box-shadow:0 0 50px rgba(255,215,0,.2);
-  transition:.4s;
-}
-.card:hover{transform:translateY(-8px)}
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-.price{font-size:36px;font-weight:800;color:#ffd700}
+    .btn {
+      padding: 15px 28px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s;
+    }
 
-.gallery img{
-  width:100%;
-  border-radius:20px;
-  box-shadow:0 0 30px rgba(255,215,0,.25);
-}
+    .btn-whatsapp {
+      background: #25d366;
+      color: #000;
+    }
 
-input,textarea{
-  width:100%;
-  padding:18px;
-  margin-top:14px;
-  border-radius:12px;
-  border:none;
-  font-size:16px;
-}
-button{
-  margin-top:20px;
-  padding:20px;
-  width:100%;
-  background:#ffd700;
-  color:#000;
-  border:none;
-  border-radius:12px;
-  font-weight:800;
-  font-size:18px;
-}
+    .btn-call {
+      background: #fff;
+      color: #000;
+    }
 
-iframe{width:100%;height:420px;border:none;border-radius:20px}
+    .btn:hover {
+      transform: scale(1.05);
+    }
 
-.float{position:fixed;right:20px;bottom:20px;z-index:999}
-.float a{
-  display:block;margin-top:12px;
-  padding:18px 22px;
-  border-radius:50px;
-  font-size:22px;
-  color:#fff;
-  text-decoration:none;
-}
-.whatsapp{background:#25d366}
-.call{background:#ffd700;color:#000}
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
 
-footer{
-  background:#000;
-  text-align:center;
-  padding:40px;
-  color:#aaa;
-  font-size:14px;
-}
-</style>
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: #111827;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #38bdf8;
+    }
+
+    .about {
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    footer {
+      background: #020617;
+      padding: 40px 20px;
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    footer strong {
+      color: #38bdf8;
+    }
+  </style>
 </head>
-
 <body>
 
 <header>
-  <div class="logo">Batut Center</div>
-  <nav>
-    <a href="#about">О нас</a>
-    <a href="#why">Почему мы</a>
-    <a href="#prices">Цены</a>
-    <a href="#gallery">Галерея</a>
-    <a href="#booking">Заявка</a>
-    <a href="#map">Карта</a>
-  </nav>
+  <div>
+    <h1>Батутный центр в Душанбе</h1>
+    <p>
+      Современный трёхэтажный батутный развлекательный центр для детей и взрослых.
+      Безопасно. Ярко. Эмоции, которые запоминаются.
+    </p>
+
+    <div class="buttons">
+      <a class="btn btn-whatsapp" href="https://wa.me/992011900303" target="_blank">
+        Написать в WhatsApp
+      </a>
+      <a class="btn btn-call" href="tel:+992011900303">
+        Позвонить
+      </a>
+    </div>
+  </div>
 </header>
 
-<section class="hero">
-<video autoplay muted loop>
-  <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-6295/1080p.mp4" type="video/mp4">
-</video>
-<div class="hero-content">
-  <h1>Премиальный батутный центр Душанбе</h1>
-  <p>3 этажа счастья • Безопасно • Современно • Профессионально</p>
-  <a href="tel:+992011900303">Позвонить</a>
-  <a href="https://wa.me/992011900303" target="_blank">WhatsApp</a>
-</div>
+<section>
+  <div class="features">
+    <div class="card">
+      <h3>🎉 3 этажа развлечений</h3>
+      <p>Батуты, игровые зоны, активные аттракционы для любого возраста.</p>
+    </div>
+
+    <div class="card">
+      <h3>🛡 Безопасность</h3>
+      <p>Мягкие зоны, контроль персонала и чистота на первом месте.</p>
+    </div>
+
+    <div class="card">
+      <h3>👨‍👩‍👧 Для всей семьи</h3>
+      <p>Идеально подходит для дней рождения, праздников и выходных.</p>
+    </div>
+
+    <div class="card">
+      <h3>📍 Душанбе</h3>
+      <p>Удобное расположение. Легко добраться из любой части города.</p>
+    </div>
+  </div>
 </section>
 
-<section id="about">
-<h2>О центре</h2>
-<div class="card">
-<b>Мубориз</b> — основатель батутного центра.<br><br>
-Мы создали пространство, где дети и родители получают эмоции, безопасность и сервис премиум-уровня.
-</div>
-</section>
-
-<section id="why">
-<h2>Почему мы №1</h2>
-<div class="grid">
-<div class="card">✔ 3 этажа развлечений</div>
-<div class="card">✔ Европейские стандарты безопасности</div>
-<div class="card">✔ Праздники и дни рождения</div>
-<div class="card">✔ Лучший сервис в Душанбе</div>
-</div>
-</section>
-
-<section id="prices">
-<h2>Цены</h2>
-<div class="grid">
-<div class="card"><h3>Мини</h3><div class="price">100 сомони</div></div>
-<div class="card"><h3>Стандарт</h3><div class="price">200 сомони</div></div>
-<div class="card"><h3>Премиум</h3><div class="price">400 сомони</div></div>
-</div>
-</section>
-
-<section id="gallery">
-<h2>Галерея</h2>
-<div class="grid gallery">
-<img src="https://picsum.photos/600/400?10">
-<img src="https://picsum.photos/600/400?11">
-<img src="https://picsum.photos/600/400?12">
-</div>
-</section>
-
-<section id="booking">
-<h2>Онлайн заявка</h2>
-<div class="card">
-<input placeholder="Имя">
-<input placeholder="Телефон">
-<textarea placeholder="Дата и комментарий"></textarea>
-<button>Отправить заявку</button>
-<p style="margin-top:15px;font-weight:600">📞 +992 011 900 303 — Мубориз</p>
-</div>
-</section>
-
-<section id="map">
-<h2>Мы в Душанбе</h2>
-<iframe src="https://www.google.com/maps?q=Dushanbe&output=embed"></iframe>
+<section class="about">
+  <h2 style="margin-bottom:20px;">О нас</h2>
+  <p>
+    Меня зовут <strong>Мубориз</strong>.  
+    Я создал этот батутный центр, чтобы дети радовались, а родители были спокойны.
+    Мы делаем отдых ярким, безопасным и незабываемым.
+  </p>
 </section>
 
 <footer>
-© Batut Center Premium — Ultra Professional Level
+  <p>
+    📞 <strong>+992 011 900 303</strong><br/>
+    📍 Батутный центр — Душанбе
+  </p>
 </footer>
-
-<div class="float">
-<a class="call" href="tel:+992011900303">📞</a>
-<a class="whatsapp" href="https://wa.me/992011900303" target="_blank">💬</a>
-</div>
 
 </body>
 </html>
