@@ -1,213 +1,53 @@
-<!DOCTYPE html>
-<html lang="ru">
+ <!DOCTYPE html><html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Batut Center Dushanbe</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Батутный центр Душанбе — Премиум</title>
+  <meta name="description" content="Премиальный батутный центр в Душанбе. Безопасно, красиво, профессионально. Звоните и пишите в WhatsApp." />  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">  <style>
+    :root {
+      --bg: #0b0f1a;
+      --card: #11162a;
+      --accent: #7c7cff;
+      --accent2: #00ffd5;
+      --text: #ffffff;
+      --muted: #b8c0ff;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(1200px 600px at 10% 10%, #1a1f4a, var(--bg));
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-<style>
-:root{
---gold:#d4af37;
---dark:#070707;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Poppins;background:var(--dark);color:#fff}
-a{text-decoration:none;color:inherit}
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      background: rgba(10, 12, 30, 0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
 
-header{
-min-height:100vh;
-background:
-linear-gradient(to bottom,rgba(0,0,0,.8),#070707),
-url("https://images.unsplash.com/photo-1603383928972-1e1cfe61a3a5");
-background-size:cover;
-background-position:center;
-display:flex;
-flex-direction:column;
-justify-content:center;
-padding:40px
-}
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
 
-nav{
-position:fixed;top:0;left:0;width:100%;
-background:rgba(0,0,0,.8);
-backdrop-filter:blur(10px);
-padding:15px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-z-index:1000
-}
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent2);
+    }
 
-nav b{color:var(--gold);font-size:1.4rem}
-nav span{cursor:pointer;margin-left:15px}
-
-.hero{
-max-width:700px;
-animation:fadeUp 1.2s ease
-}
-.hero h1{
-font-size:3.8rem;
-font-weight:900;
-color:var(--gold)
-}
-.hero p{margin:20px 0;font-size:1.15rem}
-
-.btns a{
-display:inline-block;
-margin-right:15px;
-padding:15px 35px;
-border-radius:40px;
-font-weight:700
-}
-.gold{background:var(--gold);color:#000}
-.outline{border:2px solid var(--gold)}
-
-section{padding:90px 40px;max-width:1300px;margin:auto}
-h2{text-align:center;color:var(--gold);font-size:2.6rem;margin-bottom:50px}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:30px
-}
-
-.card{
-background:#0f0f0f;
-border-radius:25px;
-padding:30px;
-transition:.4s;
-border:1px solid #222
-}
-.card:hover{
-transform:translateY(-12px);
-box-shadow:0 25px 60px rgba(212,175,55,.18)
-}
-
-.price{font-size:2.3rem;color:var(--gold);font-weight:900}
-
-.review{font-style:italic;color:#ccc}
-
-.map iframe{
-width:100%;
-height:350px;
-border:0;
-border-radius:25px
-}
-
-.float{
-position:fixed;
-right:20px;
-bottom:20px;
-display:flex;
-flex-direction:column;
-gap:15px;
-z-index:999
-}
-.float a{
-width:60px;height:60px;
-background:var(--gold);
-color:#000;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:24px
-}
-
-footer{
-background:#000;
-padding:40px;
-text-align:center;
-color:#aaa
-}
-
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(40px)}
-to{opacity:1;transform:none}
-}
-</style>
-</head>
-
-<body>
-
-<nav>
-<b>BATUT • DUSHANBE</b>
-<div>
-<span onclick="setLang('ru')">RU</span>
-<span onclick="setLang('en')">EN</span>
-</div>
-</nav>
-
-<header>
-<div class="hero">
-<h1 data-ru="Батутный центр Душанбе" data-en="Trampoline Center Dushanbe"></h1>
-<p data-ru="Трёхэтажный современный центр для детей и взрослых."
-data-en="Modern three-story entertainment center for kids and adults."></p>
-<div class="btns">
-<a class="gold" href="https://wa.me/992011900303"
-data-ru="Написать в WhatsApp"
-data-en="Chat on WhatsApp"></a>
-<a class="outline" href="tel:+992011900303"
-data-ru="Позвонить"
-data-en="Call us"></a>
-</div>
-</div>
-</header>
-
-<section>
-<h2 data-ru="Почему мы?" data-en="Why us?"></h2>
-<div class="grid">
-<div class="card">✔ Безопасные батуты</div>
-<div class="card">✔ 3 этажа развлечений</div>
-<div class="card">✔ Дни рождения и праздники</div>
-</div>
-</section>
-
-<section>
-<h2 data-ru="Цены" data-en="Prices"></h2>
-<div class="grid">
-<div class="card"><h3>Standart</h3><div class="price">100 c</div></div>
-<div class="card"><h3>Party</h3><div class="price">200 c</div></div>
-<div class="card"><h3>VIP</h3><div class="price">400 c</div></div>
-</div>
-</section>
-
-<section>
-<h2 data-ru="Отзывы родителей" data-en="Parents reviews"></h2>
-<div class="grid">
-<div class="card review">“Дети в восторге, лучший центр в городе!”</div>
-<div class="card review">“Очень чисто и безопасно.”</div>
-</div>
-</section>
-
-<section>
-<h2 data-ru="Как нас найти" data-en="How to find us"></h2>
-<div class="map">
-<iframe src="https://maps.google.com/maps?q=Dushanbe&t=&z=13&output=embed"></iframe>
-</div>
-</section>
-
-<footer>
-<b>Мубориз</b><br>
-📞 +992 011 900 303<br>
-© Batut Center Dushanbe
-</footer>
-
-<div class="float">
-<a href="https://wa.me/992011900303">💬</a>
-<a href="tel:+992011900303">📞</a>
-</div>
-
-<script>
-function setLang(lang){
-document.querySelectorAll('[data-ru]').forEach(el=>{
-el.innerText=el.dataset[lang]
-})
-}
-setLang('ru')
-</script>
-
-</body>
-</html>
+    nav a {
+      color: var(--text);
+      margin-left: 25px;
+      text
