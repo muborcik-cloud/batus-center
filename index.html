@@ -3,130 +3,152 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Batut Center — Dushanbe</title>
+<title>Batut Center — Premium</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{margin:0;padding:0;box-sizing:border-box}
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:linear-gradient(180deg,#050505,#121212);
+  font-family:'Montserrat',sans-serif;
+  background:#050505;
   color:#fff;
+  scroll-behavior:smooth;
 }
 header{
-  position:sticky;top:0;z-index:100;
-  background:#000;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:16px 28px;
+  position:fixed;top:0;width:100%;z-index:999;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(10px);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 40px;
 }
-header .logo{font-size:22px;font-weight:bold;color:#ffcc00}
+.logo{font-size:24px;font-weight:800;color:#ffcc00}
 nav a{
-  margin:0 10px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:500;
+  color:#fff;text-decoration:none;margin:0 12px;font-weight:500;
 }
+nav a:hover{color:#ffcc00}
 .lang button{
-  background:none;
-  border:1px solid #ffcc00;
-  color:#ffcc00;
-  padding:5px 10px;
-  margin-left:6px;
-  cursor:pointer;
+  background:none;border:1px solid #ffcc00;color:#ffcc00;
+  padding:6px 12px;margin-left:6px;cursor:pointer;
 }
+
+.hero{
+  height:100vh;
+  background:radial-gradient(circle at top,#222,#000);
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;
+  padding:0 20px;
+}
+.hero h1{
+  font-size:56px;
+  color:#ffcc00;
+  animation:fadeUp 1.2s ease;
+}
+.hero p{
+  margin:20px 0;
+  font-size:20px;
+  max-width:800px;
+  color:#ddd;
+  animation:fadeUp 1.6s ease;
+}
+.hero .buttons a{
+  display:inline-block;
+  margin:10px;
+  padding:16px 30px;
+  border-radius:40px;
+  background:#ffcc00;
+  color:#000;
+  font-weight:700;
+  text-decoration:none;
+  transition:.3s;
+}
+.hero .buttons a:hover{transform:scale(1.05)}
+
 section{
   max-width:1200px;
   margin:auto;
-  padding:80px 20px;
-}
-.hero{
-  text-align:center;
-  padding:110px 20px;
-  background:radial-gradient(circle,#222,#000);
-}
-.hero h1{font-size:48px;color:#ffcc00}
-.hero p{margin:20px 0;font-size:18px;color:#ddd}
-.btns a{
-  display:inline-block;
-  margin:10px;
-  padding:15px 26px;
-  background:#ffcc00;
-  color:#000;
-  text-decoration:none;
-  font-weight:bold;
-  border-radius:6px;
+  padding:100px 20px;
 }
 h2{
+  font-size:40px;
   color:#ffcc00;
-  margin-bottom:25px;
-  font-size:34px;
-}
-.card{
-  background:#141414;
-  border-radius:10px;
-  padding:30px;
-  box-shadow:0 0 25px rgba(255,204,0,.15);
+  margin-bottom:40px;
+  text-align:center;
 }
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:25px;
+  gap:30px;
 }
-.price{font-size:30px;color:#ffcc00;font-weight:bold}
+.card{
+  background:#111;
+  padding:35px;
+  border-radius:18px;
+  box-shadow:0 0 40px rgba(255,204,0,.15);
+  transition:.4s;
+}
+.card:hover{transform:translateY(-8px)}
+.price{font-size:34px;color:#ffcc00;font-weight:800}
+
 .gallery img{
-  width:100%;
-  border-radius:10px;
+  width:100%;border-radius:18px;
 }
 input,textarea{
   width:100%;
-  padding:14px;
-  margin-top:12px;
-  border-radius:6px;
+  padding:16px;
+  margin-top:14px;
+  border-radius:10px;
   border:none;
-  font-size:15px;
+  font-size:16px;
 }
 button{
+  margin-top:20px;
+  padding:18px;
   width:100%;
-  padding:16px;
   background:#ffcc00;
   color:#000;
-  font-size:16px;
-  font-weight:bold;
   border:none;
-  border-radius:6px;
+  border-radius:10px;
+  font-weight:700;
+  font-size:16px;
   cursor:pointer;
-  margin-top:15px;
 }
 iframe{
   width:100%;
-  height:380px;
-  border-radius:10px;
+  height:420px;
   border:none;
+  border-radius:18px;
 }
-footer{
-  background:#000;
-  padding:30px;
-  text-align:center;
-  color:#aaa;
-  font-size:14px;
-}
-.floating{
+
+.float{
   position:fixed;
   right:20px;
   bottom:20px;
 }
-.floating a{
+.float a{
   display:block;
   margin-top:10px;
-  padding:14px 18px;
-  background:#25d366;
-  color:#fff;
+  padding:16px 20px;
   border-radius:50px;
+  font-size:20px;
+  color:#fff;
   text-decoration:none;
-  font-weight:bold;
 }
+.whatsapp{background:#25d366}
 .call{background:#ffcc00;color:#000}
+
+footer{
+  background:#000;
+  text-align:center;
+  padding:30px;
+  color:#aaa;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
 </style>
 </head>
 
@@ -135,13 +157,12 @@ footer{
 <header>
   <div class="logo">Batut Center</div>
   <nav>
-    <a href="#about" id="m_about">О нас</a>
-    <a href="#zones" id="m_zones">Зоны</a>
-    <a href="#prices" id="m_prices">Цены</a>
-    <a href="#gallery" id="m_gallery">Галерея</a>
-    <a href="#reviews" id="m_reviews">Отзывы</a>
-    <a href="#contact" id="m_contact">Заявка</a>
-    <a href="#map" id="m_map">Карта</a>
+    <a href="#about">О нас</a>
+    <a href="#zones">Зоны</a>
+    <a href="#prices">Цены</a>
+    <a href="#gallery">Галерея</a>
+    <a href="#contact">Заявка</a>
+    <a href="#map">Карта</a>
   </nav>
   <div class="lang">
     <button onclick="setLang('ru')">RU</button>
@@ -150,73 +171,52 @@ footer{
 </header>
 
 <section class="hero">
-  <h1 id="title">Батутный центр в Душанбе</h1>
-  <p id="subtitle">Трёхэтажный центр развлечений • Безопасно • Современно • Ярко</p>
-  <div class="btns">
-    <a href="tel:+992011900303" id="callBtn">Позвонить</a>
-    <a href="https://wa.me/992011900303" target="_blank" id="waBtn">WhatsApp</a>
+  <h1 id="t1">Лучший батутный центр в Душанбе</h1>
+  <p id="t2">Трёхэтажный премиальный центр развлечений для детей и взрослых</p>
+  <div class="buttons">
+    <a href="tel:+992011900303" id="call">Позвонить</a>
+    <a href="https://wa.me/992011900303" target="_blank" id="wa">WhatsApp</a>
   </div>
 </section>
 
 <section id="about">
-  <h2 id="aboutTitle">О центре</h2>
-  <div class="card" id="aboutText">
+  <h2>О центре</h2>
+  <div class="card">
     Меня зовут <b>Мубориз</b>.  
-    Я создал этот батутный центр как <b>лучшее развлекательное пространство в Душанбе</b>:  
-    безопасное, современное и незабываемое для детей и взрослых.
+    Я создал батутный центр нового уровня —  
+    <b>безопасный, яркий и незабываемый</b> центр развлечений в Душанбе.
   </div>
 </section>
 
 <section id="zones">
-  <h2 id="zonesTitle">3 этажа развлечений</h2>
+  <h2>3 этажа эмоций</h2>
   <div class="grid">
-    <div class="card">1 этаж — Батутная арена</div>
-    <div class="card">2 этаж — Детские зоны и игры</div>
-    <div class="card">3 этаж — Праздники и дни рождения</div>
+    <div class="card">1 этаж — Батуты и актив</div>
+    <div class="card">2 этаж — Детские зоны</div>
+    <div class="card">3 этаж — Дни рождения</div>
   </div>
 </section>
 
 <section id="prices">
-  <h2 id="pricesTitle">Пакеты</h2>
+  <h2>Пакеты</h2>
   <div class="grid">
-    <div class="card">
-      <h3>Mini</h3>
-      <p>Батуты</p>
-      <div class="price">100 сомони</div>
-    </div>
-    <div class="card">
-      <h3>Standard</h3>
-      <p>Батуты + игры</p>
-      <div class="price">200 сомони</div>
-    </div>
-    <div class="card">
-      <h3>Premium</h3>
-      <p>Весь центр + праздник</p>
-      <div class="price">400 сомони</div>
-    </div>
+    <div class="card"><h3>Mini</h3><div class="price">100 сомони</div></div>
+    <div class="card"><h3>Standard</h3><div class="price">200 сомони</div></div>
+    <div class="card"><h3>Premium</h3><div class="price">400 сомони</div></div>
   </div>
 </section>
 
 <section id="gallery">
-  <h2 id="galleryTitle">Фотогалерея</h2>
+  <h2>Галерея</h2>
   <div class="grid gallery">
-    <img src="https://picsum.photos/600/400?1">
-    <img src="https://picsum.photos/600/400?2">
-    <img src="https://picsum.photos/600/400?3">
-  </div>
-</section>
-
-<section id="reviews">
-  <h2 id="reviewsTitle">Отзывы родителей</h2>
-  <div class="grid">
-    <div class="card">⭐⭐⭐⭐⭐ Лучший центр в городе</div>
-    <div class="card">⭐⭐⭐⭐⭐ Дети счастливы</div>
-    <div class="card">⭐⭐⭐⭐⭐ Очень красиво и чисто</div>
+    <img src="https://picsum.photos/600/400?11">
+    <img src="https://picsum.photos/600/400?12">
+    <img src="https://picsum.photos/600/400?13">
   </div>
 </section>
 
 <section id="contact">
-  <h2 id="contactTitle">Оставить заявку</h2>
+  <h2>Оставить заявку</h2>
   <div class="card">
     <input placeholder="Имя">
     <input placeholder="Телефон">
@@ -227,49 +227,36 @@ footer{
 </section>
 
 <section id="map">
-  <h2 id="mapTitle">Мы в Душанбе</h2>
+  <h2>Мы в Душанбе</h2>
   <iframe src="https://www.google.com/maps?q=Dushanbe&output=embed"></iframe>
-  <div class="btns">
-    <a href="https://www.google.com/maps/dir/?api=1&destination=Dushanbe" target="_blank" id="routeBtn">
-      Построить маршрут
-    </a>
-  </div>
 </section>
 
 <footer>
-© Batut Center Dushanbe • Премиальный развлекательный центр
+© Batut Center Dushanbe — Premium Level
 </footer>
 
-<div class="floating">
+<div class="float">
   <a class="call" href="tel:+992011900303">📞</a>
-  <a href="https://wa.me/992011900303" target="_blank">💬</a>
+  <a class="whatsapp" href="https://wa.me/992011900303" target="_blank">💬</a>
 </div>
 
 <script>
-const T={
+const txt={
 ru:{
-title:"Батутный центр в Душанбе",
-subtitle:"Трёхэтажный центр развлечений • Безопасно • Современно • Ярко",
-m_about:"О нас",m_zones:"Зоны",m_prices:"Цены",m_gallery:"Галерея",m_reviews:"Отзывы",m_contact:"Заявка",m_map:"Карта",
-aboutTitle:"О центре",zonesTitle:"3 этажа развлечений",pricesTitle:"Пакеты",galleryTitle:"Фотогалерея",
-reviewsTitle:"Отзывы родителей",contactTitle:"Оставить заявку",mapTitle:"Мы в Душанбе",
-callBtn:"Позвонить",waBtn:"WhatsApp",routeBtn:"Построить маршрут"
+t1:"Лучший батутный центр в Душанбе",
+t2:"Трёхэтажный премиальный центр развлечений для детей и взрослых",
+call:"Позвонить",wa:"WhatsApp"
 },
 en:{
-title:"Trampoline Center in Dushanbe",
-subtitle:"Three-story entertainment center • Safe • Modern • Fun",
-m_about:"About",m_zones:"Zones",m_prices:"Prices",m_gallery:"Gallery",m_reviews:"Reviews",m_contact:"Request",m_map:"Map",
-aboutTitle:"About Center",zonesTitle:"3 Floors of Fun",pricesTitle:"Packages",galleryTitle:"Gallery",
-reviewsTitle:"Parents Reviews",contactTitle:"Send Request",mapTitle:"We are in Dushanbe",
-callBtn:"Call",waBtn:"WhatsApp",routeBtn:"Build route"
+t1:"Best Trampoline Center in Dushanbe",
+t2:"Three-story premium entertainment center",
+call:"Call",wa:"WhatsApp"
 }
 }
 function setLang(l){
-for(let k in T[l]){
-let e=document.getElementById(k)
-if(e)e.innerText=T[l][k]
-}
-}
+for(let k in txt[l]){
+document.getElementById(k).innerText=txt[l][k]
+}}
 </script>
 
 </body>
