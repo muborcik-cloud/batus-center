@@ -9,29 +9,29 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif}
-body{background:#0e1022;color:#fff;line-height:1.6}
-
+body{background:#0b0e23;color:#fff;line-height:1.6}
 header{
-background:linear-gradient(135deg,#ff416c,#ff4b2b);
-padding:90px 20px;
-text-align:center
+background:linear-gradient(135deg,#ff512f,#dd2476);
+padding:90px 20px;text-align:center
 }
 header h1{font-size:3.2rem;font-weight:800}
 header p{font-size:1.3rem;margin-top:15px}
 
+.lang{
+position:absolute;top:20px;right:20px
+}
+.lang button{
+background:#fff;color:#000;border:none;
+padding:8px 14px;border-radius:20px;
+margin-left:5px;font-weight:600;cursor:pointer
+}
+
 nav{
-background:#111;
-padding:15px;
-text-align:center;
-position:sticky;
-top:0;
-z-index:100
+background:#111;padding:15px;text-align:center;
+position:sticky;top:0;z-index:100
 }
 nav a{
-color:#fff;
-text-decoration:none;
-margin:0 12px;
-font-weight:600
+color:#fff;text-decoration:none;margin:0 12px;font-weight:600
 }
 nav a:hover{color:#ff4b7b}
 
@@ -39,171 +39,149 @@ section{padding:70px 20px;max-width:1200px;margin:auto}
 h2{text-align:center;font-size:2.4rem;margin-bottom:30px}
 
 .cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:25px
 }
 .card{
-background:#1a1d3a;
-padding:30px;
-border-radius:20px;
-box-shadow:0 20px 40px rgba(0,0,0,.4)
+background:#1a1e44;padding:30px;border-radius:22px;
+box-shadow:0 20px 40px rgba(0,0,0,.45)
 }
 
-.price{
-font-size:2.2rem;
-font-weight:800;
-color:#ff4b7b
-}
+.price{font-size:2.2rem;font-weight:800;color:#ff4b7b}
 
 .gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px
 }
 .gallery div{
-height:180px;
-background:linear-gradient(120deg,#ff4b7b,#ff7a18);
-border-radius:20px
-}
-
-.reviews .card{
-border-left:6px solid #ff4b7b
+height:180px;border-radius:20px;
+background:linear-gradient(120deg,#ff4b7b,#ff9f43)
 }
 
 button{
-background:#ff4b7b;
-border:none;
-padding:15px 30px;
-border-radius:40px;
-color:#fff;
-font-size:1rem;
-font-weight:600;
-cursor:pointer;
-margin:10px
+background:#ff4b7b;border:none;
+padding:15px 30px;border-radius:40px;
+color:#fff;font-weight:600;cursor:pointer
 }
-button:hover{background:#ff275f}
+button:hover{background:#ff255f}
 
 input,textarea{
-width:100%;
-padding:15px;
-border-radius:15px;
-border:none;
-margin-bottom:15px
+width:100%;padding:15px;border-radius:15px;
+border:none;margin-bottom:15px
 }
 
-.contacts{text-align:center}
-
-.footer{
-background:#111;
-text-align:center;
-padding:25px;
-color:#aaa;
-font-size:.9rem
+footer{
+background:#111;padding:25px;text-align:center;
+color:#aaa;font-size:.9rem
 }
+
+.hide{display:none}
 </style>
+
+<script>
+function setLang(lang){
+document.querySelectorAll('[data-ru]').forEach(el=>{
+el.innerHTML = lang==='ru' ? el.dataset.ru : el.dataset.en
+})
+}
+</script>
 </head>
 
-<body>
+<body onload="setLang('ru')">
+
+<div class="lang">
+<button onclick="setLang('ru')">RU</button>
+<button onclick="setLang('en')">EN</button>
+</div>
 
 <header>
-<h1>Батутный центр в Душанбе</h1>
-<p>Трёхэтажный • Современный • Безопасный • Дружелюбный</p>
+<h1 data-ru="Батутный центр в Душанбе"
+    data-en="Trampoline Center in Dushanbe"></h1>
+<p data-ru="Трёхэтажный • Современный • Безопасный"
+   data-en="Three floors • Modern • Safe"></p>
 </header>
 
 <nav>
-<a href="#about">О нас</a>
-<a href="#prices">Цены</a>
-<a href="#gallery">Галерея</a>
-<a href="#reviews">Отзывы</a>
-<a href="#order">Заявка</a>
-<a href="#map">Карта</a>
-<a href="#contacts">Контакты</a>
+<a href="#about" data-ru="О нас" data-en="About"></a>
+<a href="#prices" data-ru="Цены" data-en="Prices"></a>
+<a href="#gallery" data-ru="Галерея" data-en="Gallery"></a>
+<a href="#reviews" data-ru="Отзывы" data-en="Reviews"></a>
+<a href="#order" data-ru="Заявка" data-en="Order"></a>
+<a href="#map" data-ru="Карта" data-en="Map"></a>
 </nav>
 
 <section id="about">
-<h2>О нас</h2>
-<p style="max-width:850px;margin:auto;text-align:center">
-Меня зовут <b>Мубориз</b>.  
-Я создал профессиональный батутный центр в Душанбе — место радости, энергии и безопасности.  
-Наш центр подойдёт детям и взрослым, праздникам и активному отдыху.
+<h2 data-ru="О нашем центре" data-en="About our center"></h2>
+<p style="max-width:850px;margin:auto;text-align:center"
+data-ru="Меня зовут Мубориз. Я создал профессиональный батутный центр в Душанбе — место радости, энергии и безопасности для детей и взрослых."
+data-en="My name is Muboriz. I created a professional trampoline center in Dushanbe — a place of joy, energy and safety for children and adults.">
 </p>
 </section>
 
 <section>
-<h2>Что есть в центре</h2>
+<h2 data-ru="Что у нас есть" data-en="What we offer"></h2>
 <div class="cards">
-<div class="card">🤸 Большая батутная зона</div>
-<div class="card">🏢 Три этажа развлечений</div>
-<div class="card">🎉 Дни рождения и мероприятия</div>
-<div class="card">🛡 Полная безопасность</div>
+<div class="card" data-ru="🤸 Большая батутная зона" data-en="🤸 Large trampoline zone"></div>
+<div class="card" data-ru="🏢 Три этажа развлечений" data-en="🏢 Three floors of fun"></div>
+<div class="card" data-ru="🎉 Праздники и дни рождения" data-en="🎉 Parties & birthdays"></div>
+<div class="card" data-ru="🛡 Безопасность и контроль" data-en="🛡 Safety and control"></div>
 </div>
 </section>
 
 <section id="prices">
-<h2>Цены</h2>
+<h2 data-ru="Цены" data-en="Prices"></h2>
 <div class="cards">
-<div class="card"><h3>Мини</h3><div class="price">100 сомони</div></div>
-<div class="card"><h3>Стандарт</h3><div class="price">200 сомони</div></div>
-<div class="card"><h3>Премиум</h3><div class="price">400 сомони</div></div>
+<div class="card"><h3>Mini</h3><div class="price">100 TJS</div></div>
+<div class="card"><h3>Standard</h3><div class="price">200 TJS</div></div>
+<div class="card"><h3>Premium</h3><div class="price">400 TJS</div></div>
 </div>
 </section>
 
 <section id="gallery">
-<h2>Фото-галерея</h2>
+<h2 data-ru="Фото-галерея" data-en="Photo gallery"></h2>
 <div class="gallery">
 <div></div><div></div><div></div><div></div><div></div><div></div>
 </div>
 </section>
 
-<section id="reviews" class="reviews">
-<h2>Отзывы родителей</h2>
+<section id="reviews">
+<h2 data-ru="Отзывы родителей" data-en="Parents reviews"></h2>
 <div class="cards">
-<div class="card">⭐️⭐️⭐️⭐️⭐️<br>Очень чисто и безопасно. Дети счастливы!</div>
-<div class="card">⭐️⭐️⭐️⭐️⭐️<br>Лучший батутный центр в Душанбе.</div>
-<div class="card">⭐️⭐️⭐️⭐️⭐️<br>Отличный персонал и атмосфера.</div>
+<div class="card">★★★★★<br>Отличное место!</div>
+<div class="card">★★★★★<br>Лучший центр в городе.</div>
+<div class="card">★★★★★<br>Дети в восторге.</div>
 </div>
 </section>
 
 <section id="order">
-<h2>Оставить заявку</h2>
+<h2 data-ru="Оставить заявку" data-en="Send request"></h2>
 <form>
-<input type="text" placeholder="Ваше имя">
-<input type="tel" placeholder="Телефон">
-<textarea placeholder="Сообщение"></textarea>
-<button type="submit">Отправить</button>
+<input type="text" placeholder="Имя / Name">
+<input type="tel" placeholder="Телефон / Phone">
+<textarea placeholder="Сообщение / Message"></textarea>
+<button type="submit" data-ru="Отправить" data-en="Send"></button>
 </form>
 
-<div style="text-align:center">
-<a href="tel:+992011900303"><button>📞 Позвонить</button></a>
+<div style="text-align:center;margin-top:20px">
+<a href="tel:+992011900303"><button>📞 Call</button></a>
 <a href="https://wa.me/992011900303"><button>💬 WhatsApp</button></a>
 </div>
 </section>
 
 <section id="map">
-<h2>Мы на карте</h2>
-<div style="border-radius:20px;overflow:hidden">
-<iframe
-src="https://www.google.com/maps?q=Душанбе&output=embed"
-width="100%" height="350" style="border:0"></iframe>
-</div>
+<h2 data-ru="Мы на карте" data-en="Find us on map"></h2>
+<iframe src="https://www.google.com/maps?q=Душанбе&output=embed"
+width="100%" height="350" style="border:0;border-radius:20px"></iframe>
 <p style="text-align:center;margin-top:15px">
 <a href="https://www.google.com/maps/dir/?api=1&destination=Душанбе" target="_blank">
-<button>🗺 Построить маршрут</button>
+<button data-ru="Построить маршрут" data-en="Build route"></button>
 </a>
 </p>
 </section>
 
-<section id="contacts" class="contacts">
-<h2>Контакты</h2>
-<p><b>Мубориз</b></p>
-<p>📍 Душанбе</p>
-<p>📞 +992 011 900 303</p>
-</section>
-
-<div class="footer">
-© 2025 Батутный центр Душанбе • Сайт ультра-профессиональный
-</div>
+<footer>
+© 2025 Batut Center Dushanbe • Ultra Professional Website
+</footer>
 
 </body>
-</html>
+                                                       </html>
