@@ -3,104 +3,151 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Батутный центр Душанбе</title>
+<title>Batut Center Dushanbe</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Montserrat;background:#0b1220;color:#fff;line-height:1.6}
+body{font-family:Poppins;background:#050505;color:#fff;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 
-header{
-background:linear-gradient(120deg,#ff0080,#7928ca);
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:20px
+:root{
+--gold:#d4af37;
+--dark:#0b0b0b;
 }
-
-header h1{font-size:3rem;font-weight:800}
-header p{max-width:700px;margin:20px auto}
-
-.btns{display:flex;gap:15px;justify-content:center;flex-wrap:wrap}
-.btn{
-padding:15px 30px;
-border-radius:50px;
-font-weight:600;
-transition:.3s
-}
-.whatsapp{background:#25d366;color:#000}
-.call{background:#fff;color:#000}
-.btn:hover{transform:scale(1.05)}
 
 nav{
-position:fixed;
-top:0;
-width:100%;
-background:#020617;
-padding:15px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-z-index:999
+position:fixed;top:0;width:100%;
+background:rgba(0,0,0,.85);
+backdrop-filter:blur(10px);
+padding:15px 40px;
+display:flex;justify-content:space-between;align-items:center;
+z-index:1000
 }
-nav a{margin:0 10px;font-weight:600}
+nav b{color:var(--gold);font-size:1.4rem}
+nav a{margin-left:20px;font-weight:500}
 
-.lang{cursor:pointer;background:#111827;padding:6px 14px;border-radius:20px}
+.hero{
+min-height:100vh;
+background:
+linear-gradient(to bottom,rgba(0,0,0,.7),#050505),
+url('https://images.unsplash.com/photo-1603383928972-1e1cfe61a3a5');
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+padding:40px
+}
 
-section{padding:80px 20px;max-width:1200px;margin:auto}
-h2{text-align:center;margin-bottom:40px;font-size:2.3rem}
+.hero-box{
+max-width:700px;
+animation:fadeUp 1.3s ease
+}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
+.hero h1{
+font-size:3.5rem;
+font-weight:900;
+color:var(--gold)
+}
+
+.hero p{margin:20px 0;font-size:1.1rem}
+
+.hero-btns a{
+display:inline-block;
+margin-right:15px;
+padding:15px 30px;
+border-radius:40px;
+font-weight:700
+}
+.gold{background:var(--gold);color:#000}
+.outline{border:2px solid var(--gold)}
+
+section{padding:90px 40px;max-width:1300px;margin:auto}
+h2{text-align:center;margin-bottom:50px;color:var(--gold);font-size:2.6rem}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
 
 .card{
-background:#111827;
+background:#0f0f0f;
+border:1px solid #222;
+border-radius:25px;
 padding:30px;
-border-radius:20px;
-box-shadow:0 20px 40px rgba(0,0,0,.4)
+transition:.4s
 }
+.card:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(212,175,55,.15)}
 
-.price{font-size:2rem;font-weight:800;color:#38bdf8;margin:10px 0}
+.price{font-size:2.2rem;color:var(--gold);font-weight:900}
 
 .gallery img{
 width:100%;
-border-radius:20px;
-height:220px;
-object-fit:cover
+height:230px;
+object-fit:cover;
+border-radius:25px
 }
 
-form input, form textarea{
-width:100%;
-padding:15px;
-margin-bottom:15px;
-border:none;
-border-radius:10px
+.float{
+position:fixed;
+right:20px;
+bottom:20px;
+display:flex;
+flex-direction:column;
+gap:15px;
+z-index:999
+}
+.float a{
+width:60px;height:60px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+background:var(--gold);
+color:#000
 }
 
-form button{
+.modal{
+position:fixed;
+top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,.7);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:2000
+}
+.modal-content{
+background:#0f0f0f;
+padding:40px;
+border-radius:30px;
+max-width:400px;
+width:100%
+}
+.modal input,.modal textarea{
 width:100%;
-padding:15px;
-border:none;
-border-radius:50px;
-background:#38bdf8;
-font-weight:700;
-cursor:pointer
+padding:14px;
+margin-bottom:12px;
+border:none;border-radius:10px
+}
+.modal button{
+width:100%;
+padding:14px;
+background:var(--gold);
+border:none;border-radius:30px;
+font-weight:800
 }
 
-.map iframe{
-width:100%;
-height:300px;
-border-radius:20px;
-border:0
-}
+.map iframe{width:100%;height:350px;border:0;border-radius:25px}
 
 footer{
-background:#020617;
+background:#000;
 padding:40px;
-text-align:center
+text-align:center;
+color:#aaa
+}
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(40px)}
+to{opacity:1;transform:none}
 }
 </style>
 </head>
@@ -108,97 +155,82 @@ text-align:center
 <body>
 
 <nav>
-<div><b>BATUT</b></div>
+<b>BATUT • DUSHANBE</b>
 <div>
 <a href="#about">О нас</a>
 <a href="#prices">Цены</a>
-<a href="#reviews">Отзывы</a>
 <a href="#contact">Контакты</a>
 </div>
-<div class="lang" onclick="toggleLang()">RU / EN</div>
 </nav>
 
-<header>
-<div>
-<h1 id="title">Батутный центр в Душанбе</h1>
-<p id="desc">Современный трёхэтажный батутный центр для детей и взрослых. Безопасно, ярко и весело.</p>
-<div class="btns">
-<a class="btn whatsapp" href="https://wa.me/992011900303" target="_blank" id="wa">Написать в WhatsApp</a>
-<a class="btn call" href="tel:+992011900303" id="call">Позвонить</a>
+<div class="hero">
+<div class="hero-box">
+<h1>Батутный центр Душанбе</h1>
+<p>Трёхэтажный развлекательный центр. Безопасность, эмоции и радость для детей и взрослых.</p>
+<div class="hero-btns">
+<a class="gold" onclick="openModal()">Оставить заявку</a>
+<a class="outline" href="https://wa.me/992011900303">WhatsApp</a>
 </div>
 </div>
-</header>
+</div>
 
 <section id="about">
 <h2>О центре</h2>
-<p style="text-align:center;max-width:800px;margin:auto">
-Мы — современный батутный центр в Душанбе. 3 этажа развлечений, детские зоны, праздники, дни рождения и активный отдых для всей семьи.
+<p style="text-align:center;max-width:900px;margin:auto">
+Мы — современный батутный центр в Душанбе. 3 этажа активных зон, праздники, дни рождения и семейный отдых.
 </p>
 </section>
 
 <section id="prices">
 <h2>Цены</h2>
 <div class="grid">
-<div class="card"><h3>Стандарт</h3><div class="price">100 сомони</div></div>
-<div class="card"><h3>Праздник</h3><div class="price">200 сомони</div></div>
-<div class="card"><h3>Премиум</h3><div class="price">400 сомони</div></div>
+<div class="card"><h3>Стандарт</h3><div class="price">100 c</div></div>
+<div class="card"><h3>Праздник</h3><div class="price">200 c</div></div>
+<div class="card"><h3>VIP</h3><div class="price">400 c</div></div>
 </div>
 </section>
 
-<section class="gallery">
+<section>
 <h2>Галерея</h2>
-<div class="grid">
-<img src="https://images.unsplash.com/photo-1603383928972-1e1cfe61a3a5">
+<div class="grid gallery">
 <img src="https://images.unsplash.com/photo-1540479859555-17af45c78602">
 <img src="https://images.unsplash.com/photo-1571019613914-85f342c55f86">
-</div>
-</section>
-
-<section id="reviews">
-<h2>Отзывы родителей</h2>
-<div class="grid">
-<div class="card">⭐️⭐️⭐️⭐️⭐️<br>Лучший центр в городе!</div>
-<div class="card">⭐️⭐️⭐️⭐️⭐️<br>Дети в восторге!</div>
-<div class="card">⭐️⭐️⭐️⭐️⭐️<br>Чисто и безопасно.</div>
+<img src="https://images.unsplash.com/photo-1603383928972-1e1cfe61a3a5">
 </div>
 </section>
 
 <section id="contact">
-<h2>Заявка</h2>
-<form>
-<input type="text" placeholder="Ваше имя">
-<input type="tel" placeholder="Телефон">
-<textarea placeholder="Сообщение"></textarea>
-<button>Отправить заявку</button>
-</form>
-
-<div class="map" style="margin-top:40px">
-<iframe src="https://maps.google.com/maps?q=Dushanbe&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+<h2>Как нас найти</h2>
+<div class="map">
+<iframe src="https://maps.google.com/maps?q=Dushanbe&t=&z=13&output=embed"></iframe>
 </div>
-
-<p style="text-align:center;margin-top:20px">
-<a class="btn call" href="https://maps.google.com/?q=Dushanbe" target="_blank">Построить маршрут</a>
-</p>
 </section>
 
 <footer>
-Мубориз<br>
+<b>Мубориз</b><br>
 📞 +992 011 900 303<br>
 Батутный центр • Душанбе
 </footer>
 
+<div class="float">
+<a href="https://wa.me/992011900303">💬</a>
+<a href="tel:+992011900303">📞</a>
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3 style="color:var(--gold);text-align:center">Заявка</h3>
+<input placeholder="Имя">
+<input placeholder="Телефон">
+<textarea placeholder="Комментарий"></textarea>
+<button onclick="closeModal()">Отправить</button>
+</div>
+</div>
+
 <script>
-let ru=true;
-function toggleLang(){
-ru=!ru;
-document.getElementById("title").innerText=ru?"Батутный центр в Душанбе":"Trampoline Center in Dushanbe";
-document.getElementById("desc").innerText=ru?
-"Современный трёхэтажный батутный центр для детей и взрослых. Безопасно, ярко и весело."
-:"Modern three-floor trampoline center for kids and adults.";
-document.getElementById("wa").innerText=ru?"Написать в WhatsApp":"Write on WhatsApp";
-document.getElementById("call").innerText=ru?"Позвонить":"Call";
-}
+function openModal(){document.getElementById('modal').style.display='flex'}
+function closeModal(){document.getElementById('modal').style.display='none'}
 </script>
 
 </body>
-</html>
+  </html>
