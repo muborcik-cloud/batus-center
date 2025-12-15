@@ -2,170 +2,58 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Батутный центр Душанбе</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+<title>Batut Center Dushanbe</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif}
-body{
-background:linear-gradient(180deg,#050714,#0d102c,#050714);
-color:#fff;
-overflow-x:hidden
-}
-a{text-decoration:none;color:inherit}
-
-/* HEADER */
-header{
-min-height:100vh;
-background:
-linear-gradient(120deg,rgba(255,0,120,.8),rgba(0,180,255,.7)),
-url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px
-}
-header h1{
-font-size:4rem;
-font-weight:900;
-text-shadow:0 10px 40px rgba(0,0,0,.6)
-}
-header p{
-font-size:1.4rem;
-margin-top:15px;
-max-width:700px
-}
-header button{
-margin-top:35px
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f0f0f;
+  color: #eaeaea;
 }
 
-/* NAV */
-nav{
-position:sticky;
-top:0;
-background:rgba(0,0,0,.7);
-backdrop-filter:blur(10px);
-padding:15px;
-text-align:center;
-z-index:999
-}
-nav a{
-margin:0 15px;
-font-weight:600
-}
-nav a:hover{color:#ff4fa3}
-
-/* SECTIONS */
-section{
-padding:100px 20px;
-max-width:1200px;
-margin:auto
-}
-h2{
-font-size:3rem;
-text-align:center;
-margin-bottom:50px
+header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
 }
 
-/* GLASS */
-.card{
-background:rgba(255,255,255,.08);
-border-radius:30px;
-padding:35px;
-box-shadow:0 30px 80px rgba(0,0,0,.7);
-backdrop-filter:blur(15px);
-transition:.4s
-}
-.card:hover{
-transform:translateY(-12px) scale(1.03)
+.lang button {
+  background: none;
+  border: 1px solid #777;
+  color: #fff;
+  padding: 6px 12px;
+  margin-left: 5px;
+  cursor: pointer;
 }
 
-/* GRID */
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:35px
+.lang button:hover {
+  background: #d4af37;
+  color: #000;
 }
 
-/* BUTTON */
-.btn{
-background:linear-gradient(135deg,#ff4fa3,#ff005c);
-padding:18px 45px;
-border:none;
-border-radius:50px;
-font-size:1rem;
-font-weight:700;
-color:#fff;
-cursor:pointer;
-box-shadow:0 20px 50px rgba(255,0,92,.6);
-transition:.3s
-}
-.btn:hover{transform:scale(1.08)}
-
-/* PRICES */
-.price{
-font-size:2.6rem;
-font-weight:900;
-color:#ff4fa3
+section {
+  padding: 60px 20px;
+  max-width: 900px;
+  margin: auto;
 }
 
-/* GALLERY */
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px
-}
-.gallery div{
-height:220px;
-border-radius:25px;
-background:linear-gradient(135deg,#ff4fa3,#38b6ff);
-box-shadow:0 15px 40px rgba(0,0,0,.6)
+h1 {
+  font-size: 36px;
+  color: #d4af37;
 }
 
-/* FORM */
-form input,form textarea{
-width:100%;
-padding:16px;
-border-radius:18px;
-border:none;
-margin-bottom:18px;
-font-size:1rem
-}
-
-/* FLOAT BUTTONS */
-.float{
-position:fixed;
-right:20px;
-bottom:20px;
-display:flex;
-flex-direction:column;
-gap:15px;
-z-index:999
-}
-.float a{
-width:60px;
-height:60px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:26px;
-color:#fff;
-box-shadow:0 15px 40px rgba(0,0,0,.6)
-}
-.whatsapp{background:#25D366}
-.call{background:#ff4fa3}
-
-/* FOOTER */
-footer{
-background:#000;
-padding:30px;
-text-align:center;
-color:#aaa
+.btns a {
+  display: inline-block;
+  margin: 10px 10px 0 0;
+  padding: 14px 22px;
+  background: #d4af37;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
 }
 </style>
 </head>
@@ -173,80 +61,55 @@ color:#aaa
 <body>
 
 <header>
-<h1>Батутный центр Душанбе</h1>
-<p>Современный 3-этажный батутный центр. Безопасность, эмоции, радость для детей и взрослых.</p>
-<a href="#order"><button class="btn">Записаться сейчас</button></a>
+  <div><b>Batut Center</b></div>
+  <div class="lang">
+    <button onclick="setLang('ru')">RU</button>
+    <button onclick="setLang('en')">EN</button>
+  </div>
 </header>
 
-<nav>
-<a href="#about">О нас</a>
-<a href="#prices">Цены</a>
-<a href="#gallery">Галерея</a>
-<a href="#reviews">Отзывы</a>
-<a href="#order">Заявка</a>
-<a href="#map">Карта</a>
-</nav>
+<section>
+  <h1 id="title">Батутный центр в Душанбе</h1>
+  <p id="desc">
+    Современный трёхэтажный батутный развлекательный центр для детей и взрослых.
+  </p>
 
-<section id="about">
-<h2>О центре</h2>
-<div class="card">
-<p>
-Меня зовут <b>Мубориз</b>.  
-Я создал один из самых крупных и современных батутных центров в Душанбе.  
-У нас три этажа активных развлечений, профессиональные инструкторы и максимальная безопасность.
-</p>
-</div>
+  <p id="about">
+    Меня зовут Мубориз. Я создал это пространство для радости, спорта и счастья.
+  </p>
+
+  <div class="btns">
+    <a id="call" href="tel:+992011900303">Позвонить</a>
+    <a id="wa" href="https://wa.me/992011900303" target="_blank">WhatsApp</a>
+  </div>
 </section>
 
-<section id="prices">
-<h2>Цены</h2>
-<div class="grid">
-<div class="card"><h3>Mini</h3><p class="price">100 TJS</p><p>30 минут</p></div>
-<div class="card"><h3>Standard</h3><p class="price">200 TJS</p><p>1 час</p></div>
-<div class="card"><h3>Premium</h3><p class="price">400 TJS</p><p>Безлимит</p></div>
-</div>
-</section>
+<script>
+const content = {
+  ru: {
+    title: "Батутный центр в Душанбе",
+    desc: "Современный трёхэтажный батутный развлекательный центр для детей и взрослых.",
+    about: "Меня зовут Мубориз. Я создал это пространство для радости, спорта и счастья.",
+    call: "Позвонить",
+    wa: "WhatsApp"
+  },
+  en: {
+    title: "Trampoline Center in Dushanbe",
+    desc: "A modern three-story trampoline entertainment center for kids and adults.",
+    about: "My name is Muboriz. I created this place for joy, sport, and happiness.",
+    call: "Call",
+    wa: "WhatsApp"
+  }
+};
 
-<section id="gallery">
-<h2>Галерея</h2>
-<div class="gallery">
-<div></div><div></div><div></div><div></div>
-</div>
-</section>
-
-<section id="reviews">
-<h2>Отзывы родителей</h2>
-<div class="grid">
-<div class="card">⭐⭐⭐⭐⭐<br>Дети в восторге! Лучший центр в городе.</div>
-<div class="card">⭐⭐⭐⭐⭐<br>Безопасно, чисто, красиво.</div>
-<div class="card">⭐⭐⭐⭐⭐<br>Отличный персонал и атмосфера.</div>
-</div>
-</section>
-
-<section id="order">
-<h2>Оставить заявку</h2>
-<form>
-<input placeholder="Ваше имя">
-<input placeholder="Телефон">
-<textarea placeholder="Комментарий"></textarea>
-<button class="btn">Отправить</button>
-</form>
-</section>
-
-<section id="map">
-<h2>Мы на карте</h2>
-<iframe src="https://www.google.com/maps?q=Душанбе&output=embed"
-width="100%" height="360" style="border:0;border-radius:30px"></iframe>
-</section>
-
-<footer>
-© 2025 Батутный центр Душанбе • Ultra Premium Website
-</footer>
-
-<div class="float">
-<a class="whatsapp" href="https://wa.me/992011900303">💬</a>
-<a class="call" href="tel:+992011900303">📞</a>
-</div>
+function setLang(lang) {
+  document.getElementById("title").innerText = content[lang].title;
+  document.getElementById("desc").innerText = content[lang].desc;
+  document.getElementById("about").innerText = content[lang].about;
+  document.getElementById("call").innerText = content[lang].call;
+  document.getElementById("wa").innerText = content[lang].wa;
+}
+</script>
 
 </body>
 </html>
