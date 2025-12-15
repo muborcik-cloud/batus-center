@@ -2,40 +2,105 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Батутный центр | Душанбе</title>
+<title>Батутный центр Душанбе</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif}
-body{background:#0f1220;color:#fff;line-height:1.6}
-header{background:linear-gradient(120deg,#ff512f,#dd2476);padding:70px 20px;text-align:center}
-header h1{font-size:3rem;font-weight:800}
-header p{font-size:1.2rem;margin-top:15px}
+body{background:#0e1022;color:#fff;line-height:1.6}
 
-nav{background:#111;padding:15px;text-align:center}
-nav a{color:#fff;text-decoration:none;margin:0 15px;font-weight:600}
-nav a:hover{color:#ff4f7b}
+header{
+background:linear-gradient(135deg,#ff416c,#ff4b2b);
+padding:90px 20px;
+text-align:center
+}
+header h1{font-size:3.2rem;font-weight:800}
+header p{font-size:1.3rem;margin-top:15px}
 
-section{padding:60px 20px;max-width:1100px;margin:auto}
-h2{font-size:2.2rem;margin-bottom:20px;text-align:center}
+nav{
+background:#111;
+padding:15px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:100
+}
+nav a{
+color:#fff;
+text-decoration:none;
+margin:0 12px;
+font-weight:600
+}
+nav a:hover{color:#ff4b7b}
 
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px}
-.card{background:#1a1d33;padding:30px;border-radius:18px;box-shadow:0 20px 40px rgba(0,0,0,.4)}
-.card h3{color:#ff4f7b;margin-bottom:10px}
+section{padding:70px 20px;max-width:1200px;margin:auto}
+h2{text-align:center;font-size:2.4rem;margin-bottom:30px}
 
-.prices .card{border:2px solid #ff4f7b;text-align:center}
-.price{font-size:2rem;font-weight:800;margin:15px 0}
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px
+}
+.card{
+background:#1a1d3a;
+padding:30px;
+border-radius:20px;
+box-shadow:0 20px 40px rgba(0,0,0,.4)
+}
 
-button{background:#ff4f7b;border:none;padding:15px 30px;border-radius:40px;
-color:#fff;font-size:1rem;font-weight:600;cursor:pointer}
-button:hover{background:#ff2f67}
+.price{
+font-size:2.2rem;
+font-weight:800;
+color:#ff4b7b
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px
+}
+.gallery div{
+height:180px;
+background:linear-gradient(120deg,#ff4b7b,#ff7a18);
+border-radius:20px
+}
+
+.reviews .card{
+border-left:6px solid #ff4b7b
+}
+
+button{
+background:#ff4b7b;
+border:none;
+padding:15px 30px;
+border-radius:40px;
+color:#fff;
+font-size:1rem;
+font-weight:600;
+cursor:pointer;
+margin:10px
+}
+button:hover{background:#ff275f}
+
+input,textarea{
+width:100%;
+padding:15px;
+border-radius:15px;
+border:none;
+margin-bottom:15px
+}
 
 .contacts{text-align:center}
-.contacts a{display:inline-block;margin:10px;text-decoration:none}
 
-.footer{background:#111;text-align:center;padding:25px;font-size:.9rem;color:#aaa}
+.footer{
+background:#111;
+text-align:center;
+padding:25px;
+color:#aaa;
+font-size:.9rem
+}
 </style>
 </head>
 
@@ -43,34 +108,39 @@ button:hover{background:#ff2f67}
 
 <header>
 <h1>Батутный центр в Душанбе</h1>
-<p>Современный • Безопасный • Трёхэтажный центр развлечений</p>
+<p>Трёхэтажный • Современный • Безопасный • Дружелюбный</p>
 </header>
 
 <nav>
 <a href="#about">О нас</a>
 <a href="#prices">Цены</a>
+<a href="#gallery">Галерея</a>
+<a href="#reviews">Отзывы</a>
 <a href="#order">Заявка</a>
+<a href="#map">Карта</a>
 <a href="#contacts">Контакты</a>
 </nav>
 
 <section id="about">
-<h2>О нашем центре</h2>
-<p style="text-align:center;max-width:800px;margin:auto">
-Я — <b>Мубориз</b>. Создал современный батутный центр в Душанбе.  
-У нас безопасные батуты, дружелюбный персонал и радость для детей и взрослых.
+<h2>О нас</h2>
+<p style="max-width:850px;margin:auto;text-align:center">
+Меня зовут <b>Мубориз</b>.  
+Я создал профессиональный батутный центр в Душанбе — место радости, энергии и безопасности.  
+Наш центр подойдёт детям и взрослым, праздникам и активному отдыху.
 </p>
 </section>
 
 <section>
-<h2>Что у нас есть</h2>
+<h2>Что есть в центре</h2>
 <div class="cards">
-<div class="card"><h3>🤸 Батутная зона</h3><p>Для детей и взрослых</p></div>
-<div class="card"><h3>🏢 Три этажа</h3><p>Просторно и безопасно</p></div>
-<div class="card"><h3>🎉 Праздники</h3><p>Дни рождения и мероприятия</p></div>
+<div class="card">🤸 Большая батутная зона</div>
+<div class="card">🏢 Три этажа развлечений</div>
+<div class="card">🎉 Дни рождения и мероприятия</div>
+<div class="card">🛡 Полная безопасность</div>
 </div>
 </section>
 
-<section id="prices" class="prices">
+<section id="prices">
 <h2>Цены</h2>
 <div class="cards">
 <div class="card"><h3>Мини</h3><div class="price">100 сомони</div></div>
@@ -79,13 +149,49 @@ button:hover{background:#ff2f67}
 </div>
 </section>
 
+<section id="gallery">
+<h2>Фото-галерея</h2>
+<div class="gallery">
+<div></div><div></div><div></div><div></div><div></div><div></div>
+</div>
+</section>
+
+<section id="reviews" class="reviews">
+<h2>Отзывы родителей</h2>
+<div class="cards">
+<div class="card">⭐️⭐️⭐️⭐️⭐️<br>Очень чисто и безопасно. Дети счастливы!</div>
+<div class="card">⭐️⭐️⭐️⭐️⭐️<br>Лучший батутный центр в Душанбе.</div>
+<div class="card">⭐️⭐️⭐️⭐️⭐️<br>Отличный персонал и атмосфера.</div>
+</div>
+</section>
+
 <section id="order">
 <h2>Оставить заявку</h2>
-<p style="text-align:center">Позвоните или напишите нам прямо сейчас</p>
-<div style="text-align:center;margin-top:30px">
+<form>
+<input type="text" placeholder="Ваше имя">
+<input type="tel" placeholder="Телефон">
+<textarea placeholder="Сообщение"></textarea>
+<button type="submit">Отправить</button>
+</form>
+
+<div style="text-align:center">
 <a href="tel:+992011900303"><button>📞 Позвонить</button></a>
 <a href="https://wa.me/992011900303"><button>💬 WhatsApp</button></a>
 </div>
+</section>
+
+<section id="map">
+<h2>Мы на карте</h2>
+<div style="border-radius:20px;overflow:hidden">
+<iframe
+src="https://www.google.com/maps?q=Душанбе&output=embed"
+width="100%" height="350" style="border:0"></iframe>
+</div>
+<p style="text-align:center;margin-top:15px">
+<a href="https://www.google.com/maps/dir/?api=1&destination=Душанбе" target="_blank">
+<button>🗺 Построить маршрут</button>
+</a>
+</p>
 </section>
 
 <section id="contacts" class="contacts">
@@ -96,7 +202,7 @@ button:hover{background:#ff2f67}
 </section>
 
 <div class="footer">
-© 2025 Батутный центр Душанбе • Всё сделано профессионально
+© 2025 Батутный центр Душанбе • Сайт ультра-профессиональный
 </div>
 
 </body>
