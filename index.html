@@ -1,214 +1,160 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BATUS — Батутный центр Душанбе</title>
+<meta charset="UTF-8">
+<title>Батутный центр — Душанбе</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- SEO -->
-  <meta name="description" content="Батутный центр в Душанбе. Развлечения для детей и взрослых. День рождения, активный отдых, спорт."/>
-  <meta name="keywords" content="батутный центр Душанбе, батуты, детский центр, развлечения"/>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif}
-    body{background:#0f1220;color:#fff;line-height:1.6}
-    a{text-decoration:none;color:inherit}
-
-    header{
-      background:linear-gradient(135deg,#ff0080,#7928ca);
-      padding:25px 20px;
-      position:sticky;top:0;z-index:1000
-    }
-    nav{
-      max-width:1200px;margin:auto;
-      display:flex;justify-content:space-between;align-items:center
-    }
-    nav h1{font-weight:800;font-size:26px}
-    nav ul{display:flex;gap:20px;list-style:none}
-    nav button{
-      background:#fff;color:#000;
-      border:none;border-radius:20px;
-      padding:6px 14px;font-weight:600;cursor:pointer
-    }
-
-    .hero{
-      padding:90px 20px;
-      text-align:center;
-      background:url('https://images.unsplash.com/photo-1606228281439-34b45b92b4b3') center/cover;
-    }
-    .hero h2{font-size:42px;margin-bottom:15px}
-    .hero p{font-size:18px;opacity:.9}
-    .hero .buttons{
-      margin-top:30px;
-      display:flex;gap:15px;justify-content:center;flex-wrap:wrap
-    }
-    .btn{
-      padding:14px 28px;
-      border-radius:30px;
-      font-weight:600;
-      background:#ff0080;
-      transition:.3s
-    }
-    .btn.alt{background:#fff;color:#000}
-    .btn:hover{transform:scale(1.05)}
-
-    section{
-      max-width:1200px;
-      margin:80px auto;
-      padding:0 20px
-    }
-    section h3{
-      font-size:32px;
-      margin-bottom:20px
-    }
-
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:20px
-    }
-    .card{
-      background:#1b1f3b;
-      padding:25px;
-      border-radius:20px;
-      transition:.3s
-    }
-    .card:hover{transform:translateY(-8px)}
-
-    .contact{
-      background:linear-gradient(135deg,#7928ca,#ff0080);
-      border-radius:30px;
-      padding:40px;
-      text-align:center
-    }
-    .contact p{margin:10px 0}
-
-    iframe{
-      width:100%;
-      height:350px;
-      border-radius:20px;
-      border:none
-    }
-
-    footer{
-      text-align:center;
-      padding:30px;
-      opacity:.6
-    }
-  </style>
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0b0b0b;
+  color:#fff;
+}
+header{
+  background:linear-gradient(135deg,#000,#1a1a1a);
+  padding:40px 20px;
+  text-align:center;
+}
+header h1{
+  color:#f5c26b;
+  font-size:34px;
+}
+section{
+  padding:40px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+h2{
+  color:#f5c26b;
+  text-align:center;
+  margin-bottom:30px;
+}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+.card{
+  background:#161616;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(245,194,107,0.15);
+}
+.card h3{
+  color:#f5c26b;
+}
+button,a.btn{
+  display:block;
+  text-align:center;
+  padding:14px;
+  margin-top:15px;
+  border-radius:10px;
+  background:#25D366;
+  color:#000;
+  font-weight:bold;
+  text-decoration:none;
+}
+.call{
+  background:#f5c26b;
+}
+form input, form textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:12px;
+  border:none;
+  border-radius:8px;
+}
+form button{
+  background:#f5c26b;
+  color:#000;
+  font-size:16px;
+}
+footer{
+  text-align:center;
+  padding:20px;
+  background:#000;
+  color:#777;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <nav>
-    <h1>BATUS</h1>
-    <ul>
-      <li><a href="#about">О нас</a></li>
-      <li><a href="#services">Услуги</a></li>
-      <li><a href="#contact">Контакты</a></li>
-      <li><button onclick="switchLang()">EN</button></li>
-    </ul>
-  </nav>
+  <h1>Батутный центр в Душанбе</h1>
+  <p>Современный • Безопасный • Для детей и взрослых</p>
 </header>
 
-<div class="hero">
-  <h2 id="heroTitle">Лучший батутный центр в Душанбе</h2>
-  <p id="heroText">Энергия • Радость • Безопасность • Развлечения</p>
-  <div class="buttons">
-    <a class="btn" href="tel:+992011900303">Позвонить</a>
-    <a class="btn alt" href="https://wa.me/992011900303">WhatsApp</a>
-  </div>
-</div>
-
-<section id="about">
-  <h3 id="aboutTitle">Кто мы</h3>
-  <p id="aboutText">
-    BATUS — современный батутный центр для детей и взрослых.
-    Праздники, тренировки, эмоции и безопасность на первом месте.
+<section>
+  <h2>О нас</h2>
+  <p>
+    Мы — профессиональный батутный центр в городе Душанбе.
+    Трёхэтажный развлекательный комплекс с батутами,
+    игровыми зонами и праздниками для детей.
   </p>
 </section>
 
-<section id="services">
-  <h3 id="servicesTitle">Наши услуги</h3>
+<section>
+  <h2>Цены</h2>
   <div class="cards">
-    <div class="card">🤸 Батутная арена</div>
-    <div class="card">🎉 Дни рождения</div>
-    <div class="card">👨‍👩‍👧 Семейный отдых</div>
-    <div class="card">🏆 Тренировки</div>
-  </div>
-</section>
+    <div class="card">
+      <h3>🎈 Базовый</h3>
+      <p>1 час прыжков</p>
+      <strong>100 сомони</strong>
+      <a class="btn" href="https://wa.me/992011900303">Записаться</a>
+    </div>
 
-<section id="contact">
-  <div class="contact">
-    <h3 id="contactTitle">Контакты</h3>
-    <p>📞 +992 011 900 303</p>
-    <p>📍 Душанбе</p>
-    <a class="btn alt" target="_blank"
-      href="https://www.google.com/maps/dir/?api=1&destination=Dushanbe">
-      Построить маршрут
-    </a>
+    <div class="card">
+      <h3>🎉 Стандарт</h3>
+      <p>2 часа + игровые зоны</p>
+      <strong>200 сомони</strong>
+      <a class="btn" href="https://wa.me/992011900303">Записаться</a>
+    </div>
+
+    <div class="card">
+      <h3>👑 Праздник</h3>
+      <p>День рождения • 3 часа</p>
+      <strong>400 сомони</strong>
+      <a class="btn" href="https://wa.me/992011900303">Записаться</a>
+    </div>
   </div>
 </section>
 
 <section>
-  <iframe
-    src="https://www.google.com/maps?q=Dushanbe&output=embed">
-  </iframe>
-</section>
-
-<footer>
-  © 2025 BATUS — Батутный центр Душанбе
-</footer>
-
-<script>
-let ru=true;
-function switchLang(){
-  ru=!ru;
-  document.getElementById('heroTitle').innerText =
-    ru ? 'Лучший батутный центр в Душанбе' : 'Best Trampoline Park in Dushanbe';
-  document.getElementById('heroText').innerText =
-    ru ? 'Энергия • Радость • Безопасность • Развлечения' : 'Energy • Fun • Safety • Entertainment';
-  document.getElementById('aboutTitle').innerText = ru?'Кто мы':'About us';
-  document.getElementById('aboutText').innerText =
-    ru ? 'BATUS — современный батутный центр для детей и взрослых.'
-       : 'BATUS is a modern trampoline park for kids and adults.';
-  document.getElementById('servicesTitle').innerText = ru?'Наши услуги':'Our services';
-  document.getElementById('contactTitle').innerText = ru?'Контакты':'Contacts';
-}
-</script>
-
-</body>
-</html>
-<section id="prices">
-  <h3>Цены</h3>
-
+  <h2>Отзывы родителей</h2>
   <div class="cards">
     <div class="card">
-      <h4>🎈 Базовый пакет</h4>
-      <p>• 1 час прыжков</p>
-      <p>• Доступ ко всем зонам</p>
-      <p><strong>100 сомони</strong></p>
+      ⭐⭐⭐⭐⭐<br>
+      Очень чисто, безопасно, детям понравилось!
     </div>
-
     <div class="card">
-      <h4>🎉 Стандартный пакет</h4>
-      <p>• 2 часа прыжков</p>
-      <p>• Батуты + игровые зоны</p>
-      <p>• Для детей и взрослых</p>
-      <p><strong>200 сомони</strong></p>
+      ⭐⭐⭐⭐⭐<br>
+      Лучший батутный центр в Душанбе.
     </div>
-
     <div class="card">
-      <h4>👑 Праздничный пакет</h4>
-      <p>• 3 часа</p>
-      <p>• День рождения</p>
-      <p>• Отдельная зона</p>
-      <p>• Музыка и анимация</p>
-      <p><strong>400 сомони</strong></p>
+      ⭐⭐⭐⭐⭐<br>
+      Отмечали день рождения — супер!
     </div>
   </div>
 </section>
+
+<section>
+  <h2>Оставить заявку</h2>
+  <form action="https://wa.me/992011900303" target="_blank">
+    <input type="text" placeholder="Ваше имя" required>
+    <input type="tel" placeholder="Ваш номер" required>
+    <textarea placeholder="Сообщение"></textarea>
+    <button type="submit">Отправить в WhatsApp</button>
+  </form>
+
+  <a class="btn call" href="tel:+992011900303">📞 Позвонить</a>
+</section>
+
+<footer>
+  © Батутный центр, Душанбе
+</footer>
+
+</body>
+</html>
