@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Батутный центр в Душанбе</title>
+<title>Батутный центр Душанбе</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
@@ -13,6 +13,17 @@ body{font-family:Montserrat;background:#0b1220;color:#fff}
 section{padding:80px 20px;max-width:1200px;margin:auto}
 h1,h2{text-align:center;margin-bottom:20px}
 p{text-align:center;opacity:.9}
+
+.lang{
+position:fixed;
+top:20px;
+right:20px;
+background:#020617;
+padding:8px 15px;
+border-radius:30px;
+cursor:pointer;
+font-weight:600
+}
 
 .hero{
 min-height:100vh;
@@ -24,10 +35,9 @@ text-align:center;
 padding:20px
 }
 
-.hero h1{font-size:3.2rem;font-weight:800}
-.hero p{max-width:700px;margin:20px auto 30px;font-size:1.2rem}
+.hero h1{font-size:3rem;font-weight:800}
+.btns{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin-top:25px}
 
-.btns{display:flex;gap:15px;justify-content:center;flex-wrap:wrap}
 .btn{
 padding:15px 30px;
 border-radius:50px;
@@ -59,13 +69,6 @@ color:#38bdf8;
 margin:15px 0
 }
 
-.review{
-background:#020617;
-border-left:4px solid #38bdf8;
-padding:20px;
-border-radius:12px
-}
-
 footer{
 background:#020617;
 padding:40px 20px;
@@ -73,94 +76,84 @@ text-align:center
 }
 </style>
 </head>
+
 <body>
+
+<div class="lang" onclick="toggleLang()">RU / EN</div>
 
 <!-- HERO -->
 <div class="hero">
 <div>
-<h1>Батутный центр в Душанбе</h1>
-<p>Современный трёхэтажный батутный центр для детей и взрослых. Безопасно. Ярко. Эмоции.</p>
+<h1 id="title">Батутный центр в Душанбе</h1>
+<p id="desc">Современный трёхэтажный центр для детей и взрослых. Безопасно. Ярко. Весело.</p>
 
 <div class="btns">
-<a class="btn whatsapp" href="https://wa.me/992011900303" target="_blank">Написать в WhatsApp</a>
-<a class="btn call" href="tel:+992011900303">Позвонить</a>
+<a class="btn whatsapp" href="https://wa.me/992011900303" target="_blank" id="wa">Написать в WhatsApp</a>
+<a class="btn call" href="tel:+992011900303" id="call">Позвонить</a>
 </div>
 </div>
 </div>
 
 <!-- ЦЕНЫ -->
 <section>
-<h2>💰 Цены</h2>
+<h2 id="prices">Цены</h2>
 <div class="grid">
 
 <div class="card">
-<h3>Стандарт</h3>
+<h3 id="p1">Стандарт</h3>
 <div class="price">100 сомони</div>
-<p>1 час прыжков<br>Игровые зоны</p>
 </div>
 
 <div class="card">
-<h3>Праздник</h3>
+<h3 id="p2">Праздник</h3>
 <div class="price">200 сомони</div>
-<p>Батуты + зона отдыха<br>Подходит для дней рождения</p>
 </div>
 
 <div class="card">
-<h3>Премиум</h3>
+<h3 id="p3">Премиум</h3>
 <div class="price">400 сомони</div>
-<p>Полный доступ<br>Большая компания<br>Максимум эмоций</p>
 </div>
 
 </div>
 </section>
 
-<!-- ОТЗЫВЫ -->
-<section>
-<h2>⭐ Отзывы родителей</h2>
-<div class="grid">
-
-<div class="review">
-<p><strong>Алина:</strong><br>Очень чисто и безопасно. Дети в восторге!</p>
-</div>
-
-<div class="review">
-<p><strong>Фаррух:</strong><br>Лучший батутный центр в Душанбе. Спасибо!</p>
-</div>
-
-<div class="review">
-<p><strong>Мадина:</strong><br>Отмечали день рождения — всё идеально.</p>
-</div>
-
-</div>
-</section>
-
-<!-- КАРТА -->
-<section>
-<h2>📍 Мы на карте</h2>
-<p>Наш батутный центр находится в городе Душанбе</p>
-
-<div style="margin-top:30px;border-radius:20px;overflow:hidden">
-<iframe
-src="https://www.google.com/maps?q=Душанбе&output=embed"
-width="100%" height="400" style="border:0;" loading="lazy">
-</iframe>
-</div>
-
-<div class="btns" style="margin-top:30px">
-<a class="btn call" href="https://www.google.com/maps/dir/?api=1&destination=Душанбе" target="_blank">
-Построить маршрут
-</a>
-</div>
-</section>
-
-<!-- ФУТЕР -->
 <footer>
-<p>
-<strong>Мубориз</strong><br>
+<p id="footer">
+Мубориз<br>
 📞 +992 011 900 303<br>
-📍 Батутный центр — Душанбе
+Батутный центр, Душанбе
 </p>
 </footer>
+
+<script>
+let ru=true;
+function toggleLang(){
+ru=!ru;
+
+document.getElementById("title").innerText =
+ru ? "Батутный центр в Душанбе" : "Trampoline Center in Dushanbe";
+
+document.getElementById("desc").innerText =
+ru ? "Современный трёхэтажный центр для детей и взрослых. Безопасно. Ярко. Весело."
+   : "Modern three-floor trampoline center for kids and adults. Safe. Fun. Bright.";
+
+document.getElementById("prices").innerText = ru ? "Цены" : "Prices";
+
+document.getElementById("p1").innerText = ru ? "Стандарт" : "Standard";
+document.getElementById("p2").innerText = ru ? "Праздник" : "Party";
+document.getElementById("p3").innerText = ru ? "Премиум" : "Premium";
+
+document.getElementById("wa").innerText =
+ru ? "Написать в WhatsApp" : "Write on WhatsApp";
+
+document.getElementById("call").innerText =
+ru ? "Позвонить" : "Call";
+
+document.getElementById("footer").innerHTML =
+ru ? "Мубориз<br>📞 +992 011 900 303<br>Батутный центр, Душанбе"
+   : "Muboriz<br>📞 +992 011 900 303<br>Trampoline Center, Dushanbe";
+}
+</script>
 
 </body>
 </html>
