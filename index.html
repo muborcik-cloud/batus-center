@@ -2,243 +2,102 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<title>Батутный центр | Душанбе</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Батутный центр Душанбе</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --gold: #ffb703;
-  --orange: #ff7a18;
-  --dark: #0e0e0e;
-  --card: #1a1a1a;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif}
+body{background:#0f1220;color:#fff;line-height:1.6}
+header{background:linear-gradient(120deg,#ff512f,#dd2476);padding:70px 20px;text-align:center}
+header h1{font-size:3rem;font-weight:800}
+header p{font-size:1.2rem;margin-top:15px}
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+nav{background:#111;padding:15px;text-align:center}
+nav a{color:#fff;text-decoration:none;margin:0 15px;font-weight:600}
+nav a:hover{color:#ff4f7b}
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background: var(--dark);
-  color: #fff;
-}
+section{padding:60px 20px;max-width:1100px;margin:auto}
+h2{font-size:2.2rem;margin-bottom:20px;text-align:center}
 
-/* HERO */
-.hero {
-  min-height: 100vh;
-  background: radial-gradient(circle at top, #ffb703, #ff7a18, #0e0e0e);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 30px;
-}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px}
+.card{background:#1a1d33;padding:30px;border-radius:18px;box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.card h3{color:#ff4f7b;margin-bottom:10px}
 
-.hero h1 {
-  font-size: 52px;
-  font-weight: 800;
-}
+.prices .card{border:2px solid #ff4f7b;text-align:center}
+.price{font-size:2rem;font-weight:800;margin:15px 0}
 
-.hero p {
-  font-size: 20px;
-  margin: 20px 0 40px;
-  opacity: 0.95;
-}
+button{background:#ff4f7b;border:none;padding:15px 30px;border-radius:40px;
+color:#fff;font-size:1rem;font-weight:600;cursor:pointer}
+button:hover{background:#ff2f67}
 
-.hero a {
-  display: inline-block;
-  margin: 10px;
-  padding: 18px 42px;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 18px;
-  text-decoration: none;
-  color: #000;
-  background: #fff;
-  transition: transform .2s, box-shadow .2s;
-}
+.contacts{text-align:center}
+.contacts a{display:inline-block;margin:10px;text-decoration:none}
 
-.hero a:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0,0,0,.4);
-}
-
-/* SECTIONS */
-section {
-  max-width: 1200px;
-  margin: auto;
-  padding: 90px 20px;
-}
-
-h2 {
-  text-align: center;
-  font-size: 38px;
-  margin-bottom: 15px;
-}
-
-.section-desc {
-  text-align: center;
-  font-size: 18px;
-  opacity: .9;
-  max-width: 800px;
-  margin: auto;
-}
-
-/* CARDS */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-  gap: 30px;
-  margin-top: 50px;
-}
-
-.card {
-  background: var(--card);
-  border-radius: 30px;
-  padding: 40px;
-  text-align: center;
-  border: 1px solid rgba(255,255,255,.05);
-}
-
-.card h3 {
-  color: var(--gold);
-  margin-bottom: 10px;
-}
-
-/* PRICES */
-.price {
-  font-size: 36px;
-  font-weight: 700;
-  margin-top: 10px;
-}
-
-/* FORM */
-form {
-  max-width: 520px;
-  margin: 50px auto 0;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 18px;
-  margin-bottom: 16px;
-  border-radius: 18px;
-  border: none;
-  font-size: 16px;
-}
-
-button {
-  width: 100%;
-  padding: 20px;
-  border-radius: 50px;
-  background: linear-gradient(135deg,var(--orange),var(--gold));
-  border: none;
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-/* MAP */
-iframe {
-  width: 100%;
-  height: 380px;
-  border-radius: 30px;
-  border: none;
-  margin-top: 40px;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 40px;
-  background: #000;
-  opacity: .7;
-}
+.footer{background:#111;text-align:center;padding:25px;font-size:.9rem;color:#aaa}
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<div class="hero">
-  <div>
-    <h1>Батутный центр в Душанбе</h1>
-    <p>Современный трёхэтажный развлекательный центр для детей и взрослых</p>
+<header>
+<h1>Батутный центр в Душанбе</h1>
+<p>Современный • Безопасный • Трёхэтажный центр развлечений</p>
+</header>
 
-    <a href="tel:+992011900303">📞 Позвонить</a>
-    <a href="https://wa.me/992011900303" target="_blank">💬 WhatsApp</a>
-  </div>
+<nav>
+<a href="#about">О нас</a>
+<a href="#prices">Цены</a>
+<a href="#order">Заявка</a>
+<a href="#contacts">Контакты</a>
+</nav>
+
+<section id="about">
+<h2>О нашем центре</h2>
+<p style="text-align:center;max-width:800px;margin:auto">
+Я — <b>Мубориз</b>. Создал современный батутный центр в Душанбе.  
+У нас безопасные батуты, дружелюбный персонал и радость для детей и взрослых.
+</p>
+</section>
+
+<section>
+<h2>Что у нас есть</h2>
+<div class="cards">
+<div class="card"><h3>🤸 Батутная зона</h3><p>Для детей и взрослых</p></div>
+<div class="card"><h3>🏢 Три этажа</h3><p>Просторно и безопасно</p></div>
+<div class="card"><h3>🎉 Праздники</h3><p>Дни рождения и мероприятия</p></div>
 </div>
-
-<!-- ABOUT -->
-<section>
-  <h2>О нашем центре</h2>
-  <p class="section-desc">
-    Я — Мубориз. Мы создали большой, безопасный и яркий батутный центр в Душанбе.
-    У нас 3 этажа активного отдыха, праздники, дни рождения и незабываемые эмоции.
-  </p>
-
-  <div class="grid">
-    <div class="card">
-      <h3>3 этажа</h3>
-      <p>Батуты, игровые зоны и отдых</p>
-    </div>
-    <div class="card">
-      <h3>Безопасность</h3>
-      <p>Контроль, мягкие зоны и правила</p>
-    </div>
-    <div class="card">
-      <h3>Праздники</h3>
-      <p>Дни рождения и мероприятия</p>
-    </div>
-  </div>
 </section>
 
-<!-- PRICES -->
-<section>
-  <h2>Цены</h2>
-
-  <div class="grid">
-    <div class="card">
-      <h3>1 час</h3>
-      <div class="price">100 сомони</div>
-    </div>
-    <div class="card">
-      <h3>2 часа</h3>
-      <div class="price">200 сомони</div>
-    </div>
-    <div class="card">
-      <h3>Безлимит</h3>
-      <div class="price">400 сомони</div>
-    </div>
-  </div>
+<section id="prices" class="prices">
+<h2>Цены</h2>
+<div class="cards">
+<div class="card"><h3>Мини</h3><div class="price">100 сомони</div></div>
+<div class="card"><h3>Стандарт</h3><div class="price">200 сомони</div></div>
+<div class="card"><h3>Премиум</h3><div class="price">400 сомони</div></div>
+</div>
 </section>
 
-<!-- FORM -->
-<section>
-  <h2>Оставить заявку</h2>
-
-  <form>
-    <input placeholder="Ваше имя" required>
-    <input placeholder="Телефон" required>
-    <textarea placeholder="Комментарий"></textarea>
-    <button>Отправить заявку</button>
-  </form>
+<section id="order">
+<h2>Оставить заявку</h2>
+<p style="text-align:center">Позвоните или напишите нам прямо сейчас</p>
+<div style="text-align:center;margin-top:30px">
+<a href="tel:+992011900303"><button>📞 Позвонить</button></a>
+<a href="https://wa.me/992011900303"><button>💬 WhatsApp</button></a>
+</div>
 </section>
 
-<!-- MAP -->
-<section>
-  <h2>Мы на карте</h2>
-  <iframe src="https://www.google.com/maps?q=Душанбе&output=embed"></iframe>
+<section id="contacts" class="contacts">
+<h2>Контакты</h2>
+<p><b>Мубориз</b></p>
+<p>📍 Душанбе</p>
+<p>📞 +992 011 900 303</p>
 </section>
 
-<footer>
-  © 2025 Батутный центр Душанбе
-</footer>
+<div class="footer">
+© 2025 Батутный центр Душанбе • Всё сделано профессионально
+</div>
 
 </body>
 </html>
