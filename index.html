@@ -5,233 +5,233 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Батутный центр Душанбе</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+:root {
+  --gold: #ffb703;
+  --orange: #ff7a18;
+  --dark: #0e0e0e;
+  --card: #1a1a1a;
+}
+
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  background: #0b0b0b;
-  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  background: var(--dark);
+  color: #fff;
 }
 
+/* HERO */
 .hero {
   min-height: 100vh;
-  background: radial-gradient(circle at top, #ffb347, #ff512f, #0b0b0b);
+  background: radial-gradient(circle at top, #ffb703, #ff7a18, #0e0e0e);
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 40px 20px;
+  padding: 30px;
 }
 
 .hero h1 {
-  font-size: 48px;
+  font-size: 52px;
   font-weight: 800;
 }
 
 .hero p {
   font-size: 20px;
   margin: 20px 0 40px;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
-.hero-buttons a {
+.hero a {
   display: inline-block;
   margin: 10px;
-  padding: 18px 40px;
+  padding: 18px 42px;
   border-radius: 50px;
   font-weight: 600;
   font-size: 18px;
   text-decoration: none;
-  color: #fff;
-  transition: transform 0.2s;
+  color: #000;
+  background: #fff;
+  transition: transform .2s, box-shadow .2s;
 }
 
-.hero-buttons a:hover {
-  transform: scale(1.05);
+.hero a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,.4);
 }
 
-.call { background: #22c55e; }
-.whatsapp { background: #25D366; }
-.order { background: linear-gradient(135deg,#ff512f,#ffb347); }
-
+/* SECTIONS */
 section {
-  padding: 80px 20px;
   max-width: 1200px;
   margin: auto;
+  padding: 90px 20px;
 }
 
-section h2 {
-  font-size: 36px;
+h2 {
   text-align: center;
-  margin-bottom: 20px;
+  font-size: 38px;
+  margin-bottom: 15px;
 }
 
-section p {
+.section-desc {
   text-align: center;
   font-size: 18px;
+  opacity: .9;
   max-width: 800px;
   margin: auto;
-  opacity: 0.9;
 }
 
-.features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 30px;
-  margin-top: 50px;
-}
-
-.feature {
-  background: #151515;
-  padding: 35px;
-  border-radius: 25px;
-  text-align: center;
-}
-
-.feature h3 {
-  color: #ffb347;
-}
-
-.prices {
+/* CARDS */
+.grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
   gap: 30px;
   margin-top: 50px;
 }
 
-.price {
-  background: linear-gradient(180deg,#1a1a1a,#101010);
-  padding: 40px;
+.card {
+  background: var(--card);
   border-radius: 30px;
+  padding: 40px;
   text-align: center;
-  border: 2px solid #ff512f40;
+  border: 1px solid rgba(255,255,255,.05);
 }
 
-.price h3 {
-  font-size: 26px;
-  color: #ffb347;
+.card h3 {
+  color: var(--gold);
+  margin-bottom: 10px;
 }
 
-.price strong {
-  font-size: 30px;
-  display: block;
+/* PRICES */
+.price {
+  font-size: 36px;
+  font-weight: 700;
   margin-top: 10px;
 }
 
+/* FORM */
 form {
-  max-width: 500px;
+  max-width: 520px;
   margin: 50px auto 0;
 }
 
 input, textarea {
   width: 100%;
-  padding: 16px;
-  margin-bottom: 15px;
-  border-radius: 15px;
+  padding: 18px;
+  margin-bottom: 16px;
+  border-radius: 18px;
   border: none;
   font-size: 16px;
 }
 
 button {
   width: 100%;
-  padding: 18px;
+  padding: 20px;
   border-radius: 50px;
-  font-size: 18px;
-  font-weight: 600;
-  background: linear-gradient(135deg,#ff512f,#ffb347);
+  background: linear-gradient(135deg,var(--orange),var(--gold));
   border: none;
+  font-size: 18px;
+  font-weight: 700;
   cursor: pointer;
-  color: #fff;
 }
 
-.map {
-  margin-top: 50px;
-}
-
+/* MAP */
 iframe {
   width: 100%;
   height: 380px;
   border-radius: 30px;
   border: none;
+  margin-top: 40px;
 }
 
+/* FOOTER */
 footer {
-  background: #000;
-  padding: 40px;
   text-align: center;
-  opacity: 0.7;
+  padding: 40px;
+  background: #000;
+  opacity: .7;
 }
 </style>
 </head>
 
 <body>
 
+<!-- HERO -->
 <div class="hero">
   <div>
     <h1>Батутный центр в Душанбе</h1>
-    <p>Трёхэтажный развлекательный комплекс для детей и взрослых</p>
+    <p>Современный трёхэтажный развлекательный центр для детей и взрослых</p>
 
-    <div class="hero-buttons">
-      <a href="tel:+992011900303" class="call">📞 Позвонить</a>
-      <a href="https://wa.me/992011900303" class="whatsapp" target="_blank">💬 WhatsApp</a>
-      <a href="#form" class="order">📝 Оставить заявку</a>
-    </div>
+    <a href="tel:+992011900303">📞 Позвонить</a>
+    <a href="https://wa.me/992011900303" target="_blank">💬 WhatsApp</a>
   </div>
 </div>
 
+<!-- ABOUT -->
 <section>
-  <h2>Почему выбирают нас</h2>
-  <div class="features">
-    <div class="feature">
+  <h2>О нашем центре</h2>
+  <p class="section-desc">
+    Я — Мубориз. Мы создали большой, безопасный и яркий батутный центр в Душанбе.
+    У нас 3 этажа активного отдыха, праздники, дни рождения и незабываемые эмоции.
+  </p>
+
+  <div class="grid">
+    <div class="card">
       <h3>3 этажа</h3>
-      <p>Много зон для активных игр и отдыха</p>
+      <p>Батуты, игровые зоны и отдых</p>
     </div>
-    <div class="feature">
-      <h3>Безопасно</h3>
-      <p>Современное оборудование и контроль</p>
+    <div class="card">
+      <h3>Безопасность</h3>
+      <p>Контроль, мягкие зоны и правила</p>
     </div>
-    <div class="feature">
+    <div class="card">
       <h3>Праздники</h3>
       <p>Дни рождения и мероприятия</p>
     </div>
   </div>
 </section>
 
+<!-- PRICES -->
 <section>
   <h2>Цены</h2>
-  <div class="prices">
-    <div class="price">
+
+  <div class="grid">
+    <div class="card">
       <h3>1 час</h3>
-      <strong>100 сомони</strong>
+      <div class="price">100 сомони</div>
     </div>
-    <div class="price">
+    <div class="card">
       <h3>2 часа</h3>
-      <strong>200 сомони</strong>
+      <div class="price">200 сомони</div>
     </div>
-    <div class="price">
+    <div class="card">
       <h3>Безлимит</h3>
-      <strong>400 сомони</strong>
+      <div class="price">400 сомони</div>
     </div>
   </div>
 </section>
 
-<section id="form">
+<!-- FORM -->
+<section>
   <h2>Оставить заявку</h2>
+
   <form>
     <input placeholder="Ваше имя" required>
     <input placeholder="Телефон" required>
     <textarea placeholder="Комментарий"></textarea>
-    <button>Отправить</button>
+    <button>Отправить заявку</button>
   </form>
 </section>
 
-<section class="map">
+<!-- MAP -->
+<section>
   <h2>Мы на карте</h2>
   <iframe src="https://www.google.com/maps?q=Душанбе&output=embed"></iframe>
 </section>
