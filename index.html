@@ -1,181 +1,166 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Батутный центр в Душанбе</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Батутный центр в Душанбе</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: #0f172a;
-      color: #fff;
-      line-height: 1.6;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Montserrat;background:#0b1220;color:#fff}
+section{padding:80px 20px;max-width:1200px;margin:auto}
+h1,h2{text-align:center;margin-bottom:20px}
+p{text-align:center;opacity:.9}
 
-    header {
-      min-height: 100vh;
-      background: linear-gradient(120deg, #ff0080, #7928ca);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 40px 20px;
-    }
+.hero{
+min-height:100vh;
+background:linear-gradient(120deg,#ff0080,#7928ca);
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px
+}
 
-    header h1 {
-      font-size: 3.2rem;
-      font-weight: 800;
-      margin-bottom: 20px;
-    }
+.hero h1{font-size:3.2rem;font-weight:800}
+.hero p{max-width:700px;margin:20px auto 30px;font-size:1.2rem}
 
-    header p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto 30px;
-      opacity: 0.95;
-    }
+.btns{display:flex;gap:15px;justify-content:center;flex-wrap:wrap}
+.btn{
+padding:15px 30px;
+border-radius:50px;
+font-weight:600;
+text-decoration:none;
+transition:.3s
+}
+.whatsapp{background:#25d366;color:#000}
+.call{background:#fff;color:#000}
+.btn:hover{transform:scale(1.05)}
 
-    .buttons {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px
+}
 
-    .btn {
-      padding: 15px 28px;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+.card{
+background:#111827;
+padding:30px;
+border-radius:20px;
+box-shadow:0 20px 40px rgba(0,0,0,.4)
+}
 
-    .btn-whatsapp {
-      background: #25d366;
-      color: #000;
-    }
+.price{
+font-size:2rem;
+font-weight:800;
+color:#38bdf8;
+margin:15px 0
+}
 
-    .btn-call {
-      background: #fff;
-      color: #000;
-    }
+.review{
+background:#020617;
+border-left:4px solid #38bdf8;
+padding:20px;
+border-radius:12px
+}
 
-    .btn:hover {
-      transform: scale(1.05);
-    }
-
-    section {
-      padding: 80px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-      gap: 30px;
-    }
-
-    .card {
-      background: #111827;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-    }
-
-    .card h3 {
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-      color: #38bdf8;
-    }
-
-    .about {
-      text-align: center;
-      max-width: 800px;
-      margin: auto;
-    }
-
-    footer {
-      background: #020617;
-      padding: 40px 20px;
-      text-align: center;
-      opacity: 0.9;
-    }
-
-    footer strong {
-      color: #38bdf8;
-    }
-  </style>
+footer{
+background:#020617;
+padding:40px 20px;
+text-align:center
+}
+</style>
 </head>
 <body>
 
-<header>
-  <div>
-    <h1>Батутный центр в Душанбе</h1>
-    <p>
-      Современный трёхэтажный батутный развлекательный центр для детей и взрослых.
-      Безопасно. Ярко. Эмоции, которые запоминаются.
-    </p>
+<!-- HERO -->
+<div class="hero">
+<div>
+<h1>Батутный центр в Душанбе</h1>
+<p>Современный трёхэтажный батутный центр для детей и взрослых. Безопасно. Ярко. Эмоции.</p>
 
-    <div class="buttons">
-      <a class="btn btn-whatsapp" href="https://wa.me/992011900303" target="_blank">
-        Написать в WhatsApp
-      </a>
-      <a class="btn btn-call" href="tel:+992011900303">
-        Позвонить
-      </a>
-    </div>
-  </div>
-</header>
+<div class="btns">
+<a class="btn whatsapp" href="https://wa.me/992011900303" target="_blank">Написать в WhatsApp</a>
+<a class="btn call" href="tel:+992011900303">Позвонить</a>
+</div>
+</div>
+</div>
 
+<!-- ЦЕНЫ -->
 <section>
-  <div class="features">
-    <div class="card">
-      <h3>🎉 3 этажа развлечений</h3>
-      <p>Батуты, игровые зоны, активные аттракционы для любого возраста.</p>
-    </div>
+<h2>💰 Цены</h2>
+<div class="grid">
 
-    <div class="card">
-      <h3>🛡 Безопасность</h3>
-      <p>Мягкие зоны, контроль персонала и чистота на первом месте.</p>
-    </div>
+<div class="card">
+<h3>Стандарт</h3>
+<div class="price">100 сомони</div>
+<p>1 час прыжков<br>Игровые зоны</p>
+</div>
 
-    <div class="card">
-      <h3>👨‍👩‍👧 Для всей семьи</h3>
-      <p>Идеально подходит для дней рождения, праздников и выходных.</p>
-    </div>
+<div class="card">
+<h3>Праздник</h3>
+<div class="price">200 сомони</div>
+<p>Батуты + зона отдыха<br>Подходит для дней рождения</p>
+</div>
 
-    <div class="card">
-      <h3>📍 Душанбе</h3>
-      <p>Удобное расположение. Легко добраться из любой части города.</p>
-    </div>
-  </div>
+<div class="card">
+<h3>Премиум</h3>
+<div class="price">400 сомони</div>
+<p>Полный доступ<br>Большая компания<br>Максимум эмоций</p>
+</div>
+
+</div>
 </section>
 
-<section class="about">
-  <h2 style="margin-bottom:20px;">О нас</h2>
-  <p>
-    Меня зовут <strong>Мубориз</strong>.  
-    Я создал этот батутный центр, чтобы дети радовались, а родители были спокойны.
-    Мы делаем отдых ярким, безопасным и незабываемым.
-  </p>
+<!-- ОТЗЫВЫ -->
+<section>
+<h2>⭐ Отзывы родителей</h2>
+<div class="grid">
+
+<div class="review">
+<p><strong>Алина:</strong><br>Очень чисто и безопасно. Дети в восторге!</p>
+</div>
+
+<div class="review">
+<p><strong>Фаррух:</strong><br>Лучший батутный центр в Душанбе. Спасибо!</p>
+</div>
+
+<div class="review">
+<p><strong>Мадина:</strong><br>Отмечали день рождения — всё идеально.</p>
+</div>
+
+</div>
 </section>
 
+<!-- КАРТА -->
+<section>
+<h2>📍 Мы на карте</h2>
+<p>Наш батутный центр находится в городе Душанбе</p>
+
+<div style="margin-top:30px;border-radius:20px;overflow:hidden">
+<iframe
+src="https://www.google.com/maps?q=Душанбе&output=embed"
+width="100%" height="400" style="border:0;" loading="lazy">
+</iframe>
+</div>
+
+<div class="btns" style="margin-top:30px">
+<a class="btn call" href="https://www.google.com/maps/dir/?api=1&destination=Душанбе" target="_blank">
+Построить маршрут
+</a>
+</div>
+</section>
+
+<!-- ФУТЕР -->
 <footer>
-  <p>
-    📞 <strong>+992 011 900 303</strong><br/>
-    📍 Батутный центр — Душанбе
-  </p>
+<p>
+<strong>Мубориз</strong><br>
+📞 +992 011 900 303<br>
+📍 Батутный центр — Душанбе
+</p>
 </footer>
 
 </body>
-        </html>
+</html>
