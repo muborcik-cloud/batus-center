@@ -3,132 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Батутный центр в Душанбе</title>
+<title>Батутный центр Душанбе</title>
 
 <style>
 :root{
   --main:#ff6a00;
-  --dark:#111;
-  --light:#f5f5f5;
+  --dark:#0e0e0e;
+  --light:#f6f6f6;
 }
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
-body{background:#fff;color:#222;line-height:1.6}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+html{scroll-behavior:smooth}
+body{background:#fff;color:#222}
 
+/* ===== АНИМАЦИИ ===== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes glow{
+  0%{box-shadow:0 0 10px var(--main)}
+  50%{box-shadow:0 0 30px var(--main)}
+  100%{box-shadow:0 0 10px var(--main)}
+}
+
+/* ===== HEADER ===== */
 header{
-  background:linear-gradient(120deg,var(--main),#ff9a00);
-  color:#fff;
-  padding:30px 20px;
+  position:sticky;top:0;z-index:100;
+  background:rgba(0,0,0,.8);
+  backdrop-filter:blur(10px);
+  padding:15px 20px;
 }
 header .top{
+  max-width:1200px;
+  margin:auto;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  flex-wrap:wrap;
 }
 nav a{
   color:#fff;
   margin:0 10px;
   text-decoration:none;
-  font-weight:bold;
+  position:relative;
 }
-.lang button{
-  background:#fff;
-  color:#000;
-  border:none;
-  padding:5px 10px;
-  margin-left:5px;
-  cursor:pointer;
-  border-radius:5px;
+nav a::after{
+  content:'';
+  position:absolute;
+  bottom:-5px;left:0;
+  width:0;height:2px;
+  background:var(--main);
+  transition:.3s;
 }
+nav a:hover::after{width:100%}
 
+/* ===== HERO ===== */
 .hero{
+  height:90vh;
+  background:
+    linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+    url('https://images.unsplash.com/photo-1606836591695-4d58a73eba1e');
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   text-align:center;
-  padding:60px 20px;
 }
-.hero h1{font-size:40px;margin-bottom:15px}
-.hero p{font-size:18px;margin-bottom:25px}
+.hero-content{
+  animation:fadeUp 1.2s ease forwards;
+}
+.hero h1{
+  font-size:48px;
+  margin-bottom:15px;
+}
+.hero p{
+  font-size:20px;
+  margin-bottom:30px;
+}
 
 .buttons a{
   display:inline-block;
   margin:8px;
-  padding:15px 25px;
+  padding:15px 30px;
   border-radius:50px;
   font-weight:bold;
   text-decoration:none;
+  transition:.3s;
 }
 .whatsapp{background:#25D366;color:#fff}
 .call{background:#000;color:#fff}
 .order{background:#fff;color:#000}
 
-section{padding:60px 20px;max-width:1100px;margin:auto}
-section h2{text-align:center;font-size:32px;margin-bottom:30px}
+.buttons a:hover{
+  transform:translateY(-5px) scale(1.05);
+  animation:glow 1.5s infinite;
+}
 
-.about, .prices, .reviews, .contact{background:var(--light)}
+/* ===== SECTIONS ===== */
+section{
+  max-width:1200px;
+  margin:auto;
+  padding:80px 20px;
+}
+section h2{
+  text-align:center;
+  font-size:36px;
+  margin-bottom:40px;
+  animation:fadeUp .8s ease both;
+}
 
+/* ===== CARDS ===== */
 .cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
 }
 .card{
   background:#fff;
-  padding:25px;
-  border-radius:15px;
-  box-shadow:0 10px 30px rgba(0,0,0,.1);
+  border-radius:20px;
+  padding:30px;
   text-align:center;
+  box-shadow:0 15px 40px rgba(0,0,0,.1);
+  transition:.4s;
+  animation:fadeUp 1s ease both;
 }
-.card h3{margin-bottom:10px}
+.card:hover{
+  transform:translateY(-15px) rotateX(5deg);
+  box-shadow:0 30px 60px rgba(0,0,0,.2);
+}
 
 .price{
-  font-size:28px;
+  font-size:32px;
   color:var(--main);
-  font-weight:bold;
+  margin:15px 0;
 }
 
+/* ===== REVIEWS ===== */
 .review{
   background:#fff;
-  padding:20px;
-  border-radius:15px;
-  box-shadow:0 5px 20px rgba(0,0,0,.1);
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+  transition:.3s;
 }
+.review:hover{transform:scale(1.05)}
 
+/* ===== CONTACT ===== */
 form{
   max-width:500px;
-  margin:30px auto 0;
+  margin:40px auto 0;
   display:flex;
   flex-direction:column;
 }
-form input, form textarea{
+input,textarea{
   margin-bottom:15px;
-  padding:12px;
-  border-radius:8px;
+  padding:15px;
+  border-radius:10px;
   border:1px solid #ccc;
 }
-form button{
+button{
   background:var(--main);
   color:#fff;
   border:none;
-  padding:15px;
+  padding:16px;
   font-size:16px;
   border-radius:50px;
   cursor:pointer;
+  transition:.3s;
+}
+button:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 30px var(--main);
 }
 
 .map iframe{
   width:100%;
   height:350px;
-  border-radius:20px;
   border:none;
+  border-radius:25px;
+  margin-top:30px;
 }
 
+/* ===== FOOTER ===== */
 footer{
   background:#000;
   color:#fff;
   text-align:center;
-  padding:25px 15px;
-  margin-top:50px;
+  padding:25px;
 }
-
 </style>
 </head>
 
@@ -136,81 +199,61 @@ footer{
 
 <header>
   <div class="top">
-    <strong>Батутный центр Душанбе</strong>
+    <strong style="color:#fff">Батутный центр Душанбе</strong>
     <nav>
       <a href="#about">О нас</a>
       <a href="#prices">Цены</a>
       <a href="#reviews">Отзывы</a>
       <a href="#contact">Контакты</a>
     </nav>
-    <div class="lang">
-      <button onclick="setLang('ru')">RU</button>
-      <button onclick="setLang('en')">EN</button>
-    </div>
   </div>
 </header>
 
 <div class="hero">
-  <h1 data-ru="Самый большой батутный центр в Душанбе"
-      data-en="The biggest trampoline center in Dushanbe">
-      Самый большой батутный центр в Душанбе
-  </h1>
-
-  <p data-ru="3 этажа развлечений • безопасность • радость для детей"
-     data-en="3 floors of fun • safety • joy for children">
-     3 этажа развлечений • безопасность • радость для детей
-  </p>
-
-  <div class="buttons">
-    <a class="whatsapp" href="https://wa.me/992011900303">WhatsApp</a>
-    <a class="call" href="tel:+992011900303">Позвонить</a>
-    <a class="order" href="#contact">Оставить заявку</a>
+  <div class="hero-content">
+    <h1>Батутный центр №1 в Душанбе</h1>
+    <p>3 этажа • безопасность • радость для детей</p>
+    <div class="buttons">
+      <a class="whatsapp" href="https://wa.me/992011900303">WhatsApp</a>
+      <a class="call" href="tel:+992011900303">Позвонить</a>
+      <a class="order" href="#contact">Оставить заявку</a>
+    </div>
   </div>
 </div>
 
-<section id="about" class="about">
-  <h2 data-ru="О нас" data-en="About us">О нас</h2>
-  <p style="text-align:center;max-width:800px;margin:auto"
-     data-ru="Мы — современный батутный центр только в Душанбе. 3 этажа, безопасное оборудование, зоны для детей и взрослых. Идеально для праздников и активного отдыха."
-     data-en="We are a modern trampoline center only in Dushanbe. 3 floors, safe equipment, areas for children and adults. Perfect for parties and active fun.">
-     Мы — современный батутный центр только в Душанбе...
-  </p>
-</section>
-
-<section id="prices" class="prices">
-  <h2 data-ru="Цены" data-en="Prices">Цены</h2>
+<section id="prices">
+  <h2>Цены</h2>
   <div class="cards">
     <div class="card">
       <h3>Базовый</h3>
-      <p class="price">100 c</p>
+      <div class="price">100 c</div>
       <p>Вход + батуты</p>
     </div>
     <div class="card">
       <h3>Стандарт</h3>
-      <p class="price">200 c</p>
+      <div class="price">200 c</div>
       <p>Батуты + развлечения</p>
     </div>
     <div class="card">
       <h3>Премиум</h3>
-      <p class="price">400 c</p>
+      <div class="price">400 c</div>
       <p>Всё включено</p>
     </div>
   </div>
 </section>
 
-<section id="reviews" class="reviews">
-  <h2 data-ru="Отзывы" data-en="Reviews">Отзывы</h2>
+<section id="reviews">
+  <h2>Отзывы</h2>
   <div class="cards">
-    <div class="review">⭐️⭐️⭐️⭐️⭐️ Отличное место!</div>
-    <div class="review">⭐️⭐️⭐️⭐️⭐️ Дети в восторге</div>
-    <div class="review">⭐️⭐️⭐️⭐️⭐️ Лучший центр в Душанбе</div>
+    <div class="review">⭐⭐⭐⭐⭐ Лучший центр в Душанбе</div>
+    <div class="review">⭐⭐⭐⭐⭐ Дети счастливы</div>
+    <div class="review">⭐⭐⭐⭐⭐ Очень безопасно</div>
   </div>
 </section>
 
-<section id="contact" class="contact">
-  <h2 data-ru="Контакты и заявка" data-en="Contact & booking">Контакты</h2>
-
-  <p style="text-align:center">
+<section id="contact">
+  <h2>Контакты</h2>
+  <p style="text-align:center;font-size:18px">
     📞 +992 011 900 303<br>
     💬 WhatsApp доступен
   </p>
@@ -220,7 +263,7 @@ footer{
   </div>
 
   <form>
-    <input type="text" placeholder="Ваше имя">
+    <input type="text" placeholder="Имя">
     <input type="tel" placeholder="Телефон">
     <textarea placeholder="Сообщение"></textarea>
     <button>Отправить заявку</button>
@@ -230,14 +273,6 @@ footer{
 <footer>
   © 2025 Батутный центр Душанбе
 </footer>
-
-<script>
-function setLang(lang){
-  document.querySelectorAll('[data-ru]').forEach(el=>{
-    el.innerText = el.dataset[lang];
-  });
-}
-</script>
 
 </body>
 </html>
