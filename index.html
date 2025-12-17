@@ -2,212 +2,241 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Батутный центр Душанбе — Премиум</title>
-
-<meta name="description" content="Профессиональный батутный центр в Душанбе. Трёхэтажный развлекательный комплекс. Батуты только в Душанбе. Позвонить или написать в WhatsApp.">
-<meta name="keywords" content="батутный центр Душанбе, батуты Душанбе, детский центр Душанбе, развлечения для детей">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Батутный центр в Душанбе</title>
 
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:'Segoe UI',Arial,sans-serif;
-  background:linear-gradient(180deg,#050d14,#000);
-  color:#fff;
+:root{
+  --main:#ff6a00;
+  --dark:#111;
+  --light:#f5f5f5;
 }
-:root{--gold:#ffd700}
-
-.fade{animation:fade 1.3s ease forwards}
-@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1}}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+body{background:#fff;color:#222;line-height:1.6}
 
 header{
-  min-height:100vh;
+  background:linear-gradient(120deg,var(--main),#ff9a00);
+  color:#fff;
+  padding:30px 20px;
+}
+header .top{
   display:flex;
-  flex-direction:column;
-  justify-content:center;
+  justify-content:space-between;
   align-items:center;
-  text-align:center;
-  padding:20px;
-  background:
-    radial-gradient(circle at top,#1e4d6b,transparent),
-    linear-gradient(#000,#020b12);
+  flex-wrap:wrap;
 }
-header h1{
-  font-size:52px;
-  color:var(--gold);
-}
-header p{font-size:22px;max-width:800px}
-
-.lang{
-  position:fixed;
-  top:15px;
-  right:15px;
-  z-index:99;
+nav a{
+  color:#fff;
+  margin:0 10px;
+  text-decoration:none;
+  font-weight:bold;
 }
 .lang button{
-  padding:8px 14px;
-  margin:3px;
+  background:#fff;
+  color:#000;
   border:none;
-  border-radius:10px;
-  font-weight:bold;
+  padding:5px 10px;
+  margin-left:5px;
   cursor:pointer;
+  border-radius:5px;
 }
 
-.section{
-  max-width:1200px;
-  margin:80px auto;
-  padding:40px;
-  background:rgba(255,255,255,.06);
-  border-radius:22px;
-}
-h2{color:var(--gold);margin-bottom:20px}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:22px;
-}
-
-.card{
-  background:rgba(0,0,0,.55);
-  padding:30px;
-  border-radius:20px;
+.hero{
   text-align:center;
-  transition:.3s;
+  padding:60px 20px;
 }
-.card:hover{transform:scale(1.05)}
+.hero h1{font-size:40px;margin-bottom:15px}
+.hero p{font-size:18px;margin-bottom:25px}
 
-.buttons{text-align:center;margin-top:25px}
 .buttons a{
   display:inline-block;
-  margin:10px;
-  padding:16px 28px;
-  border-radius:16px;
+  margin:8px;
+  padding:15px 25px;
+  border-radius:50px;
   font-weight:bold;
   text-decoration:none;
 }
-.whatsapp{background:#25D366;color:#000}
-.call{background:#00c3ff;color:#000}
-.route{background:var(--gold);color:#000}
+.whatsapp{background:#25D366;color:#fff}
+.call{background:#000;color:#fff}
+.order{background:#fff;color:#000}
 
-form{display:grid;gap:15px}
-input,textarea,button{
-  padding:14px;
-  border-radius:12px;
-  border:none;
-  font-size:16px;
+section{padding:60px 20px;max-width:1100px;margin:auto}
+section h2{text-align:center;font-size:32px;margin-bottom:30px}
+
+.about, .prices, .reviews, .contact{background:var(--light)}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
 }
-button{
-  background:var(--gold);
+.card{
+  background:#fff;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+  text-align:center;
+}
+.card h3{margin-bottom:10px}
+
+.price{
+  font-size:28px;
+  color:var(--main);
   font-weight:bold;
+}
+
+.review{
+  background:#fff;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+form{
+  max-width:500px;
+  margin:30px auto 0;
+  display:flex;
+  flex-direction:column;
+}
+form input, form textarea{
+  margin-bottom:15px;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+form button{
+  background:var(--main);
+  color:#fff;
+  border:none;
+  padding:15px;
+  font-size:16px;
+  border-radius:50px;
   cursor:pointer;
 }
 
-footer{
-  text-align:center;
-  padding:35px;
-  opacity:.8;
+.map iframe{
+  width:100%;
+  height:350px;
+  border-radius:20px;
+  border:none;
 }
+
+footer{
+  background:#000;
+  color:#fff;
+  text-align:center;
+  padding:25px 15px;
+  margin-top:50px;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="lang">
-  <button onclick="ru()">RU</button>
-  <button onclick="en()">EN</button>
-</div>
-
-<header class="fade">
-  <h1 id="t1">Батутный центр в Душанбе</h1>
-  <p id="t2">
-    Премиальный трёхэтажный развлекательный комплекс.  
-    Современные батуты. Праздники. Эмоции.  
-    <b>Батуты только в городе Душанбе.</b>
-  </p>
+<header>
+  <div class="top">
+    <strong>Батутный центр Душанбе</strong>
+    <nav>
+      <a href="#about">О нас</a>
+      <a href="#prices">Цены</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+    <div class="lang">
+      <button onclick="setLang('ru')">RU</button>
+      <button onclick="setLang('en')">EN</button>
+    </div>
+  </div>
 </header>
 
-<section class="section fade">
-  <h2 id="t3">О центре</h2>
-  <p id="t4">
-    Меня зовут <b>Мубориз</b>.  
-    Я создал один из самых современных батутных центров в Душанбе.  
-    Пространство безопасности, радости и активного отдыха для детей и взрослых.
+<div class="hero">
+  <h1 data-ru="Самый большой батутный центр в Душанбе"
+      data-en="The biggest trampoline center in Dushanbe">
+      Самый большой батутный центр в Душанбе
+  </h1>
+
+  <p data-ru="3 этажа развлечений • безопасность • радость для детей"
+     data-en="3 floors of fun • safety • joy for children">
+     3 этажа развлечений • безопасность • радость для детей
+  </p>
+
+  <div class="buttons">
+    <a class="whatsapp" href="https://wa.me/992011900303">WhatsApp</a>
+    <a class="call" href="tel:+992011900303">Позвонить</a>
+    <a class="order" href="#contact">Оставить заявку</a>
+  </div>
+</div>
+
+<section id="about" class="about">
+  <h2 data-ru="О нас" data-en="About us">О нас</h2>
+  <p style="text-align:center;max-width:800px;margin:auto"
+     data-ru="Мы — современный батутный центр только в Душанбе. 3 этажа, безопасное оборудование, зоны для детей и взрослых. Идеально для праздников и активного отдыха."
+     data-en="We are a modern trampoline center only in Dushanbe. 3 floors, safe equipment, areas for children and adults. Perfect for parties and active fun.">
+     Мы — современный батутный центр только в Душанбе...
   </p>
 </section>
 
-<section class="section fade">
-  <h2 id="t5">Цены</h2>
-  <div class="grid">
-    <div class="card"><h3 id="t6">Базовый</h3><p>100 сомони / 1 час</p></div>
-    <div class="card"><h3 id="t7">Стандарт</h3><p>200 сомони / 2 часа</p></div>
-    <div class="card"><h3 id="t8">Премиум</h3><p>400 сомони / безлимит</p></div>
+<section id="prices" class="prices">
+  <h2 data-ru="Цены" data-en="Prices">Цены</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Базовый</h3>
+      <p class="price">100 c</p>
+      <p>Вход + батуты</p>
+    </div>
+    <div class="card">
+      <h3>Стандарт</h3>
+      <p class="price">200 c</p>
+      <p>Батуты + развлечения</p>
+    </div>
+    <div class="card">
+      <h3>Премиум</h3>
+      <p class="price">400 c</p>
+      <p>Всё включено</p>
+    </div>
   </div>
 </section>
 
-<section class="section fade">
-  <h2 id="t9">Оставить заявку</h2>
-  <form onsubmit="sendWA(event)">
-    <input id="name" placeholder="Ваше имя" required>
-    <input id="phone" placeholder="Телефон" required>
-    <textarea id="msg" placeholder="Комментарий"></textarea>
-    <button type="submit" id="t10">Отправить</button>
+<section id="reviews" class="reviews">
+  <h2 data-ru="Отзывы" data-en="Reviews">Отзывы</h2>
+  <div class="cards">
+    <div class="review">⭐️⭐️⭐️⭐️⭐️ Отличное место!</div>
+    <div class="review">⭐️⭐️⭐️⭐️⭐️ Дети в восторге</div>
+    <div class="review">⭐️⭐️⭐️⭐️⭐️ Лучший центр в Душанбе</div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h2 data-ru="Контакты и заявка" data-en="Contact & booking">Контакты</h2>
+
+  <p style="text-align:center">
+    📞 +992 011 900 303<br>
+    💬 WhatsApp доступен
+  </p>
+
+  <div class="map">
+    <iframe src="https://www.google.com/maps?q=Dushanbe&output=embed"></iframe>
+  </div>
+
+  <form>
+    <input type="text" placeholder="Ваше имя">
+    <input type="tel" placeholder="Телефон">
+    <textarea placeholder="Сообщение"></textarea>
+    <button>Отправить заявку</button>
   </form>
 </section>
 
-<section class="section fade">
-  <h2 id="t11">Связаться</h2>
-  <p><b>Мубориз</b></p>
-  <p>📞 +992 011 900 303</p>
-  <div class="buttons">
-    <a class="whatsapp" href="https://wa.me/992011900303" target="_blank">WhatsApp</a>
-    <a class="call" href="tel:+992011900303">Позвонить</a>
-  </div>
-</section>
-
-<section class="section fade">
-  <h2 id="t12">Как нас найти</h2>
-  <div class="buttons">
-    <a class="route" href="https://www.google.com/maps/dir/?api=1&destination=Dushanbe" target="_blank" id="t13">
-      Построить маршрут
-    </a>
-  </div>
-  <br>
-  <iframe src="https://www.google.com/maps?q=Dushanbe&output=embed"
-    width="100%" height="320" style="border:0;border-radius:18px;"></iframe>
-</section>
-
 <footer>
-  © 2025 Батутный центр Душанбе • Ultimate Edition
+  © 2025 Батутный центр Душанбе
 </footer>
 
 <script>
-function sendWA(e){
-  e.preventDefault();
-  let t =
-  "Заявка с сайта:%0A"+
-  "Имя: "+name.value+"%0A"+
-  "Телефон: "+phone.value+"%0A"+
-  "Комментарий: "+msg.value;
-  window.open("https://wa.me/992011900303?text="+t,"_blank");
+function setLang(lang){
+  document.querySelectorAll('[data-ru]').forEach(el=>{
+    el.innerText = el.dataset[lang];
+  });
 }
-function en(){
-t1.innerText="Trampoline Center in Dushanbe";
-t2.innerText="Premium three-storey entertainment center. Modern trampolines. Only in Dushanbe.";
-t3.innerText="About the center";
-t4.innerText="My name is Muboriz. I created one of the most modern trampoline centers in Dushanbe.";
-t5.innerText="Prices";
-t6.innerText="Basic";
-t7.innerText="Standard";
-t8.innerText="Premium";
-t9.innerText="Send request";
-t10.innerText="Send";
-t11.innerText="Contact";
-t12.innerText="Location";
-t13.innerText="Build route";
-}
-function ru(){location.reload()}
 </script>
 
 </body>
