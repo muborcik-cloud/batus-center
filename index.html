@@ -1,243 +1,261 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Легендарный Батутный Центр Душанбе</title>
+<meta charset="UTF-8">
+<title>BATUS — Батутный центр Душанбе</title>
 
-  <!-- SEO -->
-  <meta name="description" content="Самый красивый, безопасный и современный батутный центр в Душанбе. Батуты для детей и взрослых. Запись онлайн, WhatsApp, звонок.">
-  <meta name="keywords" content="батутный центр Душанбе, батуты Душанбе, детский центр Душанбе, батуты для детей">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SEO -->
+<meta name="description" content="BATUS — батутный центр в Душанбе. Безопасные батуты для детей и взрослых. Звонок, WhatsApp, онлайн-заявка.">
+<meta name="keywords" content="батутный центр Душанбе, батуты Душанбе, детский центр Душанбе">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    /* RESET */
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:'Inter',sans-serif;
-      background:#000;
-      color:#fff;
-      line-height:1.7;
-      overflow-x:hidden;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',sans-serif;
+  background:#050505;
+  color:#fff;
+  line-height:1.6;
+}
 
-    /* VIDEO HERO */
-    .hero{
-      position:relative;
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:40px 20px;
-    }
-    .hero video{
-      position:absolute;
-      top:0;left:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      z-index:-2;
-    }
-    .hero::after{
-      content:'';
-      position:absolute;
-      inset:0;
-      background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.9));
-      z-index:-1;
-    }
+/* LANGUAGE SWITCH */
+.lang{
+  position:fixed;
+  top:20px;
+  right:20px;
+  display:flex;
+  gap:10px;
+  z-index:99;
+}
+.lang button{
+  padding:8px 14px;
+  border-radius:20px;
+  border:none;
+  font-weight:700;
+  cursor:pointer;
+  background:#222;
+  color:#fff;
+}
+.lang button.active{background:#ffcc00;color:#000}
 
-    .hero h1{
-      font-size:clamp(32px,6vw,72px);
-      font-weight:900;
-      letter-spacing:-1px;
-      animation:fadeUp 1.2s ease forwards;
-    }
-    .hero p{
-      max-width:720px;
-      margin:20px auto 40px;
-      font-size:clamp(16px,2.5vw,20px);
-      opacity:.95;
-      animation:fadeUp 1.6s ease forwards;
-    }
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px 20px;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.9)),
+    url("https://images.unsplash.com/photo-1600508774634-4e11d34730e2?auto=format&fit=crop&w=1400&q=80")
+    center/cover no-repeat;
+}
+.hero h1{
+  font-size:clamp(28px,5vw,56px);
+  font-weight:800;
+}
+.hero p{
+  max-width:700px;
+  margin:18px auto 34px;
+  font-size:clamp(15px,2.2vw,19px);
+  opacity:.9;
+}
 
-    /* BUTTONS */
-    .buttons{
-      display:flex;
-      gap:16px;
-      justify-content:center;
-      flex-wrap:wrap;
-      animation:fadeUp 2s ease forwards;
-    }
-    .btn{
-      padding:16px 34px;
-      border-radius:999px;
-      font-weight:700;
-      text-decoration:none;
-      color:#000;
-      background:linear-gradient(135deg,#ff0080,#ffcc00);
-      box-shadow:0 20px 60px rgba(255,0,128,.4);
-      transition:.3s;
-    }
-    .btn:hover{transform:translateY(-4px);box-shadow:0 30px 80px rgba(255,0,128,.6)}
+/* BUTTONS */
+.btns{
+  display:flex;
+  gap:16px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.btn{
+  padding:14px 30px;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+  color:#000;
+  background:linear-gradient(135deg,#ff0080,#ffcc00);
+  box-shadow:0 15px 50px rgba(255,0,128,.4);
+  transition:.3s;
+}
+.btn:hover{transform:translateY(-4px)}
 
-    /* SECTIONS */
-    section{
-      padding:100px 20px;
-      max-width:1200px;
-      margin:auto;
-    }
-    h2{
-      font-size:clamp(28px,4vw,48px);
-      font-weight:800;
-      margin-bottom:20px;
-      text-align:center;
-    }
-    section p{
-      max-width:800px;
-      margin:0 auto 40px;
-      text-align:center;
-      opacity:.9;
-      font-size:18px;
-    }
+/* SECTION */
+section{
+  max-width:1100px;
+  margin:auto;
+  padding:90px 20px;
+}
+h2{
+  text-align:center;
+  font-size:clamp(24px,4vw,40px);
+  font-weight:800;
+  margin-bottom:18px;
+}
+section p{
+  max-width:780px;
+  margin:0 auto 40px;
+  text-align:center;
+  opacity:.9;
+}
 
-    /* CARDS */
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:30px;
-    }
-    .card{
-      background:rgba(255,255,255,.06);
-      backdrop-filter:blur(14px);
-      border-radius:24px;
-      padding:30px;
-      transition:.4s;
-    }
-    .card:hover{transform:translateY(-10px);background:rgba(255,255,255,.1)}
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:26px;
+}
+.card{
+  background:#111;
+  border-radius:22px;
+  padding:28px;
+  text-align:center;
+  transition:.3s;
+}
+.card:hover{transform:translateY(-8px)}
+.price{
+  font-size:34px;
+  font-weight:800;
+  color:#ffcc00;
+}
 
-    /* PRICES */
-    .price{
-      font-size:36px;
-      font-weight:900;
-      margin-top:10px;
-      color:#ffcc00;
-    }
+/* FORM */
+form{
+  max-width:520px;
+  margin:auto;
+  display:grid;
+  gap:14px;
+}
+input,button{
+  padding:14px;
+  border-radius:12px;
+  border:none;
+  font-size:15px;
+}
+input{background:#1a1a1a;color:#fff}
+button{
+  background:linear-gradient(135deg,#00ffcc,#00ccff);
+  font-weight:800;
+  cursor:pointer;
+}
 
-    /* MAP */
-    iframe{
-      width:100%;
-      height:420px;
-      border:0;
-      border-radius:24px;
-      margin-top:40px;
-    }
+/* MAP */
+iframe{
+  width:100%;
+  height:420px;
+  border-radius:22px;
+  border:none;
+}
 
-    /* FORM */
-    form{
-      max-width:520px;
-      margin:40px auto 0;
-      display:grid;
-      gap:16px;
-    }
-    input,button{
-      padding:16px;
-      border-radius:14px;
-      border:none;
-      font-size:16px;
-    }
-    input{background:#111;color:#fff}
-    button{
-      background:linear-gradient(135deg,#00ffcc,#00ccff);
-      font-weight:800;
-      cursor:pointer;
-    }
-
-    /* FLOAT BUTTONS */
-    .float{
-      position:fixed;
-      right:20px;
-      bottom:20px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-      z-index:99;
-    }
-    .float a{
-      padding:14px 18px;
-      border-radius:50px;
-      background:#25D366;
-      color:#000;
-      font-weight:800;
-      text-decoration:none;
-      box-shadow:0 10px 40px rgba(0,0,0,.5);
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp{
-      from{opacity:0;transform:translateY(40px)}
-      to{opacity:1;transform:none}
-    }
-  </style>
+/* FLOAT BUTTONS */
+.float{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.float a{
+  padding:14px 18px;
+  border-radius:30px;
+  background:#25D366;
+  color:#000;
+  font-weight:800;
+  text-decoration:none;
+  box-shadow:0 10px 40px rgba(0,0,0,.5);
+}
+</style>
 </head>
 
 <body>
 
+<!-- LANGUAGE -->
+<div class="lang">
+  <button id="ru" class="active">RU</button>
+  <button id="en">EN</button>
+</div>
+
 <!-- HERO -->
 <div class="hero">
-  <video autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-2083/1080p.mp4" type="video/mp4">
-  </video>
-
   <div>
-    <h1>Легендарный Батутный Центр Душанбе</h1>
-    <p>Самый красивый, безопасный и эмоциональный батутный центр. Только в Душанбе.</p>
-    <div class="buttons">
-      <a class="btn" href="tel:+992011900303">Позвонить</a>
-      <a class="btn" href="https://wa.me/992011900303">WhatsApp</a>
+    <h1 data-ru="Батутный центр BATUS в Душанбе"
+        data-en="BATUS Trampoline Center in Dushanbe"></h1>
+
+    <p data-ru="Безопасные батуты, радость, эмоции и праздник для детей и взрослых."
+       data-en="Safe trampolines, joy and unforgettable emotions for kids and adults."></p>
+
+    <div class="btns">
+      <a class="btn" href="tel:+992011900303"
+         data-ru="Позвонить"
+         data-en="Call"></a>
+      <a class="btn" href="https://wa.me/992011900303"
+         data-ru="WhatsApp"
+         data-en="WhatsApp"></a>
     </div>
   </div>
 </div>
 
 <!-- ABOUT -->
 <section>
-  <h2>Кто мы</h2>
-  <p>Мы — современный батутный центр для детей и взрослых. Безопасность, радость и эмоции — наш приоритет.</p>
+  <h2 data-ru="Кто мы" data-en="Who we are"></h2>
+  <p data-ru="Мы — современный батутный центр в Душанбе. Безопасность, чистота и счастье детей — наш приоритет."
+     data-en="We are a modern trampoline center in Dushanbe. Safety, cleanliness and children’s happiness are our priority."></p>
 </section>
 
 <!-- PRICES -->
 <section>
-  <h2>Цены</h2>
+  <h2 data-ru="Цены" data-en="Prices"></h2>
   <div class="grid">
-    <div class="card"><h3>Базовый</h3><div class="price">100 сом</div></div>
-    <div class="card"><h3>Стандарт</h3><div class="price">200 сом</div></div>
-    <div class="card"><h3>Премиум</h3><div class="price">400 сом</div></div>
+    <div class="card"><h3>Basic</h3><div class="price">100 c.</div></div>
+    <div class="card"><h3>Standard</h3><div class="price">200 c.</div></div>
+    <div class="card"><h3>Premium</h3><div class="price">400 c.</div></div>
   </div>
 </section>
 
 <!-- FORM -->
 <section>
-  <h2>Оставить заявку</h2>
+  <h2 data-ru="Оставить заявку" data-en="Send request"></h2>
   <form>
-    <input placeholder="Ваше имя">
-    <input placeholder="Телефон">
-    <button>Отправить заявку</button>
+    <input placeholder="Имя / Name">
+    <input placeholder="Телефон / Phone">
+    <button data-ru="Отправить" data-en="Send"></button>
   </form>
 </section>
 
 <!-- MAP -->
 <section>
-  <h2>Как нас найти</h2>
+  <h2 data-ru="Как нас найти" data-en="How to find us"></h2>
   <iframe src="https://maps.google.com/maps?q=Душанбе&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
 </section>
 
 <!-- FLOAT -->
 <div class="float">
-  <a href="tel:+992011900303">📞 Позвонить</a>
-  <a href="https://wa.me/992011900303">💬 WhatsApp</a>
+  <a href="tel:+992011900303">📞</a>
+  <a href="https://wa.me/992011900303">💬</a>
 </div>
+
+<script>
+const ruBtn=document.getElementById('ru');
+const enBtn=document.getElementById('en');
+const elements=document.querySelectorAll('[data-ru]');
+
+function setLang(lang){
+  elements.forEach(el=>{
+    el.textContent=el.dataset[lang];
+  });
+  ruBtn.classList.toggle('active',lang==='ru');
+  enBtn.classList.toggle('active',lang==='en');
+}
+
+ruBtn.onclick=()=>setLang('ru');
+enBtn.onclick=()=>setLang('en');
+setLang('ru');
+</script>
 
 </body>
 </html>
