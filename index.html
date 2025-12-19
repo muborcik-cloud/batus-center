@@ -3,37 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Батутный центр Душанбе — Premium</title>
+
+<title>Батутный центр в Душанбе — №1 для детей</title>
+
+<meta name="description" content="Премиальный батутный центр в Душанбе. Безопасные зоны, праздники, дни рождения. Звоните +992 011 900 303">
+<meta name="keywords" content="батутный центр Душанбе, детский батут, развлечения для детей">
+<meta name="author" content="Мубориз">
+
+<!-- SEO Schema -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"AmusementPark",
+  "name":"Батутный центр Душанбе",
+  "telephone":"+992011900303",
+  "address":{
+    "@type":"PostalAddress",
+    "addressLocality":"Dushanbe",
+    "addressCountry":"TJ"
+  }
+}
+</script>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#0a0a0a;
-  --card:#141414;
-  --gold:#f5c84c;
-  --text:#eaeaea;
-  --muted:#9a9a9a;
-  --radius:18px;
+  --bg:#0b0b0b;
+  --card:#151515;
+  --gold:#f6c453;
+  --text:#f1f1f1;
+  --muted:#a1a1a1;
 }
 
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
 body{
   margin:0;
   font-family:Inter,sans-serif;
   background:var(--bg);
   color:var(--text);
-  line-height:1.7;
   font-size:16px;
+  line-height:1.65;
 }
 
-h1{font-size:42px;margin:0 0 12px}
-h2{font-size:30px;margin-bottom:14px}
-h3{margin:0 0 8px}
-
+h1{font-size:42px;margin:0 0 10px}
+h2{font-size:32px;margin-bottom:14px}
+h3{font-size:20px;margin-bottom:6px}
 p{color:var(--muted)}
-
-a{text-decoration:none}
 
 section{
   max-width:1200px;
@@ -43,14 +61,13 @@ section{
 
 .center{text-align:center}
 
-/* ===== HERO ===== */
+/* HERO */
 .hero{
   position:relative;
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
 }
 .hero video{
   position:absolute;
@@ -58,23 +75,23 @@ section{
   width:100%;
   height:100%;
   object-fit:cover;
-  filter:brightness(.35);
+  filter:brightness(.3);
 }
 .hero .content{
   position:relative;
   z-index:2;
   max-width:900px;
-  padding:30px;
-  animation:fadeUp 1s ease;
+  text-align:center;
+  animation:up 1.2s ease;
 }
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(30px)}
+@keyframes up{
+  from{opacity:0;transform:translateY(40px)}
   to{opacity:1;transform:none}
 }
 
-/* ===== BUTTONS ===== */
+/* BUTTONS */
 .buttons{
-  margin-top:25px;
+  margin-top:26px;
   display:flex;
   gap:14px;
   flex-wrap:wrap;
@@ -90,7 +107,7 @@ section{
 .btn.out{border:1px solid var(--gold);color:var(--gold)}
 .btn.wh{background:#25d366;color:#000}
 
-/* ===== GRID ===== */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -99,16 +116,16 @@ section{
 .card{
   background:var(--card);
   padding:28px;
-  border-radius:var(--radius);
-  border:1px solid #1f1f1f;
-  transition:.3s;
+  border-radius:18px;
+  border:1px solid #222;
+  transition:.4s;
 }
 .card:hover{
-  transform:translateY(-6px);
+  transform:translateY(-8px);
   border-color:var(--gold);
 }
 
-/* ===== GALLERY ===== */
+/* GALLERY */
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -121,7 +138,7 @@ section{
   border-radius:14px;
 }
 
-/* ===== FORM ===== */
+/* FORM */
 form{
   max-width:520px;
   margin:auto;
@@ -135,7 +152,7 @@ input,button{
   font-size:15px;
 }
 input{
-  background:#1a1a1a;
+  background:#1c1c1c;
   color:#fff;
 }
 button{
@@ -143,7 +160,7 @@ button{
   font-weight:700;
 }
 
-/* ===== MAP ===== */
+/* MAP */
 iframe{
   width:100%;
   height:360px;
@@ -151,7 +168,7 @@ iframe{
   border-radius:18px;
 }
 
-/* ===== FLOAT WHATSAPP ===== */
+/* FLOAT */
 .whatsapp{
   position:fixed;
   right:20px;
@@ -161,15 +178,15 @@ iframe{
   padding:14px 18px;
   border-radius:999px;
   font-weight:700;
-  z-index:10;
+  z-index:20;
 }
 
-/* ===== LANGUAGE ===== */
+/* LANG */
 .lang{
   position:fixed;
   top:20px;
   right:20px;
-  z-index:10;
+  z-index:20;
 }
 .lang button{
   background:#000;
@@ -177,10 +194,9 @@ iframe{
   border:1px solid #333;
   padding:6px 10px;
   margin-left:6px;
-  cursor:pointer;
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer{
   text-align:center;
   padding:30px;
@@ -204,38 +220,40 @@ footer{
     <source src="https://cdn.coverr.co/videos/coverr-kids-playing-4260/1080p.mp4">
   </video>
   <div class="content">
-    <h1 data-ru="Премиальный батутный центр в Душанбе"
-        data-en="Premium Trampoline Center in Dushanbe"></h1>
-    <p data-ru="Три этажа радости, безопасности и эмоций"
-       data-en="Three floors of joy, safety and fun"></p>
+    <h1 data-ru="Батутный центр №1 в Душанбе"
+        data-en="The #1 Trampoline Center in Dushanbe"></h1>
+    <p data-ru="Безопасность • Радость • Детские эмоции"
+       data-en="Safety • Fun • Happy kids"></p>
     <div class="buttons">
       <a class="btn main" href="tel:+992011900303"
          data-ru="Позвонить" data-en="Call"></a>
-      <a class="btn wh" href="https://wa.me/992011900303"
-         data-ru="WhatsApp" data-en="WhatsApp"></a>
+      <a class="btn wh" href="https://wa.me/992011900303">WhatsApp</a>
       <a class="btn out" href="#map"
-         data-ru="Построить маршрут" data-en="Get directions"></a>
+         data-ru="Маршрут" data-en="Directions"></a>
     </div>
   </div>
 </div>
 
 <section class="center">
-  <h2 data-ru="Почему выбирают нас" data-en="Why choose us"></h2>
+  <h2 data-ru="Почему родители выбирают нас"
+      data-en="Why parents choose us"></h2>
   <div class="grid">
     <div class="card">
-      <h3 data-ru="Безопасность" data-en="Safety"></h3>
-      <p data-ru="Мягкие зоны и контроль персонала"
+      <h3 data-ru="100% безопасность" data-en="100% Safety"></h3>
+      <p data-ru="Мягкие покрытия и контроль персонала"
          data-en="Soft zones and staff supervision"></p>
     </div>
     <div class="card">
-      <h3 data-ru="Развлечения" data-en="Entertainment"></h3>
-      <p data-ru="Батуты, зоны прыжков, игры"
-         data-en="Trampolines, jump zones, games"></p>
+      <h3 data-ru="Современное оборудование"
+         data-en="Modern equipment"></h3>
+      <p data-ru="Европейские батуты"
+         data-en="European trampolines"></p>
     </div>
     <div class="card">
-      <h3 data-ru="Праздники" data-en="Parties"></h3>
-      <p data-ru="Дни рождения и мероприятия"
-         data-en="Birthdays and events"></p>
+      <h3 data-ru="Праздники и дни рождения"
+         data-en="Parties & birthdays"></h3>
+      <p data-ru="Незабываемые эмоции"
+         data-en="Unforgettable memories"></p>
     </div>
   </div>
 </section>
@@ -250,7 +268,8 @@ footer{
 </section>
 
 <section>
-  <h2 class="center" data-ru="Оставить заявку" data-en="Send request"></h2>
+  <h2 class="center" data-ru="Оставить заявку"
+      data-en="Send request"></h2>
   <form>
     <input placeholder="Имя / Name">
     <input placeholder="Телефон / Phone">
@@ -259,12 +278,13 @@ footer{
 </section>
 
 <section id="map">
-  <h2 class="center" data-ru="Как нас найти" data-en="How to find us"></h2>
+  <h2 class="center" data-ru="Как нас найти"
+      data-en="How to find us"></h2>
   <iframe src="https://maps.google.com/maps?q=Dushanbe&z=13&output=embed"></iframe>
 </section>
 
 <footer>
-  © 2025 Батутный центр Душанбе • ULTRA PREMIUM
+  © 2025 Батутный центр Душанбе • LEGENDARY LEVEL
 </footer>
 
 <script>
