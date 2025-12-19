@@ -4,78 +4,79 @@
 <meta charset="UTF-8">
 <title>BATUS — Батутный центр Душанбе</title>
 
-<!-- SEO -->
-<meta name="description" content="BATUS — батутный центр в Душанбе. Безопасные батуты для детей и взрослых. Звонок, WhatsApp, онлайн-заявка.">
-<meta name="keywords" content="батутный центр Душанбе, батуты Душанбе, детский центр Душанбе">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BATUS — лучший батутный центр в Душанбе. Безопасность, радость, эмоции.">
+<meta name="keywords" content="батутный центр Душанбе, батуты Душанбе">
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:'Inter',sans-serif;
-  background:#050505;
+  background:#000;
   color:#fff;
-  line-height:1.6;
 }
 
-/* LANGUAGE SWITCH */
+/* LANG */
 .lang{
-  position:fixed;
-  top:20px;
-  right:20px;
-  display:flex;
-  gap:10px;
-  z-index:99;
+  position:fixed;top:20px;right:20px;
+  display:flex;gap:10px;z-index:99;
 }
 .lang button{
-  padding:8px 14px;
-  border-radius:20px;
-  border:none;
-  font-weight:700;
-  cursor:pointer;
-  background:#222;
-  color:#fff;
+  padding:8px 14px;border-radius:20px;
+  border:none;font-weight:700;
+  background:#222;color:#fff;cursor:pointer;
 }
-.lang button.active{background:#ffcc00;color:#000}
+.lang .active{background:#ffcc00;color:#000}
 
-/* HERO */
+/* VIDEO HERO */
 .hero{
-  min-height:100vh;
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+}
+.hero video{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.4),rgba(0,0,0,.9));
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  height:100%;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:40px 20px;
-  background:
-    linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.9)),
-    url("https://images.unsplash.com/photo-1600508774634-4e11d34730e2?auto=format&fit=crop&w=1400&q=80")
-    center/cover no-repeat;
+  padding:20px;
 }
 .hero h1{
-  font-size:clamp(28px,5vw,56px);
+  font-size:clamp(26px,5vw,54px);
   font-weight:800;
 }
 .hero p{
-  max-width:700px;
-  margin:18px auto 34px;
+  max-width:720px;
+  margin:18px auto 30px;
   font-size:clamp(15px,2.2vw,19px);
   opacity:.9;
 }
 
 /* BUTTONS */
 .btns{
-  display:flex;
-  gap:16px;
-  justify-content:center;
-  flex-wrap:wrap;
+  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
 }
 .btn{
   padding:14px 30px;
   border-radius:999px;
-  font-weight:700;
+  font-weight:800;
   text-decoration:none;
   color:#000;
   background:linear-gradient(135deg,#ff0080,#ffcc00);
@@ -94,10 +95,10 @@ h2{
   text-align:center;
   font-size:clamp(24px,4vw,40px);
   font-weight:800;
-  margin-bottom:18px;
+  margin-bottom:16px;
 }
 section p{
-  max-width:780px;
+  max-width:760px;
   margin:0 auto 40px;
   text-align:center;
   opacity:.9;
@@ -117,41 +118,44 @@ section p{
   transition:.3s;
 }
 .card:hover{transform:translateY(-8px)}
-.price{
-  font-size:34px;
-  font-weight:800;
-  color:#ffcc00;
+.price{font-size:34px;font-weight:800;color:#ffcc00}
+
+/* GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
 }
+.gallery img{
+  width:100%;
+  border-radius:18px;
+  transition:.3s;
+}
+.gallery img:hover{transform:scale(1.05)}
 
 /* FORM */
 form{
-  max-width:520px;
-  margin:auto;
-  display:grid;
-  gap:14px;
+  max-width:520px;margin:auto;
+  display:grid;gap:14px;
 }
 input,button{
-  padding:14px;
-  border-radius:12px;
-  border:none;
-  font-size:15px;
+  padding:14px;border-radius:12px;border:none;font-size:15px;
 }
 input{background:#1a1a1a;color:#fff}
 button{
   background:linear-gradient(135deg,#00ffcc,#00ccff);
-  font-weight:800;
-  cursor:pointer;
+  font-weight:800;cursor:pointer;
 }
 
 /* MAP */
 iframe{
   width:100%;
   height:420px;
-  border-radius:22px;
   border:none;
+  border-radius:22px;
 }
 
-/* FLOAT BUTTONS */
+/* FLOAT */
 .float{
   position:fixed;
   right:20px;
@@ -167,14 +171,12 @@ iframe{
   color:#000;
   font-weight:800;
   text-decoration:none;
-  box-shadow:0 10px 40px rgba(0,0,0,.5);
 }
 </style>
 </head>
 
 <body>
 
-<!-- LANGUAGE -->
 <div class="lang">
   <button id="ru" class="active">RU</button>
   <button id="en">EN</button>
@@ -182,29 +184,28 @@ iframe{
 
 <!-- HERO -->
 <div class="hero">
-  <div>
-    <h1 data-ru="Батутный центр BATUS в Душанбе"
-        data-en="BATUS Trampoline Center in Dushanbe"></h1>
-
-    <p data-ru="Безопасные батуты, радость, эмоции и праздник для детей и взрослых."
-       data-en="Safe trampolines, joy and unforgettable emotions for kids and adults."></p>
-
-    <div class="btns">
-      <a class="btn" href="tel:+992011900303"
-         data-ru="Позвонить"
-         data-en="Call"></a>
-      <a class="btn" href="https://wa.me/992011900303"
-         data-ru="WhatsApp"
-         data-en="WhatsApp"></a>
+  <video autoplay muted loop playsinline>
+    <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-5267/1080p.mp4" type="video/mp4">
+  </video>
+  <div class="hero-content">
+    <div>
+      <h1 data-ru="Легендарный батутный центр BATUS"
+          data-en="Legendary BATUS Trampoline Center"></h1>
+      <p data-ru="Самый безопасный и эмоциональный батутный центр в Душанбе."
+         data-en="The safest and most emotional trampoline center in Dushanbe."></p>
+      <div class="btns">
+        <a class="btn" href="tel:+992011900303" data-ru="Позвонить" data-en="Call"></a>
+        <a class="btn" href="https://wa.me/992011900303" data-ru="WhatsApp" data-en="WhatsApp"></a>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ABOUT -->
 <section>
-  <h2 data-ru="Кто мы" data-en="Who we are"></h2>
-  <p data-ru="Мы — современный батутный центр в Душанбе. Безопасность, чистота и счастье детей — наш приоритет."
-     data-en="We are a modern trampoline center in Dushanbe. Safety, cleanliness and children’s happiness are our priority."></p>
+  <h2 data-ru="О нас" data-en="About us"></h2>
+  <p data-ru="BATUS — современный батутный центр в Душанбе. 3 этажа радости, сертифицированная безопасность и счастливые дети."
+     data-en="BATUS is a modern trampoline center in Dushanbe. 3 floors of joy, certified safety and happy kids."></p>
 </section>
 
 <!-- PRICES -->
@@ -214,6 +215,16 @@ iframe{
     <div class="card"><h3>Basic</h3><div class="price">100 c.</div></div>
     <div class="card"><h3>Standard</h3><div class="price">200 c.</div></div>
     <div class="card"><h3>Premium</h3><div class="price">400 c.</div></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section>
+  <h2 data-ru="Галерея" data-en="Gallery"></h2>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1600508774634-4e11d34730e2">
+    <img src="https://images.unsplash.com/photo-1598514982841-2faab64d6c9c">
+    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf">
   </div>
 </section>
 
@@ -233,27 +244,22 @@ iframe{
   <iframe src="https://maps.google.com/maps?q=Душанбе&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
 </section>
 
-<!-- FLOAT -->
 <div class="float">
   <a href="tel:+992011900303">📞</a>
   <a href="https://wa.me/992011900303">💬</a>
 </div>
 
 <script>
-const ruBtn=document.getElementById('ru');
-const enBtn=document.getElementById('en');
-const elements=document.querySelectorAll('[data-ru]');
-
-function setLang(lang){
-  elements.forEach(el=>{
-    el.textContent=el.dataset[lang];
-  });
-  ruBtn.classList.toggle('active',lang==='ru');
-  enBtn.classList.toggle('active',lang==='en');
+const ru=document.getElementById('ru');
+const en=document.getElementById('en');
+const el=document.querySelectorAll('[data-ru]');
+function setLang(l){
+  el.forEach(e=>e.textContent=e.dataset[l]);
+  ru.classList.toggle('active',l==='ru');
+  en.classList.toggle('active',l==='en');
 }
-
-ruBtn.onclick=()=>setLang('ru');
-enBtn.onclick=()=>setLang('en');
+ru.onclick=()=>setLang('ru');
+en.onclick=()=>setLang('en');
 setLang('ru');
 </script>
 
