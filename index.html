@@ -5,186 +5,168 @@
 <title>BATUS — Premium Trampoline Park</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<meta name="description" content="Лучший батутный центр в Душанбе. Безопасно, профессионально, для детей и взрослых.">
+<meta name="keywords" content="батутный центр Душанбе, батуты Душанбе, детский центр Душанбе">
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+:root{
+--gold:#ffcc00;
+--grad:linear-gradient(135deg,#ff0080,#ffcc00);
+}
 *{margin:0;padding:0;box-sizing:border-box}
 body{
-  font-family:'Inter',sans-serif;
-  background:#0a0a0a;
-  color:#fff;
-  line-height:1.6;
+font-family:'Inter',sans-serif;
+background:#0b0b0b;
+color:#fff;
+line-height:1.6;
 }
 
 /* LANG */
 .lang{
-  position:fixed;top:18px;right:18px;
-  display:flex;gap:10px;z-index:100;
+position:fixed;top:15px;right:15px;
+z-index:999;display:flex;gap:8px
 }
 .lang button{
-  padding:7px 14px;border-radius:20px;
-  border:none;background:#1a1a1a;color:#fff;
-  font-weight:700;cursor:pointer
+padding:6px 14px;border-radius:20px;
+border:none;background:#1a1a1a;color:#fff;
+font-weight:700;cursor:pointer
 }
-.lang .active{background:#ffcc00;color:#000}
+.lang .active{background:var(--gold);color:#000}
 
 /* HERO */
-.hero{height:100vh;position:relative;overflow:hidden}
+.hero{
+height:100vh;position:relative;overflow:hidden
+}
 .hero video{
-  position:absolute;width:100%;height:100%;object-fit:cover
+position:absolute;width:100%;height:100%;object-fit:cover
 }
 .hero::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,.4),rgba(0,0,0,.9))
+content:"";position:absolute;inset:0;
+background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.95))
 }
 .hero-content{
-  position:relative;z-index:2;
-  height:100%;
-  display:flex;align-items:center;
-  justify-content:center;text-align:center;
-  padding:20px
+position:relative;z-index:2;
+height:100%;
+display:flex;align-items:center;justify-content:center;
+text-align:center;padding:20px
 }
 .hero h1{
-  font-size:clamp(28px,5vw,56px);
-  font-weight:800;
+font-size:clamp(28px,5vw,60px);
+font-weight:800;
 }
 .hero p{
-  max-width:720px;margin:20px auto 30px;
-  font-size:clamp(15px,2.2vw,18px);
-  opacity:.9
+max-width:760px;margin:20px auto 30px;
+font-size:clamp(15px,2vw,18px);opacity:.9
 }
 
 /* BUTTONS */
 .btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 .btn{
-  padding:14px 34px;border-radius:999px;
-  font-weight:800;text-decoration:none;
-  color:#000;
-  background:linear-gradient(135deg,#ff0080,#ffcc00);
-  box-shadow:0 15px 40px rgba(255,0,128,.35);
-  transition:.3s
+padding:14px 36px;border-radius:999px;
+font-weight:800;text-decoration:none;color:#000;
+background:var(--grad);
+box-shadow:0 15px 40px rgba(255,0,128,.35);
+transition:.3s
 }
-.btn.alt{
-  background:#fff;color:#000
-}
+.btn.alt{background:#fff}
 .btn:hover{transform:translateY(-4px)}
 
-/* SECTIONS */
+/* SECTION */
 section{
-  max-width:1200px;
-  margin:auto;
-  padding:90px 20px;
+max-width:1200px;margin:auto;
+padding:90px 20px
 }
 h2{
-  text-align:center;
-  font-size:clamp(24px,4vw,40px);
-  font-weight:800;
-  margin-bottom:14px
+text-align:center;
+font-size:clamp(24px,4vw,42px);
+font-weight:800;margin-bottom:14px
 }
 section p{
-  max-width:760px;
-  margin:0 auto 50px;
-  text-align:center;
-  opacity:.9
-}
-
-/* STATS */
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:26px
-}
-.stat{
-  background:#111;
-  border-radius:24px;
-  padding:36px 24px;
-  text-align:center
-}
-.stat b{
-  font-size:42px;
-  color:#ffcc00;
-  display:block
+max-width:780px;margin:0 auto 50px;
+text-align:center;opacity:.9
 }
 
 /* GRID */
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:26px
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:26px
 }
 .card{
-  background:#111;border-radius:24px;
-  padding:32px;text-align:center;
-  transition:.3s
+background:#111;border-radius:26px;
+padding:36px;text-align:center;
+transition:.3s
 }
 .card:hover{transform:translateY(-8px)}
 .price{
-  font-size:36px;
-  font-weight:800;
-  color:#ffcc00
+font-size:40px;font-weight:800;color:var(--gold)
+}
+
+/* STATS */
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:26px
+}
+.stat{
+background:#111;border-radius:26px;
+padding:36px;text-align:center
+}
+.stat b{
+font-size:44px;color:var(--gold);display:block
 }
 
 /* GALLERY */
 .gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px
 }
 .gallery img{
-  width:100%;
-  border-radius:18px;
-  transition:.3s
+width:100%;border-radius:20px;
+transition:.3s
 }
 .gallery img:hover{transform:scale(1.06)}
 
-/* TESTIMONIALS */
-.quote{
-  background:#111;
-  border-radius:24px;
-  padding:28px;
-  font-size:15px
+/* TESTIMONIAL */
+.review{
+background:#111;border-radius:26px;
+padding:28px;font-size:15px
 }
-.quote b{display:block;margin-top:12px;color:#ffcc00}
+.review b{display:block;margin-top:12px;color:var(--gold)}
 
 /* FORM */
 form{
-  max-width:520px;
-  margin:auto;
-  display:grid;
-  gap:14px
+max-width:520px;margin:auto;
+display:grid;gap:14px
 }
 input,button{
-  padding:14px;
-  border-radius:14px;
-  border:none;
-  font-size:15px
+padding:14px;border-radius:14px;
+border:none;font-size:15px
 }
 input{background:#1a1a1a;color:#fff}
 button{
-  background:linear-gradient(135deg,#00ffcc,#00ccff);
-  font-weight:800;cursor:pointer
+background:linear-gradient(135deg,#00ffcc,#00ccff);
+font-weight:800;cursor:pointer
 }
 
 /* MAP */
 iframe{
-  width:100%;
-  height:420px;
-  border:none;
-  border-radius:24px
+width:100%;height:420px;
+border:none;border-radius:26px
 }
 
 /* FLOAT */
 .float{
-  position:fixed;right:20px;bottom:20px;
-  display:flex;flex-direction:column;gap:12px
+position:fixed;right:20px;bottom:20px;
+display:flex;flex-direction:column;gap:12px;z-index:999
 }
 .float a{
-  padding:14px 18px;
-  border-radius:30px;
-  background:#25D366;
-  color:#000;
-  font-weight:800;
-  text-decoration:none
+padding:14px 18px;border-radius:30px;
+background:#25D366;color:#000;
+font-weight:800;text-decoration:none
 }
 </style>
 </head>
@@ -192,8 +174,8 @@ iframe{
 <body>
 
 <div class="lang">
-  <button id="ru" class="active">RU</button>
-  <button id="en">EN</button>
+<button id="ru" class="active">RU</button>
+<button id="en">EN</button>
 </div>
 
 <!-- HERO -->
@@ -203,10 +185,10 @@ iframe{
 </video>
 <div class="hero-content">
 <div>
-<h1 data-ru="BATUS — батутный парк нового поколения"
-    data-en="BATUS — next generation trampoline park"></h1>
-<p data-ru="Премиальный батутный центр в Душанбе. Безопасность. Эмоции. Доверие."
-   data-en="Premium trampoline park in Dushanbe. Safety. Emotions. Trust."></p>
+<h1 data-ru="BATUS — Батутный центр №1 в Душанбе"
+data-en="BATUS — Trampoline Park #1 in Dushanbe"></h1>
+<p data-ru="Премиальный батутный парк. Безопасно. Красиво. Профессионально."
+data-en="Premium trampoline park. Safe. Beautiful. Professional."></p>
 <div class="btns">
 <a class="btn" href="tel:+992011900303" data-ru="Позвонить" data-en="Call"></a>
 <a class="btn alt" href="https://wa.me/992011900303">WhatsApp</a>
@@ -215,10 +197,17 @@ iframe{
 </div>
 </div>
 
+<!-- ABOUT -->
+<section>
+<h2 data-ru="Кто мы" data-en="Who we are"></h2>
+<p data-ru="Я — Мубориз. Создал батутный центр нового уровня в Душанбе. Мы дарим детям радость, а родителям — уверенность в безопасности."
+data-en="I am Muboriz. I created a next-level trampoline center in Dushanbe. Joy for kids, trust for parents."></p>
+</section>
+
 <!-- STATS -->
 <section>
 <div class="stats">
-<div class="stat"><b>10 000+</b><span data-ru="счастливых детей" data-en="happy kids"></span></div>
+<div class="stat"><b>10 000+</b><span data-ru="детей" data-en="kids"></span></div>
 <div class="stat"><b>5 лет</b><span data-ru="опыта" data-en="experience"></span></div>
 <div class="stat"><b>100%</b><span data-ru="безопасность" data-en="safety"></span></div>
 <div class="stat"><b>№1</b><span data-ru="в Душанбе" data-en="in Dushanbe"></span></div>
@@ -235,14 +224,42 @@ iframe{
 </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- SAFETY -->
+<section>
+<h2 data-ru="Безопасность" data-en="Safety"></h2>
+<p data-ru="Сертифицированные батуты, мягкие покрытия, профессиональные инструкторы и постоянный контроль."
+data-en="Certified trampolines, soft покрытия, professional instructors and full control."></p>
+</section>
+
+<!-- GALLERY -->
+<section>
+<h2 data-ru="Галерея" data-en="Gallery"></h2>
+<div class="gallery">
+<img src="https://images.unsplash.com/photo-1600962815726-457c46a12681">
+<img src="https://images.unsplash.com/photo-1571907483083-af70aeda3086">
+<img src="https://images.unsplash.com/photo-1546519638-68e109498ffc">
+<img src="https://images.unsplash.com/photo-1601582589907-f92af5ed9db8">
+</div>
+</section>
+
+<!-- REVIEWS -->
 <section>
 <h2 data-ru="Отзывы родителей" data-en="Parents reviews"></h2>
 <div class="grid">
-<div class="quote">Очень безопасно и красиво. Дети в восторге!<b>— Мадина</b></div>
-<div class="quote">Лучший батутный центр в городе.<b>— Фаррух</b></div>
-<div class="quote">Профессиональный персонал и чистота.<b>— Алина</b></div>
+<div class="review">Лучший центр! Безопасно и красиво.<b>— Мадина</b></div>
+<div class="review">Дети счастливы, персонал профи.<b>— Фаррух</b></div>
+<div class="review">Очень высокий уровень.<b>— Алина</b></div>
 </div>
+</section>
+
+<!-- FORM -->
+<section>
+<h2 data-ru="Оставить заявку" data-en="Send request"></h2>
+<form>
+<input placeholder="Имя / Name">
+<input placeholder="Телефон / Phone">
+<button data-ru="Отправить" data-en="Send"></button>
+</form>
 </section>
 
 <!-- MAP -->
@@ -261,9 +278,9 @@ const ru=document.getElementById('ru');
 const en=document.getElementById('en');
 const el=document.querySelectorAll('[data-ru]');
 function setLang(l){
-  el.forEach(e=>e.textContent=e.dataset[l]);
-  ru.classList.toggle('active',l==='ru');
-  en.classList.toggle('active',l==='en');
+el.forEach(e=>e.textContent=e.dataset[l]);
+ru.classList.toggle('active',l==='ru');
+en.classList.toggle('active',l==='en');
 }
 ru.onclick=()=>setLang('ru');
 en.onclick=()=>setLang('en');
@@ -271,4 +288,4 @@ setLang('ru');
 </script>
 
 </body>
-</html>
+  </html>
