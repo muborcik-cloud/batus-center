@@ -3,291 +3,287 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Batut Center Dushanbe | Батутный центр</title>
+<title>Batut Center Dushanbe</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --gold:#e6c46a;
-  --dark:#070707;
-  --gray:#141414;
+  --gold:#f5c96b;
+  --dark:#050505;
+  --card:#111;
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#000;color:#fff;line-height:1.6}
-a{text-decoration:none}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif}
+body{background:#000;color:#fff}
 
-.lang-switch{
-  position:fixed;
-  top:15px;
-  right:15px;
-  z-index:999;
-}
-.lang-switch button{
-  background:#222;
-  color:#fff;
-  border:none;
-  padding:8px 14px;
-  margin-left:5px;
-  cursor:pointer;
-  border-radius:8px;
-}
-.lang-switch button:hover{background:var(--gold);color:#000}
+.hidden{display:none}
 
-header{
-  min-height:100vh;
-  background:
-    linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.9)),
-    url("https://images.unsplash.com/photo-1608219958975-1c8a0f7c6e9d") center/cover;
+.lang{
+  position:fixed;top:20px;right:20px;z-index:999;
+}
+.lang button{
+  background:#111;color:#fff;border:none;
+  padding:10px 16px;margin-left:5px;
+  border-radius:30px;cursor:pointer;
+}
+.lang button:hover{background:var(--gold);color:#000}
+
+/* HERO */
+.hero{
+  height:100vh;
+  position:relative;
+  overflow:hidden;
+}
+.hero video{
+  position:absolute;top:0;left:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  opacity:.35;
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  height:100%;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:40px;
+  padding:20px;
 }
-header h1{
-  font-size:52px;
+.hero h1{
+  font-size:60px;
+  font-weight:800;
   color:var(--gold);
-  margin-bottom:20px;
+  animation:fadeUp 1.2s;
 }
-header p{
+.hero p{
   max-width:900px;
-  margin:auto;
-  font-size:20px;
+  margin:25px auto;
+  font-size:22px;
+  animation:fadeUp 1.6s;
 }
 
-.btns{margin-top:35px}
-.btn{
+.buttons a{
   display:inline-block;
-  padding:16px 32px;
-  margin:10px;
+  margin:12px;
+  padding:18px 36px;
+  border-radius:50px;
   background:var(--gold);
   color:#000;
-  font-weight:bold;
-  border-radius:40px;
+  font-weight:700;
 }
-.btn.dark{background:#1f1f1f;color:#fff}
+.buttons a.dark{background:#1a1a1a;color:#fff}
 
+/* SECTIONS */
 section{
-  max-width:1300px;
+  max-width:1400px;
   margin:auto;
-  padding:90px 20px;
+  padding:110px 25px;
 }
 h2{
   text-align:center;
-  font-size:36px;
+  font-size:42px;
   color:var(--gold);
-  margin-bottom:50px;
+  margin-bottom:70px;
 }
 
+/* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:35px;
 }
 .card{
-  background:var(--gray);
-  padding:35px;
-  border-radius:20px;
-  border:1px solid #222;
+  background:var(--card);
+  padding:40px;
+  border-radius:26px;
+  transition:.4s;
 }
+.card:hover{transform:translateY(-10px)}
 
+/* GALLERY */
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;
+  gap:25px;
 }
 .gallery img{
   width:100%;
-  border-radius:20px;
+  border-radius:26px;
+  transition:.4s;
 }
+.gallery img:hover{transform:scale(1.05)}
 
+/* PRICES */
 .price{
-  font-size:28px;
+  font-size:32px;
   color:var(--gold);
-  margin-top:10px;
+  margin-top:20px;
 }
 
-form input, form textarea{
+/* FORM */
+form input,form textarea{
   width:100%;
-  padding:15px;
-  margin:10px 0;
+  padding:18px;
   border:none;
-  border-radius:12px;
+  border-radius:14px;
+  margin-bottom:15px;
 }
 form button{
   width:100%;
-  padding:18px;
+  padding:20px;
   background:var(--gold);
   border:none;
+  border-radius:50px;
   font-size:18px;
-  font-weight:bold;
+  font-weight:700;
   cursor:pointer;
-  border-radius:40px;
 }
 
+/* MAP */
 iframe{
   width:100%;
-  height:380px;
+  height:420px;
   border:0;
-  border-radius:20px;
+  border-radius:26px;
 }
 
+/* FOOTER */
 footer{
-  background:#050505;
-  padding:50px 20px;
+  background:#030303;
+  padding:60px 20px;
   text-align:center;
   color:#aaa;
-  font-size:14px;
 }
 
-.hidden{display:none}
+/* ANIM */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
+}
 </style>
 </head>
 
 <body>
 
-<div class="lang-switch">
+<div class="lang">
   <button onclick="setLang('ru')">RU</button>
   <button onclick="setLang('en')">EN</button>
 </div>
 
 <!-- HERO -->
-<header>
-  <div>
-    <h1 class="ru">Батутный центр в Душанбе</h1>
-    <h1 class="en hidden">Trampoline Center in Dushanbe</h1>
+<div class="hero">
+  <video autoplay muted loop>
+    <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-4035/1080p.mp4">
+  </video>
 
-    <p class="ru">
-      Большой, современный и безопасный батутный центр для детей и семей.
-      Эмоции, радость и профессиональный подход.
-    </p>
-    <p class="en hidden">
-      A large, modern and safe trampoline center for children and families.
-      Emotions, fun and professional service.
-    </p>
+  <div class="hero-content">
+    <div>
+      <h1 class="ru">Батутный Центр Душанбе</h1>
+      <h1 class="en hidden">Trampoline Center Dushanbe</h1>
 
-    <div class="btns">
-      <a class="btn" href="tel:+992011900303">📞 Позвонить</a>
-      <a class="btn dark" href="https://wa.me/992011900303" target="_blank">💬 WhatsApp</a>
+      <p class="ru">
+        Премиальный батутный центр для детей и семей.
+        Радость. Безопасность. Профессионализм.
+      </p>
+      <p class="en hidden">
+        Premium trampoline park for children and families.
+        Joy. Safety. Professional service.
+      </p>
+
+      <div class="buttons">
+        <a href="tel:+992011900303">📞 Позвонить</a>
+        <a class="dark" href="https://wa.me/992011900303" target="_blank">💬 WhatsApp</a>
+      </div>
     </div>
   </div>
-</header>
+</div>
 
 <!-- ABOUT -->
 <section>
-  <h2 class="ru">О нас</h2>
-  <h2 class="en hidden">About Us</h2>
+<h2 class="ru">Кто мы</h2>
+<h2 class="en hidden">Who we are</h2>
 
-  <div class="grid">
-    <div class="card">
-      <h3>👤 Мубориз</h3>
-      <p class="ru">
-        Я Мубориз — основатель батутного центра.
-        Я создал пространство, где дети счастливы, а родители спокойны.
-      </p>
-      <p class="en hidden">
-        My name is Muboriz — founder of the trampoline center.
-        A place where children are happy and parents feel safe.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>🏢 Наш центр</h3>
-      <p class="ru">
-        Трёхэтажный батутный центр:
-        батуты, игровые зоны, праздники, дни рождения.
-      </p>
-      <p class="en hidden">
-        Three-floor trampoline center:
-        trampolines, play zones, birthdays and events.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>📍 Локация</h3>
-      <p class="ru">
-        Мы работаем только в городе Душанбе.
-      </p>
-      <p class="en hidden">
-        We operate only in the city of Dushanbe.
-      </p>
-    </div>
+<div class="grid">
+  <div class="card">
+    <h3>👤 Основатель</h3>
+    <p class="ru">Меня зовут Мубориз. Я создал лучший батутный центр в Душанбе.</p>
+    <p class="en hidden">My name is Muboriz. I founded the best trampoline center in Dushanbe.</p>
   </div>
+  <div class="card">
+    <h3>🎉 Что мы делаем</h3>
+    <p class="ru">Батуты, праздники, дни рождения, активный отдых.</p>
+    <p class="en hidden">Trampolines, birthdays, events and fun activities.</p>
+  </div>
+  <div class="card">
+    <h3>📍 Где мы</h3>
+    <p class="ru">Работаем только в городе Душанбе.</p>
+    <p class="en hidden">Located only in Dushanbe.</p>
+  </div>
+</div>
 </section>
 
 <!-- GALLERY -->
 <section>
-  <h2 class="ru">Галерея</h2>
-  <h2 class="en hidden">Gallery</h2>
+<h2 class="ru">Как это выглядит</h2>
+<h2 class="en hidden">Gallery</h2>
 
-  <div class="gallery">
-    <img src="https://images.unsplash.com/photo-1546512565-39d4dc75e556">
-    <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
-    <img src="https://images.unsplash.com/photo-1608219959300-6c5c6bfa7c18">
-  </div>
+<div class="gallery">
+  <img src="https://images.unsplash.com/photo-1546512565-39d4dc75e556">
+  <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
+  <img src="https://images.unsplash.com/photo-1608219959300-6c5c6bfa7c18">
+</div>
 </section>
 
 <!-- PRICES -->
 <section>
-  <h2 class="ru">Цены</h2>
-  <h2 class="en hidden">Prices</h2>
+<h2 class="ru">Цены</h2>
+<h2 class="en hidden">Prices</h2>
 
-  <div class="grid">
-    <div class="card">
-      <h3>Базовый</h3>
-      <p>Игры и батуты</p>
-      <div class="price">100 сомони</div>
-    </div>
-    <div class="card">
-      <h3>Стандарт</h3>
-      <p>Игры + отдых</p>
-      <div class="price">200 сомони</div>
-    </div>
-    <div class="card">
-      <h3>Праздник</h3>
-      <p>День рождения</p>
-      <div class="price">400 сомони</div>
-    </div>
-  </div>
+<div class="grid">
+  <div class="card"><h3>Базовый</h3><div class="price">100 сомони</div></div>
+  <div class="card"><h3>Стандарт</h3><div class="price">200 сомони</div></div>
+  <div class="card"><h3>Праздник</h3><div class="price">400 сомони</div></div>
+</div>
 </section>
 
 <!-- SAFETY -->
 <section>
-  <h2 class="ru">Безопасность</h2>
-  <h2 class="en hidden">Safety</h2>
+<h2 class="ru">Безопасность</h2>
+<h2 class="en hidden">Safety</h2>
 
-  <div class="grid">
-    <div class="card">✔ Мягкие покрытия</div>
-    <div class="card">✔ Контроль персонала</div>
-    <div class="card">✔ Подходит детям</div>
-  </div>
+<div class="grid">
+  <div class="card">✔ Инструкторы</div>
+  <div class="card">✔ Мягкие покрытия</div>
+  <div class="card">✔ Детские стандарты</div>
+</div>
 </section>
 
 <!-- MAP -->
 <section>
-  <h2 class="ru">Как нас найти</h2>
-  <h2 class="en hidden">How to find us</h2>
+<h2 class="ru">Как нас найти</h2>
+<h2 class="en hidden">Find us</h2>
 
-  <iframe src="https://www.google.com/maps?q=Dushanbe&output=embed"></iframe>
+<iframe src="https://www.google.com/maps?q=Dushanbe&output=embed"></iframe>
 
-  <div class="btns" style="text-align:center">
-    <a class="btn" target="_blank"
-       href="https://www.google.com/maps/dir/?api=1&destination=Dushanbe">
-      🧭 Построить маршрут
-    </a>
-  </div>
+<div class="buttons" style="text-align:center;margin-top:30px">
+  <a href="https://www.google.com/maps/dir/?api=1&destination=Dushanbe" target="_blank">
+    🧭 Построить маршрут
+  </a>
+</div>
 </section>
 
 <!-- FORM -->
 <section>
-  <h2 class="ru">Оставить заявку</h2>
-  <h2 class="en hidden">Send request</h2>
+<h2 class="ru">Оставить заявку</h2>
+<h2 class="en hidden">Send request</h2>
 
-  <form>
-    <input placeholder="Имя">
-    <input placeholder="Телефон">
-    <textarea placeholder="Комментарий"></textarea>
-    <button>Отправить</button>
-  </form>
+<form>
+  <input placeholder="Имя">
+  <input placeholder="Телефон">
+  <textarea placeholder="Комментарий"></textarea>
+  <button>Отправить</button>
+</form>
 </section>
 
 <footer>
