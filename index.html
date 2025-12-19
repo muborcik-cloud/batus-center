@@ -2,171 +2,114 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>BATUS — Premium Trampoline Park</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Батутный центр в Душанбе</title>
 
-<meta name="description" content="Лучший батутный центр в Душанбе. Безопасно, профессионально, для детей и взрослых.">
-<meta name="keywords" content="батутный центр Душанбе, батуты Душанбе, детский центр Душанбе">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
---gold:#ffcc00;
---grad:linear-gradient(135deg,#ff0080,#ffcc00);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-font-family:'Inter',sans-serif;
-background:#0b0b0b;
-color:#fff;
-line-height:1.6;
+:root {
+  --main:#ff3d00;
+  --dark:#111;
+  --light:#fff;
+  --gray:#f5f5f5;
 }
 
-/* LANG */
-.lang{
-position:fixed;top:15px;right:15px;
-z-index:999;display:flex;gap:8px
-}
-.lang button{
-padding:6px 14px;border-radius:20px;
-border:none;background:#1a1a1a;color:#fff;
-font-weight:700;cursor:pointer
-}
-.lang .active{background:var(--gold);color:#000}
+* { box-sizing:border-box; margin:0; padding:0; font-family:'Montserrat',sans-serif; }
 
-/* HERO */
-.hero{
-height:100vh;position:relative;overflow:hidden
-}
-.hero video{
-position:absolute;width:100%;height:100%;object-fit:cover
-}
-.hero::after{
-content:"";position:absolute;inset:0;
-background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.95))
-}
-.hero-content{
-position:relative;z-index:2;
-height:100%;
-display:flex;align-items:center;justify-content:center;
-text-align:center;padding:20px
-}
-.hero h1{
-font-size:clamp(28px,5vw,60px);
-font-weight:800;
-}
-.hero p{
-max-width:760px;margin:20px auto 30px;
-font-size:clamp(15px,2vw,18px);opacity:.9
+body { background:#fff; color:#111; line-height:1.6; }
+
+header {
+  position:relative;
+  height:100vh;
+  overflow:hidden;
 }
 
-/* BUTTONS */
-.btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.btn{
-padding:14px 36px;border-radius:999px;
-font-weight:800;text-decoration:none;color:#000;
-background:var(--grad);
-box-shadow:0 15px 40px rgba(255,0,128,.35);
-transition:.3s
-}
-.btn.alt{background:#fff}
-.btn:hover{transform:translateY(-4px)}
-
-/* SECTION */
-section{
-max-width:1200px;margin:auto;
-padding:90px 20px
-}
-h2{
-text-align:center;
-font-size:clamp(24px,4vw,42px);
-font-weight:800;margin-bottom:14px
-}
-section p{
-max-width:780px;margin:0 auto 50px;
-text-align:center;opacity:.9
+header video {
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-/* GRID */
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:26px
-}
-.card{
-background:#111;border-radius:26px;
-padding:36px;text-align:center;
-transition:.3s
-}
-.card:hover{transform:translateY(-8px)}
-.price{
-font-size:40px;font-weight:800;color:var(--gold)
+header .overlay {
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.55);
 }
 
-/* STATS */
-.stats{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:26px
-}
-.stat{
-background:#111;border-radius:26px;
-padding:36px;text-align:center
-}
-.stat b{
-font-size:44px;color:var(--gold);display:block
-}
-
-/* GALLERY */
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:18px
-}
-.gallery img{
-width:100%;border-radius:20px;
-transition:.3s
-}
-.gallery img:hover{transform:scale(1.06)}
-
-/* TESTIMONIAL */
-.review{
-background:#111;border-radius:26px;
-padding:28px;font-size:15px
-}
-.review b{display:block;margin-top:12px;color:var(--gold)}
-
-/* FORM */
-form{
-max-width:520px;margin:auto;
-display:grid;gap:14px
-}
-input,button{
-padding:14px;border-radius:14px;
-border:none;font-size:15px
-}
-input{background:#1a1a1a;color:#fff}
-button{
-background:linear-gradient(135deg,#00ffcc,#00ccff);
-font-weight:800;cursor:pointer
+header .content {
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+  text-align:center;
+  padding:20px;
 }
 
-/* MAP */
-iframe{
-width:100%;height:420px;
-border:none;border-radius:26px
+header h1 { font-size:2.5rem; margin-bottom:15px; }
+header p { font-size:1.1rem; max-width:600px; }
+
+.btn {
+  margin:10px;
+  padding:14px 28px;
+  background:var(--main);
+  color:#fff;
+  border:none;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:600;
 }
 
-/* FLOAT */
-.float{
-position:fixed;right:20px;bottom:20px;
-display:flex;flex-direction:column;gap:12px;z-index:999
+section { padding:80px 20px; max-width:1200px; margin:auto; }
+
+h2 { font-size:2rem; margin-bottom:30px; text-align:center; }
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
 }
-.float a{
-padding:14px 18px;border-radius:30px;
-background:#25D366;color:#000;
-font-weight:800;text-decoration:none
+
+.card {
+  background:var(--gray);
+  padding:25px;
+  border-radius:20px;
+}
+
+.price { font-size:1.6rem; color:var(--main); font-weight:700; }
+
+.gallery img {
+  width:100%;
+  border-radius:15px;
+}
+
+iframe { width:100%; height:350px; border:0; border-radius:20px; }
+
+form input, form textarea {
+  width:100%;
+  padding:14px;
+  margin-bottom:12px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+footer {
+  background:#111;
+  color:#fff;
+  padding:40px 20px;
+  text-align:center;
+}
+
+.lang {
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:999;
 }
 </style>
 </head>
@@ -174,118 +117,91 @@ font-weight:800;text-decoration:none
 <body>
 
 <div class="lang">
-<button id="ru" class="active">RU</button>
-<button id="en">EN</button>
+  <button onclick="setLang('ru')">RU</button>
+  <button onclick="setLang('en')">EN</button>
 </div>
 
-<!-- HERO -->
-<div class="hero">
-<video autoplay muted loop playsinline>
-<source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-5267/1080p.mp4">
-</video>
-<div class="hero-content">
-<div>
-<h1 data-ru="BATUS — Батутный центр №1 в Душанбе"
-data-en="BATUS — Trampoline Park #1 in Dushanbe"></h1>
-<p data-ru="Премиальный батутный парк. Безопасно. Красиво. Профессионально."
-data-en="Premium trampoline park. Safe. Beautiful. Professional."></p>
-<div class="btns">
-<a class="btn" href="tel:+992011900303" data-ru="Позвонить" data-en="Call"></a>
-<a class="btn alt" href="https://wa.me/992011900303">WhatsApp</a>
-</div>
-</div>
-</div>
-</div>
+<header>
+  <video autoplay muted loop>
+    <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-8591/1080p.mp4">
+  </video>
+  <div class="overlay"></div>
+  <div class="content">
+    <h1 data-ru="Лучший батутный центр Душанбе" data-en="Best Trampoline Park in Dushanbe"></h1>
+    <p data-ru="3 этажа радости, безопасности и счастья для детей"
+       data-en="3 floors of fun, safety and happiness for kids"></p>
 
-<!-- ABOUT -->
-<section>
-<h2 data-ru="Кто мы" data-en="Who we are"></h2>
-<p data-ru="Я — Мубориз. Создал батутный центр нового уровня в Душанбе. Мы дарим детям радость, а родителям — уверенность в безопасности."
-data-en="I am Muboriz. I created a next-level trampoline center in Dushanbe. Joy for kids, trust for parents."></p>
-</section>
+    <a class="btn" href="tel:+992011900303">📞 Позвонить</a>
+    <a class="btn" href="https://wa.me/992011900303">💬 WhatsApp</a>
+  </div>
+</header>
 
-<!-- STATS -->
-<section>
-<div class="stats">
-<div class="stat"><b>10 000+</b><span data-ru="детей" data-en="kids"></span></div>
-<div class="stat"><b>5 лет</b><span data-ru="опыта" data-en="experience"></span></div>
-<div class="stat"><b>100%</b><span data-ru="безопасность" data-en="safety"></span></div>
-<div class="stat"><b>№1</b><span data-ru="в Душанбе" data-en="in Dushanbe"></span></div>
-</div>
-</section>
-
-<!-- PRICES -->
 <section>
 <h2 data-ru="Цены" data-en="Prices"></h2>
 <div class="grid">
-<div class="card"><h3>Basic</h3><div class="price">100 c.</div></div>
-<div class="card"><h3>Standard</h3><div class="price">200 c.</div></div>
-<div class="card"><h3>Premium</h3><div class="price">400 c.</div></div>
+  <div class="card">
+    <h3>START</h3>
+    <p class="price">100 c</p>
+    <p>1 час</p>
+  </div>
+  <div class="card">
+    <h3>FUN</h3>
+    <p class="price">200 c</p>
+    <p>2 часа</p>
+  </div>
+  <div class="card">
+    <h3>MAX</h3>
+    <p class="price">400 c</p>
+    <p>Безлимит</p>
+  </div>
 </div>
 </section>
 
-<!-- SAFETY -->
-<section>
-<h2 data-ru="Безопасность" data-en="Safety"></h2>
-<p data-ru="Сертифицированные батуты, мягкие покрытия, профессиональные инструкторы и постоянный контроль."
-data-en="Certified trampolines, soft покрытия, professional instructors and full control."></p>
-</section>
-
-<!-- GALLERY -->
-<section>
-<h2 data-ru="Галерея" data-en="Gallery"></h2>
-<div class="gallery">
-<img src="https://images.unsplash.com/photo-1600962815726-457c46a12681">
-<img src="https://images.unsplash.com/photo-1571907483083-af70aeda3086">
-<img src="https://images.unsplash.com/photo-1546519638-68e109498ffc">
-<img src="https://images.unsplash.com/photo-1601582589907-f92af5ed9db8">
-</div>
-</section>
-
-<!-- REVIEWS -->
 <section>
 <h2 data-ru="Отзывы родителей" data-en="Parents reviews"></h2>
 <div class="grid">
-<div class="review">Лучший центр! Безопасно и красиво.<b>— Мадина</b></div>
-<div class="review">Дети счастливы, персонал профи.<b>— Фаррух</b></div>
-<div class="review">Очень высокий уровень.<b>— Алина</b></div>
+  <div class="card">⭐️⭐️⭐️⭐️⭐️ Очень безопасно и красиво</div>
+  <div class="card">⭐️⭐️⭐️⭐️⭐️ Лучшее место в Душанбе</div>
 </div>
 </section>
 
-<!-- FORM -->
+<section class="gallery">
+<h2 data-ru="Галерея" data-en="Gallery"></h2>
+<div class="grid">
+  <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c">
+  <img src="https://images.unsplash.com/photo-1581579185169-41c9b0c2f0fa">
+</div>
+</section>
+
+<section>
+<h2 data-ru="Как нас найти" data-en="How to find us"></h2>
+<iframe src="https://www.google.com/maps?q=Dushanbe&output=embed"></iframe>
+<a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Dushanbe">🗺 Построить маршрут</a>
+</section>
+
 <section>
 <h2 data-ru="Оставить заявку" data-en="Send request"></h2>
 <form>
-<input placeholder="Имя / Name">
-<input placeholder="Телефон / Phone">
-<button data-ru="Отправить" data-en="Send"></button>
+  <input placeholder="Ваше имя">
+  <input placeholder="Телефон">
+  <textarea placeholder="Комментарий"></textarea>
+  <button class="btn">Отправить</button>
 </form>
 </section>
 
-<!-- MAP -->
-<section>
-<h2 data-ru="Как нас найти" data-en="How to find us"></h2>
-<iframe src="https://maps.google.com/maps?q=Душанбе&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
-</section>
-
-<div class="float">
-<a href="tel:+992011900303">📞</a>
-<a href="https://wa.me/992011900303">💬</a>
-</div>
+<footer>
+  <p>Мубориз — Батутный центр Душанбе</p>
+  <p>📞 +992 011 900 303</p>
+</footer>
 
 <script>
-const ru=document.getElementById('ru');
-const en=document.getElementById('en');
-const el=document.querySelectorAll('[data-ru]');
 function setLang(l){
-el.forEach(e=>e.textContent=e.dataset[l]);
-ru.classList.toggle('active',l==='ru');
-en.classList.toggle('active',l==='en');
+  document.querySelectorAll('[data-ru]').forEach(e=>{
+    e.innerText = e.dataset[l];
+  });
 }
-ru.onclick=()=>setLang('ru');
-en.onclick=()=>setLang('en');
 setLang('ru');
 </script>
 
 </body>
-  </html>
+</html>
