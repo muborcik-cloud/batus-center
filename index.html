@@ -1,289 +1,243 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<title>LEGEND BATUT CENTER • Dushanbe</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Лучший батутный центр в Душанбе. Безопасность, эмоции, радость.">
+  <meta charset="UTF-8">
+  <title>Легендарный Батутный Центр Душанбе</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap');
+  <!-- SEO -->
+  <meta name="description" content="Самый красивый, безопасный и современный батутный центр в Душанбе. Батуты для детей и взрослых. Запись онлайн, WhatsApp, звонок.">
+  <meta name="keywords" content="батутный центр Душанбе, батуты Душанбе, детский центр Душанбе, батуты для детей">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-:root{
---gold:#ffcc33;
---pink:#ff0066;
---dark:#050505;
---glass:rgba(255,255,255,0.08);
-}
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:Montserrat}
-body{background:var(--dark);color:#fff;overflow-x:hidden}
+  <style>
+    /* RESET */
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:'Inter',sans-serif;
+      background:#000;
+      color:#fff;
+      line-height:1.7;
+      overflow-x:hidden;
+    }
 
-::-webkit-scrollbar{width:8px}
-::-webkit-scrollbar-thumb{
-background:linear-gradient(var(--pink),var(--gold));
-border-radius:10px;
-}
+    /* VIDEO HERO */
+    .hero{
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:40px 20px;
+    }
+    .hero video{
+      position:absolute;
+      top:0;left:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:-2;
+    }
+    .hero::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.9));
+      z-index:-1;
+    }
 
-.lang{
-position:fixed;top:20px;right:20px;z-index:9999
-}
-.lang button{
-border:none;
-background:linear-gradient(45deg,var(--pink),var(--gold));
-color:#000;
-padding:8px 16px;
-margin-left:6px;
-border-radius:30px;
-font-weight:700;
-cursor:pointer;
-box-shadow:0 10px 40px rgba(255,0,102,.6)
-}
+    .hero h1{
+      font-size:clamp(32px,6vw,72px);
+      font-weight:900;
+      letter-spacing:-1px;
+      animation:fadeUp 1.2s ease forwards;
+    }
+    .hero p{
+      max-width:720px;
+      margin:20px auto 40px;
+      font-size:clamp(16px,2.5vw,20px);
+      opacity:.95;
+      animation:fadeUp 1.6s ease forwards;
+    }
 
-.hero{
-height:100vh;position:relative;overflow:hidden
-}
-.hero video{
-position:absolute;
-top:50%;left:50%;
-transform:translate(-50%,-50%);
-min-width:100%;min-height:100%;
-filter:brightness(.25) saturate(1.4);
-}
-.hero::after{
-content:"";
-position:absolute;inset:0;
-background:
-radial-gradient(circle at top,rgba(255,204,51,.15),transparent 60%),
-linear-gradient(#000,transparent 40%,#000);
-}
+    /* BUTTONS */
+    .buttons{
+      display:flex;
+      gap:16px;
+      justify-content:center;
+      flex-wrap:wrap;
+      animation:fadeUp 2s ease forwards;
+    }
+    .btn{
+      padding:16px 34px;
+      border-radius:999px;
+      font-weight:700;
+      text-decoration:none;
+      color:#000;
+      background:linear-gradient(135deg,#ff0080,#ffcc00);
+      box-shadow:0 20px 60px rgba(255,0,128,.4);
+      transition:.3s;
+    }
+    .btn:hover{transform:translateY(-4px);box-shadow:0 30px 80px rgba(255,0,128,.6)}
 
-.hero-content{
-position:relative;z-index:2;
-height:100%;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:20px;
-backdrop-filter:blur(3px);
-}
+    /* SECTIONS */
+    section{
+      padding:100px 20px;
+      max-width:1200px;
+      margin:auto;
+    }
+    h2{
+      font-size:clamp(28px,4vw,48px);
+      font-weight:800;
+      margin-bottom:20px;
+      text-align:center;
+    }
+    section p{
+      max-width:800px;
+      margin:0 auto 40px;
+      text-align:center;
+      opacity:.9;
+      font-size:18px;
+    }
 
-.hero h1{
-font-size:72px;
-font-weight:900;
-background:linear-gradient(45deg,#fff,var(--gold));
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-text-shadow:0 0 80px rgba(255,204,51,.4);
-}
+    /* CARDS */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:30px;
+    }
+    .card{
+      background:rgba(255,255,255,.06);
+      backdrop-filter:blur(14px);
+      border-radius:24px;
+      padding:30px;
+      transition:.4s;
+    }
+    .card:hover{transform:translateY(-10px);background:rgba(255,255,255,.1)}
 
-.hero p{
-font-size:24px;
-max-width:900px;
-margin:25px 0;
-opacity:.95;
-}
+    /* PRICES */
+    .price{
+      font-size:36px;
+      font-weight:900;
+      margin-top:10px;
+      color:#ffcc00;
+    }
 
-.btns a{
-display:inline-block;
-margin:10px;
-padding:18px 42px;
-border-radius:60px;
-background:linear-gradient(45deg,var(--pink),var(--gold));
-color:#000;
-font-weight:800;
-font-size:18px;
-box-shadow:0 20px 60px rgba(255,0,102,.7);
-transition:.4s;
-}
-.btns a:hover{
-transform:scale(1.08);
-}
+    /* MAP */
+    iframe{
+      width:100%;
+      height:420px;
+      border:0;
+      border-radius:24px;
+      margin-top:40px;
+    }
 
-section{
-padding:120px 20px;
-text-align:center;
-}
+    /* FORM */
+    form{
+      max-width:520px;
+      margin:40px auto 0;
+      display:grid;
+      gap:16px;
+    }
+    input,button{
+      padding:16px;
+      border-radius:14px;
+      border:none;
+      font-size:16px;
+    }
+    input{background:#111;color:#fff}
+    button{
+      background:linear-gradient(135deg,#00ffcc,#00ccff);
+      font-weight:800;
+      cursor:pointer;
+    }
 
-h2{
-font-size:48px;
-margin-bottom:35px;
-background:linear-gradient(45deg,#fff,var(--gold));
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
+    /* FLOAT BUTTONS */
+    .float{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      z-index:99;
+    }
+    .float a{
+      padding:14px 18px;
+      border-radius:50px;
+      background:#25D366;
+      color:#000;
+      font-weight:800;
+      text-decoration:none;
+      box-shadow:0 10px 40px rgba(0,0,0,.5);
+    }
 
-.fade{
-opacity:0;
-transform:translateY(80px);
-transition:1.2s cubic-bezier(.19,1,.22,1)
-}
-.fade.show{
-opacity:1;
-transform:none;
-}
-
-.cards{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:30px;
-}
-.card{
-width:320px;
-padding:45px;
-border-radius:35px;
-background:linear-gradient(160deg,var(--glass),rgba(255,255,255,0.02));
-backdrop-filter:blur(14px);
-box-shadow:0 40px 120px rgba(0,0,0,.9);
-}
-.card strong{
-font-size:38px;
-color:var(--gold);
-}
-
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
-}
-.gallery img,.gallery video{
-width:100%;
-border-radius:30px;
-box-shadow:0 30px 80px rgba(0,0,0,.9);
-transition:.5s;
-}
-.gallery img:hover,.gallery video:hover{
-transform:scale(1.07);
-}
-
-form{
-max-width:620px;
-margin:auto;
-padding:50px;
-border-radius:40px;
-background:linear-gradient(160deg,var(--glass),rgba(255,255,255,0.02));
-backdrop-filter:blur(16px);
-}
-input,textarea{
-width:100%;
-padding:18px;
-margin:14px 0;
-border-radius:18px;
-border:none;
-font-size:16px;
-}
-form button{
-margin-top:15px;
-padding:18px 60px;
-border:none;
-border-radius:60px;
-font-size:18px;
-font-weight:800;
-background:linear-gradient(45deg,var(--gold),var(--pink));
-cursor:pointer;
-}
-
-footer{
-padding:50px;
-text-align:center;
-background:#000;
-opacity:.85;
-}
-</style>
+    /* ANIMATIONS */
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(40px)}
+      to{opacity:1;transform:none}
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="lang">
-<button onclick="setLang('ru')">RU</button>
-<button onclick="setLang('en')">EN</button>
-</div>
-
+<!-- HERO -->
 <div class="hero">
-<video autoplay muted loop playsinline>
-<source src="https://cdn.coverr.co/videos/coverr-kids-playing-on-trampoline-6387/1080p.mp4">
-</video>
+  <video autoplay muted loop playsinline>
+    <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-2083/1080p.mp4" type="video/mp4">
+  </video>
 
-<div class="hero-content">
-<h1 data-ru="ЛЕГЕНДАРНЫЙ БАТУТНЫЙ ЦЕНТР"
-data-en="LEGENDARY TRAMPOLINE CENTER"></h1>
-
-<p data-ru="Самый красивый, безопасный и эмоциональный батутный центр Душанбе"
-data-en="The most beautiful, safe and emotional trampoline center in Dushanbe"></p>
-
-<div class="btns">
-<a href="tel:+992011900303"
-data-ru="Позвонить"
-data-en="Call"></a>
-
-<a href="https://wa.me/992011900303" target="_blank"
-data-ru="WhatsApp"
-data-en="WhatsApp"></a>
-
-<a href="https://www.google.com/maps?q=Dushanbe" target="_blank"
-data-ru="Построить маршрут"
-data-en="Build route"></a>
-</div>
-</div>
+  <div>
+    <h1>Легендарный Батутный Центр Душанбе</h1>
+    <p>Самый красивый, безопасный и эмоциональный батутный центр. Только в Душанбе.</p>
+    <div class="buttons">
+      <a class="btn" href="tel:+992011900303">Позвонить</a>
+      <a class="btn" href="https://wa.me/992011900303">WhatsApp</a>
+    </div>
+  </div>
 </div>
 
-<section class="fade">
-<h2 data-ru="Почему выбирают нас"
-data-en="Why choose us"></h2>
-<p data-ru="Премиум-оборудование • Сертифицированная безопасность • Счастливые дети"
-data-en="Premium equipment • Certified safety • Happy kids"></p>
+<!-- ABOUT -->
+<section>
+  <h2>Кто мы</h2>
+  <p>Мы — современный батутный центр для детей и взрослых. Безопасность, радость и эмоции — наш приоритет.</p>
 </section>
 
-<section class="fade">
-<h2 data-ru="Цены"
-data-en="Prices"></h2>
-<div class="cards">
-<div class="card"><h3>1 час</h3><strong>100 TJS</strong></div>
-<div class="card"><h3>День рождения</h3><strong>300 TJS</strong></div>
-<div class="card"><h3>VIP</h3><strong>700 TJS</strong></div>
+<!-- PRICES -->
+<section>
+  <h2>Цены</h2>
+  <div class="grid">
+    <div class="card"><h3>Базовый</h3><div class="price">100 сом</div></div>
+    <div class="card"><h3>Стандарт</h3><div class="price">200 сом</div></div>
+    <div class="card"><h3>Премиум</h3><div class="price">400 сом</div></div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section>
+  <h2>Оставить заявку</h2>
+  <form>
+    <input placeholder="Ваше имя">
+    <input placeholder="Телефон">
+    <button>Отправить заявку</button>
+  </form>
+</section>
+
+<!-- MAP -->
+<section>
+  <h2>Как нас найти</h2>
+  <iframe src="https://maps.google.com/maps?q=Душанбе&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+</section>
+
+<!-- FLOAT -->
+<div class="float">
+  <a href="tel:+992011900303">📞 Позвонить</a>
+  <a href="https://wa.me/992011900303">💬 WhatsApp</a>
 </div>
-</section>
-
-<section class="fade">
-<h2 data-ru="Настоящие эмоции"
-data-en="Real emotions"></h2>
-<div class="gallery">
-<video autoplay muted loop><source src="https://cdn.coverr.co/videos/coverr-children-jumping-on-trampoline-4718/1080p.mp4"></video>
-<img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
-<img src="https://images.unsplash.com/photo-1584467735871-bc1a52eac4fa">
-</div>
-</section>
-
-<section class="fade">
-<h2 data-ru="Оставить заявку"
-data-en="Send request"></h2>
-<form>
-<input placeholder="Имя / Name">
-<input placeholder="Телефон / Phone">
-<textarea placeholder="Сообщение / Message"></textarea>
-<button data-ru="Отправить" data-en="Send"></button>
-</form>
-</section>
-
-<footer>
-© LEGEND BATUT CENTER • +992 01 190 03 03 • Dushanbe
-</footer>
-
-<script>
-function setLang(l){
-document.documentElement.lang=l;
-document.querySelectorAll('[data-'+l+']')
-.forEach(e=>e.innerText=e.getAttribute('data-'+l))
-}
-setLang('ru')
-
-const obs=new IntersectionObserver(e=>{
-e.forEach(x=>x.isIntersecting && x.target.classList.add('show'))
-},{threshold:.15})
-document.querySelectorAll('.fade').forEach(el=>obs.observe(el))
-</script>
 
 </body>
 </html>
