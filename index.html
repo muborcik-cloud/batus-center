@@ -9,11 +9,11 @@
 
 <style>
 :root{
-  --bg:#0b0b0b;
+  --bg:#0a0a0a;
   --card:#141414;
-  --gold:#f4c430;
+  --gold:#f5c84c;
   --text:#eaeaea;
-  --muted:#a0a0a0;
+  --muted:#9a9a9a;
   --radius:18px;
 }
 
@@ -23,8 +23,25 @@ body{
   font-family:Inter,sans-serif;
   background:var(--bg);
   color:var(--text);
-  line-height:1.65;
+  line-height:1.7;
+  font-size:16px;
 }
+
+h1{font-size:42px;margin:0 0 12px}
+h2{font-size:30px;margin-bottom:14px}
+h3{margin:0 0 8px}
+
+p{color:var(--muted)}
+
+a{text-decoration:none}
+
+section{
+  max-width:1200px;
+  margin:auto;
+  padding:90px 20px;
+}
+
+.center{text-align:center}
 
 /* ===== HERO ===== */
 .hero{
@@ -43,7 +60,7 @@ body{
   object-fit:cover;
   filter:brightness(.35);
 }
-.hero .box{
+.hero .content{
   position:relative;
   z-index:2;
   max-width:900px;
@@ -55,43 +72,33 @@ body{
   to{opacity:1;transform:none}
 }
 
-h1{
-  font-size:clamp(32px,4vw,46px);
-  margin-bottom:12px;
-}
-p{color:var(--muted);font-size:16px}
-
 /* ===== BUTTONS ===== */
-.btns{margin-top:25px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.buttons{
+  margin-top:25px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
 .btn{
   padding:14px 22px;
   border-radius:14px;
-  text-decoration:none;
   font-weight:600;
   font-size:15px;
 }
 .btn.main{background:var(--gold);color:#000}
-.btn.wh{background:#25d366;color:#000}
 .btn.out{border:1px solid var(--gold);color:var(--gold)}
+.btn.wh{background:#25d366;color:#000}
 
-/* ===== SECTIONS ===== */
-section{
-  max-width:1200px;
-  margin:auto;
-  padding:90px 20px;
-}
-.center{text-align:center}
-h2{font-size:30px;margin-bottom:12px}
-
-/* ===== CARDS ===== */
+/* ===== GRID ===== */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:24px;
 }
 .card{
   background:var(--card);
-  padding:30px;
+  padding:28px;
   border-radius:var(--radius);
   border:1px solid #1f1f1f;
   transition:.3s;
@@ -99,20 +106,6 @@ h2{font-size:30px;margin-bottom:12px}
 .card:hover{
   transform:translateY(-6px);
   border-color:var(--gold);
-}
-
-/* ===== STATS ===== */
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-}
-.stat{
-  text-align:center;
-}
-.stat b{
-  font-size:36px;
-  color:var(--gold);
 }
 
 /* ===== GALLERY ===== */
@@ -123,22 +116,9 @@ h2{font-size:30px;margin-bottom:12px}
 }
 .gallery img{
   width:100%;
-  height:200px;
+  height:220px;
   object-fit:cover;
   border-radius:14px;
-}
-
-/* ===== FAQ ===== */
-details{
-  background:var(--card);
-  padding:18px;
-  border-radius:14px;
-  margin-bottom:12px;
-  border:1px solid #1f1f1f;
-}
-summary{
-  cursor:pointer;
-  font-weight:600;
 }
 
 /* ===== FORM ===== */
@@ -154,8 +134,14 @@ input,button{
   border:none;
   font-size:15px;
 }
-input{background:#1a1a1a;color:#fff}
-button{background:var(--gold);font-weight:700}
+input{
+  background:#1a1a1a;
+  color:#fff;
+}
+button{
+  background:var(--gold);
+  font-weight:700;
+}
 
 /* ===== MAP ===== */
 iframe{
@@ -165,8 +151,8 @@ iframe{
   border-radius:18px;
 }
 
-/* ===== WHATSAPP FLOAT ===== */
-.wh-float{
+/* ===== FLOAT WHATSAPP ===== */
+.whatsapp{
   position:fixed;
   right:20px;
   bottom:20px;
@@ -175,9 +161,23 @@ iframe{
   padding:14px 18px;
   border-radius:999px;
   font-weight:700;
-  text-decoration:none;
   z-index:10;
-  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+/* ===== LANGUAGE ===== */
+.lang{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:10;
+}
+.lang button{
+  background:#000;
+  color:#fff;
+  border:1px solid #333;
+  padding:6px 10px;
+  margin-left:6px;
+  cursor:pointer;
 }
 
 /* ===== FOOTER ===== */
@@ -192,51 +192,56 @@ footer{
 
 <body>
 
-<a class="wh-float" href="https://wa.me/992011900303">WhatsApp</a>
+<div class="lang">
+  <button onclick="setLang('ru')">RU</button>
+  <button onclick="setLang('en')">EN</button>
+</div>
+
+<a class="whatsapp" href="https://wa.me/992011900303">WhatsApp</a>
 
 <div class="hero">
   <video autoplay muted loop playsinline>
     <source src="https://cdn.coverr.co/videos/coverr-kids-playing-4260/1080p.mp4">
   </video>
-  <div class="box">
-    <h1>Премиальный батутный центр в Душанбе</h1>
-    <p>Безопасно • Красиво • Дети в восторге</p>
-    <div class="btns">
-      <a class="btn main" href="tel:+992011900303">Позвонить</a>
-      <a class="btn wh" href="https://wa.me/992011900303">WhatsApp</a>
-      <a class="btn out" href="#map">Маршрут</a>
+  <div class="content">
+    <h1 data-ru="Премиальный батутный центр в Душанбе"
+        data-en="Premium Trampoline Center in Dushanbe"></h1>
+    <p data-ru="Три этажа радости, безопасности и эмоций"
+       data-en="Three floors of joy, safety and fun"></p>
+    <div class="buttons">
+      <a class="btn main" href="tel:+992011900303"
+         data-ru="Позвонить" data-en="Call"></a>
+      <a class="btn wh" href="https://wa.me/992011900303"
+         data-ru="WhatsApp" data-en="WhatsApp"></a>
+      <a class="btn out" href="#map"
+         data-ru="Построить маршрут" data-en="Get directions"></a>
     </div>
   </div>
 </div>
 
 <section class="center">
-  <h2>Почему выбирают нас</h2>
-  <div class="stats">
-    <div class="stat"><b>3</b><p>Этажа развлечений</p></div>
-    <div class="stat"><b>1000+</b><p>Довольных детей</p></div>
-    <div class="stat"><b>100%</b><p>Безопасность</p></div>
-  </div>
-</section>
-
-<section>
+  <h2 data-ru="Почему выбирают нас" data-en="Why choose us"></h2>
   <div class="grid">
-    <div class="card"><h3>Безопасность</h3><p>Мягкие зоны, контроль персонала</p></div>
-    <div class="card"><h3>Чистота</h3><p>Ежедневная уборка</p></div>
-    <div class="card"><h3>Праздники</h3><p>Дни рождения и мероприятия</p></div>
+    <div class="card">
+      <h3 data-ru="Безопасность" data-en="Safety"></h3>
+      <p data-ru="Мягкие зоны и контроль персонала"
+         data-en="Soft zones and staff supervision"></p>
+    </div>
+    <div class="card">
+      <h3 data-ru="Развлечения" data-en="Entertainment"></h3>
+      <p data-ru="Батуты, зоны прыжков, игры"
+         data-en="Trampolines, jump zones, games"></p>
+    </div>
+    <div class="card">
+      <h3 data-ru="Праздники" data-en="Parties"></h3>
+      <p data-ru="Дни рождения и мероприятия"
+         data-en="Birthdays and events"></p>
+    </div>
   </div>
 </section>
 
 <section>
-  <h2 class="center">Галерея</h2>
-  <div class="gallery">
-    <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498b">
-    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952">
-    <img src="https://images.unsplash.com/photo-1604881988758-f76ad2f7aac1">
-  </div>
-</section>
-
-<section>
-  <h2 class="center">Цены</h2>
+  <h2 class="center" data-ru="Цены" data-en="Prices"></h2>
   <div class="grid">
     <div class="card"><h3>1 час</h3><p><b style="color:var(--gold)">100 сомони</b></p></div>
     <div class="card"><h3>2 часа</h3><p><b style="color:var(--gold)">200 сомони</b></p></div>
@@ -245,28 +250,31 @@ footer{
 </section>
 
 <section>
-  <h2 class="center">Частые вопросы</h2>
-  <details><summary>Это безопасно?</summary><p>Да, у нас строгие правила и контроль.</p></details>
-  <details><summary>С какого возраста?</summary><p>Подходит детям от 3 лет.</p></details>
-</section>
-
-<section>
-  <h2 class="center">Оставить заявку</h2>
+  <h2 class="center" data-ru="Оставить заявку" data-en="Send request"></h2>
   <form>
-    <input placeholder="Имя">
-    <input placeholder="Телефон">
-    <button>Отправить</button>
+    <input placeholder="Имя / Name">
+    <input placeholder="Телефон / Phone">
+    <button data-ru="Отправить" data-en="Send"></button>
   </form>
 </section>
 
 <section id="map">
-  <h2 class="center">Как нас найти</h2>
+  <h2 class="center" data-ru="Как нас найти" data-en="How to find us"></h2>
   <iframe src="https://maps.google.com/maps?q=Dushanbe&z=13&output=embed"></iframe>
 </section>
 
 <footer>
-  © 2025 Батутный центр Душанбе • Premium Brand
+  © 2025 Батутный центр Душанбе • ULTRA PREMIUM
 </footer>
+
+<script>
+function setLang(l){
+  document.querySelectorAll('[data-ru]').forEach(e=>{
+    e.textContent = e.dataset[l];
+  });
+}
+setLang('ru');
+</script>
 
 </body>
 </html>
