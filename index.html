@@ -5,116 +5,138 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Батутный центр в Душанбе</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
 <style>
-:root {
-  --main:#ff3d00;
-  --dark:#111;
-  --light:#fff;
-  --gray:#f5f5f5;
+:root{
+  --gold:#f5c542;
+  --dark:#0e0e0e;
+  --gray:#bfbfbf;
 }
 
-* { box-sizing:border-box; margin:0; padding:0; font-family:'Montserrat',sans-serif; }
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
 
-body { background:#fff; color:#111; line-height:1.6; }
-
-header {
-  position:relative;
-  height:100vh;
-  overflow:hidden;
+body{
+  background:linear-gradient(180deg,#0e0e0e,#161616);
+  color:white;
+  line-height:1.6;
 }
 
-header video {
-  position:absolute;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-header .overlay {
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.55);
-}
-
-header .content {
-  position:relative;
-  z-index:2;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  color:#fff;
-  text-align:center;
-  padding:20px;
-}
-
-header h1 { font-size:2.5rem; margin-bottom:15px; }
-header p { font-size:1.1rem; max-width:600px; }
-
-.btn {
-  margin:10px;
-  padding:14px 28px;
-  background:var(--main);
-  color:#fff;
-  border:none;
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:600;
-}
-
-section { padding:80px 20px; max-width:1200px; margin:auto; }
-
-h2 { font-size:2rem; margin-bottom:30px; text-align:center; }
-
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px;
-}
-
-.card {
-  background:var(--gray);
-  padding:25px;
-  border-radius:20px;
-}
-
-.price { font-size:1.6rem; color:var(--main); font-weight:700; }
-
-.gallery img {
-  width:100%;
-  border-radius:15px;
-}
-
-iframe { width:100%; height:350px; border:0; border-radius:20px; }
-
-form input, form textarea {
-  width:100%;
-  padding:14px;
-  margin-bottom:12px;
-  border-radius:10px;
-  border:1px solid #ccc;
-}
-
-footer {
-  background:#111;
-  color:#fff;
+/* HEADER */
+header{
   padding:40px 20px;
   text-align:center;
 }
+header h1{
+  font-size:32px;
+  color:var(--gold);
+  margin-bottom:10px;
+}
+header p{
+  font-size:16px;
+  color:var(--gray);
+}
 
-.lang {
+/* BUTTONS */
+.buttons{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+.btn{
+  padding:12px 22px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:15px;
+}
+.call{background:var(--gold);color:black}
+.whatsapp{background:#25D366;color:black}
+.apply{border:2px solid var(--gold);color:var(--gold)}
+
+/* SECTIONS */
+section{
+  padding:50px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+h2{
+  font-size:26px;
+  color:var(--gold);
+  margin-bottom:20px;
+  text-align:center;
+}
+p{font-size:16px;color:#ddd}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+.card{
+  background:#1c1c1c;
+  padding:25px;
+  border-radius:12px;
+  border:1px solid #2b2b2b;
+}
+.card h3{
+  color:var(--gold);
+  margin-bottom:10px;
+}
+
+/* PRICES */
+.price{
+  font-size:22px;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+/* MAP */
+iframe{
+  width:100%;
+  height:350px;
+  border-radius:12px;
+  border:none;
+  margin-top:20px;
+}
+
+/* FOOTER */
+footer{
+  padding:30px 20px;
+  text-align:center;
+  color:#888;
+  font-size:14px;
+}
+
+/* LANGUAGE */
+.lang{
   position:fixed;
-  top:20px;
-  right:20px;
-  z-index:999;
+  top:15px;
+  right:15px;
+}
+.lang button{
+  background:#1f1f1f;
+  color:white;
+  border:1px solid #333;
+  padding:6px 12px;
+  border-radius:6px;
+  cursor:pointer;
+  margin-left:5px;
 }
 </style>
+
+<script>
+function setLang(l){
+  document.querySelectorAll('[data-ru]').forEach(el=>{
+    el.innerText = l==='ru' ? el.dataset.ru : el.dataset.en;
+  });
+}
+</script>
 </head>
 
-<body>
+<body onload="setLang('ru')">
 
 <div class="lang">
   <button onclick="setLang('ru')">RU</button>
@@ -122,86 +144,58 @@ footer {
 </div>
 
 <header>
-  <video autoplay muted loop>
-    <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-8591/1080p.mp4">
-  </video>
-  <div class="overlay"></div>
-  <div class="content">
-    <h1 data-ru="Лучший батутный центр Душанбе" data-en="Best Trampoline Park in Dushanbe"></h1>
-    <p data-ru="3 этажа радости, безопасности и счастья для детей"
-       data-en="3 floors of fun, safety and happiness for kids"></p>
+  <h1 data-ru="Батутный центр в Душанбе" data-en="Trampoline Center in Dushanbe"></h1>
+  <p data-ru="Современный детский развлекательный центр. Только в городе Душанбе."
+     data-en="Modern children entertainment center. Only in Dushanbe."></p>
 
-    <a class="btn" href="tel:+992011900303">📞 Позвонить</a>
-    <a class="btn" href="https://wa.me/992011900303">💬 WhatsApp</a>
+  <div class="buttons">
+    <a href="tel:+992011900303" class="btn call">Позвонить</a>
+    <a href="https://wa.me/992011900303" class="btn whatsapp">WhatsApp</a>
+    <a href="#form" class="btn apply">Оставить заявку</a>
   </div>
 </header>
 
 <section>
-<h2 data-ru="Цены" data-en="Prices"></h2>
-<div class="grid">
-  <div class="card">
-    <h3>START</h3>
-    <p class="price">100 c</p>
-    <p>1 час</p>
-  </div>
-  <div class="card">
-    <h3>FUN</h3>
-    <p class="price">200 c</p>
-    <p>2 часа</p>
-  </div>
-  <div class="card">
-    <h3>MAX</h3>
-    <p class="price">400 c</p>
-    <p>Безлимит</p>
-  </div>
-</div>
+  <h2 data-ru="О нас" data-en="About us"></h2>
+  <p data-ru="Я Мубориз. Я создаю и развиваю профессиональный батутный центр для детей и семей. У нас безопасно, ярко и весело."
+     data-en="My name is Muboriz. I run a professional trampoline center for kids and families. Safe, bright and fun."></p>
 </section>
 
 <section>
-<h2 data-ru="Отзывы родителей" data-en="Parents reviews"></h2>
-<div class="grid">
-  <div class="card">⭐️⭐️⭐️⭐️⭐️ Очень безопасно и красиво</div>
-  <div class="card">⭐️⭐️⭐️⭐️⭐️ Лучшее место в Душанбе</div>
-</div>
-</section>
-
-<section class="gallery">
-<h2 data-ru="Галерея" data-en="Gallery"></h2>
-<div class="grid">
-  <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c">
-  <img src="https://images.unsplash.com/photo-1581579185169-41c9b0c2f0fa">
-</div>
+  <h2 data-ru="Цены" data-en="Prices"></h2>
+  <div class="cards">
+    <div class="card">
+      <h3 data-ru="Стандарт" data-en="Standard"></h3>
+      <p>1 час</p>
+      <div class="price">100 сомони</div>
+    </div>
+    <div class="card">
+      <h3 data-ru="Комфорт" data-en="Comfort"></h3>
+      <p>2 часа</p>
+      <div class="price">200 сомони</div>
+    </div>
+    <div class="card">
+      <h3 data-ru="Премиум" data-en="Premium"></h3>
+      <p data-ru="Без ограничений" data-en="Unlimited"></p>
+      <div class="price">400 сомони</div>
+    </div>
+  </div>
 </section>
 
 <section>
-<h2 data-ru="Как нас найти" data-en="How to find us"></h2>
-<iframe src="https://www.google.com/maps?q=Dushanbe&output=embed"></iframe>
-<a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Dushanbe">🗺 Построить маршрут</a>
+  <h2 data-ru="Как нас найти" data-en="How to find us"></h2>
+  <iframe src="https://maps.google.com/maps?q=Dushanbe&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
 </section>
 
-<section>
-<h2 data-ru="Оставить заявку" data-en="Send request"></h2>
-<form>
-  <input placeholder="Ваше имя">
-  <input placeholder="Телефон">
-  <textarea placeholder="Комментарий"></textarea>
-  <button class="btn">Отправить</button>
-</form>
+<section id="form">
+  <h2 data-ru="Оставить заявку" data-en="Send request"></h2>
+  <p data-ru="Позвоните нам или напишите в WhatsApp — мы ответим сразу."
+     data-en="Call us or message us on WhatsApp — we reply instantly."></p>
 </section>
 
 <footer>
-  <p>Мубориз — Батутный центр Душанбе</p>
-  <p>📞 +992 011 900 303</p>
+  © 2025 Батутный центр • Душанбе
 </footer>
-
-<script>
-function setLang(l){
-  document.querySelectorAll('[data-ru]').forEach(e=>{
-    e.innerText = e.dataset[l];
-  });
-}
-setLang('ru');
-</script>
 
 </body>
 </html>
