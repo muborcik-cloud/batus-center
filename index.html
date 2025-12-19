@@ -3,147 +3,176 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Батутный центр Душанбе — лучший детский центр</title>
+<title>Batut Center Dushanbe | Батутный центр Душанбе</title>
 
-<!-- SEO -->
-<meta name="description" content="Батутный центр в Душанбе. 3 этажа развлечений, безопасность, праздники, дни рождения. Запись по WhatsApp.">
-<meta name="keywords" content="батуты Душанбе, батутный центр Душанбе, детский центр Душанбе">
+<meta name="description" content="Лучший батутный центр в Душанбе. 3 этажа развлечений. Запись по WhatsApp.">
+<meta name="keywords" content="батутный центр Душанбе, батуты Душанбе, детский центр">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#222}
-a{text-decoration:none}
+*{box-sizing:border-box}
+body{margin:0;font-family:Poppins,sans-serif;background:#fff;color:#222}
+a{text-decoration:none;color:inherit}
 
-/* ===== FIXED BUTTONS ===== */
-.fixed{
-  position:fixed;right:20px;z-index:999;
-  display:flex;flex-direction:column;gap:10px
-}
-.fixed a{
-  padding:14px 20px;border-radius:50px;
-  color:#fff;font-weight:bold
-}
-.w{background:#25D366}
-.c{background:#000}
+/* LANG */
+.lang{position:fixed;top:20px;left:20px;z-index:1000}
+.lang button{padding:8px 14px;border:none;border-radius:20px;margin-right:5px;cursor:pointer}
 
-/* ===== HERO ===== */
+/* FIXED BUTTONS */
+.fixed{position:fixed;right:20px;bottom:20px;z-index:1000;display:flex;flex-direction:column;gap:10px}
+.fixed a{padding:15px 22px;border-radius:50px;color:#fff;font-weight:600}
+.whatsapp{background:#25D366}
+.call{background:#000}
+
+/* HERO */
 .hero{
   min-height:100vh;
   background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
   url("https://images.unsplash.com/photo-1606836591695-4d58a73eba1e");
   background-size:cover;
   display:flex;align-items:center;justify-content:center;
-  text-align:center;color:#fff;padding:20px
+  text-align:center;color:#fff;padding:20px;
+  animation:fade 1.5s
 }
-.hero h1{font-size:46px}
-.hero p{font-size:20px;margin:15px 0 30px}
-.btn{
-  padding:15px 35px;border-radius:50px;
-  background:#ff6a00;color:#fff;font-weight:bold
-}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.hero h1{font-size:52px}
+.hero p{font-size:22px;margin:15px 0 30px}
+.btn{padding:16px 40px;border-radius:50px;background:#ff6a00;color:#fff;font-weight:700}
 
-/* ===== SECTIONS ===== */
-section{max-width:1200px;margin:auto;padding:80px 20px}
-h2{text-align:center;font-size:38px;margin-bottom:40px}
+/* SECTION */
+section{max-width:1200px;margin:auto;padding:90px 20px}
+h2{text-align:center;font-size:40px;margin-bottom:50px}
 
-/* ===== GRID ===== */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px
-}
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
 .card{
-  background:#fff;padding:30px;border-radius:20px;
-  box-shadow:0 15px 50px rgba(0,0,0,.1);
-  text-align:center
+  background:#fff;padding:35px;border-radius:25px;
+  box-shadow:0 20px 60px rgba(0,0,0,.12);
+  text-align:center;
+  transition:.4s
 }
-.price{font-size:30px;color:#ff6a00}
+.card:hover{transform:translateY(-10px)}
 
-/* ===== FORM ===== */
-form{
-  max-width:500px;margin:40px auto;
-  display:flex;flex-direction:column
+/* PRICES */
+.price{font-size:32px;color:#ff6a00;font-weight:800}
+
+/* GALLERY */
+.gallery img{
+  width:100%;border-radius:20px;height:220px;
+  object-fit:cover;transition:.4s
 }
+.gallery img:hover{transform:scale(1.05)}
+
+/* REVIEWS */
+.review{font-style:italic}
+
+/* FORM */
+form{max-width:520px;margin:40px auto;display:flex;flex-direction:column}
 input,textarea{
-  padding:15px;margin-bottom:15px;
-  border-radius:10px;border:1px solid #ccc
+  padding:16px;margin-bottom:15px;
+  border-radius:12px;border:1px solid #ccc;font-size:16px
 }
 button{
-  padding:16px;border:none;
-  border-radius:50px;
-  background:#25D366;color:#fff;
-  font-size:18px;font-weight:bold
+  padding:18px;border:none;border-radius:50px;
+  background:#25D366;color:#fff;font-size:18px;font-weight:700
 }
 
-/* ===== FOOTER ===== */
-footer{
-  background:#000;color:#fff;
-  text-align:center;padding:30px
-}
+/* FOOTER */
+footer{background:#000;color:#fff;text-align:center;padding:30px}
 </style>
 
 <script>
 function sendWA(){
-  let n=document.getElementById('name').value;
-  let p=document.getElementById('phone').value;
-  let m=document.getElementById('msg').value;
-  let text=`Заявка с сайта%0AИмя: ${n}%0AТелефон: ${p}%0AСообщение: ${m}`;
-  window.open(`https://wa.me/992011900303?text=${text}`,'_blank');
+ let n=document.getElementById("name").value;
+ let p=document.getElementById("phone").value;
+ let t=document.getElementById("text").value;
+ let msg=`Заявка с сайта%0AИмя: ${n}%0AТелефон: ${p}%0AСообщение: ${t}`;
+ window.open("https://wa.me/992011900303?text="+msg);
+}
+
+function setLang(l){
+ document.querySelectorAll("[data-ru]").forEach(e=>{
+   e.innerText = l==="ru"?e.dataset.ru:e.dataset.en;
+ });
 }
 </script>
 </head>
 
 <body>
 
+<div class="lang">
+<button onclick="setLang('ru')">RU</button>
+<button onclick="setLang('en')">EN</button>
+</div>
+
 <div class="fixed">
-  <a class="w" href="https://wa.me/992011900303">WhatsApp</a>
-  <a class="c" href="tel:+992011900303">Позвонить</a>
+<a class="whatsapp" href="https://wa.me/992011900303">WhatsApp</a>
+<a class="call" href="tel:+992011900303">Позвонить</a>
 </div>
 
 <div class="hero">
-  <div>
-    <h1>Батутный центр в Душанбе</h1>
-    <p>3 этажа • Безопасность • Радость детям</p>
-    <a class="btn" href="#order">Записаться</a>
-  </div>
+<div>
+<h1 data-ru="Батутный центр Душанбе" data-en="Trampoline Center Dushanbe"></h1>
+<p data-ru="3 этажа • Безопасно • Весело" data-en="3 floors • Safe • Fun"></p>
+<a class="btn" href="#order" data-ru="Записаться" data-en="Book now"></a>
+</div>
 </div>
 
 <section>
-  <h2>Почему выбирают нас</h2>
-  <div class="grid">
-    <div class="card">✅ 3 этажа развлечений</div>
-    <div class="card">✅ Безопасное оборудование</div>
-    <div class="card">✅ Для детей и семей</div>
-    <div class="card">✅ Центр Душанбе</div>
-  </div>
+<h2 data-ru="Почему выбирают нас" data-en="Why choose us"></h2>
+<div class="grid">
+<div class="card" data-ru="3 этажа развлечений" data-en="3 floors of fun"></div>
+<div class="card" data-ru="Современные батуты" data-en="Modern trampolines"></div>
+<div class="card" data-ru="Безопасность детей" data-en="Child safety"></div>
+<div class="card" data-ru="Только в Душанбе" data-en="Only in Dushanbe"></div>
+</div>
 </section>
 
 <section>
-  <h2>Цены</h2>
-  <div class="grid">
-    <div class="card"><h3>Базовый</h3><div class="price">100 c</div></div>
-    <div class="card"><h3>Стандарт</h3><div class="price">200 c</div></div>
-    <div class="card"><h3>Премиум</h3><div class="price">400 c</div></div>
-  </div>
+<h2 data-ru="Цены" data-en="Prices"></h2>
+<div class="grid">
+<div class="card"><div class="price">100 c</div><p data-ru="Базовый" data-en="Basic"></p></div>
+<div class="card"><div class="price">200 c</div><p data-ru="Стандарт" data-en="Standard"></p></div>
+<div class="card"><div class="price">400 c</div><p data-ru="Премиум" data-en="Premium"></p></div>
+</div>
+</section>
+
+<section>
+<h2 data-ru="Фото-галерея" data-en="Gallery"></h2>
+<div class="grid gallery">
+<img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d">
+<img src="https://images.unsplash.com/photo-1546519638-68e109498ffc">
+<img src="https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf">
+</div>
+</section>
+
+<section>
+<h2 data-ru="Отзывы родителей" data-en="Parents reviews"></h2>
+<div class="grid">
+<div class="card review">★★★★★ «Лучший центр в Душанбе!»</div>
+<div class="card review">★★★★★ «Дети в восторге»</div>
+<div class="card review">★★★★★ «Очень безопасно»</div>
+</div>
 </section>
 
 <section id="order">
-  <h2>Оставить заявку</h2>
-  <form onsubmit="sendWA();return false;">
-    <input id="name" placeholder="Ваше имя" required>
-    <input id="phone" placeholder="Телефон" required>
-    <textarea id="msg" placeholder="Сообщение"></textarea>
-    <button>Отправить в WhatsApp</button>
-  </form>
+<h2 data-ru="Оставить заявку" data-en="Send request"></h2>
+<form onsubmit="sendWA();return false;">
+<input id="name" placeholder="Имя" required>
+<input id="phone" placeholder="Телефон" required>
+<textarea id="text" placeholder="Сообщение"></textarea>
+<button data-ru="Отправить в WhatsApp" data-en="Send to WhatsApp"></button>
+</form>
 
-  <iframe
-    src="https://www.google.com/maps?q=Dushanbe&output=embed"
-    style="width:100%;height:350px;border-radius:20px;border:none">
-  </iframe>
+<iframe src="https://www.google.com/maps?q=Dushanbe&output=embed"
+style="width:100%;height:350px;border-radius:20px;border:none"></iframe>
 </section>
 
 <footer>
-  © 2025 Батутный центр Душанбе • Бизнес-уровень
+© 2025 Batut Center Dushanbe
 </footer>
 
+<script>setLang('ru')</script>
 </body>
 </html>
