@@ -2,195 +2,136 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Батутный центр в Душанбе</title>
+  <title>Trampoline Center Dushanbe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+    * {margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+    body {background:#000;color:#fff}
+
+    .lang-switch {
+      position:fixed;top:20px;right:20px;z-index:999;
+    }
+    .lang-switch button {
+      background:#ff9900;border:none;
+      padding:8px 14px;margin-left:5px;
+      border-radius:20px;cursor:pointer;font-weight:bold;
     }
 
-    body {
-      color: white;
-      background: #000;
-    }
-
-    /* ===== VIDEO BACKGROUND ===== */
-    .hero {
-      position: relative;
-      height: 100vh;
-      overflow: hidden;
-    }
-
+    .hero {height:100vh;position:relative;overflow:hidden}
     .hero video {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      transform: translate(-50%, -50%);
-      z-index: -1;
-      filter: brightness(0.5);
+      position:absolute;top:50%;left:50%;
+      min-width:100%;min-height:100%;
+      transform:translate(-50%,-50%);
+      filter:brightness(0.45);
+    }
+    .content {
+      position:relative;z-index:2;
+      height:100%;
+      display:flex;flex-direction:column;
+      justify-content:center;align-items:center;
+      text-align:center;padding:20px;
+    }
+    h1 {font-size:48px;margin-bottom:20px}
+    p {font-size:20px;max-width:800px}
+
+    .btns a {
+      display:inline-block;margin:10px;
+      padding:15px 30px;
+      background:linear-gradient(45deg,#ff0066,#ff9900);
+      color:#fff;text-decoration:none;
+      border-radius:40px;font-size:18px;
     }
 
-    .hero-content {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-    }
+    section {padding:70px 20px;text-align:center;background:#111}
+    section h2 {font-size:36px;margin-bottom:20px}
 
-    .hero h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
-      text-shadow: 0 0 20px rgba(0,0,0,0.7);
+    .cards {display:flex;flex-wrap:wrap;justify-content:center}
+    .card {
+      background:#1c1c1c;border-radius:20px;
+      padding:30px;margin:15px;width:280px;
     }
+    .card strong {color:#ff9900;font-size:28px}
 
-    .hero p {
-      font-size: 22px;
-      max-width: 700px;
-      margin-bottom: 30px;
-    }
-
-    .buttons a {
-      display: inline-block;
-      margin: 10px;
-      padding: 15px 30px;
-      border-radius: 50px;
-      font-size: 18px;
-      text-decoration: none;
-      color: white;
-      background: linear-gradient(45deg, #ff0066, #ff9900);
-      transition: transform 0.3s;
-    }
-
-    .buttons a:hover {
-      transform: scale(1.1);
-    }
-
-    section {
-      padding: 60px 20px;
-      text-align: center;
-      background: #111;
-    }
-
-    section h2 {
-      font-size: 36px;
-      margin-bottom: 20px;
-    }
-
-    section p {
-      font-size: 18px;
-      max-width: 800px;
-      margin: auto;
-    }
-
-    .prices {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 40px;
-    }
-
-    .price-card {
-      background: #1a1a1a;
-      border-radius: 20px;
-      padding: 30px;
-      margin: 15px;
-      width: 280px;
-    }
-
-    .price-card h3 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .price-card strong {
-      font-size: 28px;
-      color: #ff9900;
-    }
-
-    footer {
-      padding: 30px;
-      text-align: center;
-      background: #000;
-      font-size: 16px;
-    }
+    footer {padding:30px;text-align:center;background:#000}
   </style>
 </head>
 <body>
 
-  <!-- HERO WITH VIDEO -->
-  <div class="hero">
-    <video autoplay muted loop playsinline>
-      <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-5470/1080p.mp4" type="video/mp4">
-    </video>
+<!-- LANGUAGE SWITCH -->
+<div class="lang-switch">
+  <button onclick="setLang('ru')">RU</button>
+  <button onclick="setLang('en')">EN</button>
+</div>
 
-    <div class="hero-content">
-      <h1>Батутный центр в Душанбе</h1>
-      <p>Трёхэтажный современный батутный центр для детей и взрослых. Эмоции, безопасность и радость.</p>
+<!-- HERO -->
+<div class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-5470/1080p.mp4" type="video/mp4">
+  </video>
 
-      <div class="buttons">
-        <a href="tel:+992011900303">📞 Позвонить</a>
-        <a href="https://wa.me/992011900303" target="_blank">💬 WhatsApp</a>
-      </div>
+  <div class="content">
+    <h1 data-ru="Батутный центр в Душанбе" data-en="Trampoline Center in Dushanbe"></h1>
+    <p data-ru="Трёхэтажный современный батутный центр. Безопасно. Ярко. Профессионально."
+       data-en="Three-story modern trampoline center. Safe. Fun. Professional."></p>
+
+    <div class="btns">
+      <a href="tel:+992011900303" data-ru="Позвонить" data-en="Call"></a>
+      <a href="https://wa.me/992011900303" target="_blank"
+         data-ru="Написать в WhatsApp" data-en="WhatsApp"></a>
     </div>
   </div>
+</div>
 
-  <!-- ABOUT -->
-  <section>
-    <h2>Кто мы</h2>
-    <p>
-      Мы — профессиональный батутный центр в Душанбе. Современное оборудование,
-      безопасные зоны, опытные инструкторы и незабываемые эмоции для детей.
-    </p>
-  </section>
+<!-- ABOUT -->
+<section>
+  <h2 data-ru="О нас" data-en="About Us"></h2>
+  <p data-ru="Мы создаём эмоции для детей. Современные батуты, инструкторы и безопасность."
+     data-en="We create emotions for children. Modern trampolines, instructors and safety."></p>
+</section>
 
-  <!-- PRICES -->
-  <section>
-    <h2>Цены</h2>
-    <div class="prices">
-      <div class="price-card">
-        <h3>Стандарт</h3>
-        <strong>100 сомони</strong>
-        <p>Батуты и игровая зона</p>
-      </div>
-      <div class="price-card">
-        <h3>Праздник</h3>
-        <strong>200 сомони</strong>
-        <p>Развлечения + зона отдыха</p>
-      </div>
-      <div class="price-card">
-        <h3>VIP</h3>
-        <strong>400 сомони</strong>
-        <p>Полный доступ + аниматор</p>
-      </div>
+<!-- PRICES -->
+<section>
+  <h2 data-ru="Цены" data-en="Prices"></h2>
+  <div class="cards">
+    <div class="card">
+      <h3 data-ru="Стандарт" data-en="Standard"></h3>
+      <strong>100 TJS</strong>
     </div>
-  </section>
+    <div class="card">
+      <h3 data-ru="Праздник" data-en="Party"></h3>
+      <strong>200 TJS</strong>
+    </div>
+    <div class="card">
+      <h3 data-ru="VIP" data-en="VIP"></h3>
+      <strong>400 TJS</strong>
+    </div>
+  </div>
+</section>
 
-  <!-- MAP -->
-  <section>
-    <h2>Как нас найти</h2>
-    <p>Мы находимся в городе Душанбе</p>
-    <br>
-    <iframe
-      src="https://www.google.com/maps?q=Dushanbe&output=embed"
-      width="90%"
-      height="300"
-      style="border-radius:20px;border:0;"
-      loading="lazy">
-    </iframe>
-  </section>
+<!-- MAP -->
+<section>
+  <h2 data-ru="Как нас найти" data-en="How to find us"></h2>
+  <iframe
+    src="https://www.google.com/maps?q=Dushanbe&output=embed"
+    width="90%" height="300"
+    style="border-radius:20px;border:0">
+  </iframe>
+</section>
 
-  <footer>
-    © Батутный центр Душанбе • Тел: +992 01 190 03 03
-  </footer>
+<footer>
+  © Trampoline Center Dushanbe | +992 01 190 03 03
+</footer>
+
+<script>
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-'+lang+']').forEach(el=>{
+    el.innerText = el.getAttribute('data-'+lang);
+  });
+}
+setLang('ru');
+</script>
 
 </body>
 </html>
