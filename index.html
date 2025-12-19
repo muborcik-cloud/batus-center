@@ -1,136 +1,191 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>Trampoline Center Dushanbe</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>Batut Center Dushanbe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-    body {background:#000;color:#fff}
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#000;color:#fff;overflow-x:hidden}
+a{text-decoration:none;color:#fff}
 
-    .lang-switch {
-      position:fixed;top:20px;right:20px;z-index:999;
-    }
-    .lang-switch button {
-      background:#ff9900;border:none;
-      padding:8px 14px;margin-left:5px;
-      border-radius:20px;cursor:pointer;font-weight:bold;
-    }
+.lang{position:fixed;top:15px;right:15px;z-index:999}
+.lang button{
+background:#ff9800;border:none;
+padding:8px 14px;border-radius:20px;
+font-weight:bold;cursor:pointer;margin-left:5px
+}
 
-    .hero {height:100vh;position:relative;overflow:hidden}
-    .hero video {
-      position:absolute;top:50%;left:50%;
-      min-width:100%;min-height:100%;
-      transform:translate(-50%,-50%);
-      filter:brightness(0.45);
-    }
-    .content {
-      position:relative;z-index:2;
-      height:100%;
-      display:flex;flex-direction:column;
-      justify-content:center;align-items:center;
-      text-align:center;padding:20px;
-    }
-    h1 {font-size:48px;margin-bottom:20px}
-    p {font-size:20px;max-width:800px}
+.hero{height:100vh;position:relative}
+.hero video{
+position:absolute;top:50%;left:50%;
+transform:translate(-50%,-50%);
+min-width:100%;min-height:100%;
+filter:brightness(0.4)
+}
+.hero .box{
+position:relative;z-index:2;height:100%;
+display:flex;flex-direction:column;
+justify-content:center;align-items:center;
+text-align:center;padding:20px
+}
+.hero h1{font-size:52px;margin-bottom:20px}
+.hero p{font-size:22px;max-width:800px}
 
-    .btns a {
-      display:inline-block;margin:10px;
-      padding:15px 30px;
-      background:linear-gradient(45deg,#ff0066,#ff9900);
-      color:#fff;text-decoration:none;
-      border-radius:40px;font-size:18px;
-    }
+.btns a{
+display:inline-block;margin:10px;
+padding:15px 32px;border-radius:40px;
+background:linear-gradient(45deg,#ff0066,#ff9800);
+font-size:18px
+}
 
-    section {padding:70px 20px;text-align:center;background:#111}
-    section h2 {font-size:36px;margin-bottom:20px}
+section{padding:80px 20px;text-align:center}
+h2{font-size:38px;margin-bottom:25px}
 
-    .cards {display:flex;flex-wrap:wrap;justify-content:center}
-    .card {
-      background:#1c1c1c;border-radius:20px;
-      padding:30px;margin:15px;width:280px;
-    }
-    .card strong {color:#ff9900;font-size:28px}
+.fade{opacity:0;transform:translateY(40px);transition:1s}
+.fade.show{opacity:1;transform:none}
 
-    footer {padding:30px;text-align:center;background:#000}
-  </style>
+.cards{display:flex;flex-wrap:wrap;justify-content:center}
+.card{
+background:#111;border-radius:20px;
+padding:30px;margin:15px;width:280px
+}
+.card strong{font-size:28px;color:#ff9800}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px
+}
+.gallery img{
+width:100%;border-radius:15px;
+transition:.4s
+}
+.gallery img:hover{transform:scale(1.05)}
+
+form{
+max-width:500px;margin:auto
+}
+input,textarea{
+width:100%;padding:15px;
+margin:10px 0;border-radius:10px;
+border:none;font-size:16px
+}
+form button{
+padding:15px 40px;
+border:none;border-radius:30px;
+background:#ff9800;
+font-size:18px;cursor:pointer
+}
+
+footer{padding:30px;background:#000}
+
+</style>
 </head>
 <body>
 
-<!-- LANGUAGE SWITCH -->
-<div class="lang-switch">
-  <button onclick="setLang('ru')">RU</button>
-  <button onclick="setLang('en')">EN</button>
+<div class="lang">
+<button onclick="setLang('ru')">RU</button>
+<button onclick="setLang('en')">EN</button>
 </div>
 
 <!-- HERO -->
 <div class="hero">
-  <video autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-5470/1080p.mp4" type="video/mp4">
-  </video>
+<video autoplay muted loop playsinline>
+<source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-5470/1080p.mp4">
+</video>
 
-  <div class="content">
-    <h1 data-ru="Батутный центр в Душанбе" data-en="Trampoline Center in Dushanbe"></h1>
-    <p data-ru="Трёхэтажный современный батутный центр. Безопасно. Ярко. Профессионально."
-       data-en="Three-story modern trampoline center. Safe. Fun. Professional."></p>
+<div class="box">
+<h1 data-ru="Батутный центр в Душанбе"
+data-en="Trampoline Center in Dushanbe"></h1>
 
-    <div class="btns">
-      <a href="tel:+992011900303" data-ru="Позвонить" data-en="Call"></a>
-      <a href="https://wa.me/992011900303" target="_blank"
-         data-ru="Написать в WhatsApp" data-en="WhatsApp"></a>
-    </div>
-  </div>
+<p data-ru="Трёхэтажный современный батутный центр. Эмоции, безопасность и радость."
+data-en="Three-story modern trampoline center. Emotions, safety and fun."></p>
+
+<div class="btns">
+<a href="tel:+992011900303" data-ru="Позвонить" data-en="Call"></a>
+<a href="https://wa.me/992011900303" target="_blank"
+data-ru="WhatsApp" data-en="WhatsApp"></a>
+</div>
+</div>
 </div>
 
 <!-- ABOUT -->
-<section>
-  <h2 data-ru="О нас" data-en="About Us"></h2>
-  <p data-ru="Мы создаём эмоции для детей. Современные батуты, инструкторы и безопасность."
-     data-en="We create emotions for children. Modern trampolines, instructors and safety."></p>
+<section class="fade">
+<h2 data-ru="Кто мы" data-en="Who we are"></h2>
+<p data-ru="Мы — крупнейший батутный центр Душанбе. Безопасно. Профессионально."
+data-en="We are the largest trampoline center in Dushanbe. Safe. Professional."></p>
 </section>
 
 <!-- PRICES -->
-<section>
-  <h2 data-ru="Цены" data-en="Prices"></h2>
-  <div class="cards">
-    <div class="card">
-      <h3 data-ru="Стандарт" data-en="Standard"></h3>
-      <strong>100 TJS</strong>
-    </div>
-    <div class="card">
-      <h3 data-ru="Праздник" data-en="Party"></h3>
-      <strong>200 TJS</strong>
-    </div>
-    <div class="card">
-      <h3 data-ru="VIP" data-en="VIP"></h3>
-      <strong>400 TJS</strong>
-    </div>
-  </div>
+<section class="fade">
+<h2 data-ru="Цены" data-en="Prices"></h2>
+<div class="cards">
+<div class="card">
+<h3 data-ru="Стандарт" data-en="Standard"></h3>
+<strong>100 TJS</strong>
+</div>
+<div class="card">
+<h3 data-ru="Праздник" data-en="Party"></h3>
+<strong>200 TJS</strong>
+</div>
+<div class="card">
+<h3 data-ru="VIP" data-en="VIP"></h3>
+<strong>400 TJS</strong>
+</div>
+</div>
+</section>
+
+<!-- GALLERY -->
+<section class="fade">
+<h2 data-ru="Галерея" data-en="Gallery"></h2>
+<div class="gallery">
+<img src="https://images.unsplash.com/photo-1600959907703-c1c2c8b9b89d">
+<img src="https://images.unsplash.com/photo-1584467735871-bc1a52eac4fa">
+<img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
+</div>
+</section>
+
+<!-- FORM -->
+<section class="fade">
+<h2 data-ru="Оставить заявку" data-en="Send request"></h2>
+<form>
+<input placeholder="Имя / Name">
+<input placeholder="Телефон / Phone">
+<textarea placeholder="Сообщение / Message"></textarea>
+<button type="button"
+onclick="alert('Заявка отправлена!')"
+data-ru="Отправить" data-en="Send"></button>
+</form>
 </section>
 
 <!-- MAP -->
-<section>
-  <h2 data-ru="Как нас найти" data-en="How to find us"></h2>
-  <iframe
-    src="https://www.google.com/maps?q=Dushanbe&output=embed"
-    width="90%" height="300"
-    style="border-radius:20px;border:0">
-  </iframe>
+<section class="fade">
+<h2 data-ru="Как нас найти" data-en="How to find us"></h2>
+<iframe
+src="https://www.google.com/maps?q=Dushanbe&output=embed"
+width="90%" height="300"
+style="border-radius:20px;border:0">
+</iframe>
 </section>
 
 <footer>
-  © Trampoline Center Dushanbe | +992 01 190 03 03
+© Batut Center Dushanbe | +992 01 190 03 03
 </footer>
 
 <script>
-function setLang(lang) {
-  document.documentElement.lang = lang;
-  document.querySelectorAll('[data-'+lang+']').forEach(el=>{
-    el.innerText = el.getAttribute('data-'+lang);
-  });
+function setLang(l){
+document.documentElement.lang=l;
+document.querySelectorAll('[data-'+l+']')
+.forEach(e=>e.innerText=e.getAttribute('data-'+l))
 }
-setLang('ru');
+setLang('ru')
+
+const obs=new IntersectionObserver(e=>{
+e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('show')})
+},{threshold:.2})
+document.querySelectorAll('.fade').forEach(el=>obs.observe(el))
 </script>
 
 </body>
