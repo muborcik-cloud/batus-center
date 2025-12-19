@@ -2,132 +2,196 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>LEGEND Batut Center — Dushanbe</title>
+<title>LEGEND BATUT CENTER • Dushanbe</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Лучший батутный центр в Душанбе. Безопасность, эмоции, радость.">
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap');
+
 :root{
---gold:#ffb300;
---red:#ff004c;
---dark:#0b0b0b;
+--gold:#ffcc33;
+--pink:#ff0066;
+--dark:#050505;
+--glass:rgba(255,255,255,0.08);
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Montserrat}
 body{background:var(--dark);color:#fff;overflow-x:hidden}
-a{text-decoration:none;color:#fff}
+
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-thumb{
+background:linear-gradient(var(--pink),var(--gold));
+border-radius:10px;
+}
 
 .lang{
-position:fixed;top:20px;right:20px;z-index:999;
+position:fixed;top:20px;right:20px;z-index:9999
 }
 .lang button{
-background:linear-gradient(45deg,var(--gold),var(--red));
-border:none;border-radius:30px;
-padding:8px 16px;margin-left:5px;
-font-weight:700;cursor:pointer;
+border:none;
+background:linear-gradient(45deg,var(--pink),var(--gold));
+color:#000;
+padding:8px 16px;
+margin-left:6px;
+border-radius:30px;
+font-weight:700;
+cursor:pointer;
+box-shadow:0 10px 40px rgba(255,0,102,.6)
 }
 
 .hero{
-height:100vh;position:relative;
+height:100vh;position:relative;overflow:hidden
 }
 .hero video{
-position:absolute;top:50%;left:50%;
+position:absolute;
+top:50%;left:50%;
 transform:translate(-50%,-50%);
 min-width:100%;min-height:100%;
-filter:brightness(0.35);
+filter:brightness(.25) saturate(1.4);
 }
 .hero::after{
-content:"";position:absolute;inset:0;
-background:radial-gradient(circle at top,transparent,#000);
+content:"";
+position:absolute;inset:0;
+background:
+radial-gradient(circle at top,rgba(255,204,51,.15),transparent 60%),
+linear-gradient(#000,transparent 40%,#000);
 }
-.hero .content{
+
+.hero-content{
 position:relative;z-index:2;
 height:100%;
-display:flex;flex-direction:column;
-justify-content:center;align-items:center;
-text-align:center;padding:20px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+backdrop-filter:blur(3px);
 }
+
 .hero h1{
-font-size:64px;font-weight:900;
-text letter-spacing:1px;
+font-size:72px;
+font-weight:900;
 background:linear-gradient(45deg,#fff,var(--gold));
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
+text-shadow:0 0 80px rgba(255,204,51,.4);
 }
+
 .hero p{
-font-size:22px;max-width:900px;
-margin:20px 0;
+font-size:24px;
+max-width:900px;
+margin:25px 0;
+opacity:.95;
 }
 
 .btns a{
 display:inline-block;
 margin:10px;
-padding:16px 36px;
-border-radius:50px;
-background:linear-gradient(45deg,var(--red),var(--gold));
-font-size:18px;font-weight:700;
-box-shadow:0 10px 40px rgba(255,0,76,.4);
+padding:18px 42px;
+border-radius:60px;
+background:linear-gradient(45deg,var(--pink),var(--gold));
+color:#000;
+font-weight:800;
+font-size:18px;
+box-shadow:0 20px 60px rgba(255,0,102,.7);
+transition:.4s;
+}
+.btns a:hover{
+transform:scale(1.08);
 }
 
-section{padding:100px 20px;text-align:center}
+section{
+padding:120px 20px;
+text-align:center;
+}
+
 h2{
-font-size:42px;margin-bottom:30px;
+font-size:48px;
+margin-bottom:35px;
 background:linear-gradient(45deg,#fff,var(--gold));
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
 
-.fade{opacity:0;transform:translateY(60px);transition:1.2s}
-.fade.show{opacity:1;transform:none}
+.fade{
+opacity:0;
+transform:translateY(80px);
+transition:1.2s cubic-bezier(.19,1,.22,1)
+}
+.fade.show{
+opacity:1;
+transform:none;
+}
 
 .cards{
-display:flex;flex-wrap:wrap;justify-content:center;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
 }
 .card{
-background:linear-gradient(160deg,#111,#000);
-border-radius:30px;
-padding:40px;margin:20px;
-width:300px;
-box-shadow:0 30px 80px rgba(0,0,0,.8);
+width:320px;
+padding:45px;
+border-radius:35px;
+background:linear-gradient(160deg,var(--glass),rgba(255,255,255,0.02));
+backdrop-filter:blur(14px);
+box-shadow:0 40px 120px rgba(0,0,0,.9);
 }
-.card strong{font-size:32px;color:var(--gold)}
+.card strong{
+font-size:38px;
+color:var(--gold);
+}
 
 .gallery{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
+gap:25px;
 }
-.gallery img, .gallery video{
-width:100%;border-radius:25px;
+.gallery img,.gallery video{
+width:100%;
+border-radius:30px;
+box-shadow:0 30px 80px rgba(0,0,0,.9);
 transition:.5s;
 }
-.gallery img:hover, .gallery video:hover{
-transform:scale(1.06);
+.gallery img:hover,.gallery video:hover{
+transform:scale(1.07);
 }
 
 form{
-max-width:550px;margin:auto;
-background:#111;padding:40px;
-border-radius:30px;
+max-width:620px;
+margin:auto;
+padding:50px;
+border-radius:40px;
+background:linear-gradient(160deg,var(--glass),rgba(255,255,255,0.02));
+backdrop-filter:blur(16px);
 }
 input,textarea{
-width:100%;padding:16px;
-margin:12px 0;border-radius:15px;
-border:none;font-size:16px;
+width:100%;
+padding:18px;
+margin:14px 0;
+border-radius:18px;
+border:none;
+font-size:16px;
 }
 form button{
-margin-top:10px;
-padding:16px 45px;
-border:none;border-radius:40px;
-background:linear-gradient(45deg,var(--gold),var(--red));
-font-size:18px;font-weight:700;
+margin-top:15px;
+padding:18px 60px;
+border:none;
+border-radius:60px;
+font-size:18px;
+font-weight:800;
+background:linear-gradient(45deg,var(--gold),var(--pink));
 cursor:pointer;
 }
 
 footer{
-padding:40px;
-background:#000;text-align:center;
-font-size:15px;
+padding:50px;
+text-align:center;
+background:#000;
+opacity:.85;
 }
-
 </style>
 </head>
 <body>
@@ -137,18 +201,17 @@ font-size:15px;
 <button onclick="setLang('en')">EN</button>
 </div>
 
-<!-- HERO -->
 <div class="hero">
 <video autoplay muted loop playsinline>
 <source src="https://cdn.coverr.co/videos/coverr-kids-playing-on-trampoline-6387/1080p.mp4">
 </video>
 
-<div class="content">
+<div class="hero-content">
 <h1 data-ru="ЛЕГЕНДАРНЫЙ БАТУТНЫЙ ЦЕНТР"
 data-en="LEGENDARY TRAMPOLINE CENTER"></h1>
 
-<p data-ru="Место, где дети летают, а родители уверены в безопасности. №1 в Душанбе."
-data-en="A place where kids fly and parents trust safety. №1 in Dushanbe."></p>
+<p data-ru="Самый красивый, безопасный и эмоциональный батутный центр Душанбе"
+data-en="The most beautiful, safe and emotional trampoline center in Dushanbe"></p>
 
 <div class="btns">
 <a href="tel:+992011900303"
@@ -166,49 +229,33 @@ data-en="Build route"></a>
 </div>
 </div>
 
-<!-- ABOUT -->
 <section class="fade">
-<h2 data-ru="Почему мы"
-data-en="Why us"></h2>
-
-<p data-ru="Современное оборудование, сертифицированная безопасность, тренеры, счастливые дети и спокойные родители."
-data-en="Modern equipment, certified safety, trainers, happy kids and calm parents."></p>
+<h2 data-ru="Почему выбирают нас"
+data-en="Why choose us"></h2>
+<p data-ru="Премиум-оборудование • Сертифицированная безопасность • Счастливые дети"
+data-en="Premium equipment • Certified safety • Happy kids"></p>
 </section>
 
-<!-- PRICES -->
 <section class="fade">
 <h2 data-ru="Цены"
 data-en="Prices"></h2>
 <div class="cards">
-<div class="card">
-<h3 data-ru="1 час" data-en="1 hour"></h3>
-<strong>100 TJS</strong>
-</div>
-<div class="card">
-<h3 data-ru="День рождения" data-en="Birthday"></h3>
-<strong>300 TJS</strong>
-</div>
-<div class="card">
-<h3 data-ru="VIP аренда" data-en="VIP rent"></h3>
-<strong>700 TJS</strong>
-</div>
+<div class="card"><h3>1 час</h3><strong>100 TJS</strong></div>
+<div class="card"><h3>День рождения</h3><strong>300 TJS</strong></div>
+<div class="card"><h3>VIP</h3><strong>700 TJS</strong></div>
 </div>
 </section>
 
-<!-- GALLERY -->
 <section class="fade">
-<h2 data-ru="Живые эмоции"
-data-en="Live emotions"></h2>
+<h2 data-ru="Настоящие эмоции"
+data-en="Real emotions"></h2>
 <div class="gallery">
-<video autoplay muted loop>
-<source src="https://cdn.coverr.co/videos/coverr-children-jumping-on-trampoline-4718/1080p.mp4">
-</video>
+<video autoplay muted loop><source src="https://cdn.coverr.co/videos/coverr-children-jumping-on-trampoline-4718/1080p.mp4"></video>
 <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
 <img src="https://images.unsplash.com/photo-1584467735871-bc1a52eac4fa">
 </div>
 </section>
 
-<!-- FORM -->
 <section class="fade">
 <h2 data-ru="Оставить заявку"
 data-en="Send request"></h2>
@@ -216,9 +263,7 @@ data-en="Send request"></h2>
 <input placeholder="Имя / Name">
 <input placeholder="Телефон / Phone">
 <textarea placeholder="Сообщение / Message"></textarea>
-<button onclick="alert('Заявка отправлена!')"
-data-ru="Отправить"
-data-en="Send"></button>
+<button data-ru="Отправить" data-en="Send"></button>
 </form>
 </section>
 
@@ -236,7 +281,7 @@ setLang('ru')
 
 const obs=new IntersectionObserver(e=>{
 e.forEach(x=>x.isIntersecting && x.target.classList.add('show'))
-},{threshold:.2})
+},{threshold:.15})
 document.querySelectorAll('.fade').forEach(el=>obs.observe(el))
 </script>
 
