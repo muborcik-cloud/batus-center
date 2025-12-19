@@ -2,84 +2,131 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Batut Center Dushanbe</title>
+<title>LEGEND Batut Center — Dushanbe</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#000;color:#fff;overflow-x:hidden}
+:root{
+--gold:#ffb300;
+--red:#ff004c;
+--dark:#0b0b0b;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:var(--dark);color:#fff;overflow-x:hidden}
 a{text-decoration:none;color:#fff}
 
-.lang{position:fixed;top:15px;right:15px;z-index:999}
+.lang{
+position:fixed;top:20px;right:20px;z-index:999;
+}
 .lang button{
-background:#ff9800;border:none;
-padding:8px 14px;border-radius:20px;
-font-weight:bold;cursor:pointer;margin-left:5px
+background:linear-gradient(45deg,var(--gold),var(--red));
+border:none;border-radius:30px;
+padding:8px 16px;margin-left:5px;
+font-weight:700;cursor:pointer;
 }
 
-.hero{height:100vh;position:relative}
+.hero{
+height:100vh;position:relative;
+}
 .hero video{
 position:absolute;top:50%;left:50%;
 transform:translate(-50%,-50%);
 min-width:100%;min-height:100%;
-filter:brightness(0.4)
+filter:brightness(0.35);
 }
-.hero .box{
-position:relative;z-index:2;height:100%;
+.hero::after{
+content:"";position:absolute;inset:0;
+background:radial-gradient(circle at top,transparent,#000);
+}
+.hero .content{
+position:relative;z-index:2;
+height:100%;
 display:flex;flex-direction:column;
 justify-content:center;align-items:center;
-text-align:center;padding:20px
+text-align:center;padding:20px;
 }
-.hero h1{font-size:52px;margin-bottom:20px}
-.hero p{font-size:22px;max-width:800px}
+.hero h1{
+font-size:64px;font-weight:900;
+text letter-spacing:1px;
+background:linear-gradient(45deg,#fff,var(--gold));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.hero p{
+font-size:22px;max-width:900px;
+margin:20px 0;
+}
 
 .btns a{
-display:inline-block;margin:10px;
-padding:15px 32px;border-radius:40px;
-background:linear-gradient(45deg,#ff0066,#ff9800);
-font-size:18px
+display:inline-block;
+margin:10px;
+padding:16px 36px;
+border-radius:50px;
+background:linear-gradient(45deg,var(--red),var(--gold));
+font-size:18px;font-weight:700;
+box-shadow:0 10px 40px rgba(255,0,76,.4);
 }
 
-section{padding:80px 20px;text-align:center}
-h2{font-size:38px;margin-bottom:25px}
+section{padding:100px 20px;text-align:center}
+h2{
+font-size:42px;margin-bottom:30px;
+background:linear-gradient(45deg,#fff,var(--gold));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
 
-.fade{opacity:0;transform:translateY(40px);transition:1s}
+.fade{opacity:0;transform:translateY(60px);transition:1.2s}
 .fade.show{opacity:1;transform:none}
 
-.cards{display:flex;flex-wrap:wrap;justify-content:center}
-.card{
-background:#111;border-radius:20px;
-padding:30px;margin:15px;width:280px
+.cards{
+display:flex;flex-wrap:wrap;justify-content:center;
 }
-.card strong{font-size:28px;color:#ff9800}
+.card{
+background:linear-gradient(160deg,#111,#000);
+border-radius:30px;
+padding:40px;margin:20px;
+width:300px;
+box-shadow:0 30px 80px rgba(0,0,0,.8);
+}
+.card strong{font-size:32px;color:var(--gold)}
 
 .gallery{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:15px
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
 }
-.gallery img{
-width:100%;border-radius:15px;
-transition:.4s
+.gallery img, .gallery video{
+width:100%;border-radius:25px;
+transition:.5s;
 }
-.gallery img:hover{transform:scale(1.05)}
+.gallery img:hover, .gallery video:hover{
+transform:scale(1.06);
+}
 
 form{
-max-width:500px;margin:auto
+max-width:550px;margin:auto;
+background:#111;padding:40px;
+border-radius:30px;
 }
 input,textarea{
-width:100%;padding:15px;
-margin:10px 0;border-radius:10px;
-border:none;font-size:16px
+width:100%;padding:16px;
+margin:12px 0;border-radius:15px;
+border:none;font-size:16px;
 }
 form button{
-padding:15px 40px;
-border:none;border-radius:30px;
-background:#ff9800;
-font-size:18px;cursor:pointer
+margin-top:10px;
+padding:16px 45px;
+border:none;border-radius:40px;
+background:linear-gradient(45deg,var(--gold),var(--red));
+font-size:18px;font-weight:700;
+cursor:pointer;
 }
 
-footer{padding:30px;background:#000}
+footer{
+padding:40px;
+background:#000;text-align:center;
+font-size:15px;
+}
 
 </style>
 </head>
@@ -93,85 +140,90 @@ footer{padding:30px;background:#000}
 <!-- HERO -->
 <div class="hero">
 <video autoplay muted loop playsinline>
-<source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-5470/1080p.mp4">
+<source src="https://cdn.coverr.co/videos/coverr-kids-playing-on-trampoline-6387/1080p.mp4">
 </video>
 
-<div class="box">
-<h1 data-ru="Батутный центр в Душанбе"
-data-en="Trampoline Center in Dushanbe"></h1>
+<div class="content">
+<h1 data-ru="ЛЕГЕНДАРНЫЙ БАТУТНЫЙ ЦЕНТР"
+data-en="LEGENDARY TRAMPOLINE CENTER"></h1>
 
-<p data-ru="Трёхэтажный современный батутный центр. Эмоции, безопасность и радость."
-data-en="Three-story modern trampoline center. Emotions, safety and fun."></p>
+<p data-ru="Место, где дети летают, а родители уверены в безопасности. №1 в Душанбе."
+data-en="A place where kids fly and parents trust safety. №1 in Dushanbe."></p>
 
 <div class="btns">
-<a href="tel:+992011900303" data-ru="Позвонить" data-en="Call"></a>
+<a href="tel:+992011900303"
+data-ru="Позвонить"
+data-en="Call"></a>
+
 <a href="https://wa.me/992011900303" target="_blank"
-data-ru="WhatsApp" data-en="WhatsApp"></a>
+data-ru="WhatsApp"
+data-en="WhatsApp"></a>
+
+<a href="https://www.google.com/maps?q=Dushanbe" target="_blank"
+data-ru="Построить маршрут"
+data-en="Build route"></a>
 </div>
 </div>
 </div>
 
 <!-- ABOUT -->
 <section class="fade">
-<h2 data-ru="Кто мы" data-en="Who we are"></h2>
-<p data-ru="Мы — крупнейший батутный центр Душанбе. Безопасно. Профессионально."
-data-en="We are the largest trampoline center in Dushanbe. Safe. Professional."></p>
+<h2 data-ru="Почему мы"
+data-en="Why us"></h2>
+
+<p data-ru="Современное оборудование, сертифицированная безопасность, тренеры, счастливые дети и спокойные родители."
+data-en="Modern equipment, certified safety, trainers, happy kids and calm parents."></p>
 </section>
 
 <!-- PRICES -->
 <section class="fade">
-<h2 data-ru="Цены" data-en="Prices"></h2>
+<h2 data-ru="Цены"
+data-en="Prices"></h2>
 <div class="cards">
 <div class="card">
-<h3 data-ru="Стандарт" data-en="Standard"></h3>
+<h3 data-ru="1 час" data-en="1 hour"></h3>
 <strong>100 TJS</strong>
 </div>
 <div class="card">
-<h3 data-ru="Праздник" data-en="Party"></h3>
-<strong>200 TJS</strong>
+<h3 data-ru="День рождения" data-en="Birthday"></h3>
+<strong>300 TJS</strong>
 </div>
 <div class="card">
-<h3 data-ru="VIP" data-en="VIP"></h3>
-<strong>400 TJS</strong>
+<h3 data-ru="VIP аренда" data-en="VIP rent"></h3>
+<strong>700 TJS</strong>
 </div>
 </div>
 </section>
 
 <!-- GALLERY -->
 <section class="fade">
-<h2 data-ru="Галерея" data-en="Gallery"></h2>
+<h2 data-ru="Живые эмоции"
+data-en="Live emotions"></h2>
 <div class="gallery">
-<img src="https://images.unsplash.com/photo-1600959907703-c1c2c8b9b89d">
-<img src="https://images.unsplash.com/photo-1584467735871-bc1a52eac4fa">
+<video autoplay muted loop>
+<source src="https://cdn.coverr.co/videos/coverr-children-jumping-on-trampoline-4718/1080p.mp4">
+</video>
 <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
+<img src="https://images.unsplash.com/photo-1584467735871-bc1a52eac4fa">
 </div>
 </section>
 
 <!-- FORM -->
 <section class="fade">
-<h2 data-ru="Оставить заявку" data-en="Send request"></h2>
+<h2 data-ru="Оставить заявку"
+data-en="Send request"></h2>
 <form>
 <input placeholder="Имя / Name">
 <input placeholder="Телефон / Phone">
 <textarea placeholder="Сообщение / Message"></textarea>
-<button type="button"
-onclick="alert('Заявка отправлена!')"
-data-ru="Отправить" data-en="Send"></button>
+<button onclick="alert('Заявка отправлена!')"
+data-ru="Отправить"
+data-en="Send"></button>
 </form>
 </section>
 
-<!-- MAP -->
-<section class="fade">
-<h2 data-ru="Как нас найти" data-en="How to find us"></h2>
-<iframe
-src="https://www.google.com/maps?q=Dushanbe&output=embed"
-width="90%" height="300"
-style="border-radius:20px;border:0">
-</iframe>
-</section>
-
 <footer>
-© Batut Center Dushanbe | +992 01 190 03 03
+© LEGEND BATUT CENTER • +992 01 190 03 03 • Dushanbe
 </footer>
 
 <script>
@@ -183,7 +235,7 @@ document.querySelectorAll('[data-'+l+']')
 setLang('ru')
 
 const obs=new IntersectionObserver(e=>{
-e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('show')})
+e.forEach(x=>x.isIntersecting && x.target.classList.add('show'))
 },{threshold:.2})
 document.querySelectorAll('.fade').forEach(el=>obs.observe(el))
 </script>
