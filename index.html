@@ -3,91 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Батутный центр в Душанбе</title>
+<title>Батутный центр Душанбе</title>
 
 <style>
+:root{
+  --gold:#f5c16c;
+  --dark:#0b0f1a;
+  --card:#121a2f;
+}
+*{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:#0f172a;
-  color:#f8fafc;
+  font-family:Inter,Arial,sans-serif;
+  background:radial-gradient(circle at top,#111827,#020617);
+  color:#e5e7eb;
 }
 header{
-  background:linear-gradient(135deg,#020617,#1e293b);
-  padding:40px 20px;
+  padding:80px 20px;
   text-align:center;
 }
 header h1{
-  font-size:36px;
-  margin-bottom:10px;
+  font-size:44px;
+  margin:0;
+  color:var(--gold);
+  letter-spacing:1px;
 }
 header p{
-  font-size:18px;
-  opacity:0.9;
+  font-size:20px;
+  max-width:700px;
+  margin:20px auto 40px;
+  opacity:.9;
 }
-.btns a{
+.actions a{
   display:inline-block;
   margin:10px;
-  padding:15px 25px;
-  border-radius:8px;
+  padding:16px 30px;
+  border-radius:10px;
+  font-weight:700;
   text-decoration:none;
-  font-weight:bold;
 }
-.whatsapp{background:#25D366;color:#000;}
-.call{background:#facc15;color:#000;}
+.whatsapp{background:#22c55e;color:#052e16}
+.call{background:var(--gold);color:#1f2937}
 
 section{
-  padding:50px 20px;
-  max-width:1100px;
+  max-width:1200px;
   margin:auto;
+  padding:70px 20px;
 }
 h2{
-  font-size:28px;
-  margin-bottom:20px;
-  color:#facc15;
+  text-align:center;
+  font-size:32px;
+  color:var(--gold);
+  margin-bottom:50px;
 }
-.cards{
+.grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
 }
 .card{
-  background:#020617;
-  padding:25px;
-  border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  background:linear-gradient(145deg,#0b1020,#111936);
+  padding:30px;
+  border-radius:16px;
+  box-shadow:0 25px 60px rgba(0,0,0,.45);
+  transition:.3s;
 }
+.card:hover{transform:translateY(-8px)}
 .price{
-  font-size:32px;
+  font-size:36px;
   color:#22c55e;
+  font-weight:800;
 }
-form input, form textarea{
+.about{
+  max-width:900px;
+  margin:auto;
+  font-size:18px;
+  line-height:1.7;
+  text-align:center;
+}
+form{
+  max-width:600px;
+  margin:auto;
+}
+input,textarea{
   width:100%;
-  padding:12px;
   margin:10px 0;
-  border-radius:6px;
+  padding:14px;
+  border-radius:8px;
   border:none;
+  background:#020617;
+  color:#e5e7eb;
 }
-form button{
-  background:#facc15;
-  border:none;
-  padding:15px;
+button{
   width:100%;
-  font-size:16px;
-  font-weight:bold;
+  padding:16px;
+  background:var(--gold);
+  border:none;
+  font-weight:800;
+  border-radius:10px;
   cursor:pointer;
 }
 iframe{
   width:100%;
-  height:350px;
-  border-radius:12px;
+  height:380px;
   border:0;
+  border-radius:16px;
 }
 footer{
+  padding:30px;
   text-align:center;
-  padding:20px;
-  background:#020617;
-  opacity:0.8;
+  opacity:.6;
 }
 .lang{
   position:fixed;
@@ -95,7 +120,10 @@ footer{
   right:15px;
 }
 .lang button{
-  margin:3px;
+  background:#020617;
+  color:#e5e7eb;
+  border:1px solid #334155;
+  margin:2px;
   padding:6px 10px;
 }
 </style>
@@ -110,38 +138,43 @@ footer{
 
 <header>
   <h1 id="title">БАТУТНЫЙ ЦЕНТР В ДУШАНБЕ</h1>
-  <p id="subtitle">Трёхэтажный семейный развлекательный центр</p>
-  <div class="btns">
-    <a class="whatsapp" href="https://wa.me/992011900303" target="_blank">💬 WhatsApp</a>
-    <a class="call" href="tel:+992011900303">📞 Позвонить</a>
+  <p id="subtitle">
+    Премиальный трёхэтажный семейный развлекательный центр.<br>
+    Только Душанбе.
+  </p>
+  <div class="actions">
+    <a class="whatsapp" href="https://wa.me/992011900303" target="_blank">Написать в WhatsApp</a>
+    <a class="call" href="tel:+992011900303">Позвонить</a>
   </div>
 </header>
 
 <section>
-  <h2 id="aboutTitle">О НАС</h2>
-  <p id="aboutText">
-    Меня зовут Мубориз. Я создал современный батутный центр для детей и семей.
-    Безопасные батуты, чистота, контроль и море эмоций.
-    <br><b>Работаем только в городе Душанбе.</b>
-  </p>
+  <h2 id="aboutTitle">КТО МЫ</h2>
+  <div class="about" id="aboutText">
+    Меня зовут <b>Мубориз</b>.  
+    Я создал современный батутный центр для детей и семей.  
+    Безопасность, чистота, контроль, эмоции и высокий сервис.  
+    <br><br>
+    <b>Мы работаем только в городе Душанбе.</b>
+  </div>
 </section>
 
 <section>
   <h2 id="priceTitle">ЦЕНЫ</h2>
-  <div class="cards">
+  <div class="grid">
     <div class="card">
       <h3>Базовый</h3>
-      <p class="price">100 c.</p>
-      <p>Свободное посещение</p>
+      <div class="price">100 c.</div>
+      <p>Свободные батуты</p>
     </div>
     <div class="card">
-      <h3>Стандарт</h3>
-      <p class="price">200 c.</p>
-      <p>Развлечения + зоны</p>
+      <h3>Комфорт</h3>
+      <div class="price">200 c.</div>
+      <p>Зоны + развлечения</p>
     </div>
     <div class="card">
       <h3>Премиум</h3>
-      <p class="price">400 c.</p>
+      <div class="price">400 c.</div>
       <p>Все зоны + праздник</p>
     </div>
   </div>
@@ -149,45 +182,34 @@ footer{
 
 <section>
   <h2 id="formTitle">ЗАЯВКА</h2>
-  <form onsubmit="sendWhatsApp();return false;">
-    <input id="name" placeholder="Ваше имя" required>
-    <input id="phone" placeholder="Телефон" required>
-    <textarea id="msg" placeholder="Комментарий"></textarea>
-    <button>Отправить</button>
+  <form onsubmit="send();return false;">
+    <input id="n" placeholder="Имя" required>
+    <input id="p" placeholder="Телефон" required>
+    <textarea id="m" placeholder="Комментарий"></textarea>
+    <button>Отправить заявку</button>
   </form>
 </section>
 
 <section>
-  <h2 id="mapTitle">КАК НАС НАЙТИ</h2>
+  <h2 id="mapTitle">МЫ НА КАРТЕ</h2>
   <iframe src="https://www.google.com/maps?q=Душанбе&output=embed"></iframe>
 </section>
 
 <footer>
-  © Батутный центр Душанбе
+  © Батутный центр Душанбе · Premium Level
 </footer>
 
 <script>
-function sendWhatsApp(){
-  let n=document.getElementById('name').value;
-  let p=document.getElementById('phone').value;
-  let m=document.getElementById('msg').value;
-  window.open(`https://wa.me/992011900303?text=Имя:%20${n}%0AТелефон:%20${p}%0A${m}`);
+function send(){
+  let t=`Имя: ${n.value}\nТелефон: ${p.value}\n${m.value}`;
+  window.open(`https://wa.me/992011900303?text=${encodeURIComponent(t)}`);
 }
-
-function ru(){
-  title.innerText="БАТУТНЫЙ ЦЕНТР В ДУШАНБЕ";
-  subtitle.innerText="Трёхэтажный семейный развлекательный центр";
-  aboutTitle.innerText="О НАС";
-  aboutText.innerHTML="Меня зовут Мубориз. Современный батутный центр для детей и семей.<br><b>Работаем только в Душанбе.</b>";
-  priceTitle.innerText="ЦЕНЫ";
-  formTitle.innerText="ЗАЯВКА";
-  mapTitle.innerText="КАК НАС НАЙТИ";
-}
+function ru(){}
 function en(){
   title.innerText="TRAMPOLINE CENTER IN DUSHANBE";
-  subtitle.innerText="Three-story family entertainment center";
+  subtitle.innerHTML="Premium three-story family entertainment center.<br>Dushanbe only.";
   aboutTitle.innerText="ABOUT US";
-  aboutText.innerHTML="My name is Muboriz. A modern trampoline center for families.<br><b>Dushanbe only.</b>";
+  aboutText.innerHTML="My name is <b>Muboriz</b>. A modern premium trampoline center for families.<br><br><b>Dushanbe only.</b>";
   priceTitle.innerText="PRICES";
   formTitle.innerText="REQUEST";
   mapTitle.innerText="LOCATION";
@@ -195,4 +217,4 @@ function en(){
 </script>
 
 </body>
-</html>
+  </html>
