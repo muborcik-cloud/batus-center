@@ -3,299 +3,162 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BOSS MODE — Батутный центр Душанбе</title>
 
-<!-- SEO -->
-<meta name="description" content="Батутный центр в Душанбе. Современный развлекательный центр, цены, карта, маршрут, WhatsApp и звонок.">
-<meta name="keywords" content="батутный центр Душанбе, батуты Душанбе, развлечения Душанбе">
+<title>Батутный центр в Душанбе — Развлечения для детей и взрослых</title>
+<meta name="description" content="Современный батутный центр в Душанбе. 3 этажа развлечений, детские зоны, праздники. Позвоните или напишите в WhatsApp.">
+<meta name="keywords" content="батуты Душанбе, батутный центр Душанбе, детский центр Душанбе">
 <meta name="author" content="Мубориз">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
 
 <style>
-:root{
---gold:#ffd700;
---neon:#22c55e;
---bg:#030712;
---card:#0b1024;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-font-family:'Poppins',sans-serif;
-background:#020617;
-color:#f8fafc;
-overflow-x:hidden;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif}
+body{background:#0b0f1a;color:#fff;line-height:1.6}
+a{text-decoration:none;color:inherit}
+.container{max-width:1200px;margin:auto;padding:40px 20px}
+
 header{
 min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-background:
-linear-gradient(120deg,rgba(0,0,0,.7),rgba(0,0,0,.4)),
-url('https://images.unsplash.com/photo-1546519638-68e109498ffc') center/cover fixed;
+background:linear-gradient(120deg,#7f00ff,#00c6ff);
+display:flex;align-items:center;justify-content:center;
+text-align:center;animation:fadeIn 1.2s ease
 }
-.hero{
-max-width:900px;
-padding:30px;
-animation:fade 1.2s ease;
+header h1{font-size:52px;font-weight:900}
+header p{font-size:22px;margin:20px 0}
+.btn{
+display:inline-block;padding:15px 30px;border-radius:40px;
+background:#fff;color:#000;font-weight:700;margin:10px;
+transition:.3s
 }
-h1{
-font-size:clamp(40px,6vw,82px);
-font-weight:900;
-color:var(--gold);
-text-shadow:0 0 50px rgba(255,215,0,.5);
-}
-.hero p{
-font-size:22px;
-margin:30px 0;
-}
-.actions a{
-display:inline-block;
-margin:10px;
-padding:18px 36px;
-border-radius:16px;
-font-weight:700;
-text-decoration:none;
-transition:.3s;
-}
-.whatsapp{background:var(--neon);color:#022c22}
-.call{background:var(--gold);color:#1f2937}
-.actions a:hover{transform:scale(1.1)}
+.btn:hover{transform:scale(1.08)}
 
-section{
-max-width:1300px;
-margin:auto;
-padding:120px 20px;
-}
-h2{
-text-align:center;
-font-size:44px;
-margin-bottom:70px;
-color:var(--gold);
-}
+.lang{position:fixed;top:20px;right:20px;background:#000;padding:10px 15px;border-radius:20px;cursor:pointer}
 
-.about{
-max-width:900px;
-margin:auto;
-font-size:20px;
-line-height:1.9;
-text-align:center;
-}
+section{margin-top:80px}
+h2{text-align:center;font-size:38px;margin-bottom:30px}
 
-.stats{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:40px;
-margin-top:80px;
-}
-.stat{
-background:linear-gradient(160deg,#0b1024,#141b3f);
-padding:40px;
-border-radius:26px;
-text-align:center;
-box-shadow:0 20px 60px rgba(0,0,0,.6);
-}
-.stat span{
-font-size:56px;
-font-weight:900;
-color:var(--neon);
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:40px;
-}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
 .card{
-background:linear-gradient(160deg,#0b1024,#141b3f);
-padding:40px;
-border-radius:26px;
-box-shadow:0 20px 60px rgba(0,0,0,.7);
-transition:.5s;
+background:#12172a;border-radius:20px;padding:25px;
+box-shadow:0 0 40px rgba(0,198,255,.15);
+transition:.3s
 }
-.card:hover{
-transform:translateY(-15px);
-box-shadow:0 0 80px rgba(255,215,0,.3);
-}
-.price{
-font-size:48px;
-font-weight:900;
-color:var(--neon);
-}
+.card:hover{transform:translateY(-10px)}
 
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
-}
-.gallery img{
-width:100%;
-border-radius:22px;
-box-shadow:0 20px 60px rgba(0,0,0,.6);
-transition:.4s;
-}
-.gallery img:hover{
-transform:scale(1.05);
-}
+.price{font-size:28px;font-weight:900;color:#00c6ff}
 
-form{
-max-width:600px;
-margin:auto;
-}
+.review{font-style:italic;opacity:.9}
+
+iframe{width:100%;height:400px;border-radius:20px;border:0}
+
+form{display:grid;gap:15px;max-width:500px;margin:auto}
 input,textarea{
-width:100%;
-padding:16px;
-margin:10px 0;
-border-radius:14px;
-border:1px solid #1e293b;
-background:#020617;
-color:#fff;
+padding:15px;border-radius:10px;border:none;font-size:16px
 }
 button{
-width:100%;
-padding:18px;
-border:none;
-border-radius:16px;
-background:linear-gradient(135deg,var(--gold),#fbbf24);
-font-weight:900;
-cursor:pointer;
+padding:15px;border-radius:30px;border:none;
+background:#00c6ff;font-size:18px;font-weight:700;cursor:pointer
 }
 
-iframe{
-width:100%;
-height:420px;
-border-radius:26px;
-border:none;
-box-shadow:0 30px 80px rgba(0,0,0,.8);
+.fixed-buttons{
+position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:15px
 }
+.fixed-buttons a{
+background:#25D366;padding:15px;border-radius:50%;
+font-size:22px;text-align:center
+}
+.call{background:#007bff}
 
-.lang{
-position:fixed;
-top:20px;
-right:20px;
-z-index:10;
-}
-.lang button{
-margin:4px;
-padding:8px 12px;
-border-radius:8px;
-background:#020617;
-color:#fff;
-border:1px solid #334155;
-}
+footer{text-align:center;padding:40px;opacity:.7}
 
-footer{
-padding:40px;
-text-align:center;
-opacity:.6;
-}
-
-@keyframes fade{
+@keyframes fadeIn{
 from{opacity:0;transform:translateY(40px)}
-to{opacity:1;transform:none}
+to{opacity:1;transform:translateY(0)}
 }
 </style>
 </head>
 
 <body>
 
-<div class="lang">
-<button onclick="ru()">RU</button>
-<button onclick="en()">EN</button>
-</div>
+<div class="lang" onclick="toggleLang()">EN</div>
 
 <header>
-<div class="hero">
-<h1 id="t">БАТУТНЫЙ ЦЕНТР ДУШАНБЕ</h1>
-<p id="s">BOSS MODE. Развлечения нового поколения. Только Душанбе.</p>
-<div class="actions">
-<a class="whatsapp" href="https://wa.me/992011900303">WhatsApp</a>
-<a class="call" href="tel:+992011900303">Позвонить</a>
-</div>
+<div>
+<h1 data-ru="Батутный центр в Душанбе" data-en="Trampoline Center in Dushanbe">Батутный центр в Душанбе</h1>
+<p data-ru="3 этажа ярких эмоций для детей и взрослых"
+   data-en="3 floors of fun for kids and adults">
+3 этажа ярких эмоций для детей и взрослых
+</p>
+<a href="#form" class="btn" data-ru="Оставить заявку" data-en="Send request">Оставить заявку</a>
+<a href="tel:+992011900303" class="btn">📞 Позвонить</a>
 </div>
 </header>
 
-<section>
-<h2 id="a1">О НАС</h2>
-<div class="about" id="a2">
-Меня зовут <b>Мубориз</b>.  
-Я создал батутный центр высшего уровня: безопасность, эмоции и сервис.  
-Работаем <b>только в Душанбе</b>.
-</div>
-
-<div class="stats">
-<div class="stat"><span>3</span><br>Этажа</div>
-<div class="stat"><span>1000+</span><br>Клиентов</div>
-<div class="stat"><span>100%</span><br>Безопасность</div>
-</div>
+<section class="container">
+<h2 data-ru="О нас" data-en="About us">О нас</h2>
+<p style="text-align:center">
+<span data-ru="Меня зовут Мубориз. Я создал современный батутный центр в Душанбе."
+data-en="My name is Muboriz. I created a modern trampoline center in Dushanbe.">
+Меня зовут Мубориз. Я создал современный батутный центр в Душанбе.
+</span>
+</p>
 </section>
 
-<section>
-<h2 id="p1">ЦЕНЫ</h2>
+<section class="container">
+<h2 data-ru="Цены" data-en="Prices">Цены</h2>
 <div class="cards">
-<div class="card">
-<h3>START</h3>
-<div class="price">100 c.</div>
-<p>Базовые батуты</p>
-</div>
-<div class="card">
-<h3>PRO</h3>
-<div class="price">200 c.</div>
-<p>Зоны + развлечения</p>
-</div>
-<div class="card">
-<h3>BOSS</h3>
-<div class="price">400 c.</div>
-<p>Полный доступ + праздник</p>
-</div>
+<div class="card"><h3>START</h3><p class="price">100 сомони</p></div>
+<div class="card"><h3>FUN</h3><p class="price">200 сомони</p></div>
+<div class="card"><h3>MAX</h3><p class="price">400 сомони</p></div>
 </div>
 </section>
 
-<section>
-<h2 id="g1">ГАЛЕРЕЯ</h2>
-<div class="gallery">
-<img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c">
-<img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
-<img src="https://images.unsplash.com/photo-1546519638-68e109498ffc">
+<section class="container">
+<h2 data-ru="Отзывы родителей" data-en="Parents reviews">Отзывы родителей</h2>
+<div class="cards">
+<div class="card review">“Лучший центр в Душанбе!”</div>
+<div class="card review">“Дети в восторге ❤️”</div>
+<div class="card review">“Очень безопасно и красиво”</div>
 </div>
 </section>
 
-<section>
-<h2 id="f1">ЗАЯВКА</h2>
-<form onsubmit="send();return false;">
-<input id="n" placeholder="Имя" required>
-<input id="p" placeholder="Телефон" required>
-<textarea id="m" placeholder="Комментарий"></textarea>
-<button>ОТПРАВИТЬ</button>
+<section class="container">
+<h2 data-ru="Мы на карте Душанбе" data-en="Find us on map">Мы на карте Душанбе</h2>
+<iframe src="https://www.google.com/maps?q=Dushanbe&output=embed"></iframe>
+<p style="text-align:center;margin-top:15px">
+<a class="btn" target="_blank" href="https://www.google.com/maps/dir/?api=1&destination=Dushanbe">
+Построить маршрут
+</a>
+</p>
+</section>
+
+<section class="container" id="form">
+<h2 data-ru="Оставить заявку" data-en="Send request">Оставить заявку</h2>
+<form>
+<input placeholder="Ваше имя">
+<input placeholder="Телефон">
+<textarea placeholder="Сообщение"></textarea>
+<button>Отправить</button>
 </form>
 </section>
 
-<section>
-<h2 id="m1">КАК НАС НАЙТИ</h2>
-<iframe src="https://www.google.com/maps?q=Душанбе&output=embed"></iframe>
-</section>
+<div class="fixed-buttons">
+<a href="https://wa.me/992011900303" target="_blank">💬</a>
+<a href="tel:+992011900303" class="call">📞</a>
+</div>
 
 <footer>
-© BOSS MODE Batut Center · Душанбе
+© Батутный центр Душанбе | Мубориз
 </footer>
 
 <script>
-function send(){
-let text=`Имя: ${n.value}\nТелефон: ${p.value}\n${m.value}`;
-window.open(`https://wa.me/992011900303?text=${encodeURIComponent(text)}`);
-}
-function ru(){}
-function en(){
-t.innerText="TRAMPOLINE CENTER DUSHANBE";
-s.innerText="BOSS MODE. Next-level entertainment. Dushanbe only.";
-a1.innerText="ABOUT US";
-a2.innerHTML="My name is <b>Muboriz</b>. A premium trampoline center. <b>Dushanbe only.</b>";
-p1.innerText="PRICES";
-g1.innerText="GALLERY";
-f1.innerText="REQUEST";
-m1.innerText="LOCATION";
+let ru=true;
+function toggleLang(){
+ru=!ru;
+document.querySelector('.lang').innerText=ru?'EN':'RU';
+document.querySelectorAll('[data-ru]').forEach(el=>{
+el.innerText=ru?el.dataset.ru:el.dataset.en;
+});
 }
 </script>
 
