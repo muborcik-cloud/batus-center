@@ -3,21 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Батутный центр в Душанбе — лучший для детей</title>
-<meta name="description" content="Современный батутный центр в Душанбе. Безопасность, радость, праздники. Звоните +992 011 900 303">
-<meta name="keywords" content="батутный центр Душанбе, батуты дети, развлечения Душанбе">
-<meta name="author" content="Мубориз">
+<title>Батутный центр Душанбе №1</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
- --bg:#0e0e11;
- --card:#18181d;
+ --bg:#0b0c10;
+ --card:#16181d;
  --gold:#f5c25c;
  --text:#f2f2f2;
- --muted:#9b9b9b;
+ --muted:#9aa0a6;
 }
 
 *{box-sizing:border-box}
@@ -26,19 +22,19 @@ body{
  font-family:Inter,sans-serif;
  background:var(--bg);
  color:var(--text);
- font-size:16px;
- line-height:1.6;
+ font-size:15px;
+ line-height:1.7;
 }
 
-h1{font-size:40px}
-h2{font-size:30px}
-h3{font-size:20px}
+h1{font-size:38px}
+h2{font-size:28px}
+h3{font-size:18px}
 p{color:var(--muted)}
 
 section{
  max-width:1200px;
  margin:auto;
- padding:80px 20px;
+ padding:90px 20px;
 }
 
 .center{text-align:center}
@@ -51,6 +47,7 @@ section{
  align-items:center;
  justify-content:center;
  text-align:center;
+ overflow:hidden;
 }
 .hero video{
  position:absolute;
@@ -63,11 +60,11 @@ section{
 .hero .box{
  position:relative;
  z-index:2;
- max-width:850px;
- animation:fadeUp 1.2s ease;
+ max-width:900px;
+ animation:up 1.3s ease;
 }
-@keyframes fadeUp{
- from{opacity:0;transform:translateY(40px)}
+@keyframes up{
+ from{opacity:0;transform:translateY(50px)}
  to{opacity:1;transform:none}
 }
 
@@ -77,50 +74,61 @@ section{
  gap:14px;
  justify-content:center;
  flex-wrap:wrap;
- margin-top:25px;
+ margin-top:30px;
 }
 .btn{
- padding:14px 22px;
- border-radius:14px;
+ padding:14px 24px;
+ border-radius:16px;
  font-weight:600;
- font-size:15px;
+ font-size:14px;
  text-decoration:none;
 }
-.btn.gold{background:var(--gold);color:#000}
-.btn.line{border:1px solid var(--gold);color:var(--gold)}
-.btn.wh{background:#25d366;color:#000}
+.gold{background:var(--gold);color:#000}
+.line{border:1px solid var(--gold);color:var(--gold)}
+.wh{background:#25d366;color:#000}
 
 /* GRID */
 .grid{
  display:grid;
  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
- gap:22px;
+ gap:24px;
 }
 .card{
  background:var(--card);
- padding:26px;
- border-radius:18px;
+ padding:28px;
+ border-radius:20px;
  border:1px solid #232323;
  transition:.4s;
 }
 .card:hover{
- transform:translateY(-8px);
+ transform:translateY(-10px);
  border-color:var(--gold);
+}
+
+/* STATS */
+.stats{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+ gap:24px;
+ text-align:center;
+}
+.stat{
+ font-size:34px;
+ font-weight:700;
+ color:var(--gold);
 }
 
 /* SLIDER */
 .slider{
  display:flex;
- gap:16px;
+ gap:18px;
  overflow-x:auto;
- scroll-snap-type:x mandatory;
 }
-.slider img{
- width:300px;
+.slider img, .slider video{
+ width:320px;
  height:220px;
  object-fit:cover;
- border-radius:14px;
- scroll-snap-align:start;
+ border-radius:18px;
 }
 
 /* FORM */
@@ -132,26 +140,19 @@ form{
 }
 input,button{
  padding:14px;
- border-radius:12px;
+ border-radius:14px;
  border:none;
- font-size:15px;
+ font-size:14px;
 }
-input{
- background:#1c1c1c;
- color:#fff;
-}
-button{
- background:var(--gold);
- font-weight:700;
- cursor:pointer;
-}
+input{background:#1b1d22;color:#fff}
+button{background:var(--gold);font-weight:700}
 
 /* MAP */
 iframe{
  width:100%;
  height:360px;
  border:none;
- border-radius:18px;
+ border-radius:20px;
 }
 
 /* FIXED */
@@ -185,7 +186,7 @@ footer{
  text-align:center;
  padding:30px;
  color:#777;
- font-size:14px;
+ font-size:13px;
 }
 </style>
 </head>
@@ -204,10 +205,10 @@ footer{
   <source src="https://cdn.coverr.co/videos/coverr-kids-playing-4260/1080p.mp4">
  </video>
  <div class="box">
-  <h1 data-ru="Лучший батутный центр в Душанбе"
-      data-en="The best trampoline center in Dushanbe"></h1>
-  <p data-ru="Безопасно • Весело • Профессионально"
-     data-en="Safe • Fun • Professional"></p>
+  <h1 data-ru="Батутный центр №1 в Душанбе"
+      data-en="Trampoline Center №1 in Dushanbe"></h1>
+  <p data-ru="Максимальная безопасность • Радость • Профессиональный уровень"
+     data-en="Maximum safety • Joy • Professional level"></p>
   <div class="btns">
    <a class="btn gold" href="tel:+992011900303"
       data-ru="Позвонить" data-en="Call"></a>
@@ -219,20 +220,22 @@ footer{
 </div>
 
 <section class="center">
- <h2 data-ru="Почему выбирают нас" data-en="Why choose us"></h2>
- <div class="grid">
-  <div class="card"><h3 data-ru="Безопасность" data-en="Safety"></h3><p>Мягкие зоны и контроль</p></div>
-  <div class="card"><h3 data-ru="Оборудование" data-en="Equipment"></h3><p>Современные батуты</p></div>
-  <div class="card"><h3 data-ru="Праздники" data-en="Parties"></h3><p>Дни рождения и шоу</p></div>
+ <h2 data-ru="Нам доверяют" data-en="Trusted by"></h2>
+ <div class="stats">
+  <div><div class="stat">10 000+</div><p>Детей</p></div>
+  <div><div class="stat">5 лет</div><p>Опыт</p></div>
+  <div><div class="stat">100%</div><p>Безопасность</p></div>
  </div>
 </section>
 
 <section>
- <h2 class="center" data-ru="Галерея" data-en="Gallery"></h2>
+ <h2 class="center" data-ru="Фото и видео" data-en="Photos & Videos"></h2>
  <div class="slider">
   <img src="https://images.unsplash.com/photo-1601999109332-5429a7f1d15c">
+  <video autoplay muted loop>
+   <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-4385/1080p.mp4">
+  </video>
   <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
-  <img src="https://images.unsplash.com/photo-1588075592446-8a8f78a65f5b">
  </div>
 </section>
 
@@ -246,7 +249,16 @@ footer{
 </section>
 
 <section>
- <h2 class="center" data-ru="Заявка" data-en="Request"></h2>
+ <h2 class="center" data-ru="Отзывы родителей" data-en="Parents reviews"></h2>
+ <div class="grid">
+  <div class="card">⭐️⭐️⭐️⭐️⭐️<p>Лучшее место в Душанбе</p></div>
+  <div class="card">⭐️⭐️⭐️⭐️⭐️<p>Очень безопасно и красиво</p></div>
+  <div class="card">⭐️⭐️⭐️⭐️⭐️<p>Дети счастливы!</p></div>
+ </div>
+</section>
+
+<section>
+ <h2 class="center" data-ru="Оставить заявку" data-en="Send request"></h2>
  <form onsubmit="sendWA(event)">
   <input id="name" placeholder="Имя / Name">
   <input id="phone" placeholder="Телефон / Phone">
@@ -260,7 +272,7 @@ footer{
 </section>
 
 <footer>
- © 2025 Батутный центр Душанбе • ULTRA LEGENDARY LEVEL
+ © 2025 Батутный центр Душанбе • ABSOLUTE LEGEND LEVEL
 </footer>
 
 <script>
