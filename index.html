@@ -3,74 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Покупной Центр — Душанбе</title>
+<title>Premium Shopping Center</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --gold:#e7c873;
-  --dark:#0a0a0a;
+  --gold:#e6c87a;
+  --dark:#0b0b0b;
+  --gray:#bdbdbd;
   --glass:rgba(255,255,255,.08);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 
 body{
   font-family:Inter,system-ui,sans-serif;
-  background:radial-gradient(circle at top,#111,#000);
+  background:#000;
   color:#fff;
-  overflow-x:hidden;
+  line-height:1.6;
 }
 
-/* HERO */
+/* VIDEO HERO */
 .hero{
-  min-height:100vh;
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+}
+
+.hero video{
+  position:absolute;
+  top:50%;left:50%;
+  min-width:100%;
+  min-height:100%;
+  transform:translate(-50%,-50%);
+  object-fit:cover;
+  filter:brightness(.55);
+}
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.2),#000);
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  height:100%;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:40px;
-  background:
-    linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.9)),
-    url("https://images.unsplash.com/photo-1515169067865-5387ec356754?auto=format&fit=crop&w=1800&q=80");
-  background-size:cover;
-  background-position:center;
+  padding:30px;
 }
 
 .hero-box{
-  backdrop-filter:blur(14px);
-  background:var(--glass);
-  padding:60px 40px;
-  border-radius:30px;
-  border:1px solid rgba(255,255,255,.15);
   max-width:900px;
+  background:var(--glass);
+  backdrop-filter:blur(16px);
+  border-radius:28px;
+  padding:60px 45px;
+  border:1px solid rgba(255,255,255,.15);
+  animation:fadeUp 1.2s ease;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
 .hero h1{
-  font-size:52px;
+  font-size:clamp(32px,5vw,52px);
   font-weight:900;
-  color:var(--gold);
   letter-spacing:-1px;
+  color:var(--gold);
 }
 
 .hero p{
-  margin:25px auto;
-  font-size:20px;
-  color:#ddd;
-  max-width:700px;
+  margin:22px auto;
+  font-size:18px;
+  color:#e0e0e0;
+  max-width:720px;
 }
 
-.cta{
+.buttons{
   display:flex;
-  gap:18px;
+  gap:16px;
   justify-content:center;
   flex-wrap:wrap;
-  margin-top:35px;
+  margin-top:30px;
 }
 
 .btn{
-  padding:16px 32px;
+  padding:14px 30px;
   border-radius:40px;
   font-weight:700;
   text-decoration:none;
@@ -87,77 +115,82 @@ body{
   color:var(--gold);
 }
 
-.btn:hover{
-  transform:translateY(-4px) scale(1.02);
-}
+.btn:hover{transform:translateY(-4px)}
 
 /* SECTIONS */
 section{
-  padding:100px 25px;
+  padding:90px 24px;
   max-width:1200px;
   margin:auto;
 }
 
 h2{
+  font-size:clamp(26px,4vw,40px);
   text-align:center;
-  font-size:40px;
-  font-weight:800;
   color:var(--gold);
-  margin-bottom:60px;
+  margin-bottom:55px;
+  font-weight:800;
 }
 
 /* FEATURES */
-.features{
+.grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;
+  gap:28px;
 }
 
-.feature{
+.card{
   background:linear-gradient(180deg,#111,#0b0b0b);
-  padding:35px;
-  border-radius:25px;
+  border-radius:26px;
+  padding:34px;
   border:1px solid rgba(255,255,255,.08);
   transition:.4s;
 }
 
-.feature:hover{
+.card:hover{
   transform:translateY(-8px);
   border-color:var(--gold);
 }
 
-.feature h3{
-  font-size:22px;
+.card h3{
   color:var(--gold);
-  margin-bottom:15px;
+  font-size:20px;
+  margin-bottom:12px;
 }
 
 /* GALLERY */
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
+  gap:18px;
 }
 
 .gallery img{
   width:100%;
   height:240px;
   object-fit:cover;
-  border-radius:25px;
+  border-radius:24px;
   transition:.4s;
 }
 
-.gallery img:hover{
-  transform:scale(1.06);
+.gallery img:hover{transform:scale(1.06)}
+
+/* PRICES */
+.prices{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
 }
 
-/* INFO */
-.info{
+.price{
   text-align:center;
-  font-size:20px;
-  color:#ccc;
-  max-width:900px;
-  margin:auto;
+}
+
+.price strong{
+  display:block;
+  font-size:34px;
+  color:var(--gold);
+  margin-top:10px;
 }
 
 /* MAP */
@@ -171,78 +204,79 @@ h2{
 /* FOOTER */
 footer{
   background:#000;
-  padding:50px 20px;
   text-align:center;
-  color:#777;
+  padding:40px 20px;
   font-size:14px;
+  color:#777;
 }
 </style>
 </head>
 
 <body>
 
-<div class="hero">
-  <div class="hero-box">
-    <h1>Покупной Центр Душанбе</h1>
-    <p>
-      Торговля нового поколения. Бренды. Развлечения. Рестораны.
-      Пространство, которое выглядит и ощущается как миллиардный бизнес.
-    </p>
+<!-- HERO WITH VIDEO -->
+<section class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="https://cdn.coverr.co/videos/coverr-shopping-mall-1634/1080p.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
 
-    <div class="cta">
-      <a href="tel:+992011900303" class="btn gold">Позвонить</a>
-      <a href="https://wa.me/992011900303" class="btn outline">WhatsApp</a>
-    </div>
-  </div>
-</div>
-
-<section>
-  <h2>Почему мы №1</h2>
-  <div class="features">
-    <div class="feature">
-      <h3>Премиум-дизайн</h3>
-      <p>Архитектура, свет и стиль уровня Дубая и Сингапура.</p>
-    </div>
-    <div class="feature">
-      <h3>Лучшие бренды</h3>
-      <p>Оригинальные магазины, проверенные продавцы.</p>
-    </div>
-    <div class="feature">
-      <h3>Семейный формат</h3>
-      <p>Развлечения, фудкорт, зоны отдыха для всех возрастов.</p>
-    </div>
-    <div class="feature">
-      <h3>Безопасность</h3>
-      <p>Камеры, охрана, комфорт 24/7.</p>
+  <div class="hero-content">
+    <div class="hero-box">
+      <h1>Premium Shopping Center</h1>
+      <p>
+        Современный торговый центр нового поколения.  
+        Архитектура, бренды, сервис и комфорт уровня мировых столиц.
+      </p>
+      <div class="buttons">
+        <a href="tel:+992011900303" class="btn gold">Позвонить</a>
+        <a href="https://wa.me/992011900303" class="btn outline">WhatsApp</a>
+        <a href="#map" class="btn outline">Маршрут</a>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- FEATURES -->
+<section>
+  <h2>Почему выбирают нас</h2>
+  <div class="grid">
+    <div class="card"><h3>Премиум бренды</h3><p>Только проверенные магазины и официальные представители.</p></div>
+    <div class="card"><h3>Безопасность</h3><p>Круглосуточная охрана, видеонаблюдение, комфорт.</p></div>
+    <div class="card"><h3>Для семьи</h3><p>Развлечения, фудкорт, зоны отдыха.</p></div>
+    <div class="card"><h3>Локация</h3><p>Удобный подъезд и парковка.</p></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
 <section>
   <h2>Галерея</h2>
   <div class="gallery">
-    <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd47?auto=format&fit=crop&w=1000&q=80">
-    <img src="https://images.unsplash.com/photo-1604147706283-d7119b5b822c?auto=format&fit=crop&w=1000&q=80">
-    <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=1000&q=80">
+    <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd47">
+    <img src="https://images.unsplash.com/photo-1604147706283-d7119b5b822c">
+    <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a">
   </div>
 </section>
 
+<!-- PRICES -->
 <section>
-  <h2>О центре</h2>
-  <div class="info">
-    Это не просто торговый центр —  
-    это место, куда приходят за эмоциями, статусом и комфортом.
+  <h2>Аренда</h2>
+  <div class="prices">
+    <div class="card price"><h3>Бутик</h3><strong>от $500</strong></div>
+    <div class="card price"><h3>Островок</h3><strong>от $300</strong></div>
+    <div class="card price"><h3>Фудкорт</h3><strong>от $800</strong></div>
   </div>
 </section>
 
-<section class="map">
-  <h2>Мы на карте</h2>
+<!-- MAP -->
+<section id="map" class="map">
+  <h2>Как нас найти</h2>
   <iframe src="https://maps.google.com/maps?q=Душанбе&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
 </section>
 
 <footer>
-  © 2025 Покупной Центр Душанбе · Уровень миллиардного бренда
+  © 2025 Premium Shopping Center · ULTRA LEVEL DESIGN
 </footer>
 
 </body>
-      </html>
+</html>
