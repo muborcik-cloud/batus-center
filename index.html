@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Platinum Center</title>
+<title>Platinum Center — Premium Space</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -11,132 +11,195 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:Inter,system-ui,sans-serif;
-  background:#0b0b0b;
+  background:#0a0a0a;
   color:#fff;
-  line-height:1.6;
+  line-height:1.55;
 }
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:40px 20px;
+
+/* VIDEO HERO */
+.hero{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
 }
-header{
+.hero video{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.45);
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  height:100%;
   display:flex;
-  justify-content:space-between;
+  flex-direction:column;
+  justify-content:center;
   align-items:center;
+  text-align:center;
+  padding:20px;
+}
+.hero h1{
+  font-size:48px;
+  font-weight:800;
+  color:#d4af37;
+  animation:fadeUp 1s ease;
+}
+.hero p{
+  max-width:620px;
+  margin-top:20px;
+  font-size:18px;
+  color:#e0e0e0;
+  animation:fadeUp 1.4s ease;
+}
+.hero .buttons{margin-top:30px}
+
+/* GLOBAL */
+.container{max-width:1100px;margin:auto;padding:80px 20px}
+section{margin-top:100px}
+h2{
+  font-size:32px;
+  font-weight:700;
+  color:#d4af37;
+  margin-bottom:30px;
+}
+.card{
+  background:#121212;
+  border-radius:26px;
+  padding:32px;
+  border:1px solid rgba(255,255,255,.08);
+  animation:fadeUp .9s ease;
+}
+.buttons{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.btn{
+  padding:13px 28px;
+  border-radius:30px;
+  font-weight:600;
+  text-decoration:none;
+}
+.call{background:#d4af37;color:#000}
+.wa{border:2px solid #25d366;color:#25d366}
+
+/* PRICES */
+.prices{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:22px;
+}
+.price strong{
+  font-size:30px;
+  color:#d4af37;
+}
+
+/* FORM */
+input,textarea{
+  width:100%;
+  margin-top:12px;
+  padding:14px;
+  border-radius:16px;
+  border:none;
+  outline:none;
+  background:#1b1b1b;
+  color:#fff;
+}
+
+/* MAP */
+iframe{
+  width:100%;
+  height:380px;
+  border:none;
+  border-radius:26px;
+}
+
+/* LANG */
+.lang{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:50;
 }
 .lang button{
   background:none;
   border:1px solid #d4af37;
   color:#d4af37;
   padding:6px 14px;
-  margin-left:8px;
+  margin-left:6px;
   border-radius:20px;
   cursor:pointer;
 }
-h1{
-  font-size:42px;
-  font-weight:800;
-  color:#d4af37;
-}
-h2{
-  font-size:30px;
-  margin-bottom:20px;
-  color:#d4af37;
-}
-section{margin-top:80px}
-.card{
-  background:#121212;
-  border-radius:24px;
-  padding:30px;
-  margin-top:20px;
-  border:1px solid rgba(255,255,255,.08);
-}
-.buttons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:14px;
-  margin-top:25px;
-}
-.btn{
-  padding:12px 26px;
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:600;
-}
-.call{background:#d4af37;color:#000}
-.wa{border:2px solid #25d366;color:#25d366}
-.price-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-}
-.price{
-  text-align:center;
-}
-.price strong{
-  display:block;
-  font-size:28px;
-  color:#d4af37;
-}
-input,textarea{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border-radius:14px;
-  border:none;
-  outline:none;
-}
-iframe{
-  width:100%;
-  height:380px;
-  border:none;
-  border-radius:24px;
-}
+
 footer{
   text-align:center;
+  padding:40px;
   color:#777;
-  padding:30px;
-  margin-top:60px;
   font-size:14px;
 }
+
+/* ANIMATION */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:none}
+}
+
 .hidden{display:none}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="lang">
+  <button onclick="ru()">RU</button>
+  <button onclick="en()">EN</button>
+</div>
 
-<header>
-  <h1>Platinum Center</h1>
-  <div class="lang">
-    <button onclick="ru()">RU</button>
-    <button onclick="en()">EN</button>
-  </div>
-</header>
+<!-- HERO -->
+<div class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-1606/1080p.mp4" type="video/mp4">
+  </video>
+  <div class="hero-content">
+    <h1 class="ru">Platinum Center</h1>
+    <h1 class="en hidden">Platinum Center</h1>
 
-<!-- ABOUT -->
-<section>
-  <h2 class="ru">Обо мне</h2>
-  <h2 class="en hidden">About Me</h2>
-
-  <div class="card">
     <p class="ru">
-      Меня зовут <b>Мубориз</b>.  
-      Я создатель и управляющий <b>Platinum Center</b> — современного центра в Душанбе.
-      Мы создаём комфортное пространство для людей, бизнеса и семьи.
+      Премиальный центр в Душанбе.  
+      Пространство, комфорт, безопасность и высокий уровень сервиса.
     </p>
     <p class="en hidden">
-      My name is <b>Muboriz</b>.  
-      I am the founder and manager of <b>Platinum Center</b> — a modern center in Dushanbe.
-      We create a comfortable space for people, business, and families.
+      Premium center in Dushanbe.  
+      Space, comfort, safety and high-level service.
     </p>
 
     <div class="buttons">
       <a href="tel:+992011900303" class="btn call">Позвонить</a>
       <a href="https://wa.me/992011900303" class="btn wa">WhatsApp</a>
     </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ABOUT -->
+<section>
+  <h2 class="ru">Кто я</h2>
+  <h2 class="en hidden">About</h2>
+
+  <div class="card">
+    <p class="ru">
+      Меня зовут <b>Мубориз</b>.  
+      Я основатель <b>Platinum Center</b>.  
+      Мы создаём современные пространства только в Душанбе.
+    </p>
+    <p class="en hidden">
+      My name is <b>Muboriz</b>.  
+      I am the founder of <b>Platinum Center</b>.  
+      We create modern spaces only in Dushanbe.
+    </p>
   </div>
 </section>
 
@@ -145,33 +208,21 @@ footer{
   <h2 class="ru">Цены</h2>
   <h2 class="en hidden">Prices</h2>
 
-  <div class="price-grid">
-    <div class="card price">
-      <p class="ru">Малое помещение</p>
-      <p class="en hidden">Small space</p>
-      <strong>$300</strong>
-    </div>
-    <div class="card price">
-      <p class="ru">Среднее помещение</p>
-      <p class="en hidden">Medium space</p>
-      <strong>$600</strong>
-    </div>
-    <div class="card price">
-      <p class="ru">Большое помещение</p>
-      <p class="en hidden">Large space</p>
-      <strong>$1000</strong>
-    </div>
+  <div class="prices">
+    <div class="card price"><p>Стандарт</p><strong>$300</strong></div>
+    <div class="card price"><p>Бизнес</p><strong>$600</strong></div>
+    <div class="card price"><p>Премиум</p><strong>$1000</strong></div>
   </div>
 </section>
 
 <!-- FORM -->
 <section>
   <h2 class="ru">Оставить заявку</h2>
-  <h2 class="en hidden">Send Request</h2>
+  <h2 class="en hidden">Request</h2>
 
   <div class="card">
-    <input type="text" placeholder="Имя / Name">
-    <input type="tel" placeholder="Телефон / Phone">
+    <input placeholder="Имя / Name">
+    <input placeholder="Телефон / Phone">
     <textarea rows="4" placeholder="Сообщение / Message"></textarea>
     <div class="buttons">
       <a href="https://wa.me/992011900303" class="btn call">Отправить</a>
@@ -182,16 +233,16 @@ footer{
 <!-- MAP -->
 <section>
   <h2 class="ru">Как нас найти</h2>
-  <h2 class="en hidden">How to find us</h2>
+  <h2 class="en hidden">Location</h2>
 
   <iframe src="https://maps.google.com/maps?q=Душанбе&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
 </section>
 
-<footer>
-  © 2025 Platinum Center · Billion Level Website
-</footer>
-
 </div>
+
+<footer>
+© 2025 Platinum Center · NEXT LEVEL WEBSITE
+</footer>
 
 <script>
 function ru(){
