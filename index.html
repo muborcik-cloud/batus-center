@@ -293,3 +293,78 @@ function lang(l){
 
 </body>
 </html>
+<!-- === NEXT LEVEL: Booking + UX === -->
+<style>
+.booking-fab{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:9999;
+  background:linear-gradient(90deg,#00e5ff,#7c6cff);
+  color:#000;
+  padding:14px 22px;
+  border-radius:40px;
+  font-weight:700;
+  box-shadow:0 15px 40px rgba(0,229,255,.35);
+  animation:pulse 2.5s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(0,229,255,.6)}
+  70%{box-shadow:0 0 0 18px rgba(0,229,255,0)}
+  100%{box-shadow:0 0 0 0 rgba(0,229,255,0)}
+}
+.booking-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:10000;
+}
+.booking-box{
+  background:#151b34;
+  padding:28px;
+  border-radius:20px;
+  width:90%;
+  max-width:420px;
+}
+.booking-box h3{
+  margin-bottom:14px;
+}
+.booking-box input, .booking-box textarea{
+  width:100%;
+  margin-bottom:12px;
+}
+.close{
+  text-align:right;
+  color:#9aa3c7;
+  cursor:pointer;
+}
+</style>
+
+<a class="booking-fab" onclick="openBooking()">Записаться</a>
+
+<div class="booking-modal" id="booking">
+  <div class="booking-box">
+    <div class="close" onclick="closeBooking()">✕</div>
+    <h3>Онлайн-заявка</h3>
+    <input id="bname" placeholder="Имя">
+    <input id="bphone" placeholder="Телефон">
+    <textarea id="bmsg" placeholder="Когда хотите прийти?"></textarea>
+    <button class="btn main" onclick="sendWA()">Отправить в WhatsApp</button>
+  </div>
+</div>
+
+<script>
+function openBooking(){document.getElementById('booking').style.display='flex'}
+function closeBooking(){document.getElementById('booking').style.display='none'}
+function sendWA(){
+  const n=document.getElementById('bname').value;
+  const p=document.getElementById('bphone').value;
+  const m=document.getElementById('bmsg').value;
+  const txt=`Заявка с сайта:%0AИмя: ${n}%0AТелефон: ${p}%0AСообщение: ${m}`;
+  window.open(`https://wa.me/992011900303?text=${txt}`,'_blank');
+}
+</script>
+<!-- === END NEXT LEVEL === -->
