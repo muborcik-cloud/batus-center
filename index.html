@@ -3,317 +3,229 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Platinum Jump — Investor Level</title>
+<title>Батутный центр | Душанбе</title>
 
-<!-- SEO -->
-<meta name="description" content="Platinum Jump — премиальный батутный центр в Душанбе. 3 этажа развлечений, безопасность, лучшие цены. Позвонить, WhatsApp, маршрут.">
-<meta name="keywords" content="батутный центр Душанбе, батуты Душанбе, детский центр Душанбе, развлечения для детей">
-<meta name="author" content="Мубориз">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --gold:#d4af37;
+  --gold:#f5c542;
   --dark:#0b0b0b;
-  --card:#151515;
+  --gray:#bdbdbd;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
 body{
-  font-family:Inter,system-ui,sans-serif;
-  background:var(--dark);
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(180deg,#000,#111);
   color:#fff;
   line-height:1.6;
 }
 
-/* ===== HERO ===== */
-.hero{
-  position:relative;
-  height:100vh;
-  overflow:hidden;
-}
-.hero video{
-  position:absolute;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  filter:brightness(.4);
-}
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at top,rgba(212,175,55,.15),transparent 60%);
-}
-.hero-content{
-  position:relative;
-  z-index:2;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+/* HEADER */
+header{
+  padding:60px 20px;
   text-align:center;
-  padding:20px;
 }
-.hero h1{
-  font-size:56px;
-  font-weight:900;
-  letter-spacing:-1px;
+header h1{
+  font-size:42px;
   color:var(--gold);
-  animation:slideUp 1s ease;
 }
-.hero p{
-  max-width:720px;
-  margin-top:20px;
-  font-size:20px;
-  color:#e6e6e6;
-  animation:slideUp 1.3s ease;
+header p{
+  font-size:18px;
+  color:var(--gray);
+  margin-top:10px;
 }
-.hero .buttons{margin-top:35px}
 
-/* ===== GLOBAL ===== */
-.container{max-width:1200px;margin:auto;padding:100px 20px}
-section{margin-bottom:120px}
-h2{
-  font-size:38px;
-  font-weight:800;
-  color:var(--gold);
-  margin-bottom:30px;
-}
-.card{
-  background:linear-gradient(180deg,#181818,#111);
-  border-radius:28px;
-  padding:36px;
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow:0 40px 80px rgba(0,0,0,.6);
-  transition:.5s;
-}
-.card:hover{transform:translateY(-6px)}
-.buttons{
-  display:flex;
-  gap:16px;
-  flex-wrap:wrap;
+/* BUTTONS */
+.btns{
+  margin-top:30px;
 }
 .btn{
-  padding:14px 34px;
+  display:inline-block;
+  margin:10px;
+  padding:14px 26px;
   border-radius:40px;
-  font-weight:700;
   text-decoration:none;
-  transition:.4s;
+  font-weight:600;
 }
-.call{
-  background:var(--gold);
-  color:#000;
-}
-.call:hover{box-shadow:0 0 30px rgba(212,175,55,.6)}
-.wa{
-  border:2px solid #25d366;
-  color:#25d366;
-}
-.wa:hover{background:#25d366;color:#000}
+.call{background:var(--gold);color:#000}
+.whatsapp{border:2px solid var(--gold);color:var(--gold)}
 
-/* ===== GRID ===== */
-.grid{
+/* SECTIONS */
+section{
+  padding:70px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+h2{
+  font-size:32px;
+  color:var(--gold);
+  margin-bottom:20px;
+}
+p{font-size:17px;color:#ddd}
+
+/* CARDS */
+.cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:28px;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+.card{
+  background:#151515;
+  padding:25px;
+  border-radius:20px;
+  transition:.3s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 15px 40px rgba(245,197,66,.25);
 }
 
-/* ===== PRICES ===== */
-.price strong{
-  display:block;
-  font-size:34px;
+/* PRICES */
+.price{
+  font-size:26px;
   color:var(--gold);
   margin-top:10px;
 }
 
-/* ===== FORM ===== */
-input,textarea{
-  width:100%;
-  margin-top:14px;
-  padding:16px;
-  border-radius:18px;
+/* FORM */
+form{
+  display:grid;
+  gap:15px;
+}
+input,textarea,button{
+  padding:14px;
+  border-radius:12px;
   border:none;
-  outline:none;
-  background:#1d1d1d;
-  color:#fff;
-  font-size:15px;
+  font-size:16px;
+}
+input,textarea{background:#1c1c1c;color:#fff}
+button{
+  background:var(--gold);
+  color:#000;
+  font-weight:700;
+  cursor:pointer;
 }
 
-/* ===== MAP ===== */
+/* MAP */
 iframe{
   width:100%;
-  height:420px;
+  height:350px;
+  border-radius:20px;
   border:none;
-  border-radius:28px;
-  filter:grayscale(.2) contrast(1.1);
 }
 
-/* ===== LANG ===== */
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:40px;
+  color:#888;
+  font-size:14px;
+}
+
+/* LANGUAGE */
 .lang{
   position:fixed;
   top:20px;
   right:20px;
-  z-index:100;
 }
 .lang button{
-  background:rgba(0,0,0,.4);
-  border:1px solid var(--gold);
-  color:var(--gold);
-  padding:8px 16px;
   margin-left:8px;
-  border-radius:30px;
+  padding:6px 12px;
+  border-radius:10px;
+  border:none;
   cursor:pointer;
 }
-
-/* ===== FOOTER ===== */
-footer{
-  text-align:center;
-  padding:50px 20px;
-  color:#777;
-  font-size:14px;
-  border-top:1px solid rgba(255,255,255,.05);
-}
-
-/* ===== ANIM ===== */
-@keyframes slideUp{
-  from{opacity:0;transform:translateY(40px)}
-  to{opacity:1;transform:none}
-}
-.reveal{
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s;
-}
-.reveal.show{
-  opacity:1;
-  transform:none;
-}
-.hidden{display:none}
 </style>
 </head>
 
 <body>
 
 <div class="lang">
-  <button onclick="ru()">RU</button>
-  <button onclick="en()">EN</button>
+  <button onclick="setLang('ru')">RU</button>
+  <button onclick="setLang('en')">EN</button>
 </div>
 
-<!-- HERO -->
-<div class="hero">
-  <video autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-1606/1080p.mp4" type="video/mp4">
-  </video>
-  <div class="hero-content">
-    <h1 class="ru">Platinum Jump</h1>
-    <h1 class="en hidden">Platinum Jump</h1>
+<header>
+  <h1 id="t1">Батутный центр в Душанбе</h1>
+  <p id="t2">Современный трёхэтажный развлекательный центр для детей и семьи</p>
 
-    <p class="ru">
-      Батутный центр нового уровня в Душанбе.  
-      3 этажа. Безопасность. Премиум-сервис.
-    </p>
-    <p class="en hidden">
-      Next-level trampoline center in Dushanbe.  
-      3 floors. Safety. Premium service.
-    </p>
+  <div class="btns">
+    <a class="btn call" href="tel:+992011900303">Позвонить</a>
+    <a class="btn whatsapp" href="https://wa.me/992011900303">WhatsApp</a>
+  </div>
+</header>
 
-    <div class="buttons">
-      <a href="tel:+992011900303" class="btn call">Позвонить</a>
-      <a href="https://wa.me/992011900303" class="btn wa">WhatsApp</a>
+<section>
+  <h2 id="t3">О нас</h2>
+  <p id="t4">
+    Я Мубориз. Мы создали безопасный и яркий батутный центр в городе Душанбе.
+    У нас дети прыгают, играют и радуются в полностью оборудованном пространстве.
+  </p>
+</section>
+
+<section>
+  <h2 id="t5">Цены</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Базовый</h3>
+      <div class="price">100 сомони</div>
     </div>
-  </div>
-</div>
-
-<div class="container">
-
-<!-- ABOUT -->
-<section class="reveal">
-  <h2 class="ru">О центре</h2>
-  <h2 class="en hidden">About</h2>
-  <div class="card">
-    <p class="ru">
-      Меня зовут <b>Мубориз</b>.  
-      Я основатель <b>Platinum Jump</b> — батутного центра только в Душанбе.  
-      Наш центр — это безопасность, комфорт и эмоции для детей и взрослых.
-    </p>
-    <p class="en hidden">
-      My name is <b>Muboriz</b>.  
-      I am the founder of <b>Platinum Jump</b> in Dushanbe.  
-      Safety, comfort and emotions for children and adults.
-    </p>
-  </div>
-</section>
-
-<!-- ADV -->
-<section class="reveal">
-  <h2 class="ru">Почему мы</h2>
-  <h2 class="en hidden">Why us</h2>
-  <div class="grid">
-    <div class="card">3 этажа развлечений</div>
-    <div class="card">Современное оборудование</div>
-    <div class="card">Контроль безопасности</div>
-    <div class="card">Дружелюбный персонал</div>
-  </div>
-</section>
-
-<!-- PRICES -->
-<section class="reveal">
-  <h2 class="ru">Цены</h2>
-  <h2 class="en hidden">Prices</h2>
-  <div class="grid">
-    <div class="card price">Стандарт<strong>300 сомони</strong></div>
-    <div class="card price">Развлечения<strong>600 сомони</strong></div>
-    <div class="card price">Премиум<strong>1000 сомони</strong></div>
-  </div>
-</section>
-
-<!-- FORM -->
-<section class="reveal">
-  <h2 class="ru">Оставить заявку</h2>
-  <h2 class="en hidden">Request</h2>
-  <div class="card">
-    <input placeholder="Имя / Name">
-    <input placeholder="Телефон / Phone">
-    <textarea rows="4" placeholder="Сообщение / Message"></textarea>
-    <div class="buttons">
-      <a href="https://wa.me/992011900303" class="btn call">Отправить</a>
+    <div class="card">
+      <h3>Стандарт</h3>
+      <div class="price">200 сомони</div>
+    </div>
+    <div class="card">
+      <h3>Премиум</h3>
+      <div class="price">400 сомони</div>
     </div>
   </div>
 </section>
 
-<!-- MAP -->
-<section class="reveal">
-  <h2 class="ru">Как нас найти</h2>
-  <h2 class="en hidden">Location</h2>
-  <iframe src="https://maps.google.com/maps?q=Душанбе&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+<section>
+  <h2 id="t6">Как нас найти</h2>
+  <iframe src="https://maps.google.com/maps?q=Dushanbe&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
 </section>
 
-</div>
+<section>
+  <h2 id="t7">Оставить заявку</h2>
+  <form>
+    <input placeholder="Ваше имя">
+    <input placeholder="Телефон">
+    <textarea placeholder="Комментарий"></textarea>
+    <button>Отправить</button>
+  </form>
+</section>
 
 <footer>
-© 2025 Platinum Jump · GOD MODE · INVESTOR LEVEL
+  © 2025 Батутный центр Душанбе · Заказы только в городе Душанбе
 </footer>
 
 <script>
-function ru(){
- document.querySelectorAll('.ru').forEach(e=>e.classList.remove('hidden'));
- document.querySelectorAll('.en').forEach(e=>e.classList.add('hidden'));
+const text={
+ru:{
+t1:"Батутный центр в Душанбе",
+t2:"Современный трёхэтажный развлекательный центр для детей и семьи",
+t3:"О нас",
+t4:"Я Мубориз. Мы создали безопасный и яркий батутный центр в городе Душанбе.",
+t5:"Цены",
+t6:"Как нас найти",
+t7:"Оставить заявку"
+},
+en:{
+t1:"Trampoline Center in Dushanbe",
+t2:"Modern three-floor entertainment center for kids and families",
+t3:"About us",
+t4:"My name is Muboriz. We created a safe and fun trampoline center in Dushanbe.",
+t5:"Prices",
+t6:"How to find us",
+t7:"Send a request"
 }
-function en(){
- document.querySelectorAll('.en').forEach(e=>e.classList.remove('hidden'));
- document.querySelectorAll('.ru').forEach(e=>e.classList.add('hidden'));
 }
-const reveals=document.querySelectorAll('.reveal');
-window.addEventListener('scroll',()=>{
-  reveals.forEach(el=>{
-    if(el.getBoundingClientRect().top<window.innerHeight-100){
-      el.classList.add('show');
-    }
-  })
-})
+function setLang(l){
+for(let k in text[l]){
+document.getElementById(k).innerText=text[l][k]
+}}
 </script>
 
 </body>
