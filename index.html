@@ -1,365 +1,294 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Батутный центр | Душанбе</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Батутный центр в Душанбе — Прыжки для детей и взрослых</title>
+<meta name="description" content="Лучший батутный центр в Душанбе. 3 этажа, безопасность, цены, WhatsApp, маршрут. Детский и семейный отдых.">
+<meta name="keywords" content="батутный центр Душанбе, батуты Душанбе, детский центр Душанбе">
 
-  <style>
-    :root{
-      --bg:#0b0f19;
-      --card:#131a2b;
-      --accent:#00e5ff;
-      --accent2:#7c4dff;
-      --text:#e6ebff;
-      --muted:#9aa4c7;
-      --radius:18px;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:'Inter',sans-serif;
-      background:linear-gradient(180deg,#060914,#0b0f19);
-      color:var(--text);
-      line-height:1.6;
-      font-size:16px;
-    }
+<style>
+:root{
+  --bg:#0c1020;
+  --card:#151b34;
+  --accent:#00e5ff;
+  --text:#eaf0ff;
+  --muted:#9aa3c7;
+  --radius:18px;
+}
 
-    a{color:inherit;text-decoration:none}
+*{box-sizing:border-box;margin:0;padding:0}
 
-    /* HEADER / HERO */
-    header{
-      position:relative;
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      overflow:hidden;
-    }
+body{
+  font-family:Inter,sans-serif;
+  background:linear-gradient(180deg,#080c1c,#0c1020);
+  color:var(--text);
+  font-size:16px;
+  line-height:1.6;
+}
 
-    header video{
-      position:absolute;
-      top:0;left:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      opacity:.25;
-    }
+a{text-decoration:none;color:inherit}
 
-    header::after{
-      content:'';
-      position:absolute;
-      inset:0;
-      background:radial-gradient(circle at top,transparent,rgba(0,0,0,.8));
-    }
+header{
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+}
 
-    .hero{
-      position:relative;
-      max-width:900px;
-      padding:24px;
-      z-index:2;
-    }
+header video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.18;
+}
 
-    .lang-switch{
-      position:absolute;
-      top:20px;
-      right:20px;
-      display:flex;
-      gap:10px;
-    }
+header::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,.2),#0c1020);
+}
 
-    .lang-switch button{
-      background:transparent;
-      border:1px solid var(--accent);
-      color:var(--accent);
-      padding:6px 12px;
-      border-radius:20px;
-      cursor:pointer;
-      font-size:14px;
-    }
+.hero{
+  position:relative;
+  z-index:2;
+  max-width:900px;
+  padding:20px;
+}
 
-    h1{
-      font-size:clamp(32px,5vw,56px);
-      font-weight:700;
-      margin-bottom:20px;
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-    }
+.lang{
+  position:absolute;
+  top:20px;
+  right:20px;
+}
 
-    .hero p{
-      font-size:18px;
-      color:var(--muted);
-      margin-bottom:30px;
-    }
+.lang button{
+  background:transparent;
+  border:1px solid var(--accent);
+  color:var(--accent);
+  padding:6px 12px;
+  border-radius:20px;
+  cursor:pointer;
+  margin-left:6px;
+}
 
-    .btns{
-      display:flex;
-      flex-wrap:wrap;
-      gap:16px;
-      justify-content:center;
-    }
+h1{
+  font-size:clamp(30px,4.5vw,52px);
+  font-weight:700;
+  margin-bottom:16px;
+  background:linear-gradient(90deg,var(--accent),#7c6cff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
 
-    .btn{
-      padding:14px 26px;
-      border-radius:30px;
-      font-weight:600;
-      transition:.3s;
-      border:none;
-      cursor:pointer;
-    }
+.hero p{
+  font-size:18px;
+  color:var(--muted);
+  max-width:700px;
+  margin:0 auto 30px;
+}
 
-    .btn-primary{
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
-      color:#000;
-    }
+.btns{
+  display:flex;
+  gap:16px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
 
-    .btn-outline{
-      background:transparent;
-      border:1px solid var(--accent);
-      color:var(--accent);
-    }
+.btn{
+  padding:14px 28px;
+  border-radius:30px;
+  font-weight:600;
+  transition:.3s;
+}
 
-    .btn:hover{transform:translateY(-2px)}
+.btn.main{
+  background:linear-gradient(90deg,var(--accent),#7c6cff);
+  color:#000;
+}
 
-    /* SECTIONS */
-    section{
-      padding:90px 20px;
-    }
+.btn.out{
+  border:1px solid var(--accent);
+  color:var(--accent);
+}
 
-    .container{
-      max-width:1200px;
-      margin:auto;
-    }
+.btn:hover{transform:translateY(-2px)}
 
-    h2{
-      font-size:clamp(26px,4vw,40px);
-      margin-bottom:20px;
-      text-align:center;
-    }
+section{
+  padding:90px 20px;
+}
 
-    .subtitle{
-      text-align:center;
-      color:var(--muted);
-      max-width:700px;
-      margin:0 auto 60px;
-    }
+.container{
+  max-width:1200px;
+  margin:auto;
+}
 
-    /* CARDS */
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:24px;
-    }
+h2{
+  font-size:clamp(24px,3.5vw,38px);
+  text-align:center;
+  margin-bottom:16px;
+}
 
-    .card{
-      background:var(--card);
-      padding:30px;
-      border-radius:var(--radius);
-      box-shadow:0 10px 40px rgba(0,0,0,.4);
-      transition:.4s;
-    }
+.sub{
+  text-align:center;
+  color:var(--muted);
+  max-width:720px;
+  margin:0 auto 60px;
+}
 
-    .card:hover{
-      transform:translateY(-6px);
-      box-shadow:0 20px 60px rgba(0,229,255,.15);
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+}
 
-    .card h3{
-      margin-bottom:12px;
-      font-size:20px;
-    }
+.card{
+  background:var(--card);
+  padding:28px;
+  border-radius:var(--radius);
+  transition:.35s;
+}
 
-    .price{
-      font-size:34px;
-      font-weight:700;
-      margin:10px 0;
-      color:var(--accent);
-    }
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 60px rgba(0,229,255,.15);
+}
 
-    /* GALLERY */
-    .gallery{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:16px;
-    }
+.price{
+  font-size:34px;
+  font-weight:700;
+  color:var(--accent);
+  margin:10px 0;
+}
 
-    .gallery img{
-      width:100%;
-      height:220px;
-      object-fit:cover;
-      border-radius:14px;
-      transition:.4s;
-    }
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+}
 
-    .gallery img:hover{
-      transform:scale(1.05);
-    }
+.gallery img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:14px;
+  transition:.4s;
+}
 
-    /* FORM */
-    form{
-      max-width:600px;
-      margin:40px auto 0;
-      display:grid;
-      gap:16px;
-    }
+.gallery img:hover{transform:scale(1.05)}
 
-    input,textarea{
-      padding:14px;
-      border-radius:12px;
-      border:none;
-      outline:none;
-      font-size:15px;
-    }
+form{
+  max-width:600px;
+  margin:40px auto 0;
+  display:grid;
+  gap:14px;
+}
 
-    textarea{min-height:120px}
+input,textarea{
+  padding:14px;
+  border-radius:12px;
+  border:none;
+  font-size:15px;
+}
 
-    /* MAP */
-    iframe{
-      width:100%;
-      height:380px;
-      border:0;
-      border-radius:var(--radius);
-    }
+iframe{
+  width:100%;
+  height:380px;
+  border:0;
+  border-radius:var(--radius);
+}
 
-    /* FOOTER */
-    footer{
-      background:#05070d;
-      padding:40px 20px;
-      text-align:center;
-      color:var(--muted);
-    }
+footer{
+  background:#070a16;
+  padding:40px 20px;
+  text-align:center;
+  color:var(--muted);
+}
 
-    footer strong{color:var(--text)}
-
-    /* LANG */
-    [data-lang]{display:none}
-    [data-lang].active{display:block}
-
-  </style>
+[data-lang]{display:none}
+[data-lang].active{display:block}
+</style>
 </head>
+
 <body>
 
 <header>
-  <!-- Видео фон (можешь заменить src на своё видео) -->
-  <video autoplay muted loop>
-    <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampolines-5404/1080p.mp4" type="video/mp4">
-  </video>
+<video autoplay muted loop>
+  <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampolines-5404/1080p.mp4">
+</video>
 
-  <div class="lang-switch">
-    <button onclick="setLang('ru')">RU</button>
-    <button onclick="setLang('en')">EN</button>
+<div class="lang">
+  <button onclick="lang('ru')">RU</button>
+  <button onclick="lang('en')">EN</button>
+</div>
+
+<div class="hero">
+  <div data-lang="ru" class="active">
+    <h1>Батутный центр №1 в Душанбе</h1>
+    <p>Три этажа прыжков, безопасность и радость для детей и взрослых</p>
+  </div>
+  <div data-lang="en">
+    <h1>Trampoline Center №1 in Dushanbe</h1>
+    <p>Three floors of fun, safety and joy for kids and adults</p>
   </div>
 
-  <div class="hero">
-    <div data-lang="ru" class="active">
-      <h1>Батутный Центр №1 в Душанбе</h1>
-      <p>Современный, безопасный и невероятно красивый батутный центр для детей и взрослых.</p>
-    </div>
-    <div data-lang="en">
-      <h1>Trampoline Center №1 in Dushanbe</h1>
-      <p>A modern, safe and incredibly beautiful trampoline center for kids and adults.</p>
-    </div>
-
-    <div class="btns">
-      <a class="btn btn-primary" href="tel:+992011900303">Позвонить</a>
-      <a class="btn btn-outline" href="https://wa.me/992011900303">WhatsApp</a>
-    </div>
+  <div class="btns">
+    <a class="btn main" href="tel:+992011900303">Позвонить</a>
+    <a class="btn out" href="https://wa.me/992011900303">WhatsApp</a>
   </div>
+</div>
 </header>
 
 <section>
-  <div class="container">
-    <h2 data-lang="ru" class="active">О нас</h2>
-    <h2 data-lang="en">About Us</h2>
-    <p class="subtitle" data-lang="ru" class="active">
-      Меня зовут <strong>Мубориз</strong>. Я создал лучший батутный центр в Душанбе — три этажа радости, безопасности и эмоций.
-    </p>
-    <p class="subtitle" data-lang="en">
-      My name is <strong>Muboriz</strong>. I created the best trampoline center in Dushanbe — three floors of fun, safety and эмоций.
-    </p>
-  </div>
+<div class="container">
+<h2 data-lang="ru" class="active">Цены</h2>
+<h2 data-lang="en">Prices</h2>
+
+<div class="grid">
+<div class="card"><h3>Базовый</h3><div class="price">100 c.</div><p>Прыжки</p></div>
+<div class="card"><h3>Стандарт</h3><div class="price">200 c.</div><p>Развлечения</p></div>
+<div class="card"><h3>Премиум</h3><div class="price">400 c.</div><p>Все зоны</p></div>
+</div>
+</div>
 </section>
 
 <section>
-  <div class="container">
-    <h2 data-lang="ru" class="active">Цены</h2>
-    <h2 data-lang="en">Prices</h2>
-
-    <div class="grid">
-      <div class="card">
-        <h3>Базовый</h3>
-        <div class="price">100 c.</div>
-        <p>Прыжки и свободная зона</p>
-      </div>
-      <div class="card">
-        <h3>Стандарт</h3>
-        <div class="price">200 c.</div>
-        <p>Развлечения + батуты</p>
-      </div>
-      <div class="card">
-        <h3>Премиум</h3>
-        <div class="price">400 c.</div>
-        <p>Все зоны + шоу</p>
-      </div>
-    </div>
-  </div>
+<div class="container">
+<h2>Как нас найти</h2>
+<iframe src="https://www.google.com/maps?q=Dushanbe&output=embed"></iframe>
+</div>
 </section>
 
 <section>
-  <div class="container">
-    <h2>Галерея</h2>
-    <div class="gallery">
-      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" />
-      <img src="https://images.unsplash.com/photo-1518611012118-f0c5c4a3f8f8" />
-      <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d" />
-      <img src="https://images.unsplash.com/photo-1517964603305-11c0f6f66012" />
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <h2 data-lang="ru" class="active">Как нас найти</h2>
-    <h2 data-lang="en">How to find us</h2>
-
-    <iframe 
-      src="https://www.google.com/maps?q=Dushanbe&output=embed">
-    </iframe>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <h2 data-lang="ru" class="active">Оставить заявку</h2>
-    <h2 data-lang="en">Send Request</h2>
-
-    <form>
-      <input type="text" placeholder="Ваше имя">
-      <input type="tel" placeholder="Телефон">
-      <textarea placeholder="Сообщение"></textarea>
-      <button class="btn btn-primary" type="submit">Отправить</button>
-    </form>
-  </div>
+<div class="container">
+<h2>Заявка</h2>
+<form>
+<input placeholder="Имя">
+<input placeholder="Телефон">
+<textarea placeholder="Сообщение"></textarea>
+<button class="btn main">Отправить</button>
+</form>
+</div>
 </section>
 
 <footer>
-  <p>© Батутный Центр Душанбе • <strong>Мубориз</strong> • +992 011 900 303</p>
+© Батутный центр Душанбе • Мубориз • +992 011 900 303
 </footer>
 
 <script>
-  function setLang(lang){
-    document.querySelectorAll('[data-lang]').forEach(el=>{
-      el.classList.remove('active');
-      if(el.getAttribute('data-lang')===lang){
-        el.classList.add('active');
-      }
-    });
-  }
+function lang(l){
+ document.querySelectorAll('[data-lang]').forEach(e=>e.classList.remove('active'));
+ document.querySelectorAll('[data-lang="'+l+'"]').forEach(e=>e.classList.add('active'));
+}
 </script>
 
 </body>
