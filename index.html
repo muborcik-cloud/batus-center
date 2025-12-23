@@ -4,222 +4,240 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PLATINUM JUMP CENTER — Батутный центр №1</title>
+<title>Platinum Jump Center — Батутный центр №1</title>
 
-<meta name="description" content="Самый красивый батутный центр. Детский отдых, прыжки, праздники. Запись онлайн.">
-<meta name="keywords" content="батутный центр, детский центр, развлечения, прыжки">
+<meta name="description" content="Премиальный батутный центр в Душанбе. Детский отдых, безопасность, праздники.">
+<meta name="keywords" content="батутный центр Душанбе, детский центр, прыжки, развлечения">
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
---bg:#0b0b12;
---card:#151522;
---main:#ff5c00;
---accent:#00f7ff;
+--bg:#06070d;
+--card:#11131f;
+--main:#ff6a00;
+--accent:#00eaff;
 --text:#ffffff;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:Montserrat}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter}
 
 body{
-background:radial-gradient(circle at top,#1a1a2e,#05050a);
+background:var(--bg);
 color:var(--text);
 overflow-x:hidden;
 }
 
-header{
-min-height:100vh;
+/* ===== VIDEO HERO ===== */
+.hero{
+position:relative;
+height:100vh;
+overflow:hidden;
+}
+
+.hero video{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+filter:brightness(.5);
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+height:100%;
 display:flex;
+flex-direction:column;
 align-items:center;
 justify-content:center;
 text-align:center;
-padding:40px;
-background:
-radial-gradient(circle at top,var(--main),transparent 60%);
+padding:20px;
 }
 
-header h1{
-font-size:clamp(2.5rem,6vw,5rem);
+.hero h1{
+font-size:clamp(2.2rem,5vw,4.5rem);
 font-weight:900;
-letter-spacing:3px;
-text-shadow:0 0 40px var(--main);
-animation:pulse 2s infinite alternate;
+letter-spacing:2px;
 }
 
-header p{
-margin-top:25px;
-font-size:1.3rem;
+.hero p{
+margin-top:20px;
+font-size:1.2rem;
+max-width:700px;
 opacity:.9;
 }
 
-@keyframes pulse{
-from{transform:scale(1)}
-to{transform:scale(1.03)}
-}
-
+/* ===== BUTTONS ===== */
 .btns{
-margin-top:40px;
+margin-top:35px;
 display:flex;
+gap:18px;
 flex-wrap:wrap;
 justify-content:center;
-gap:20px;
 }
 
 .btn{
-padding:16px 34px;
-border-radius:50px;
-background:linear-gradient(135deg,var(--main),#ff9900);
+padding:15px 34px;
+border-radius:40px;
+background:linear-gradient(135deg,var(--main),#ffb100);
 color:#000;
 font-weight:800;
 text-decoration:none;
 transition:.3s;
 }
 
-.btn:hover{transform:scale(1.1)}
+.btn.alt{
+background:transparent;
+border:2px solid var(--accent);
+color:var(--accent);
+}
 
+.btn:hover{transform:scale(1.08)}
+
+/* ===== LANGUAGE ===== */
+.lang{
+position:absolute;
+top:20px;
+right:20px;
+z-index:5;
+}
+
+.lang button{
+background:#000;
+border:1px solid var(--accent);
+color:var(--accent);
+padding:8px 14px;
+border-radius:20px;
+cursor:pointer;
+margin-left:5px;
+}
+
+/* ===== SECTIONS ===== */
 section{
-padding:100px 20px;
-max-width:1300px;
+padding:90px 20px;
+max-width:1200px;
 margin:auto;
 }
 
 h2{
-font-size:2.8rem;
-margin-bottom:40px;
+font-size:2.4rem;
+margin-bottom:35px;
 color:var(--accent);
 text-align:center;
 }
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:35px;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
 }
 
 .card{
-background:linear-gradient(180deg,#1b1b2b,#0f0f18);
-padding:35px;
-border-radius:25px;
-box-shadow:0 30px 60px rgba(0,0,0,.6);
+background:linear-gradient(180deg,#16192b,#0c0e1a);
+padding:30px;
+border-radius:24px;
+box-shadow:0 25px 60px rgba(0,0,0,.6);
 transition:.4s;
-position:relative;
-overflow:hidden;
-}
-
-.card::before{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(120deg,transparent,var(--accent),transparent);
-opacity:.1;
 }
 
 .card:hover{
-transform:translateY(-15px) scale(1.02);
+transform:translateY(-12px);
 }
 
 .price{
-font-size:2rem;
+font-size:1.9rem;
 font-weight:900;
-margin-top:15px;
 color:var(--main);
+margin-top:10px;
 }
 
+/* ===== CTA ===== */
 .cta{
-background:linear-gradient(135deg,var(--main),#ffcc00);
+background:linear-gradient(135deg,var(--main),#ffd000);
+padding:80px 25px;
 border-radius:40px;
-padding:80px 30px;
 text-align:center;
 }
 
 .cta h2{color:#000}
 
-.cta a{
-display:inline-block;
-margin:15px;
-padding:18px 36px;
-background:#000;
-color:#fff;
-border-radius:60px;
-font-weight:800;
-text-decoration:none;
-}
-
 form{
-max-width:600px;
-margin:60px auto 0;
+max-width:520px;
+margin:40px auto 0;
 display:grid;
-gap:20px;
+gap:16px;
 }
 
 input,textarea{
-padding:18px;
-border-radius:15px;
+padding:16px;
+border-radius:14px;
 border:none;
 font-size:1rem;
 }
 
 button{
-padding:18px;
-border-radius:50px;
+padding:16px;
+border-radius:40px;
 border:none;
-background:var(--accent);
+background:#000;
+color:#fff;
 font-weight:900;
 cursor:pointer;
 }
 
+/* ===== MAP ===== */
 iframe{
 width:100%;
-height:380px;
+height:360px;
 border:none;
-border-radius:30px;
-box-shadow:0 30px 60px rgba(0,0,0,.6);
+border-radius:26px;
+box-shadow:0 25px 60px rgba(0,0,0,.6);
 }
 
 footer{
-padding:40px;
+padding:35px;
 text-align:center;
-opacity:.6;
 font-size:.9rem;
+opacity:.6;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<div>
-<h1>PLATINUM JUMP CENTER</h1>
-<p>Самый красивый батутный центр. Радость. Движение. Эмоции.</p>
+<div class="lang">
+<button onclick="setLang('ru')">RU</button>
+<button onclick="setLang('en')">EN</button>
+</div>
+
+<div class="hero">
+<video autoplay muted loop>
+<source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-7961/1080p.mp4" type="video/mp4">
+</video>
+
+<div class="hero-content">
+<h1 id="t1">PLATINUM JUMP CENTER</h1>
+<p id="t2">Премиальный батутный центр для детей и семей в Душанбе</p>
 
 <div class="btns">
 <a class="btn" href="tel:+992011900303">📞 Позвонить</a>
-<a class="btn" href="https://wa.me/992011900303">💬 WhatsApp</a>
+<a class="btn alt" href="https://wa.me/992011900303">💬 WhatsApp</a>
 </div>
 </div>
-</header>
+</div>
 
 <section>
-<h2>Кто мы?</h2>
+<h2 id="t3">Почему мы?</h2>
 <div class="grid">
-<div class="card">Мы — современный батутный центр для детей и семей</div>
-<div class="card">Безопасность, радость и энергия</div>
-<div class="card">Праздники, тренировки и эмоции</div>
+<div class="card">Безопасные сертифицированные батуты</div>
+<div class="card">Радость, энергия и развитие</div>
+<div class="card">Дни рождения и праздники</div>
 </div>
 </section>
 
 <section>
-<h2>Этажи центра</h2>
-<div class="grid">
-<div class="card">1 этаж — Детская зона</div>
-<div class="card">2 этаж — Прыжки и экстрим</div>
-<div class="card">3 этаж — Праздники и дни рождения</div>
-</div>
-</section>
-
-<section>
-<h2>Цены</h2>
+<h2 id="t4">Цены</h2>
 <div class="grid">
 <div class="card"><div class="price">50 сомони</div>30 минут</div>
 <div class="card"><div class="price">80 сомони</div>1 час</div>
@@ -228,23 +246,47 @@ font-size:.9rem;
 </section>
 
 <section class="cta">
-<h2>Оставить заявку</h2>
+<h2 id="t5">Оставить заявку</h2>
 <form>
-<input placeholder="Ваше имя">
+<input placeholder="Имя">
 <input placeholder="Телефон">
-<textarea placeholder="Комментарий"></textarea>
-<button>Отправить заявку</button>
+<textarea placeholder="Сообщение"></textarea>
+<button>Отправить</button>
 </form>
 </section>
 
 <section>
-<h2>Как нас найти</h2>
+<h2 id="t6">Как нас найти</h2>
 <iframe src="https://maps.google.com/maps?q=Dushanbe&t=&z=15&output=embed"></iframe>
 </section>
 
 <footer>
-© 2025 Platinum Jump Center — Website Level: ∞ GOD MODE
+© 2025 Platinum Jump Center — ABSOLUTE DOMINATION LEVEL
 </footer>
 
+<script>
+const text={
+ru:{
+t2:"Премиальный батутный центр для детей и семей в Душанбе",
+t3:"Почему мы?",
+t4:"Цены",
+t5:"Оставить заявку",
+t6:"Как нас найти"
+},
+en:{
+t2:"Premium trampoline park for kids and families in Dushanbe",
+t3:"Why choose us?",
+t4:"Prices",
+t5:"Send request",
+t6:"How to find us"
+}
+}
+function setLang(l){
+for(let k in text[l]){
+document.getElementById(k).innerText=text[l][k]
+}
+}
+</script>
+
 </body>
-</html>
+  </html>
