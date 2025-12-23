@@ -3,84 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platinum Jump Center — Premium Trampoline Park</title>
 
-<title>Platinum Jump Center — Батутный центр №1</title>
-
-<meta name="description" content="Премиальный батутный центр в Душанбе. Детский отдых, безопасность, праздники.">
-<meta name="keywords" content="батутный центр Душанбе, детский центр, прыжки, развлечения">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
---bg:#06070d;
---card:#11131f;
---main:#ff6a00;
+--bg:#05060b;
+--glass:rgba(255,255,255,.08);
+--main:#ff7a00;
 --accent:#00eaff;
 --text:#ffffff;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter}
 
 body{
-background:var(--bg);
+background:radial-gradient(circle at top,#0c1020,#05060b 60%);
 color:var(--text);
-overflow-x:hidden;
+line-height:1.6;
 }
 
-/* ===== VIDEO HERO ===== */
-.hero{
-position:relative;
-height:100vh;
-overflow:hidden;
-}
-
-.hero video{
-position:absolute;
+/* ===== HEADER ===== */
+header{
+position:fixed;
+top:0;
 width:100%;
-height:100%;
-object-fit:cover;
-filter:brightness(.5);
+padding:18px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(5,6,11,.6);
+backdrop-filter:blur(14px);
+z-index:1000;
 }
 
-.hero-content{
-position:relative;
-z-index:2;
-height:100%;
+.logo{
+font-weight:900;
+letter-spacing:1px;
+}
+
+header a{
+color:#fff;
+text-decoration:none;
+margin-left:18px;
+font-weight:500;
+}
+
+/* ===== HERO ===== */
+.hero{
+min-height:100vh;
 display:flex;
-flex-direction:column;
 align-items:center;
 justify-content:center;
 text-align:center;
-padding:20px;
+padding:120px 20px 60px;
 }
 
 .hero h1{
-font-size:clamp(2.2rem,5vw,4.5rem);
+font-size:clamp(2.3rem,4.5vw,4.2rem);
 font-weight:900;
-letter-spacing:2px;
 }
 
 .hero p{
 margin-top:20px;
-font-size:1.2rem;
-max-width:700px;
+max-width:720px;
+font-size:1.15rem;
 opacity:.9;
 }
 
-/* ===== BUTTONS ===== */
-.btns{
+.cta{
 margin-top:35px;
 display:flex;
-gap:18px;
-flex-wrap:wrap;
+gap:16px;
 justify-content:center;
+flex-wrap:wrap;
 }
 
 .btn{
-padding:15px 34px;
+padding:14px 34px;
 border-radius:40px;
-background:linear-gradient(135deg,var(--main),#ffb100);
+background:linear-gradient(135deg,var(--main),#ffb200);
 color:#000;
 font-weight:800;
 text-decoration:none;
@@ -93,84 +96,70 @@ border:2px solid var(--accent);
 color:var(--accent);
 }
 
-.btn:hover{transform:scale(1.08)}
-
-/* ===== LANGUAGE ===== */
-.lang{
-position:absolute;
-top:20px;
-right:20px;
-z-index:5;
-}
-
-.lang button{
-background:#000;
-border:1px solid var(--accent);
-color:var(--accent);
-padding:8px 14px;
-border-radius:20px;
-cursor:pointer;
-margin-left:5px;
-}
+.btn:hover{transform:scale(1.07)}
 
 /* ===== SECTIONS ===== */
 section{
-padding:90px 20px;
 max-width:1200px;
 margin:auto;
+padding:90px 20px;
 }
 
 h2{
-font-size:2.4rem;
+font-size:2.1rem;
 margin-bottom:35px;
-color:var(--accent);
 text-align:center;
+color:var(--accent);
 }
 
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:30px;
+gap:26px;
 }
 
 .card{
-background:linear-gradient(180deg,#16192b,#0c0e1a);
+background:linear-gradient(180deg,#12152a,#0a0c18);
+border-radius:26px;
 padding:30px;
-border-radius:24px;
-box-shadow:0 25px 60px rgba(0,0,0,.6);
+box-shadow:0 25px 70px rgba(0,0,0,.55);
 transition:.4s;
 }
 
 .card:hover{
-transform:translateY(-12px);
+transform:translateY(-10px);
 }
 
 .price{
 font-size:1.9rem;
 font-weight:900;
 color:var(--main);
-margin-top:10px;
 }
 
-/* ===== CTA ===== */
-.cta{
-background:linear-gradient(135deg,var(--main),#ffd000);
-padding:80px 25px;
-border-radius:40px;
-text-align:center;
+/* ===== OWNER ===== */
+.owner{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+align-items:center;
 }
 
-.cta h2{color:#000}
+.owner div{
+background:var(--glass);
+padding:30px;
+border-radius:26px;
+}
 
+/* ===== FORM ===== */
 form{
-max-width:520px;
+max-width:500px;
 margin:40px auto 0;
 display:grid;
-gap:16px;
+gap:14px;
 }
 
 input,textarea{
-padding:16px;
+padding:15px;
 border-radius:14px;
 border:none;
 font-size:1rem;
@@ -178,8 +167,8 @@ font-size:1rem;
 
 button{
 padding:16px;
-border-radius:40px;
 border:none;
+border-radius:40px;
 background:#000;
 color:#fff;
 font-weight:900;
@@ -190,13 +179,14 @@ cursor:pointer;
 iframe{
 width:100%;
 height:360px;
-border:none;
 border-radius:26px;
-box-shadow:0 25px 60px rgba(0,0,0,.6);
+border:none;
+box-shadow:0 25px 70px rgba(0,0,0,.55);
 }
 
+/* ===== FOOTER ===== */
 footer{
-padding:35px;
+padding:30px;
 text-align:center;
 font-size:.9rem;
 opacity:.6;
@@ -206,21 +196,23 @@ opacity:.6;
 
 <body>
 
-<div class="lang">
-<button onclick="setLang('ru')">RU</button>
-<button onclick="setLang('en')">EN</button>
-</div>
+<header>
+<div class="logo">PLATINUM JUMP</div>
+<nav>
+<a href="tel:+992011900303">Позвонить</a>
+<a href="https://wa.me/992011900303">WhatsApp</a>
+</nav>
+</header>
 
 <div class="hero">
-<video autoplay muted loop>
-<source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-trampoline-7961/1080p.mp4" type="video/mp4">
-</video>
+<div>
+<h1>Батутный центр нового поколения</h1>
+<p>
+Премиальное пространство для детей и семей в Душанбе.  
+Безопасность, радость, энергия и доверие.
+</p>
 
-<div class="hero-content">
-<h1 id="t1">PLATINUM JUMP CENTER</h1>
-<p id="t2">Премиальный батутный центр для детей и семей в Душанбе</p>
-
-<div class="btns">
+<div class="cta">
 <a class="btn" href="tel:+992011900303">📞 Позвонить</a>
 <a class="btn alt" href="https://wa.me/992011900303">💬 WhatsApp</a>
 </div>
@@ -228,16 +220,16 @@ opacity:.6;
 </div>
 
 <section>
-<h2 id="t3">Почему мы?</h2>
+<h2>3 этажа удовольствия</h2>
 <div class="grid">
-<div class="card">Безопасные сертифицированные батуты</div>
-<div class="card">Радость, энергия и развитие</div>
-<div class="card">Дни рождения и праздники</div>
+<div class="card">1 этаж — батутная зона и свободные прыжки</div>
+<div class="card">2 этаж — дни рождения и мероприятия</div>
+<div class="card">3 этаж — отдых для родителей</div>
 </div>
 </section>
 
 <section>
-<h2 id="t4">Цены</h2>
+<h2>Цены</h2>
 <div class="grid">
 <div class="card"><div class="price">50 сомони</div>30 минут</div>
 <div class="card"><div class="price">80 сомони</div>1 час</div>
@@ -245,8 +237,28 @@ opacity:.6;
 </div>
 </section>
 
-<section class="cta">
-<h2 id="t5">Оставить заявку</h2>
+<section>
+<h2>О владельце</h2>
+<div class="owner">
+<div>
+<h3>Мубориз</h3>
+<p>
+Основатель Platinum Jump Center.  
+Создал безопасное и современное пространство для детей в Душанбе.
+</p>
+<p><b>Телефон:</b> +992 011 900 303</p>
+</div>
+<div>
+<h3>Безопасность</h3>
+<p>
+Сертифицированные батуты, контроль персонала, правила безопасности и забота о каждом ребёнке.
+</p>
+</div>
+</div>
+</section>
+
+<section>
+<h2>Оставить заявку</h2>
 <form>
 <input placeholder="Имя">
 <input placeholder="Телефон">
@@ -256,37 +268,13 @@ opacity:.6;
 </section>
 
 <section>
-<h2 id="t6">Как нас найти</h2>
+<h2>Как нас найти</h2>
 <iframe src="https://maps.google.com/maps?q=Dushanbe&t=&z=15&output=embed"></iframe>
 </section>
 
 <footer>
-© 2025 Platinum Jump Center — ABSOLUTE DOMINATION LEVEL
+© 2025 Platinum Jump Center — NEXT EVOLUTION LEVEL
 </footer>
 
-<script>
-const text={
-ru:{
-t2:"Премиальный батутный центр для детей и семей в Душанбе",
-t3:"Почему мы?",
-t4:"Цены",
-t5:"Оставить заявку",
-t6:"Как нас найти"
-},
-en:{
-t2:"Premium trampoline park for kids and families in Dushanbe",
-t3:"Why choose us?",
-t4:"Prices",
-t5:"Send request",
-t6:"How to find us"
-}
-}
-function setLang(l){
-for(let k in text[l]){
-document.getElementById(k).innerText=text[l][k]
-}
-}
-</script>
-
 </body>
-  </html>
+</html>
