@@ -3,50 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Батутный центр — Радость, Прыжки, Эмоции | Душанбе</title>
+<title>Батутный центр в Душанбе — Радость и безопасность</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#0a0f1f;
-  --card:#121a33;
-  --accent:#ff3d81;
-  --accent2:#ffd93d;
+  --bg:#0b0f1a;
+  --card:#12182a;
+  --accent:#ff4d4d;
+  --accent2:#ffd24d;
   --text:#ffffff;
-  --muted:#b6c0ff;
+  --muted:#aab1d4;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif;}
-body{
-  background:radial-gradient(1200px 600px at 50% -20%, #1a2a6c, var(--bg));
-  color:var(--text);
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
+body{background:var(--bg);color:var(--text);line-height:1.6;}
 
-section{padding:90px 20px;}
-.container{max-width:1200px;margin:auto;}
+.container{max-width:1200px;margin:auto;padding:0 20px;}
+section{padding:90px 0;}
 
-h1,h2,h3{font-weight:800;}
-h1{font-size:clamp(36px,6vw,64px);}
-h2{font-size:clamp(28px,5vw,42px);}
-p{color:var(--muted);font-size:18px;line-height:1.7;}
+h1{font-size:56px;font-weight:800;line-height:1.1;}
+h2{font-size:38px;font-weight:800;margin-bottom:20px;}
+h3{font-size:22px;font-weight:700;margin-bottom:10px;}
+p{color:var(--muted);font-size:18px;}
 
 .btn{
   display:inline-block;
-  padding:18px 34px;
-  border-radius:50px;
+  padding:16px 34px;
+  border-radius:40px;
   background:linear-gradient(135deg,var(--accent),var(--accent2));
   color:#000;
-  font-weight:800;
+  font-weight:700;
   text-decoration:none;
   margin-top:25px;
-  box-shadow:0 25px 70px rgba(255,61,129,.5);
-  transition:.3s;
 }
-.btn:hover{transform:scale(1.05);}
+
+header{
+  padding:25px 0;
+  position:sticky;
+  top:0;
+  background:rgba(11,15,26,.85);
+  backdrop-filter:blur(10px);
+  z-index:10;
+}
+
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+nav a{color:#fff;text-decoration:none;margin-left:25px;font-weight:600;}
 
 .hero{
-  min-height:100vh;
+  min-height:85vh;
   display:flex;
   align-items:center;
 }
@@ -55,48 +65,34 @@ p{color:var(--muted);font-size:18px;line-height:1.7;}
   grid-template-columns:1.3fr 1fr;
   gap:60px;
 }
-
-.card{
-  background:linear-gradient(180deg,#1b2552,var(--card));
-  padding:40px;
-  border-radius:30px;
-  box-shadow:0 40px 100px rgba(0,0,0,.7);
+.hero-box{
+  background:var(--card);
+  padding:45px;
+  border-radius:24px;
 }
 
-.features, .prices{
+.grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:30px;
-  margin-top:50px;
+  margin-top:40px;
 }
-
-.box{
-  background:rgba(255,255,255,.05);
+.card{
+  background:var(--card);
   padding:35px;
-  border-radius:26px;
-  transition:.4s;
-}
-.box:hover{
-  transform:translateY(-10px);
-  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  border-radius:22px;
 }
 
 .price{
-  font-size:40px;
-  color:var(--accent2);
+  font-size:36px;
   font-weight:800;
-}
-
-.line{
-  height:1px;
-  background:linear-gradient(90deg,transparent,var(--accent),transparent);
-  margin:70px 0;
+  color:var(--accent2);
 }
 
 .whatsapp{
   position:fixed;
-  right:25px;
-  bottom:25px;
+  right:22px;
+  bottom:22px;
   width:64px;
   height:64px;
   border-radius:50%;
@@ -107,94 +103,117 @@ p{color:var(--muted);font-size:18px;line-height:1.7;}
   font-size:30px;
   color:#000;
   text-decoration:none;
-  box-shadow:0 20px 50px rgba(37,211,102,.6);
 }
 
 footer{
-  background:#060913;
+  background:#070a12;
+  padding:40px 0;
   text-align:center;
-  padding:50px 20px;
   font-size:14px;
+  color:#777;
+}
+
+@media(max-width:900px){
+  h1{font-size:40px}
+  .hero-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<a class="whatsapp" href="https://wa.me/992011900303" target="_blank">💬</a>
+<header>
+  <div class="container">
+    <nav>
+      <strong>Батутный центр</strong>
+      <div>
+        <a href="#about">О нас</a>
+        <a href="#prices">Цены</a>
+        <a href="#contact">Контакты</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<a class="whatsapp" href="https://wa.me/992011900303">💬</a>
 
 <section class="hero">
   <div class="container hero-grid">
     <div>
-      <h1>Батутный центр<br>для детей и взрослых</h1>
-      <p style="margin-top:25px;">
-        Прыжки • Радость • Эмоции • Безопасность  
-        Идеальное место для отдыха, дней рождения и праздников в Душанбе.
+      <h1>Современный<br>Батутный Центр<br>в Душанбе</h1>
+      <p style="margin-top:25px">
+        Пространство радости, движения и безопасности  
+        для детей и взрослых.
       </p>
-      <a class="btn" href="tel:+992011900303">📞 Позвонить</a>
+      <a class="btn" href="tel:+992011900303">Позвонить</a>
     </div>
-
-    <div class="card">
-      <h2>Почему выбирают нас?</h2>
-      <div class="line"></div>
+    <div class="hero-box">
+      <h3>Почему мы</h3>
       <p>✔ Современные батуты</p>
-      <p>✔ Безопасность и контроль</p>
-      <p>✔ Для детей и взрослых</p>
+      <p>✔ Инструкторы и контроль</p>
+      <p>✔ Детские зоны</p>
       <p>✔ Праздники и дни рождения</p>
     </div>
   </div>
 </section>
 
-<section>
+<section id="about">
   <div class="container">
-    <h2>Развлечения</h2>
-    <div class="features">
-      <div class="box">
-        <h3>👦 Детская зона</h3>
-        <p>Безопасные батуты для малышей</p>
+    <h2>О нашем центре</h2>
+    <p>
+      Мы — профессиональный батутный центр, созданный для активного отдыха,
+      развития координации и настоящих эмоций.  
+      Безопасность — наш главный приоритет.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Безопасность</h3>
+        <p>Мягкие зоны, контроль, правила</p>
       </div>
-      <div class="box">
-        <h3>🤸 Свободные прыжки</h3>
-        <p>Максимум драйва и эмоций</p>
+      <div class="card">
+        <h3>Для детей</h3>
+        <p>Отдельные зоны и формат</p>
       </div>
-      <div class="box">
-        <h3>🎉 Праздники</h3>
-        <p>Дни рождения и мероприятия</p>
+      <div class="card">
+        <h3>Праздники</h3>
+        <p>Дни рождения и события</p>
       </div>
     </div>
   </div>
 </section>
 
-<section>
+<section id="prices">
   <div class="container">
     <h2>Цены</h2>
-    <div class="prices">
-      <div class="box">
+    <div class="grid">
+      <div class="card">
         <h3>30 минут</h3>
         <div class="price">20 c</div>
       </div>
-      <div class="box">
+      <div class="card">
         <h3>1 час</h3>
         <div class="price">35 c</div>
       </div>
-      <div class="box">
+      <div class="card">
         <h3>Праздник</h3>
-        <div class="price">Договорная</div>
+        <div class="price">По договору</div>
       </div>
     </div>
   </div>
 </section>
 
-<section>
+<section id="contact">
   <div class="container">
-    <h2>Как нас найти</h2>
-    <p>Город Душанбе • Удобное расположение</p>
-    <a class="btn" href="tel:+992011900303">📍 Построить маршрут</a>
+    <h2>Контакты</h2>
+    <p>📍 Душанбе</p>
+    <p>📞 +992 011 900 303</p>
+    <a class="btn" href="tel:+992011900303">Позвонить</a>
   </div>
 </section>
 
 <footer>
-  © Батутный центр • Душанбе • Радость для всех
+  © Батутный центр • Душанбе
 </footer>
 
 </body>
