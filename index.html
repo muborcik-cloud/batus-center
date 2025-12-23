@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Батутный центр в Душанбе</title>
+<title>Батутный центр Душанбе</title>
 
-<meta name="description" content="Профессиональный батутный центр в Душанбе. Развлечения для детей, безопасность, радость и движение.">
-<meta name="keywords" content="батутный центр Душанбе, батуты для детей, развлечения Душанбе">
+<meta name="description" content="Современный батутный центр в Душанбе. 3 этажа, безопасность, радость для детей. Звоните или пишите в WhatsApp.">
+<meta name="keywords" content="батутный центр Душанбе, батуты Душанбе, детский центр">
 <meta name="author" content="Мубориз">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -14,52 +14,61 @@
 <style>
 :root{
   --accent:#ffcc4d;
-  --bg:#0b1020;
-  --card:rgba(255,255,255,.08);
+  --dark:#050814;
+  --glass:rgba(255,255,255,.08);
 }
-
 *{margin:0;padding:0;box-sizing:border-box}
-
 body{
   font-family:Inter,system-ui,sans-serif;
-  background:radial-gradient(circle at top,#1a2560,#060913);
+  background:#050814;
   color:#fff;
   line-height:1.6;
 }
 
-header{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:40px 20px;
-}
-
+/* HERO */
 .hero{
-  max-width:900px;
-  animation:fadeUp 1s ease;
+  position:relative;
+  height:100vh;
+  overflow:hidden;
 }
-
+.hero video{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.55;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,#050814,rgba(5,8,20,.6),#050814);
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+  animation:fadeUp 1.2s ease;
+}
 .hero h1{
-  font-size:clamp(2.2rem,4.5vw,3.8rem);
+  font-size:clamp(2.4rem,4.5vw,4rem);
   font-weight:800;
   color:var(--accent);
 }
-
 .hero p{
+  max-width:700px;
   font-size:1.15rem;
-  margin:20px auto 30px;
-  opacity:.95;
+  margin:18px 0 28px;
 }
 
-.buttons{
-  display:flex;
-  gap:15px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-
+/* BUTTONS */
+.buttons{display:flex;gap:15px;flex-wrap:wrap}
 .btn{
   padding:14px 28px;
   border-radius:50px;
@@ -67,28 +76,25 @@ header{
   text-decoration:none;
   transition:.3s;
 }
-
 .primary{
-  background:linear-gradient(90deg,var(--accent),#ffe8a3);
+  background:linear-gradient(90deg,var(--accent),#ffe6a3);
   color:#000;
 }
-
 .secondary{
   border:2px solid var(--accent);
   color:#fff;
 }
-
 .btn:hover{transform:translateY(-2px)}
 
+/* LANGUAGE */
 .lang{
   position:fixed;
   top:20px;
   right:20px;
   z-index:999;
 }
-
 .lang button{
-  background:var(--card);
+  background:var(--glass);
   color:#fff;
   border:none;
   padding:8px 14px;
@@ -96,44 +102,56 @@ header{
   cursor:pointer;
 }
 
+/* SECTIONS */
 section{
   max-width:1200px;
   margin:auto;
   padding:90px 20px;
 }
-
 .card{
-  background:var(--card);
+  background:var(--glass);
   border-radius:26px;
   padding:32px;
-  margin-bottom:30px;
   backdrop-filter:blur(14px);
+  margin-bottom:28px;
 }
-
 h2{
   color:var(--accent);
-  margin-bottom:12px;
   font-size:1.9rem;
+  margin-bottom:12px;
 }
-
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:22px;
 }
-
 .price{
   font-size:1.6rem;
   font-weight:800;
   color:var(--accent);
 }
 
-footer{
-  text-align:center;
-  padding:60px 20px;
-  opacity:.85;
+/* FORM */
+input,textarea{
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  border-radius:14px;
+  border:none;
+  font-family:inherit;
+}
+form button{
+  margin-top:15px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  background:var(--accent);
+  font-weight:800;
+  cursor:pointer;
 }
 
+/* FLOAT BUTTONS */
 .fixed{
   position:fixed;
   right:20px;
@@ -142,17 +160,14 @@ footer{
   font-weight:700;
   z-index:999;
 }
+.whatsapp{bottom:90px;background:#25d366;color:#000}
+.call{bottom:30px;background:var(--accent);color:#000}
 
-.whatsapp{
-  bottom:90px;
-  background:#25d366;
-  color:#000;
-}
-
-.call{
-  bottom:30px;
-  background:var(--accent);
-  color:#000;
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:60px 20px;
+  opacity:.85;
 }
 
 @keyframes fadeUp{
@@ -169,43 +184,39 @@ footer{
   <button onclick="setLang('en')">EN</button>
 </div>
 
-<header>
-  <div class="hero">
+<header class="hero">
+  <video autoplay muted loop>
+    <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-a-trampoline-7345/1080p.mp4" type="video/mp4">
+  </video>
+  <div class="hero-content">
     <h1 data-ru="Батутный центр в Душанбе" data-en="Trampoline Center in Dushanbe">
       Батутный центр в Душанбе
     </h1>
-
-    <p data-ru="Современный, безопасный и яркий центр для детей. Мы создаём радость, движение и эмоции."
-       data-en="A modern, safe and joyful trampoline center for children. We create motion and happiness.">
-      Современный, безопасный и яркий центр для детей.
+    <p data-ru="3 этажа радости, движения и безопасности для детей."
+       data-en="3 floors of fun, motion and safety for kids.">
+      3 этажа радости, движения и безопасности для детей.
     </p>
-
     <div class="buttons">
       <a href="tel:+992011900303" class="btn primary" data-ru="Позвонить" data-en="Call">Позвонить</a>
-      <a href="https://wa.me/992011900303" class="btn secondary" data-ru="WhatsApp" data-en="WhatsApp">WhatsApp</a>
+      <a href="https://wa.me/992011900303" class="btn secondary">WhatsApp</a>
     </div>
   </div>
 </header>
 
 <section>
   <div class="card">
-    <h2 data-ru="Кто я?" data-en="Who am I?">Кто я?</h2>
-    <p data-ru="Меня зовут Мубориз. Я основатель батутного центра в Душанбе."
-       data-en="My name is Muboriz. I am the founder of a trampoline center in Dushanbe.">
-      Меня зовут Мубориз. Я основатель батутного центра в Душанбе.
+    <h2 data-ru="О центре" data-en="About Center">О центре</h2>
+    <p data-ru="Меня зовут Мубориз. Я создал современный батутный центр в Душанбе."
+       data-en="My name is Muboriz. I created a modern trampoline center in Dushanbe.">
+      Меня зовут Мубориз. Я создал современный батутный центр в Душанбе.
     </p>
   </div>
 
   <h2 data-ru="Наши этажи" data-en="Our Floors">Наши этажи</h2>
   <div class="grid">
-    <div class="card" data-ru="1 этаж — зона для малышей, мягкие батуты."
-         data-en="1st floor — soft trampoline area for toddlers.">1 этаж — зона для малышей</div>
-
-    <div class="card" data-ru="2 этаж — активные прыжковые зоны."
-         data-en="2nd floor — active jumping zones.">2 этаж — активные зоны</div>
-
-    <div class="card" data-ru="3 этаж — максимум эмоций и движения."
-         data-en="3rd floor — maximum energy and fun.">3 этаж — максимум эмоций</div>
+    <div class="card">1 этаж — малыши и мягкие зоны</div>
+    <div class="card">2 этаж — активные прыжки</div>
+    <div class="card">3 этаж — максимум эмоций</div>
   </div>
 
   <h2 data-ru="Цены" data-en="Prices">Цены</h2>
@@ -216,6 +227,16 @@ footer{
   </div>
 
   <div class="card">
+    <h2 data-ru="Оставить заявку" data-en="Send Request">Оставить заявку</h2>
+    <form onsubmit="alert('Заявка отправлена!');return false;">
+      <input placeholder="Имя">
+      <input placeholder="Телефон">
+      <textarea placeholder="Сообщение"></textarea>
+      <button>Отправить</button>
+    </form>
+  </div>
+
+  <div class="card">
     <h2 data-ru="Как нас найти" data-en="How to Find Us">Как нас найти</h2>
     <iframe src="https://maps.google.com/maps?q=Dushanbe&t=&z=13&output=embed"
       width="100%" height="320" style="border:0;border-radius:18px"></iframe>
@@ -223,7 +244,7 @@ footer{
 </section>
 
 <footer>
-  © Батутный центр Душанбе • +992 011 900 303
+  © Батутный центр Душанбе • Мубориз • +992 011 900 303
 </footer>
 
 <a class="fixed whatsapp" href="https://wa.me/992011900303">WhatsApp</a>
