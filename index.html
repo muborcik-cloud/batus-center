@@ -3,114 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Батутный центр в Душанбе — Радость и безопасность</title>
+<title>Батутный центр в Душанбе</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --bg:#0b0f1a;
-  --card:#12182a;
-  --accent:#ff4d4d;
-  --accent2:#ffd24d;
-  --text:#ffffff;
-  --muted:#aab1d4;
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#0b0f1a;color:#fff;line-height:1.6}
+.container{max-width:1200px;margin:auto;padding:0 20px}
+section{padding:90px 0}
+h1{font-size:54px;font-weight:800}
+h2{font-size:38px;margin-bottom:20px}
+p{color:#cfd3ff;font-size:18px}
+
+header{
+  position:sticky;top:0;z-index:10;
+  background:rgba(11,15,26,.9);
+  backdrop-filter:blur(10px);
 }
-
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
-body{background:var(--bg);color:var(--text);line-height:1.6;}
-
-.container{max-width:1200px;margin:auto;padding:0 20px;}
-section{padding:90px 0;}
-
-h1{font-size:56px;font-weight:800;line-height:1.1;}
-h2{font-size:38px;font-weight:800;margin-bottom:20px;}
-h3{font-size:22px;font-weight:700;margin-bottom:10px;}
-p{color:var(--muted);font-size:18px;}
+nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 0
+}
+nav a{color:#fff;text-decoration:none;margin-left:25px;font-weight:600}
 
 .btn{
   display:inline-block;
   padding:16px 34px;
   border-radius:40px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  background:linear-gradient(135deg,#ff4d4d,#ffd24d);
   color:#000;
   font-weight:700;
   text-decoration:none;
-  margin-top:25px;
+  margin-top:25px
 }
-
-header{
-  padding:25px 0;
-  position:sticky;
-  top:0;
-  background:rgba(11,15,26,.85);
-  backdrop-filter:blur(10px);
-  z-index:10;
-}
-
-nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-nav a{color:#fff;text-decoration:none;margin-left:25px;font-weight:600;}
 
 .hero{
   min-height:85vh;
   display:flex;
-  align-items:center;
+  align-items:center
 }
 .hero-grid{
   display:grid;
-  grid-template-columns:1.3fr 1fr;
-  gap:60px;
+  grid-template-columns:1.2fr 1fr;
+  gap:60px
 }
-.hero-box{
-  background:var(--card);
-  padding:45px;
-  border-radius:24px;
+.box{
+  background:#12182a;
+  padding:40px;
+  border-radius:24px
 }
 
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:30px;
-  margin-top:40px;
+  margin-top:40px
 }
 .card{
-  background:var(--card);
+  background:#12182a;
   padding:35px;
-  border-radius:22px;
+  border-radius:22px
 }
 
 .price{
   font-size:36px;
   font-weight:800;
-  color:var(--accent2);
+  color:#ffd24d
+}
+
+input,textarea{
+  width:100%;
+  padding:15px;
+  border-radius:12px;
+  border:none;
+  margin-bottom:15px;
+  font-size:16px
+}
+form button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:30px;
+  font-weight:700;
+  background:linear-gradient(135deg,#ff4d4d,#ffd24d)
 }
 
 .whatsapp{
   position:fixed;
-  right:22px;
-  bottom:22px;
-  width:64px;
-  height:64px;
-  border-radius:50%;
+  right:20px;
+  bottom:20px;
+  width:64px;height:64px;
   background:#25d366;
+  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:30px;
   color:#000;
   text-decoration:none;
+  z-index:20
 }
 
 footer{
-  background:#070a12;
+  background:#060914;
   padding:40px 0;
   text-align:center;
-  font-size:14px;
-  color:#777;
+  color:#777
 }
 
 @media(max-width:900px){
@@ -125,7 +124,7 @@ footer{
 <header>
   <div class="container">
     <nav>
-      <strong>Батутный центр</strong>
+      <strong>Батутный Центр</strong>
       <div>
         <a href="#about">О нас</a>
         <a href="#prices">Цены</a>
@@ -141,35 +140,29 @@ footer{
   <div class="container hero-grid">
     <div>
       <h1>Современный<br>Батутный Центр<br>в Душанбе</h1>
-      <p style="margin-top:25px">
-        Пространство радости, движения и безопасности  
-        для детей и взрослых.
+      <p style="margin-top:20px">
+        Пространство радости, движения и безопасности для детей и взрослых
       </p>
-      <a class="btn" href="tel:+992011900303">Позвонить</a>
+      <a href="tel:+992011900303" class="btn">Позвонить</a>
     </div>
-    <div class="hero-box">
-      <h3>Почему мы</h3>
-      <p>✔ Современные батуты</p>
-      <p>✔ Инструкторы и контроль</p>
-      <p>✔ Детские зоны</p>
-      <p>✔ Праздники и дни рождения</p>
+    <div class="box">
+      <h3>Кто мы</h3>
+      <p>Мы — профессиональный батутный центр в Душанбе.</p>
+      <p>Работаем для детей и семей.</p>
+      <p>Безопасность — наш приоритет.</p>
+      <p><strong>Имя:</strong> Мубориз</p>
+      <p><strong>Телефон:</strong> +992 011 900 303</p>
     </div>
   </div>
 </section>
 
 <section id="about">
   <div class="container">
-    <h2>О нашем центре</h2>
-    <p>
-      Мы — профессиональный батутный центр, созданный для активного отдыха,
-      развития координации и настоящих эмоций.  
-      Безопасность — наш главный приоритет.
-    </p>
-
+    <h2>Почему выбирают нас</h2>
     <div class="grid">
       <div class="card">
-        <h3>Безопасность</h3>
-        <p>Мягкие зоны, контроль, правила</p>
+        <h3>Безопасно</h3>
+        <p>Контроль, мягкие зоны, правила</p>
       </div>
       <div class="card">
         <h3>Для детей</h3>
@@ -177,7 +170,7 @@ footer{
       </div>
       <div class="card">
         <h3>Праздники</h3>
-        <p>Дни рождения и события</p>
+        <p>Дни рождения и мероприятия</p>
       </div>
     </div>
   </div>
@@ -189,11 +182,11 @@ footer{
     <div class="grid">
       <div class="card">
         <h3>30 минут</h3>
-        <div class="price">20 c</div>
+        <div class="price">20 сомони</div>
       </div>
       <div class="card">
         <h3>1 час</h3>
-        <div class="price">35 c</div>
+        <div class="price">35 сомони</div>
       </div>
       <div class="card">
         <h3>Праздник</h3>
@@ -205,15 +198,28 @@ footer{
 
 <section id="contact">
   <div class="container">
-    <h2>Контакты</h2>
-    <p>📍 Душанбе</p>
+    <h2>Как нас найти</h2>
+    <p>📍 Город Душанбе</p>
     <p>📞 +992 011 900 303</p>
-    <a class="btn" href="tel:+992011900303">Позвонить</a>
+
+    <a class="btn" href="https://maps.google.com/?q=Душанбе">Построить маршрут</a>
+
+    <div class="grid" style="margin-top:50px">
+      <div class="card">
+        <h3>Отправить заявку</h3>
+        <form>
+          <input type="text" placeholder="Ваше имя" required>
+          <input type="tel" placeholder="Телефон" required>
+          <textarea rows="4" placeholder="Сообщение"></textarea>
+          <button type="submit">Отправить</button>
+        </form>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer>
-  © Батутный центр • Душанбе
+  © Батутный Центр • Душанбе
 </footer>
 
 </body>
