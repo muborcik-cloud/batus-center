@@ -3,260 +3,248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Батутный центр Душанбе</title>
 
-<meta name="description" content="Современный батутный центр в Душанбе. 3 этажа, безопасность, радость для детей. Звоните или пишите в WhatsApp.">
-<meta name="keywords" content="батутный центр Душанбе, батуты Душанбе, детский центр">
-<meta name="author" content="Мубориз">
+<title>PLATINUM JUMP CENTER — Батутный центр №1</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<meta name="description" content="Самый красивый батутный центр. Детский отдых, прыжки, праздники. Запись онлайн.">
+<meta name="keywords" content="батутный центр, детский центр, развлечения, прыжки">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --accent:#ffcc4d;
-  --dark:#050814;
-  --glass:rgba(255,255,255,.08);
+--bg:#0b0b12;
+--card:#151522;
+--main:#ff5c00;
+--accent:#00f7ff;
+--text:#ffffff;
 }
-*{margin:0;padding:0;box-sizing:border-box}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Montserrat}
+
 body{
-  font-family:Inter,system-ui,sans-serif;
-  background:#050814;
-  color:#fff;
-  line-height:1.6;
+background:radial-gradient(circle at top,#1a1a2e,#05050a);
+color:var(--text);
+overflow-x:hidden;
 }
 
-/* HERO */
-.hero{
-  position:relative;
-  height:100vh;
-  overflow:hidden;
-}
-.hero video{
-  position:absolute;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:.55;
-}
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to bottom,#050814,rgba(5,8,20,.6),#050814);
-}
-.hero-content{
-  position:relative;
-  z-index:2;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:20px;
-  animation:fadeUp 1.2s ease;
-}
-.hero h1{
-  font-size:clamp(2.4rem,4.5vw,4rem);
-  font-weight:800;
-  color:var(--accent);
-}
-.hero p{
-  max-width:700px;
-  font-size:1.15rem;
-  margin:18px 0 28px;
+header{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px;
+background:
+radial-gradient(circle at top,var(--main),transparent 60%);
 }
 
-/* BUTTONS */
-.buttons{display:flex;gap:15px;flex-wrap:wrap}
+header h1{
+font-size:clamp(2.5rem,6vw,5rem);
+font-weight:900;
+letter-spacing:3px;
+text-shadow:0 0 40px var(--main);
+animation:pulse 2s infinite alternate;
+}
+
+header p{
+margin-top:25px;
+font-size:1.3rem;
+opacity:.9;
+}
+
+@keyframes pulse{
+from{transform:scale(1)}
+to{transform:scale(1.03)}
+}
+
+.btns{
+margin-top:40px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+}
+
 .btn{
-  padding:14px 28px;
-  border-radius:50px;
-  font-weight:700;
-  text-decoration:none;
-  transition:.3s;
-}
-.primary{
-  background:linear-gradient(90deg,var(--accent),#ffe6a3);
-  color:#000;
-}
-.secondary{
-  border:2px solid var(--accent);
-  color:#fff;
-}
-.btn:hover{transform:translateY(-2px)}
-
-/* LANGUAGE */
-.lang{
-  position:fixed;
-  top:20px;
-  right:20px;
-  z-index:999;
-}
-.lang button{
-  background:var(--glass);
-  color:#fff;
-  border:none;
-  padding:8px 14px;
-  border-radius:20px;
-  cursor:pointer;
+padding:16px 34px;
+border-radius:50px;
+background:linear-gradient(135deg,var(--main),#ff9900);
+color:#000;
+font-weight:800;
+text-decoration:none;
+transition:.3s;
 }
 
-/* SECTIONS */
+.btn:hover{transform:scale(1.1)}
+
 section{
-  max-width:1200px;
-  margin:auto;
-  padding:90px 20px;
+padding:100px 20px;
+max-width:1300px;
+margin:auto;
 }
-.card{
-  background:var(--glass);
-  border-radius:26px;
-  padding:32px;
-  backdrop-filter:blur(14px);
-  margin-bottom:28px;
-}
+
 h2{
-  color:var(--accent);
-  font-size:1.9rem;
-  margin-bottom:12px;
+font-size:2.8rem;
+margin-bottom:40px;
+color:var(--accent);
+text-align:center;
 }
+
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:22px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:35px;
 }
+
+.card{
+background:linear-gradient(180deg,#1b1b2b,#0f0f18);
+padding:35px;
+border-radius:25px;
+box-shadow:0 30px 60px rgba(0,0,0,.6);
+transition:.4s;
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(120deg,transparent,var(--accent),transparent);
+opacity:.1;
+}
+
+.card:hover{
+transform:translateY(-15px) scale(1.02);
+}
+
 .price{
-  font-size:1.6rem;
-  font-weight:800;
-  color:var(--accent);
+font-size:2rem;
+font-weight:900;
+margin-top:15px;
+color:var(--main);
 }
 
-/* FORM */
+.cta{
+background:linear-gradient(135deg,var(--main),#ffcc00);
+border-radius:40px;
+padding:80px 30px;
+text-align:center;
+}
+
+.cta h2{color:#000}
+
+.cta a{
+display:inline-block;
+margin:15px;
+padding:18px 36px;
+background:#000;
+color:#fff;
+border-radius:60px;
+font-weight:800;
+text-decoration:none;
+}
+
+form{
+max-width:600px;
+margin:60px auto 0;
+display:grid;
+gap:20px;
+}
+
 input,textarea{
-  width:100%;
-  padding:14px;
-  margin-top:10px;
-  border-radius:14px;
-  border:none;
-  font-family:inherit;
-}
-form button{
-  margin-top:15px;
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:30px;
-  background:var(--accent);
-  font-weight:800;
-  cursor:pointer;
+padding:18px;
+border-radius:15px;
+border:none;
+font-size:1rem;
 }
 
-/* FLOAT BUTTONS */
-.fixed{
-  position:fixed;
-  right:20px;
-  padding:14px 18px;
-  border-radius:50px;
-  font-weight:700;
-  z-index:999;
+button{
+padding:18px;
+border-radius:50px;
+border:none;
+background:var(--accent);
+font-weight:900;
+cursor:pointer;
 }
-.whatsapp{bottom:90px;background:#25d366;color:#000}
-.call{bottom:30px;background:var(--accent);color:#000}
 
-/* FOOTER */
+iframe{
+width:100%;
+height:380px;
+border:none;
+border-radius:30px;
+box-shadow:0 30px 60px rgba(0,0,0,.6);
+}
+
 footer{
-  text-align:center;
-  padding:60px 20px;
-  opacity:.85;
-}
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px)}
-  to{opacity:1;transform:none}
+padding:40px;
+text-align:center;
+opacity:.6;
+font-size:.9rem;
 }
 </style>
 </head>
 
 <body>
 
-<div class="lang">
-  <button onclick="setLang('ru')">RU</button>
-  <button onclick="setLang('en')">EN</button>
-</div>
+<header>
+<div>
+<h1>PLATINUM JUMP CENTER</h1>
+<p>Самый красивый батутный центр. Радость. Движение. Эмоции.</p>
 
-<header class="hero">
-  <video autoplay muted loop>
-    <source src="https://cdn.coverr.co/videos/coverr-kids-jumping-on-a-trampoline-7345/1080p.mp4" type="video/mp4">
-  </video>
-  <div class="hero-content">
-    <h1 data-ru="Батутный центр в Душанбе" data-en="Trampoline Center in Dushanbe">
-      Батутный центр в Душанбе
-    </h1>
-    <p data-ru="3 этажа радости, движения и безопасности для детей."
-       data-en="3 floors of fun, motion and safety for kids.">
-      3 этажа радости, движения и безопасности для детей.
-    </p>
-    <div class="buttons">
-      <a href="tel:+992011900303" class="btn primary" data-ru="Позвонить" data-en="Call">Позвонить</a>
-      <a href="https://wa.me/992011900303" class="btn secondary">WhatsApp</a>
-    </div>
-  </div>
+<div class="btns">
+<a class="btn" href="tel:+992011900303">📞 Позвонить</a>
+<a class="btn" href="https://wa.me/992011900303">💬 WhatsApp</a>
+</div>
+</div>
 </header>
 
 <section>
-  <div class="card">
-    <h2 data-ru="О центре" data-en="About Center">О центре</h2>
-    <p data-ru="Меня зовут Мубориз. Я создал современный батутный центр в Душанбе."
-       data-en="My name is Muboriz. I created a modern trampoline center in Dushanbe.">
-      Меня зовут Мубориз. Я создал современный батутный центр в Душанбе.
-    </p>
-  </div>
+<h2>Кто мы?</h2>
+<div class="grid">
+<div class="card">Мы — современный батутный центр для детей и семей</div>
+<div class="card">Безопасность, радость и энергия</div>
+<div class="card">Праздники, тренировки и эмоции</div>
+</div>
+</section>
 
-  <h2 data-ru="Наши этажи" data-en="Our Floors">Наши этажи</h2>
-  <div class="grid">
-    <div class="card">1 этаж — малыши и мягкие зоны</div>
-    <div class="card">2 этаж — активные прыжки</div>
-    <div class="card">3 этаж — максимум эмоций</div>
-  </div>
+<section>
+<h2>Этажи центра</h2>
+<div class="grid">
+<div class="card">1 этаж — Детская зона</div>
+<div class="card">2 этаж — Прыжки и экстрим</div>
+<div class="card">3 этаж — Праздники и дни рождения</div>
+</div>
+</section>
 
-  <h2 data-ru="Цены" data-en="Prices">Цены</h2>
-  <div class="grid">
-    <div class="card"><div class="price">100</div> сомони</div>
-    <div class="card"><div class="price">200</div> сомони</div>
-    <div class="card"><div class="price">400</div> сомони</div>
-  </div>
+<section>
+<h2>Цены</h2>
+<div class="grid">
+<div class="card"><div class="price">50 сомони</div>30 минут</div>
+<div class="card"><div class="price">80 сомони</div>1 час</div>
+<div class="card"><div class="price">120 сомони</div>Безлимит</div>
+</div>
+</section>
 
-  <div class="card">
-    <h2 data-ru="Оставить заявку" data-en="Send Request">Оставить заявку</h2>
-    <form onsubmit="alert('Заявка отправлена!');return false;">
-      <input placeholder="Имя">
-      <input placeholder="Телефон">
-      <textarea placeholder="Сообщение"></textarea>
-      <button>Отправить</button>
-    </form>
-  </div>
+<section class="cta">
+<h2>Оставить заявку</h2>
+<form>
+<input placeholder="Ваше имя">
+<input placeholder="Телефон">
+<textarea placeholder="Комментарий"></textarea>
+<button>Отправить заявку</button>
+</form>
+</section>
 
-  <div class="card">
-    <h2 data-ru="Как нас найти" data-en="How to Find Us">Как нас найти</h2>
-    <iframe src="https://maps.google.com/maps?q=Dushanbe&t=&z=13&output=embed"
-      width="100%" height="320" style="border:0;border-radius:18px"></iframe>
-  </div>
+<section>
+<h2>Как нас найти</h2>
+<iframe src="https://maps.google.com/maps?q=Dushanbe&t=&z=15&output=embed"></iframe>
 </section>
 
 <footer>
-  © Батутный центр Душанбе • Мубориз • +992 011 900 303
+© 2025 Platinum Jump Center — Website Level: ∞ GOD MODE
 </footer>
-
-<a class="fixed whatsapp" href="https://wa.me/992011900303">WhatsApp</a>
-<a class="fixed call" href="tel:+992011900303">Call</a>
-
-<script>
-function setLang(lang){
-  document.querySelectorAll('[data-'+lang+']').forEach(el=>{
-    el.innerText = el.getAttribute('data-'+lang);
-  });
-}
-</script>
 
 </body>
 </html>
