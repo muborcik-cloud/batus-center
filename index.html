@@ -2,185 +2,141 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Roblox Style Tycoon</title>
+<title>City Builder</title>
 
 <style>
-body{
+body {
   margin:0;
+  overflow:hidden;
   font-family:Arial;
-  background:#0f172a;
+}
+
+#ui{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  background:#222;
   color:white;
-  text-align:center;
-}
-
-#top{
-  background:#1e293b;
-  padding:15px;
-  font-size:20px;
-}
-
-#click{
-  background:red;
-  border:none;
-  padding:20px;
-  font-size:20px;
-  border-radius:10px;
-  margin:15px;
-  cursor:pointer;
-}
-
-#shop{
-  margin-top:10px;
-}
-
-button{
   padding:10px;
-  margin:5px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
 }
 
-#map{
-  margin-top:20px;
-}
-
-.house{
-  display:inline-block;
-  width:50px;
-  height:50px;
-  margin:5px;
-  background:brown;
-}
-
-.l2{ background:orange; }
-.l3{ background:gold; }
-
-.bot{
-  display:inline-block;
-  margin:5px;
-  padding:5px;
-  background:#334155;
-  border-radius:6px;
+#game{
+  background:#87CEEB;
+  display:block;
 }
 </style>
 </head>
 
 <body>
 
-<div id="top">
-💰 Деньги: <span id="money">0</span> |
-⚡ Доход: <span id="income">0</span>/сек
+<div id="ui">
+💰 Деньги: <span id="money">100</span> |
+🏠 Домов: <span id="houses">0</span>
+<br>
+🎮 WASD — движение | E — построить дом
 </div>
 
-<button id="click">🔴 КЛИК</button>
-
-<div id="shop">
-<h3>🏠 Строительство</h3>
-<button onclick="buyHouse()">Дом (50)</button>
-<button onclick="upgrade()">Улучшить (100)</button>
-
-<h3>🤖 Игроки (боты)</h3>
-<button onclick="buyBot()">Нанять (200)</button>
-</div>
-
-<div id="map"></div>
-<div id="bots"></div>
+<canvas id="game"></canvas>
 
 <script>
-let money = 0;
-let houses = [];
-let income = 0;
-let bots = [];
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
 
-// клик
-click.onclick = ()=>{
-  money += 1;
-  update();
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+let money = 100;
+let houses = [];
+
+let player = {
+  x: 200,
+  y: 200,
+  size: 20,
+  speed: 3
 };
 
-// купить дом
-function buyHouse(){
-  if(money >= 50){
-    money -= 50;
-    houses.push(1);
-    income += 1;
-    render();
-  }
-}
+let keys = {};
 
-// апгрейд
-function upgrade(){
-  if(money >= 100){
-    for(let i=0;i<houses.length;i++){
-      if(houses[i] < 3){
-        houses[i]++;
-        money -= 100;
-        income += 2;
-        break;
-      }
+// управление
+document.addEventListener("keydown", e=>{
+  keys[e.key.toLowerCase()] = true;
+
+  // строить дом
+  if(e.key.toLowerCase() === "e"){
+    if(money >= 50){
+      houses.push({
+        x: player.x,
+        y: player.y,
+        level:1
+      });
+      money -= 50;
     }
-    render();
   }
-}
+});
 
-// бот (как "игрок")
-function buyBot(){
-  if(money >= 200){
-    money -= 200;
-    bots.push({power:1});
-    renderBots();
-  }
-}
+document.addEventListener("keyup", e=>{
+  keys[e.key.toLowerCase()] = false;
+});
 
 // доход
 setInterval(()=>{
-  money += income;
-
-  // боты кликают
-  bots.forEach(b=>{
-    money += b.power;
+  houses.forEach(h=>{
+    money += h.level;
   });
-
-  update();
+  updateUI();
 },1000);
 
+// движение
+function move(){
+  if(keys["w"]) player.y -= player.speed;
+  if(keys["s"]) player.y += player.speed;
+  if(keys["a"]) player.x -= player.speed;
+  if(keys["d"]) player.x += player.speed;
+}
+
+// рисуем
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  // земля
+  ctx.fillStyle = "#7CFC00";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  // дома
+  houses.forEach(h=>{
+    ctx.fillStyle = "brown";
+    ctx.fillRect(h.x-15,h.y-15,30,30);
+
+    // крыша
+    ctx.fillStyle = "red";
+    ctx.beginPath();
+    ctx.moveTo(h.x-15,h.y-15);
+    ctx.lineTo(h.x+15,h.y-15);
+    ctx.lineTo(h.x,h.y-35);
+    ctx.fill();
+  });
+
+  // игрок
+  ctx.fillStyle = "blue";
+  ctx.fillRect(player.x-10, player.y-10, 20, 20);
+}
+
 // UI
-function update(){
-  moneyEl.innerText = money;
-  incomeEl.innerText = income;
+function updateUI(){
+  document.getElementById("money").innerText = money;
+  document.getElementById("houses").innerText = houses.length;
 }
 
-const moneyEl = document.getElementById("money");
-const incomeEl = document.getElementById("income");
-
-// дома
-function render(){
-  update();
-  map.innerHTML = "";
-
-  houses.forEach(level=>{
-    const h = document.createElement("div");
-    h.className = "house";
-    if(level===2) h.classList.add("l2");
-    if(level===3) h.classList.add("l3");
-    map.appendChild(h);
-  });
+// цикл игры
+function gameLoop(){
+  move();
+  draw();
+  requestAnimationFrame(gameLoop);
 }
 
-// боты
-function renderBots(){
-  botsDiv.innerHTML = "";
-  bots.forEach((b,i)=>{
-    const el = document.createElement("div");
-    el.className = "bot";
-    el.innerText = "Игрок #" + (i+1);
-    botsDiv.appendChild(el);
-  });
-}
-
-const map = document.getElementById("map");
-const botsDiv = document.getElementById("bots");
+updateUI();
+gameLoop();
 </script>
 
 </body>
