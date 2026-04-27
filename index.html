@@ -1,40 +1,49 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Real Mobile Game</title>
-
+<title>Game</title>
 <style>
-body{margin:0;overflow:hidden;font-family:Arial;}
+body { margin:0; overflow:hidden; font-family:Arial; }
 
 #ui{
- position:absolute;top:0;width:100%;
- background:#111;color:white;padding:10px;
- z-index:10;
+ position:absolute;
+ top:0;
+ width:100%;
+ background:#111;
+ color:white;
+ padding:10px;
 }
 
 #joy{
- position:absolute;bottom:20px;left:20px;
- width:100px;height:100px;
- background:rgba(255,255,255,0.2);
+ position:absolute;
+ bottom:20px;
+ left:20px;
+ width:100px;
+ height:100px;
+ background:rgba(255,255,255,0.3);
  border-radius:50%;
 }
 
 #stick{
- width:40px;height:40px;
- background:white;border-radius:50%;
- position:absolute;left:30px;top:30px;
+ width:40px;
+ height:40px;
+ background:white;
+ border-radius:50%;
+ position:absolute;
+ left:30px;
+ top:30px;
 }
 
-.btn{
- position:absolute;right:20px;
- padding:12px;font-size:16px;
- border:none;border-radius:10px;
+button{
+ position:absolute;
+ right:20px;
+ padding:12px;
+ font-size:16px;
 }
 
-#build{bottom:140px;}
-#upgrade{bottom:90px;}
-#shop{bottom:40px;}
+#build{ bottom:120px; }
+#upgrade{ bottom:70px; }
 </style>
 </head>
 
@@ -47,35 +56,29 @@ body{margin:0;overflow:hidden;font-family:Arial;}
 
 <div id="joy"><div id="stick"></div></div>
 
-<button class="btn" id="build">🏠</button>
-<button class="btn" id="upgrade">⬆️</button>
-<button class="btn" id="shop">🛒</button>
+<button id="build">🏠</button>
+<button id="upgrade">⬆️</button>
 
 <canvas id="game"></canvas>
 
 <script>
 const c = document.getElementById("game");
 const ctx = c.getContext("2d");
-c.width = innerWidth;
-c.height = innerHeight;
 
-let player = {x:500,y:500};
+c.width = window.innerWidth;
+c.height = window.innerHeight;
+
+let player = {x:300,y:300};
 let money = 200;
 let houses = [];
-let trees = [];
 let joy = {x:0,y:0};
-
-// деревья
-for(let i=0;i<50;i++){
- trees.push({x:Math.random()*2000,y:Math.random()*2000});
-}
 
 // джойстик
 const stick = document.getElementById("stick");
-document.getElementById("joy").addEventListener("touchstart", ()=>{});
-document.addEventListener("touchmove", e=>{
+
+document.getElementById("joy").addEventListener("touchmove", e=>{
  let t=e.touches[0];
- let rect=document.getElementById("joy").getBoundingClientRect();
+ let rect=e.target.getBoundingClientRect();
 
  let dx=t.clientX-(rect.left+50);
  let dy=t.clientY-(rect.top+50);
@@ -86,8 +89,9 @@ document.addEventListener("touchmove", e=>{
  stick.style.left=(30+dx/2)+"px";
  stick.style.top=(30+dy/2)+"px";
 });
+
 document.addEventListener("touchend", ()=>{
- joy.x=0;joy.y=0;
+ joy.x=0; joy.y=0;
  stick.style.left="30px";
  stick.style.top="30px";
 });
@@ -102,11 +106,13 @@ build.onclick=()=>{
 
 upgrade.onclick=()=>{
  let near=null,dist=50;
+
  houses.forEach(h=>{
   let d=Math.hypot(player.x-h.x,player.y-h.y);
   if(d<dist){near=h;dist=d;}
  });
- if(near && near.level<10){
+
+ if(near){
   let cost=near.level*40;
   if(money>=cost){
    money-=cost;
@@ -115,81 +121,53 @@ upgrade.onclick=()=>{
  }
 };
 
-shop.onclick=()=>{
- money+=100; // простой магазин (потом можно улучшить)
-};
-
 // движение
 function move(){
- player.x+=joy.x*4;
- player.y+=joy.y*4;
+ player.x+=joy.x*3;
+ player.y+=joy.y*3;
 }
 
 // доход
 setInterval(()=>{
  houses.forEach(h=>money+=h.level);
- save();
  update();
 },1000);
 
-// сохранение
-function save(){
- localStorage.setItem("save",JSON.stringify({money,houses}));
-}
-function load(){
- let s=localStorage.getItem("save");
- if(s){
-  let d=JSON.parse(s);
-  money=d.money;
-  houses=d.houses;
- }
-}
-load();
-
-// камера
-function cam(){
- return {x:player.x-c.width/2,y:player.y-c.height/2};
-}
-
-// рисование
+// рисуем
 function draw(){
  ctx.clearRect(0,0,c.width,c.height);
- let m=cam();
 
- // трава
+ // фон
  ctx.fillStyle="#6fdc3c";
  ctx.fillRect(0,0,c.width,c.height);
-
- // деревья
- trees.forEach(t=>{
-  ctx.fillStyle="green";
-  ctx.beginPath();
-  ctx.arc(t.x-m.x,t.y-m.y,15,0,6.28);
-  ctx.fill();
- });
 
  // дома
  houses.forEach(h=>{
   ctx.fillStyle="brown";
-  ctx.fillRect(h.x-20-m.x,h.y-20-m.y,40,40);
-
-  ctx.fillStyle="red";
-  ctx.beginPath();
-  ctx.moveTo(h.x-20-m.x,h.y-20-m.y);
-  ctx.lineTo(h.x+20-m.x,h.y-20-m.y);
-  ctx.lineTo(h.x-m.x,h.y-40-m.y);
-  ctx.fill();
+  ctx.fillRect(h.x-15,h.y-15,30,30);
  });
 
- // персонаж (тело + голова + ноги)
+ // игрок
  ctx.fillStyle="blue";
- ctx.fillRect(player.x-10-m.x,player.y-10-m.y,20,20);
+ ctx.fillRect(player.x-10,player.y-10,20,20);
+}
 
- ctx.fillStyle="white";
- ctx.beginPath();
- ctx.arc(player.x-m.x,player.y-18-m.y,6,0,6.28);
- ctx.fill();
+// UI
+function update(){
+ document.getElementById("money").innerText=Math.floor(money);
+ document.getElementById("houses").innerText=houses.length;
+}
 
- ctx.fillStyle="black";
- ctx.fillRect(player.x-8-m.x,player.y+10-m.y,5,10);
- ctx.fillRect(player.x+3-m.x,player.y+10-m.y,5,10
+// цикл
+function loop(){
+ move();
+ draw();
+ requestAnimationFrame(loop);
+}
+
+update();
+loop();
+</script>
+
+</body>
+</html>
