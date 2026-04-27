@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>City Max</title>
+<title>City Next Level</title>
 
 <style>
 body{margin:0;overflow:hidden;font-family:Arial;}
@@ -31,10 +31,9 @@ body{margin:0;overflow:hidden;font-family:Arial;}
  padding:10px;
 }
 
-#buy{bottom:200px;}
-#car{bottom:150px;}
-#shoot{bottom:100px;}
-#save{bottom:50px;}
+#enter{bottom:250px;}
+#car{bottom:200px;}
+#shoot{bottom:150px;}
 </style>
 </head>
 
@@ -43,15 +42,14 @@ body{margin:0;overflow:hidden;font-family:Arial;}
 <div id="ui">
 💰 <span id="money">200</span> |
 🏠 <span id="houses">0</span> |
-🚗 <span id="mode">пешком</span>
+📋 <span id="task">найди дом</span>
 </div>
 
 <div id="joy"><div id="stick"></div></div>
 
-<button class="btn" id="buy">🏠 купить</button>
+<button class="btn" id="enter">🚪</button>
 <button class="btn" id="car">🚗</button>
 <button class="btn" id="shoot">🔫</button>
-<button class="btn" id="save">💾</button>
 
 <canvas id="game"></canvas>
 
@@ -66,18 +64,25 @@ let player={x:1000,y:1000};
 let money=200;
 let houses=[];
 let inCar=false;
-
-let cars=[{x:1100,y:1000}];
-let bullets=[];
-let npcs=[];
+let inside=false;
+let task="найди дом";
 
 // NPC
-for(let i=0;i<20;i++){
+let npcs=[];
+for(let i=0;i<15;i++){
  npcs.push({
   x:Math.random()*2000,
   y:Math.random()*2000,
   dx:Math.random()*2-1,
   dy:Math.random()*2-1
+ });
+}
+
+// дома
+for(let i=0;i<10;i++){
+ houses.push({
+  x:Math.random()*2000,
+  y:Math.random()*2000
  });
 }
 
@@ -107,16 +112,27 @@ document.addEventListener("touchend", ()=>{
 
 // движение
 function move(){
- let speed = inCar ? 6 : 3;
+ let speed=inCar?6:3;
  player.x+=joy.x*speed;
  player.y+=joy.y*speed;
 }
 
-// купить дом
-buy.onclick=()=>{
- if(money>=100){
-  houses.push({x:player.x,y:player.y});
-  money-=100;
+// вход в дом
+enter.onclick=()=>{
+ let near=false;
+ houses.forEach(h=>{
+  if(Math.hypot(player.x-h.x,player.y-h.y)<40){
+   near=true;
+  }
+ });
+
+ if(near){
+  inside=!inside;
+  if(inside){
+   task="ты внутри дома";
+  }else{
+   task="выйди и заработай";
+  }
  }
 };
 
@@ -126,48 +142,41 @@ car.onclick=()=>{
 };
 
 // стрельба
+let bullets=[];
 shoot.onclick=()=>{
  bullets.push({x:player.x,y:player.y,dx:joy.x*10,dy:joy.y*10});
 };
 
 // обновление
 function update(){
- // доход с домов
- houses.forEach(()=>money+=0.1);
+ houses.forEach(()=>money+=0.05);
 
- // пули
  bullets.forEach(b=>{
   b.x+=b.dx;
   b.y+=b.dy;
  });
 
- // NPC
  npcs.forEach(n=>{
   n.x+=n.dx;
   n.y+=n.dy;
  });
 
- // попадания
  bullets.forEach(b=>{
   npcs.forEach(n=>{
-   let d=Math.hypot(b.x-n.x,b.y-n.y);
-   if(d<10){
+   if(Math.hypot(b.x-n.x,b.y-n.y)<10){
+    money+=10;
     n.x=Math.random()*2000;
     n.y=Math.random()*2000;
-    money+=10;
    }
   });
  });
 
  document.getElementById("money").innerText=Math.floor(money);
  document.getElementById("houses").innerText=houses.length;
- document.getElementById("mode").innerText=inCar?"в машине":"пешком";
-}
+ document.getElementById("task").innerText=task;
 
-// сохранение
-save.onclick=()=>{
- localStorage.setItem("save",JSON.stringify({money,houses}));
-};
+ localStorage.setItem("save",JSON.stringify({money}));
+}
 
 // камера
 function cam(){
@@ -177,37 +186,35 @@ function cam(){
 // рисование
 function draw(){
  ctx.clearRect(0,0,c.width,c.height);
+
+ if(inside){
+  ctx.fillStyle="#ccc";
+  ctx.fillRect(0,0,c.width,c.height);
+  ctx.fillStyle="black";
+  ctx.fillText("ВНУТРИ ДОМА",50,50);
+  return;
+ }
+
  let m=cam();
 
- // фон
  ctx.fillStyle="#6fdc3c";
  ctx.fillRect(0,0,c.width,c.height);
 
- // дома
  houses.forEach(h=>{
   ctx.fillStyle="brown";
   ctx.fillRect(h.x-15-m.x,h.y-15-m.y,30,30);
  });
 
- // машины
- cars.forEach(car=>{
-  ctx.fillStyle="red";
-  ctx.fillRect(car.x-m.x,car.y-m.y,30,15);
- });
-
- // NPC
  npcs.forEach(n=>{
   ctx.fillStyle="yellow";
   ctx.fillRect(n.x-5-m.x,n.y-5-m.y,10,10);
  });
 
- // пули
- ctx.fillStyle="black";
  bullets.forEach(b=>{
+  ctx.fillStyle="black";
   ctx.fillRect(b.x-m.x,b.y-m.y,5,5);
  });
 
- // игрок
  ctx.fillStyle="blue";
  ctx.fillRect(player.x-10-m.x,player.y-10-m.y,20,20);
 }
