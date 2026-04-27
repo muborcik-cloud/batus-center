@@ -2,137 +2,135 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>My Roblox Style Game</title>
-
+<title>3D Craft Game</title>
 <style>
-body{
-  margin:0;
-  font-family:Arial;
-  background:#111;
+body { margin:0; overflow:hidden; }
+#info {
+  position:absolute;
+  top:10px;
+  left:10px;
   color:white;
-  text-align:center;
-}
-
-#top{
-  background:#222;
-  padding:15px;
-  font-size:20px;
-}
-
-#clickBtn{
-  background:red;
-  color:white;
-  border:none;
-  padding:20px;
-  font-size:20px;
-  border-radius:10px;
-  margin:20px;
-  cursor:pointer;
-}
-
-#shop{
-  margin-top:20px;
-}
-
-button{
-  margin:5px;
+  background:rgba(0,0,0,0.5);
   padding:10px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
+  font-family:Arial;
 }
-
-.house{
-  display:inline-block;
-  width:60px;
-  height:60px;
-  margin:5px;
-  background:brown;
-}
-
-.level2{ background:orange; }
-.level3{ background:gold; }
-
 </style>
 </head>
 
 <body>
 
-<div id="top">
-💰 Деньги: <span id="money">0</span>
+<div id="info">
+🎮 WASD — ходить<br>
+🖱 Мышка — смотреть<br>
+⬅️ ЛКМ — ставить блок<br>
+➡️ ПКМ — удалять
 </div>
 
-<button id="clickBtn">🔴 ЖМИ ДЛЯ ДЕНЕГ</button>
+<script type="module">
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.158/build/three.module.js";
 
-<div id="shop">
-<h3>🏠 Строительство</h3>
-<button onclick="buyHouse()">Купить дом (50)</button>
-<button onclick="upgrade()">Улучшить дом (100)</button>
-</div>
+let scene = new THREE.Scene();
+scene.background = new THREE.Color(0x87CEEB);
 
-<div id="houses"></div>
+let camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
+let renderer = new THREE.WebGLRenderer();
+renderer.setSize(innerWidth, innerHeight);
+document.body.appendChild(renderer.domElement);
 
-<script>
-let money = 0;
-let houses = [];
-let income = 0;
+// свет
+const light = new THREE.DirectionalLight(0xffffff,1);
+light.position.set(5,10,5);
+scene.add(light);
 
-// кнопка денег
-document.getElementById("clickBtn").onclick = () => {
-  money += 1;
-  update();
-};
+// земля
+const planeGeo = new THREE.PlaneGeometry(50,50);
+const planeMat = new THREE.MeshLambertMaterial({color:0x55aa55});
+const plane = new THREE.Mesh(planeGeo, planeMat);
+plane.rotation.x = -Math.PI/2;
+scene.add(plane);
 
-// купить дом
-function buyHouse(){
-  if(money >= 50){
-    money -= 50;
-    houses.push(1);
-    income += 1;
-    render();
+// блоки
+const blocks = [];
+const cubeGeo = new THREE.BoxGeometry(1,1,1);
+const cubeMat = new THREE.MeshLambertMaterial({color:0x8B4513});
+
+// камера
+camera.position.set(0,2,5);
+
+// управление
+let keys = {};
+document.addEventListener("keydown", e=>keys[e.key]=true);
+document.addEventListener("keyup", e=>keys[e.key]=false);
+
+// мышка
+document.body.onclick = () => document.body.requestPointerLock();
+
+let yaw = 0;
+let pitch = 0;
+
+document.addEventListener("mousemove", e=>{
+  if(document.pointerLockElement){
+    yaw -= e.movementX * 0.002;
+    pitch -= e.movementY * 0.002;
+    pitch = Math.max(-1.5, Math.min(1.5, pitch));
   }
-}
+});
 
-// улучшение
-function upgrade(){
-  if(money >= 100){
-    for(let i=0;i<houses.length;i++){
-      if(houses[i] < 3){
-        money -= 100;
-        houses[i]++;
-        income += 2;
-        break;
+// луч (для строительства)
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+// клик
+document.addEventListener("mousedown", e=>{
+  raycaster.setFromCamera(new THREE.Vector2(0,0), camera);
+  const intersects = raycaster.intersectObjects([plane,...blocks]);
+
+  if(intersects.length > 0){
+    const hit = intersects[0];
+
+    if(e.button === 0){ // поставить
+      const cube = new THREE.Mesh(cubeGeo, cubeMat);
+      cube.position.copy(hit.point).add(hit.face.normal).floor().addScalar(0.5);
+      scene.add(cube);
+      blocks.push(cube);
+    }
+
+    if(e.button === 2){ // удалить
+      if(hit.object !== plane){
+        scene.remove(hit.object);
+        blocks.splice(blocks.indexOf(hit.object),1);
       }
     }
-    render();
   }
-}
+});
 
-// доход
-setInterval(()=>{
-  money += income;
-  update();
-},1000);
+// отключить меню ПКМ
+window.addEventListener("contextmenu", e=>e.preventDefault());
 
-// обновление UI
+// движение
 function update(){
-  document.getElementById("money").innerText = money;
+  let speed = 0.1;
+
+  let forward = new THREE.Vector3(Math.sin(yaw),0,Math.cos(yaw));
+  let right = new THREE.Vector3().crossVectors(forward,new THREE.Vector3(0,1,0));
+
+  if(keys["w"]) camera.position.add(forward.clone().multiplyScalar(-speed));
+  if(keys["s"]) camera.position.add(forward.clone().multiplyScalar(speed));
+  if(keys["a"]) camera.position.add(right.clone().multiplyScalar(-speed));
+  if(keys["d"]) camera.position.add(right.clone().multiplyScalar(speed));
+
+  camera.rotation.order = "YXZ";
+  camera.rotation.y = yaw;
+  camera.rotation.x = pitch;
 }
 
-// отображение домов
-function render(){
+// рендер
+function animate(){
+  requestAnimationFrame(animate);
   update();
-  const div = document.getElementById("houses");
-  div.innerHTML = "";
-
-  houses.forEach(level=>{
-    const h = document.createElement("div");
-    h.className = "house";
-    if(level === 2) h.classList.add("level2");
-    if(level === 3) h.classList.add("level3");
-    div.appendChild(h);
-  });
+  renderer.render(scene, camera);
 }
+animate();
 </script>
 
 </body>
