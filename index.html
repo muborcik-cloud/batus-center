@@ -2,39 +2,30 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Pro Builder Game</title>
+<title>Ultra City Builder</title>
 
 <style>
-body {
-  margin:0;
-  overflow:hidden;
-  font-family:Arial;
-}
-
+body{margin:0;overflow:hidden;font-family:Arial;}
 #ui{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  background:#111;
-  color:white;
-  padding:10px;
+ position:absolute;top:0;left:0;width:100%;
+ background:#111;color:white;padding:10px;
 }
-
-canvas{
-  display:block;
-  background:#87CEEB;
-}
+canvas{background:#87CEEB;display:block;}
+button{margin-top:5px;}
 </style>
 </head>
 
 <body>
 
 <div id="ui">
-💰 Деньги: <span id="money">200</span> |
-🏠 Домов: <span id="count">0</span>
+💰 Деньги: <span id="money">0</span> |
+🌲 Дерево: <span id="wood">0</span> |
+🏠 Домов: <span id="houses">0</span>
 <br>
-🎮 WASD — ходить | E — построить | Q — улучшить
+🎮 WASD — ходить | E — дом | Q — улучшить
+<br>
+<button onclick="buyWood()">Купить дерево (10$)</button>
+<button onclick="saveGame()">💾 Сохранить</button>
 </div>
 
 <canvas id="game"></canvas>
@@ -47,120 +38,160 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 let money = 200;
+let wood = 5;
 
-let player = {
-  x:300,
-  y:300,
-  size:20,
-  speed:3
-};
-
+let player = {x:300,y:300,size:20,speed:3};
 let houses = [];
+let npcs = [];
 let keys = {};
+
+// NPC
+for(let i=0;i<5;i++){
+ npcs.push({
+  x:Math.random()*800,
+  y:Math.random()*600,
+  dx:Math.random()*2-1,
+  dy:Math.random()*2-1
+ });
+}
 
 // управление
 document.addEventListener("keydown", e=>{
-  keys[e.key.toLowerCase()] = true;
+ keys[e.key.toLowerCase()] = true;
 
-  // построить
-  if(e.key.toLowerCase() === "e"){
-    if(money >= 50){
-      houses.push({
-        x: player.x,
-        y: player.y,
-        level:1
-      });
-      money -= 50;
-    }
+ if(e.key==="e"){
+  if(money>=50 && wood>=2){
+    houses.push({x:player.x,y:player.y,level:1});
+    money-=50; wood-=2;
   }
+ }
 
-  // улучшить ближайший дом
-  if(e.key.toLowerCase() === "q"){
-    let nearest = null;
-    let dist = 50;
+ if(e.key==="q"){
+  let nearest=null,dist=50;
+  houses.forEach(h=>{
+   let d=Math.hypot(player.x-h.x,player.y-h.y);
+   if(d<dist){nearest=h;dist=d;}
+  });
 
-    houses.forEach(h=>{
-      let d = Math.hypot(player.x - h.x, player.y - h.y);
-      if(d < dist){
-        nearest = h;
-        dist = d;
-      }
-    });
-
-    if(nearest && nearest.level < 10){
-      let cost = nearest.level * 50;
-
-      if(money >= cost){
-        money -= cost;
-        nearest.level++;
-      }
-    }
+  if(nearest && nearest.level<10){
+   let cost=nearest.level*40;
+   if(money>=cost){
+    money-=cost;
+    nearest.level++;
+   }
   }
+ }
 });
 
 document.addEventListener("keyup", e=>{
-  keys[e.key.toLowerCase()] = false;
+ keys[e.key.toLowerCase()] = false;
 });
 
 // движение
 function move(){
-  if(keys["w"]) player.y -= player.speed;
-  if(keys["s"]) player.y += player.speed;
-  if(keys["a"]) player.x -= player.speed;
-  if(keys["d"]) player.x += player.speed;
+ if(keys["w"]) player.y-=player.speed;
+ if(keys["s"]) player.y+=player.speed;
+ if(keys["a"]) player.x-=player.speed;
+ if(keys["d"]) player.x+=player.speed;
+}
+
+// NPC движение
+function moveNPC(){
+ npcs.forEach(n=>{
+  n.x+=n.dx;
+  n.y+=n.dy;
+
+  if(Math.random()<0.02){
+   n.dx=Math.random()*2-1;
+   n.dy=Math.random()*2-1;
+  }
+ });
 }
 
 // доход
 setInterval(()=>{
-  houses.forEach(h=>{
-    money += h.level; // чем выше уровень — тем больше доход
-  });
-  updateUI();
+ houses.forEach(h=> money+=h.level);
+ npcs.forEach(()=> money+=0.5);
+ updateUI();
 },1000);
 
+// магазин
+function buyWood(){
+ if(money>=10){
+  money-=10;
+  wood+=1;
+ }
+}
+
+// сохранение
+function saveGame(){
+ localStorage.setItem("gameSave", JSON.stringify({
+  money,wood,houses
+ }));
+}
+
+// загрузка
+function loadGame(){
+ let data = localStorage.getItem("gameSave");
+ if(data){
+  let d = JSON.parse(data);
+  money=d.money;
+  wood=d.wood;
+  houses=d.houses;
+ }
+}
+loadGame();
+
 // цвета уровней
-function getColor(level){
-  const colors = [
-    "#8B4513","#A0522D","#CD853F","#DEB887","#F4A460",
-    "#FFD700","#FFA500","#FF8C00","#FF4500","#FF0000"
-  ];
-  return colors[level-1];
+function color(l){
+ return ["#8B4513","#A0522D","#CD853F","#DEB887","#F4A460",
+ "#FFD700","#FFA500","#FF8C00","#FF4500","#FF0000"][l-1];
 }
 
 // рисование
 function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+ ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  // земля
-  ctx.fillStyle = "#7CFC00";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+ // земля
+ ctx.fillStyle="#7CFC00";
+ ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  // дома
-  houses.forEach(h=>{
-    ctx.fillStyle = getColor(h.level);
-    ctx.fillRect(h.x-15,h.y-15,30,30);
+ // дома
+ houses.forEach(h=>{
+  ctx.fillStyle=color(h.level);
+  ctx.fillRect(h.x-15,h.y-15,30,30);
+  ctx.fillStyle="black";
+  ctx.fillText(h.level,h.x-5,h.y+5);
+ });
 
-    // уровень
-    ctx.fillStyle = "black";
-    ctx.fillText(h.level, h.x-5, h.y+5);
-  });
+ // NPC
+ ctx.fillStyle="purple";
+ npcs.forEach(n=>{
+  ctx.fillRect(n.x-8,n.y-8,16,16);
+ });
 
-  // игрок
-  ctx.fillStyle = "blue";
-  ctx.fillRect(player.x-10, player.y-10, 20, 20);
+ // игрок
+ ctx.fillStyle="blue";
+ ctx.fillRect(player.x-10,player.y-10,20,20);
 }
 
 // UI
 function updateUI(){
-  document.getElementById("money").innerText = money;
-  document.getElementById("count").innerText = houses.length;
+ moneyEl.innerText=Math.floor(money);
+ woodEl.innerText=wood;
+ houseEl.innerText=houses.length;
 }
+
+const moneyEl=document.getElementById("money");
+const woodEl=document.getElementById("wood");
+const houseEl=document.getElementById("houses");
 
 // цикл
 function loop(){
-  move();
-  draw();
-  requestAnimationFrame(loop);
+ move();
+ moveNPC();
+ draw();
+ requestAnimationFrame(loop);
 }
 
 updateUI();
