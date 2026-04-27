@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>City Ultimate</title>
+<title>City Max</title>
 
 <style>
 body{margin:0;overflow:hidden;font-family:Arial;}
@@ -31,6 +31,7 @@ body{margin:0;overflow:hidden;font-family:Arial;}
  padding:10px;
 }
 
+#buy{bottom:200px;}
 #car{bottom:150px;}
 #shoot{bottom:100px;}
 #save{bottom:50px;}
@@ -41,11 +42,13 @@ body{margin:0;overflow:hidden;font-family:Arial;}
 
 <div id="ui">
 💰 <span id="money">200</span> |
+🏠 <span id="houses">0</span> |
 🚗 <span id="mode">пешком</span>
 </div>
 
 <div id="joy"><div id="stick"></div></div>
 
+<button class="btn" id="buy">🏠 купить</button>
 <button class="btn" id="car">🚗</button>
 <button class="btn" id="shoot">🔫</button>
 <button class="btn" id="save">💾</button>
@@ -61,6 +64,7 @@ c.height = innerHeight;
 
 let player={x:1000,y:1000};
 let money=200;
+let houses=[];
 let inCar=false;
 
 let cars=[{x:1100,y:1000}];
@@ -68,7 +72,7 @@ let bullets=[];
 let npcs=[];
 
 // NPC
-for(let i=0;i<15;i++){
+for(let i=0;i<20;i++){
  npcs.push({
   x:Math.random()*2000,
   y:Math.random()*2000,
@@ -108,6 +112,14 @@ function move(){
  player.y+=joy.y*speed;
 }
 
+// купить дом
+buy.onclick=()=>{
+ if(money>=100){
+  houses.push({x:player.x,y:player.y});
+  money-=100;
+ }
+};
+
 // машина
 car.onclick=()=>{
  inCar=!inCar;
@@ -120,6 +132,9 @@ shoot.onclick=()=>{
 
 // обновление
 function update(){
+ // доход с домов
+ houses.forEach(()=>money+=0.1);
+
  // пули
  bullets.forEach(b=>{
   b.x+=b.dx;
@@ -144,13 +159,14 @@ function update(){
   });
  });
 
- document.getElementById("money").innerText=money;
+ document.getElementById("money").innerText=Math.floor(money);
+ document.getElementById("houses").innerText=houses.length;
  document.getElementById("mode").innerText=inCar?"в машине":"пешком";
 }
 
 // сохранение
 save.onclick=()=>{
- localStorage.setItem("save",JSON.stringify({money}));
+ localStorage.setItem("save",JSON.stringify({money,houses}));
 };
 
 // камера
@@ -166,6 +182,12 @@ function draw(){
  // фон
  ctx.fillStyle="#6fdc3c";
  ctx.fillRect(0,0,c.width,c.height);
+
+ // дома
+ houses.forEach(h=>{
+  ctx.fillStyle="brown";
+  ctx.fillRect(h.x-15-m.x,h.y-15-m.y,30,30);
+ });
 
  // машины
  cars.forEach(car=>{
