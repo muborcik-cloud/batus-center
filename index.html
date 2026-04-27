@@ -2,234 +2,158 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Mobile Builder Game</title>
-
+<title>3D Builder PRO</title>
 <style>
-body { margin:0; overflow:hidden; font-family:Arial; }
-
+body { margin:0; overflow:hidden; }
 #ui{
  position:absolute;
- top:0;
- width:100%;
- background:#111;
+ top:10px;
+ left:10px;
  color:white;
+ background:rgba(0,0,0,0.5);
  padding:10px;
- z-index:10;
+ font-family:Arial;
 }
-
-#joystick{
- position:absolute;
- bottom:30px;
- left:30px;
- width:100px;
- height:100px;
- background:rgba(255,255,255,0.2);
- border-radius:50%;
-}
-
-#stick{
- position:absolute;
- width:40px;
- height:40px;
- background:white;
- border-radius:50%;
- left:30px;
- top:30px;
-}
-
-button{
- position:absolute;
- right:20px;
- padding:10px;
- margin-top:5px;
-}
-#build{ bottom:100px; }
-#upgrade{ bottom:50px; }
 </style>
 </head>
 
 <body>
 
 <div id="ui">
-💰 <span id="money">200</span> |
-🏠 <span id="houses">0</span>
+🎮 Кликни по экрану<br>
+WASD — ходить<br>
+Мышка — смотреть<br>
+ЛКМ — строить<br>
+ПКМ — ломать
 </div>
 
-<div id="joystick"><div id="stick"></div></div>
-<button id="build">🏠</button>
-<button id="upgrade">⬆️</button>
+<script type="module">
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.158/build/three.module.js";
 
-<canvas id="game"></canvas>
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x87CEEB);
 
-<script>
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
 
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth, innerHeight);
+document.body.appendChild(renderer.domElement);
 
-// игрок
-let player = {x:500,y:500,size:20};
+// свет
+const light = new THREE.DirectionalLight(0xffffff,1);
+light.position.set(5,10,5);
+scene.add(light);
 
-// данные
-let money = 200;
-let houses = [];
-let trees = [];
+// земля
+const ground = new THREE.Mesh(
+ new THREE.PlaneGeometry(100,100),
+ new THREE.MeshLambertMaterial({color:0x55aa55})
+);
+ground.rotation.x = -Math.PI/2;
+scene.add(ground);
 
-// деревья
-for(let i=0;i<40;i++){
- trees.push({
-  x:Math.random()*2000,
-  y:Math.random()*2000
- });
-}
+// ===== ПЕРСОНАЖ (тело + голова) =====
+const body = new THREE.Mesh(
+ new THREE.BoxGeometry(0.8,1.2,0.4),
+ new THREE.MeshLambertMaterial({color:0x0000ff})
+);
 
-// джойстик
-let joy = {x:0,y:0,active:false};
-const stick = document.getElementById("stick");
+const head = new THREE.Mesh(
+ new THREE.SphereGeometry(0.3),
+ new THREE.MeshLambertMaterial({color:0xffccaa})
+);
 
-document.getElementById("joystick").addEventListener("touchstart", e=>{
- joy.active = true;
-});
+head.position.y = 1;
 
-document.addEventListener("touchmove", e=>{
- if(joy.active){
-  let t = e.touches[0];
-  let rect = document.getElementById("joystick").getBoundingClientRect();
+const player = new THREE.Group();
+player.add(body);
+player.add(head);
 
-  let dx = t.clientX - (rect.left+50);
-  let dy = t.clientY - (rect.top+50);
+scene.add(player);
 
-  joy.x = dx/50;
-  joy.y = dy/50;
+camera.position.set(0,2,5);
 
-  stick.style.left = (30+dx/2)+"px";
-  stick.style.top = (30+dy/2)+"px";
+// блоки
+const blocks = [];
+const cubeGeo = new THREE.BoxGeometry(1,1,1);
+const cubeMat = new THREE.MeshLambertMaterial({color:0x8B4513});
+
+// управление
+let keys = {};
+document.addEventListener("keydown", e=>keys[e.key]=true);
+document.addEventListener("keyup", e=>keys[e.key]=false);
+
+// мышка
+document.body.onclick = ()=>document.body.requestPointerLock();
+
+let yaw = 0;
+let pitch = 0;
+
+document.addEventListener("mousemove", e=>{
+ if(document.pointerLockElement){
+  yaw -= e.movementX * 0.002;
+  pitch -= e.movementY * 0.002;
+  pitch = Math.max(-1.5, Math.min(1.5, pitch));
  }
 });
 
-document.addEventListener("touchend", ()=>{
- joy.active=false;
- joy.x=0; joy.y=0;
- stick.style.left="30px";
- stick.style.top="30px";
-});
+// луч
+const raycaster = new THREE.Raycaster();
 
-// кнопки
-document.getElementById("build").onclick = ()=>{
- if(money>=50){
-  houses.push({x:player.x,y:player.y,level:1});
-  money-=50;
- }
-};
+// строительство
+document.addEventListener("mousedown", e=>{
+ raycaster.setFromCamera(new THREE.Vector2(0,0), camera);
+ const hit = raycaster.intersectObjects([ground,...blocks]);
 
-document.getElementById("upgrade").onclick = ()=>{
- let near=null,dist=50;
+ if(hit.length > 0){
+  const h = hit[0];
 
- houses.forEach(h=>{
-  let d=Math.hypot(player.x-h.x,player.y-h.y);
-  if(d<dist){near=h;dist=d;}
- });
+  if(e.button === 0){
+   const cube = new THREE.Mesh(cubeGeo, cubeMat);
+   cube.position.copy(h.point).add(h.face.normal).floor().addScalar(0.5);
+   scene.add(cube);
+   blocks.push(cube);
+  }
 
- if(near && near.level<10){
-  let cost = near.level*40;
-  if(money>=cost){
-   money-=cost;
-   near.level++;
+  if(e.button === 2){
+   if(h.object !== ground){
+    scene.remove(h.object);
+    blocks.splice(blocks.indexOf(h.object),1);
+   }
   }
  }
-};
+});
+
+window.addEventListener("contextmenu", e=>e.preventDefault());
 
 // движение
 function move(){
- player.x += joy.x*4;
- player.y += joy.y*4;
-}
+ let speed = 0.1;
 
-// доход
-setInterval(()=>{
- houses.forEach(h=> money += h.level);
- save();
- updateUI();
-},1000);
+ let forward = new THREE.Vector3(Math.sin(yaw),0,Math.cos(yaw));
+ let right = new THREE.Vector3().crossVectors(forward,new THREE.Vector3(0,1,0));
 
-// сохранение
-function save(){
- localStorage.setItem("save", JSON.stringify({money,houses}));
-}
+ if(keys["w"]) player.position.add(forward.clone().multiplyScalar(-speed));
+ if(keys["s"]) player.position.add(forward.clone().multiplyScalar(speed));
+ if(keys["a"]) player.position.add(right.clone().multiplyScalar(-speed));
+ if(keys["d"]) player.position.add(right.clone().multiplyScalar(speed));
 
-function load(){
- let s = localStorage.getItem("save");
- if(s){
-  let d = JSON.parse(s);
-  money = d.money;
-  houses = d.houses;
- }
-}
-load();
+ // камера следует за игроком
+ camera.position.x = player.position.x;
+ camera.position.z = player.position.z;
 
-// цвета уровней
-function color(l){
- return ["#8B4513","#A0522D","#CD853F","#DEB887","#F4A460",
- "#FFD700","#FFA500","#FF8C00","#FF4500","#FF0000"][l-1];
-}
-
-// камера
-function cam(){
- return {
-  x: player.x - canvas.width/2,
-  y: player.y - canvas.height/2
- };
-}
-
-// рисование
-function draw(){
- ctx.clearRect(0,0,canvas.width,canvas.height);
- let c = cam();
-
- // земля
- ctx.fillStyle="#6fdc3c";
- ctx.fillRect(0,0,canvas.width,canvas.height);
-
- // деревья
- trees.forEach(t=>{
-  ctx.fillStyle="green";
-  ctx.beginPath();
-  ctx.arc(t.x-c.x,t.y-c.y,15,0,Math.PI*2);
-  ctx.fill();
- });
-
- // дома
- houses.forEach(h=>{
-  ctx.fillStyle=color(h.level);
-  ctx.fillRect(h.x-20-c.x,h.y-20-c.y,40,40);
- });
-
- // персонаж (уже "человечек")
- ctx.fillStyle="blue";
- ctx.fillRect(player.x-10-c.x,player.y-10-c.y,20,20);
-
- ctx.fillStyle="white"; // голова
- ctx.beginPath();
- ctx.arc(player.x-c.x,player.y-15-c.y,6,0,Math.PI*2);
- ctx.fill();
-}
-
-// UI
-function updateUI(){
- document.getElementById("money").innerText=Math.floor(money);
- document.getElementById("houses").innerText=houses.length;
+ camera.rotation.order = "YXZ";
+ camera.rotation.y = yaw;
+ camera.rotation.x = pitch;
 }
 
 // цикл
-function loop(){
+function animate(){
+ requestAnimationFrame(animate);
  move();
- draw();
- requestAnimationFrame(loop);
+ renderer.render(scene, camera);
 }
-
-updateUI();
-loop();
+animate();
 </script>
 
 </body>
