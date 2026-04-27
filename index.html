@@ -2,83 +2,136 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Mini Craft</title>
+<title>My Roblox Style Game</title>
 
 <style>
-body {
+body{
   margin:0;
-  background:#87CEEB;
   font-family:Arial;
+  background:#111;
+  color:white;
   text-align:center;
 }
 
-#toolbar {
-  background:#333;
+#top{
+  background:#222;
+  padding:15px;
+  font-size:20px;
+}
+
+#clickBtn{
+  background:red;
   color:white;
+  border:none;
+  padding:20px;
+  font-size:20px;
+  border-radius:10px;
+  margin:20px;
+  cursor:pointer;
+}
+
+#shop{
+  margin-top:20px;
+}
+
+button{
+  margin:5px;
   padding:10px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
 }
 
-#game {
-  display:grid;
-  grid-template-columns: repeat(20, 30px);
-  justify-content:center;
-  margin-top:10px;
+.house{
+  display:inline-block;
+  width:60px;
+  height:60px;
+  margin:5px;
+  background:brown;
 }
 
-.cell {
-  width:30px;
-  height:30px;
-  border:1px solid #ccc;
-  background:#7CFC00;
-}
+.level2{ background:orange; }
+.level3{ background:gold; }
 
-.grass { background:#7CFC00; }
-.dirt { background:#8B4513; }
-.wood { background:#A0522D; }
-.stone { background:#808080; }
-
-.selected {
-  outline:3px solid yellow;
-}
 </style>
 </head>
 
 <body>
 
-<div id="toolbar">
-  Выбери блок:
-  <button onclick="selectBlock('grass')">Трава</button>
-  <button onclick="selectBlock('dirt')">Земля</button>
-  <button onclick="selectBlock('wood')">Дерево</button>
-  <button onclick="selectBlock('stone')">Камень</button>
-  <button onclick="selectBlock('erase')">❌ Удалить</button>
+<div id="top">
+💰 Деньги: <span id="money">0</span>
 </div>
 
-<div id="game"></div>
+<button id="clickBtn">🔴 ЖМИ ДЛЯ ДЕНЕГ</button>
+
+<div id="shop">
+<h3>🏠 Строительство</h3>
+<button onclick="buyHouse()">Купить дом (50)</button>
+<button onclick="upgrade()">Улучшить дом (100)</button>
+</div>
+
+<div id="houses"></div>
 
 <script>
-const game = document.getElementById("game");
-let selected = "grass";
+let money = 0;
+let houses = [];
+let income = 0;
 
-// создаём поле
-for(let i=0;i<400;i++){
-  const cell = document.createElement("div");
-  cell.className = "cell";
+// кнопка денег
+document.getElementById("clickBtn").onclick = () => {
+  money += 1;
+  update();
+};
 
-  cell.onclick = () => {
-    if(selected === "erase"){
-      cell.className = "cell";
-    } else {
-      cell.className = "cell " + selected;
-    }
-  };
-
-  game.appendChild(cell);
+// купить дом
+function buyHouse(){
+  if(money >= 50){
+    money -= 50;
+    houses.push(1);
+    income += 1;
+    render();
+  }
 }
 
-// выбор блока
-function selectBlock(type){
-  selected = type;
+// улучшение
+function upgrade(){
+  if(money >= 100){
+    for(let i=0;i<houses.length;i++){
+      if(houses[i] < 3){
+        money -= 100;
+        houses[i]++;
+        income += 2;
+        break;
+      }
+    }
+    render();
+  }
+}
+
+// доход
+setInterval(()=>{
+  money += income;
+  update();
+},1000);
+
+// обновление UI
+function update(){
+  document.getElementById("money").innerText = money;
+}
+
+// отображение домов
+function render(){
+  update();
+  const div = document.getElementById("houses");
+  div.innerHTML = "";
+
+  houses.forEach(level=>{
+    const h = document.createElement("div");
+    h.className = "house";
+    if(level === 2) h.classList.add("level2");
+    if(level === 3) h.classList.add("level3");
+    div.appendChild(h);
+  });
 }
 </script>
 
