@@ -2,54 +2,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>City Next Level</title>
+<title>Dubai City Game</title>
 
 <style>
-body{margin:0;overflow:hidden;font-family:Arial;}
-
+body{margin:0;overflow:hidden;background:#87ceeb;}
+canvas{display:block;}
 #ui{
- position:absolute;top:0;width:100%;
- background:#111;color:white;padding:10px;
- z-index:10;
+ position:absolute;
+ top:0;
+ width:100%;
+ background:#111;
+ color:white;
+ padding:8px;
+ font-family:Arial;
 }
-
-#joy{
- position:absolute;bottom:20px;left:20px;
- width:100px;height:100px;
- background:rgba(255,255,255,0.3);
- border-radius:50%;
-}
-
-#stick{
- width:40px;height:40px;
- background:white;border-radius:50%;
- position:absolute;left:30px;top:30px;
-}
-
-.btn{
- position:absolute;right:20px;
- padding:10px;
-}
-
-#enter{bottom:250px;}
-#car{bottom:200px;}
-#shoot{bottom:150px;}
 </style>
 </head>
 
 <body>
 
 <div id="ui">
-💰 <span id="money">200</span> |
-🏠 <span id="houses">0</span> |
-📋 <span id="task">найди дом</span>
+💰 <span id="money">200</span>
 </div>
-
-<div id="joy"><div id="stick"></div></div>
-
-<button class="btn" id="enter">🚪</button>
-<button class="btn" id="car">🚗</button>
-<button class="btn" id="shoot">🔫</button>
 
 <canvas id="game"></canvas>
 
@@ -62,14 +36,38 @@ c.height = innerHeight;
 
 let player={x:1000,y:1000};
 let money=200;
-let houses=[];
-let inCar=false;
-let inside=false;
-let task="найди дом";
+
+// здания (высотки)
+let buildings=[];
+for(let i=0;i<50;i++){
+ buildings.push({
+  x:Math.random()*2000,
+  y:Math.random()*2000,
+  w:40,
+  h:100+Math.random()*200
+ });
+}
+
+// дороги
+let roads=[];
+for(let i=0;i<10;i++){
+ roads.push({x:0,y:i*200,w:2000,h:50});
+ roads.push({x:i*200,y:0,w:50,h:2000});
+}
+
+// машины
+let cars=[];
+for(let i=0;i<8;i++){
+ cars.push({
+  x:Math.random()*2000,
+  y:Math.random()*2000,
+  speed:2+Math.random()*2
+ });
+}
 
 // NPC
 let npcs=[];
-for(let i=0;i<15;i++){
+for(let i=0;i<20;i++){
  npcs.push({
   x:Math.random()*2000,
   y:Math.random()*2000,
@@ -78,104 +76,28 @@ for(let i=0;i<15;i++){
  });
 }
 
-// дома
-for(let i=0;i<10;i++){
- houses.push({
+// деревья
+let trees=[];
+for(let i=0;i<30;i++){
+ trees.push({
   x:Math.random()*2000,
   y:Math.random()*2000
  });
 }
 
-// джойстик
+// управление (тач)
 let joy={x:0,y:0};
-const stick=document.getElementById("stick");
-
-document.getElementById("joy").addEventListener("touchmove", e=>{
+document.addEventListener("touchmove",e=>{
  let t=e.touches[0];
- let rect=e.target.getBoundingClientRect();
-
- let dx=t.clientX-(rect.left+50);
- let dy=t.clientY-(rect.top+50);
-
- joy.x=dx/50;
- joy.y=dy/50;
-
- stick.style.left=(30+dx/2)+"px";
- stick.style.top=(30+dy/2)+"px";
+ joy.x=(t.clientX-c.width/2)/100;
+ joy.y=(t.clientY-c.height/2)/100;
 });
-
-document.addEventListener("touchend", ()=>{
- joy.x=0;joy.y=0;
- stick.style.left="30px";
- stick.style.top="30px";
-});
+document.addEventListener("touchend",()=>{joy.x=0;joy.y=0;});
 
 // движение
 function move(){
- let speed=inCar?6:3;
- player.x+=joy.x*speed;
- player.y+=joy.y*speed;
-}
-
-// вход в дом
-enter.onclick=()=>{
- let near=false;
- houses.forEach(h=>{
-  if(Math.hypot(player.x-h.x,player.y-h.y)<40){
-   near=true;
-  }
- });
-
- if(near){
-  inside=!inside;
-  if(inside){
-   task="ты внутри дома";
-  }else{
-   task="выйди и заработай";
-  }
- }
-};
-
-// машина
-car.onclick=()=>{
- inCar=!inCar;
-};
-
-// стрельба
-let bullets=[];
-shoot.onclick=()=>{
- bullets.push({x:player.x,y:player.y,dx:joy.x*10,dy:joy.y*10});
-};
-
-// обновление
-function update(){
- houses.forEach(()=>money+=0.05);
-
- bullets.forEach(b=>{
-  b.x+=b.dx;
-  b.y+=b.dy;
- });
-
- npcs.forEach(n=>{
-  n.x+=n.dx;
-  n.y+=n.dy;
- });
-
- bullets.forEach(b=>{
-  npcs.forEach(n=>{
-   if(Math.hypot(b.x-n.x,b.y-n.y)<10){
-    money+=10;
-    n.x=Math.random()*2000;
-    n.y=Math.random()*2000;
-   }
-  });
- });
-
- document.getElementById("money").innerText=Math.floor(money);
- document.getElementById("houses").innerText=houses.length;
- document.getElementById("task").innerText=task;
-
- localStorage.setItem("save",JSON.stringify({money}));
+ player.x+=joy.x*4;
+ player.y+=joy.y*4;
 }
 
 // камера
@@ -183,40 +105,77 @@ function cam(){
  return {x:player.x-c.width/2,y:player.y-c.height/2};
 }
 
+// обновление
+function update(){
+ // машины
+ cars.forEach(car=>{
+  car.x+=car.speed;
+  if(car.x>2000) car.x=0;
+ });
+
+ // NPC
+ npcs.forEach(n=>{
+  n.x+=n.dx;
+  n.y+=n.dy;
+ });
+
+ // доход
+ money+=0.02;
+ document.getElementById("money").innerText=Math.floor(money);
+}
+
 // рисование
 function draw(){
  ctx.clearRect(0,0,c.width,c.height);
-
- if(inside){
-  ctx.fillStyle="#ccc";
-  ctx.fillRect(0,0,c.width,c.height);
-  ctx.fillStyle="black";
-  ctx.fillText("ВНУТРИ ДОМА",50,50);
-  return;
- }
-
  let m=cam();
 
+ // трава
  ctx.fillStyle="#6fdc3c";
  ctx.fillRect(0,0,c.width,c.height);
 
- houses.forEach(h=>{
-  ctx.fillStyle="brown";
-  ctx.fillRect(h.x-15-m.x,h.y-15-m.y,30,30);
+ // дороги
+ ctx.fillStyle="#444";
+ roads.forEach(r=>{
+  ctx.fillRect(r.x-m.x,r.y-m.y,r.w,r.h);
  });
 
+ // здания (высотки)
+ buildings.forEach(b=>{
+  ctx.fillStyle="#777";
+  ctx.fillRect(b.x-m.x,b.y-m.y,b.w,b.h);
+ });
+
+ // деревья
+ trees.forEach(t=>{
+  ctx.fillStyle="green";
+  ctx.beginPath();
+  ctx.arc(t.x-m.x,t.y-m.y,10,0,6.28);
+  ctx.fill();
+ });
+
+ // машины
+ cars.forEach(car=>{
+  ctx.fillStyle="red";
+  ctx.fillRect(car.x-m.x,car.y-m.y,30,15);
+ });
+
+ // NPC (голова + тело)
  npcs.forEach(n=>{
-  ctx.fillStyle="yellow";
-  ctx.fillRect(n.x-5-m.x,n.y-5-m.y,10,10);
+  ctx.fillStyle="blue";
+  ctx.fillRect(n.x-5-m.x,n.y-5-m.y,10,15);
+  ctx.fillStyle="white";
+  ctx.beginPath();
+  ctx.arc(n.x-m.x,n.y-10-m.y,5,0,6.28);
+  ctx.fill();
  });
 
- bullets.forEach(b=>{
-  ctx.fillStyle="black";
-  ctx.fillRect(b.x-m.x,b.y-m.y,5,5);
- });
-
- ctx.fillStyle="blue";
- ctx.fillRect(player.x-10-m.x,player.y-10-m.y,20,20);
+ // игрок
+ ctx.fillStyle="black";
+ ctx.fillRect(player.x-5-m.x,player.y-5-m.y,10,15);
+ ctx.fillStyle="white";
+ ctx.beginPath();
+ ctx.arc(player.x-m.x,player.y-10-m.y,5,0,6.28);
+ ctx.fill();
 }
 
 // цикл
