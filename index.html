@@ -2,21 +2,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>City Game</title>
+<title>City PRO</title>
 
 <style>
 body{margin:0;overflow:hidden;font-family:Arial;}
 
 #ui{
- position:absolute;
- top:0;width:100%;
- background:#111;color:white;
- padding:10px;
+ position:absolute;top:0;width:100%;
+ background:#111;color:white;padding:10px;
+ z-index:10;
 }
 
 #joy{
- position:absolute;
- bottom:20px;left:20px;
+ position:absolute;bottom:20px;left:20px;
  width:100px;height:100px;
  background:rgba(255,255,255,0.3);
  border-radius:50%;
@@ -28,68 +26,79 @@ body{margin:0;overflow:hidden;font-family:Arial;}
  position:absolute;left:30px;top:30px;
 }
 
-button{
- position:absolute;
- right:20px;
- padding:10px;
+.btn{
+ position:absolute;right:20px;
+ padding:10px;font-size:16px;
 }
 
-#build{bottom:100px;}
+#shop{bottom:120px;}
+#job{bottom:70px;}
 </style>
 </head>
 
 <body>
 
 <div id="ui">
-💰 <span id="money">200</span>
+💰 <span id="money">200</span> |
+📋 <span id="task">нет задания</span>
 </div>
 
 <div id="joy"><div id="stick"></div></div>
-<button id="build">🏠</button>
+
+<button class="btn" id="shop">🛒</button>
+<button class="btn" id="job">📋</button>
 
 <canvas id="game"></canvas>
 
 <script>
 const c = document.getElementById("game");
 const ctx = c.getContext("2d");
-
 c.width = innerWidth;
 c.height = innerHeight;
 
-let player = {x:500,y:500};
-let money = 200;
+let player={x:1000,y:1000};
+let money=200;
+let task="нет задания";
 
-// город
-let buildings = [];
-let npcs = [];
-let cars = [];
+// мир
+let buildings=[];
+let roads=[];
+let cars=[];
+let npcs=[];
 
-// создаём здания
-for(let i=0;i<40;i++){
+// здания (включая "высотки")
+for(let i=0;i<60;i++){
+ let tall=Math.random()<0.3;
  buildings.push({
   x:Math.random()*2000,
   y:Math.random()*2000,
-  w:40+Math.random()*60,
-  h:40+Math.random()*100
+  w:40,
+  h:tall?120:60
  });
 }
 
-// NPC люди
+// дороги
 for(let i=0;i<10;i++){
+ roads.push({x:0,y:i*200,w:2000,h:40});
+ roads.push({x:i*200,y:0,w:40,h:2000});
+}
+
+// машины (по дорогам)
+for(let i=0;i<8;i++){
+ cars.push({
+  x:Math.random()*2000,
+  y:Math.floor(Math.random()*10)*200+10,
+  speed:2+Math.random()*2
+ });
+}
+
+// NPC
+for(let i=0;i<15;i++){
  npcs.push({
   x:Math.random()*2000,
   y:Math.random()*2000,
   dx:Math.random()*2-1,
   dy:Math.random()*2-1
- });
-}
-
-// машины
-for(let i=0;i<5;i++){
- cars.push({
-  x:Math.random()*2000,
-  y:Math.random()*2000,
-  speed:2+Math.random()*2
  });
 }
 
@@ -128,7 +137,7 @@ function cam(){
  return {x:player.x-c.width/2,y:player.y-c.height/2};
 }
 
-// NPC движение
+// NPC
 function updateNPC(){
  npcs.forEach(n=>{
   n.x+=n.dx;
@@ -140,13 +149,22 @@ function updateNPC(){
  });
 }
 
-// машины движение
+// машины
 function updateCars(){
  cars.forEach(car=>{
   car.x+=car.speed;
   if(car.x>2000) car.x=0;
  });
 }
+
+// задания
+job.onclick=()=>{
+ task="дойди до здания!";
+};
+
+shop.onclick=()=>{
+ money+=50;
+};
 
 // рисование
 function draw(){
@@ -157,9 +175,15 @@ function draw(){
  ctx.fillStyle="#6fdc3c";
  ctx.fillRect(0,0,c.width,c.height);
 
- // здания (город)
+ // дороги
+ ctx.fillStyle="#333";
+ roads.forEach(r=>{
+  ctx.fillRect(r.x-m.x,r.y-m.y,r.w,r.h);
+ });
+
+ // здания
  buildings.forEach(b=>{
-  ctx.fillStyle="#555";
+  ctx.fillStyle="#777";
   ctx.fillRect(b.x-m.x,b.y-m.y,b.w,b.h);
  });
 
@@ -169,12 +193,10 @@ function draw(){
   ctx.fillRect(car.x-m.x,car.y-m.y,30,15);
  });
 
- // NPC люди
+ // NPC
  npcs.forEach(n=>{
   ctx.fillStyle="yellow";
   ctx.fillRect(n.x-5-m.x,n.y-5-m.y,10,10);
-
-  // голова
   ctx.beginPath();
   ctx.arc(n.x-m.x,n.y-10-m.y,4,0,6.28);
   ctx.fill();
@@ -183,11 +205,16 @@ function draw(){
  // игрок
  ctx.fillStyle="blue";
  ctx.fillRect(player.x-10-m.x,player.y-10-m.y,20,20);
-
  ctx.fillStyle="white";
  ctx.beginPath();
  ctx.arc(player.x-m.x,player.y-15-m.y,6,0,6.28);
  ctx.fill();
+}
+
+// UI
+function update(){
+ document.getElementById("money").innerText=money;
+ document.getElementById("task").innerText=task;
 }
 
 // цикл
@@ -196,6 +223,7 @@ function loop(){
  updateNPC();
  updateCars();
  draw();
+ update();
  requestAnimationFrame(loop);
 }
 
