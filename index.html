@@ -2,192 +2,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Dubai City Game</title>
-
+<title>3D City</title>
 <style>
-body{margin:0;overflow:hidden;background:#87ceeb;}
-canvas{display:block;}
-#ui{
+body { margin:0; overflow:hidden; }
+#info{
  position:absolute;
- top:0;
- width:100%;
- background:#111;
+ top:10px;
+ left:10px;
  color:white;
- padding:8px;
- font-family:Arial;
+ background:rgba(0,0,0,0.5);
+ padding:10px;
 }
 </style>
 </head>
 
 <body>
+<div id="info">Нажми на экран и двигайся</div>
 
-<div id="ui">
-💰 <span id="money">200</span>
-</div>
-
-<canvas id="game"></canvas>
-
-<script>
-const c = document.getElementById("game");
-const ctx = c.getContext("2d");
-
-c.width = innerWidth;
-c.height = innerHeight;
-
-let player={x:1000,y:1000};
-let money=200;
-
-// здания (высотки)
-let buildings=[];
-for(let i=0;i<50;i++){
- buildings.push({
-  x:Math.random()*2000,
-  y:Math.random()*2000,
-  w:40,
-  h:100+Math.random()*200
- });
-}
-
-// дороги
-let roads=[];
-for(let i=0;i<10;i++){
- roads.push({x:0,y:i*200,w:2000,h:50});
- roads.push({x:i*200,y:0,w:50,h:2000});
-}
-
-// машины
-let cars=[];
-for(let i=0;i<8;i++){
- cars.push({
-  x:Math.random()*2000,
-  y:Math.random()*2000,
-  speed:2+Math.random()*2
- });
-}
-
-// NPC
-let npcs=[];
-for(let i=0;i<20;i++){
- npcs.push({
-  x:Math.random()*2000,
-  y:Math.random()*2000,
-  dx:Math.random()*2-1,
-  dy:Math.random()*2-1
- });
-}
-
-// деревья
-let trees=[];
-for(let i=0;i<30;i++){
- trees.push({
-  x:Math.random()*2000,
-  y:Math.random()*2000
- });
-}
-
-// управление (тач)
-let joy={x:0,y:0};
-document.addEventListener("touchmove",e=>{
- let t=e.touches[0];
- joy.x=(t.clientX-c.width/2)/100;
- joy.y=(t.clientY-c.height/2)/100;
-});
-document.addEventListener("touchend",()=>{joy.x=0;joy.y=0;});
-
-// движение
-function move(){
- player.x+=joy.x*4;
- player.y+=joy.y*4;
-}
-
-// камера
-function cam(){
- return {x:player.x-c.width/2,y:player.y-c.height/2};
-}
-
-// обновление
-function update(){
- // машины
- cars.forEach(car=>{
-  car.x+=car.speed;
-  if(car.x>2000) car.x=0;
- });
-
- // NPC
- npcs.forEach(n=>{
-  n.x+=n.dx;
-  n.y+=n.dy;
- });
-
- // доход
- money+=0.02;
- document.getElementById("money").innerText=Math.floor(money);
-}
-
-// рисование
-function draw(){
- ctx.clearRect(0,0,c.width,c.height);
- let m=cam();
-
- // трава
- ctx.fillStyle="#6fdc3c";
- ctx.fillRect(0,0,c.width,c.height);
-
- // дороги
- ctx.fillStyle="#444";
- roads.forEach(r=>{
-  ctx.fillRect(r.x-m.x,r.y-m.y,r.w,r.h);
- });
-
- // здания (высотки)
- buildings.forEach(b=>{
-  ctx.fillStyle="#777";
-  ctx.fillRect(b.x-m.x,b.y-m.y,b.w,b.h);
- });
-
- // деревья
- trees.forEach(t=>{
-  ctx.fillStyle="green";
-  ctx.beginPath();
-  ctx.arc(t.x-m.x,t.y-m.y,10,0,6.28);
-  ctx.fill();
- });
-
- // машины
- cars.forEach(car=>{
-  ctx.fillStyle="red";
-  ctx.fillRect(car.x-m.x,car.y-m.y,30,15);
- });
-
- // NPC (голова + тело)
- npcs.forEach(n=>{
-  ctx.fillStyle="blue";
-  ctx.fillRect(n.x-5-m.x,n.y-5-m.y,10,15);
-  ctx.fillStyle="white";
-  ctx.beginPath();
-  ctx.arc(n.x-m.x,n.y-10-m.y,5,0,6.28);
-  ctx.fill();
- });
-
- // игрок
- ctx.fillStyle="black";
- ctx.fillRect(player.x-5-m.x,player.y-5-m.y,10,15);
- ctx.fillStyle="white";
- ctx.beginPath();
- ctx.arc(player.x-m.x,player.y-10-m.y,5,0,6.28);
- ctx.fill();
-}
-
-// цикл
-function loop(){
- move();
- update();
- draw();
- requestAnimationFrame(loop);
-}
-
-loop();
-</script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158/build/three.min.js"></script>
+<script src="game.js"></script>
 
 </body>
 </html>
