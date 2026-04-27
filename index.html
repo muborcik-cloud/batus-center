@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>City Builder</title>
+<title>Pro Builder Game</title>
 
 <style>
 body {
@@ -16,14 +16,14 @@ body {
   top:0;
   left:0;
   width:100%;
-  background:#222;
+  background:#111;
   color:white;
   padding:10px;
 }
 
-#game{
-  background:#87CEEB;
+canvas{
   display:block;
+  background:#87CEEB;
 }
 </style>
 </head>
@@ -31,10 +31,10 @@ body {
 <body>
 
 <div id="ui">
-💰 Деньги: <span id="money">100</span> |
-🏠 Домов: <span id="houses">0</span>
+💰 Деньги: <span id="money">200</span> |
+🏠 Домов: <span id="count">0</span>
 <br>
-🎮 WASD — движение | E — построить дом
+🎮 WASD — ходить | E — построить | Q — улучшить
 </div>
 
 <canvas id="game"></canvas>
@@ -46,23 +46,23 @@ const ctx = canvas.getContext("2d");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-let money = 100;
-let houses = [];
+let money = 200;
 
 let player = {
-  x: 200,
-  y: 200,
-  size: 20,
-  speed: 3
+  x:300,
+  y:300,
+  size:20,
+  speed:3
 };
 
+let houses = [];
 let keys = {};
 
 // управление
 document.addEventListener("keydown", e=>{
   keys[e.key.toLowerCase()] = true;
 
-  // строить дом
+  // построить
   if(e.key.toLowerCase() === "e"){
     if(money >= 50){
       houses.push({
@@ -73,19 +73,34 @@ document.addEventListener("keydown", e=>{
       money -= 50;
     }
   }
+
+  // улучшить ближайший дом
+  if(e.key.toLowerCase() === "q"){
+    let nearest = null;
+    let dist = 50;
+
+    houses.forEach(h=>{
+      let d = Math.hypot(player.x - h.x, player.y - h.y);
+      if(d < dist){
+        nearest = h;
+        dist = d;
+      }
+    });
+
+    if(nearest && nearest.level < 10){
+      let cost = nearest.level * 50;
+
+      if(money >= cost){
+        money -= cost;
+        nearest.level++;
+      }
+    }
+  }
 });
 
 document.addEventListener("keyup", e=>{
   keys[e.key.toLowerCase()] = false;
 });
-
-// доход
-setInterval(()=>{
-  houses.forEach(h=>{
-    money += h.level;
-  });
-  updateUI();
-},1000);
 
 // движение
 function move(){
@@ -95,7 +110,24 @@ function move(){
   if(keys["d"]) player.x += player.speed;
 }
 
-// рисуем
+// доход
+setInterval(()=>{
+  houses.forEach(h=>{
+    money += h.level; // чем выше уровень — тем больше доход
+  });
+  updateUI();
+},1000);
+
+// цвета уровней
+function getColor(level){
+  const colors = [
+    "#8B4513","#A0522D","#CD853F","#DEB887","#F4A460",
+    "#FFD700","#FFA500","#FF8C00","#FF4500","#FF0000"
+  ];
+  return colors[level-1];
+}
+
+// рисование
 function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
@@ -105,16 +137,12 @@ function draw(){
 
   // дома
   houses.forEach(h=>{
-    ctx.fillStyle = "brown";
+    ctx.fillStyle = getColor(h.level);
     ctx.fillRect(h.x-15,h.y-15,30,30);
 
-    // крыша
-    ctx.fillStyle = "red";
-    ctx.beginPath();
-    ctx.moveTo(h.x-15,h.y-15);
-    ctx.lineTo(h.x+15,h.y-15);
-    ctx.lineTo(h.x,h.y-35);
-    ctx.fill();
+    // уровень
+    ctx.fillStyle = "black";
+    ctx.fillText(h.level, h.x-5, h.y+5);
   });
 
   // игрок
@@ -125,18 +153,18 @@ function draw(){
 // UI
 function updateUI(){
   document.getElementById("money").innerText = money;
-  document.getElementById("houses").innerText = houses.length;
+  document.getElementById("count").innerText = houses.length;
 }
 
-// цикл игры
-function gameLoop(){
+// цикл
+function loop(){
   move();
   draw();
-  requestAnimationFrame(gameLoop);
+  requestAnimationFrame(loop);
 }
 
 updateUI();
-gameLoop();
+loop();
 </script>
 
 </body>
