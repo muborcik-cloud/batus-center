@@ -2,25 +2,221 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>3D City</title>
+<title>My City Game</title>
+
 <style>
-body { margin:0; overflow:hidden; }
-#info{
- position:absolute;
- top:10px;
- left:10px;
- color:white;
- background:rgba(0,0,0,0.5);
+body{margin:0;overflow:hidden;font-family:Arial;background:#87ceeb;}
+
+#ui{
+ position:absolute;top:0;width:100%;
+ background:#111;color:white;padding:8px;
+}
+
+#joy{
+ position:absolute;bottom:20px;left:20px;
+ width:100px;height:100px;
+ background:rgba(255,255,255,0.3);
+ border-radius:50%;
+}
+
+#stick{
+ width:40px;height:40px;
+ background:white;border-radius:50%;
+ position:absolute;left:30px;top:30px;
+}
+
+.btn{
+ position:absolute;right:20px;
  padding:10px;
 }
+
+#build{bottom:180px;}
+#shoot{bottom:120px;}
+#upgrade{bottom:60px;}
 </style>
 </head>
 
 <body>
-<div id="info">Нажми на экран и двигайся</div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.158/build/three.min.js"></script>
-<script src="game.js"></script>
+<div id="ui">
+💰 <span id="money">200</span> |
+🏠 <span id="houses">0</span> |
+⭐ <span id="level">1</span>
+</div>
+
+<div id="joy"><div id="stick"></div></div>
+
+<button class="btn" id="build">🏠</button>
+<button class="btn" id="shoot">🔫</button>
+<button class="btn" id="upgrade">⬆️</button>
+
+<canvas id="game"></canvas>
+
+<script>
+const c=document.getElementById("game");
+const ctx=c.getContext("2d");
+
+c.width=innerWidth;
+c.height=innerHeight;
+
+let player={x:1000,y:1000};
+let money=200;
+let level=1;
+
+let houses=[];
+let bullets=[];
+let npcs=[];
+
+// NPC
+for(let i=0;i<15;i++){
+ npcs.push({
+  x:Math.random()*2000,
+  y:Math.random()*2000,
+  dx:Math.random()*2-1,
+  dy:Math.random()*2-1
+ });
+}
+
+// джойстик
+let joy={x:0,y:0};
+const stick=document.getElementById("stick");
+
+document.getElementById("joy").addEventListener("touchmove",e=>{
+ let t=e.touches[0];
+ let rect=e.target.getBoundingClientRect();
+
+ let dx=t.clientX-(rect.left+50);
+ let dy=t.clientY-(rect.top+50);
+
+ joy.x=dx/50;
+ joy.y=dy/50;
+
+ stick.style.left=(30+dx/2)+"px";
+ stick.style.top=(30+dy/2)+"px";
+});
+
+document.addEventListener("touchend",()=>{
+ joy.x=0;joy.y=0;
+ stick.style.left="30px";
+ stick.style.top="30px";
+});
+
+// движение
+function move(){
+ player.x+=joy.x*(2+level*0.3);
+ player.y+=joy.y*(2+level*0.3);
+}
+
+// кнопки
+build.onclick=()=>{
+ if(money>=100){
+  houses.push({x:player.x,y:player.y,level:1});
+  money-=100;
+ }
+};
+
+upgrade.onclick=()=>{
+ if(money>=200){
+  level++;
+  money-=200;
+ }
+};
+
+shoot.onclick=()=>{
+ bullets.push({x:player.x,y:player.y,dx:joy.x*10,dy:joy.y*10});
+};
+
+// обновление
+function update(){
+
+ // доход с домов
+ houses.forEach(h=>{
+  money+=0.05*h.level;
+ });
+
+ // NPC движение
+ npcs.forEach(n=>{
+  n.x+=n.dx;
+  n.y+=n.dy;
+ });
+
+ // пули
+ bullets.forEach(b=>{
+  b.x+=b.dx;
+  b.y+=b.dy;
+ });
+
+ // попадания
+ bullets.forEach(b=>{
+  npcs.forEach(n=>{
+   if(Math.hypot(b.x-n.x,b.y-n.y)<10){
+    n.x=Math.random()*2000;
+    n.y=Math.random()*2000;
+    money+=20;
+   }
+  });
+ });
+
+ document.getElementById("money").innerText=Math.floor(money);
+ document.getElementById("houses").innerText=houses.length;
+ document.getElementById("level").innerText=level;
+}
+
+// камера
+function cam(){
+ return {x:player.x-c.width/2,y:player.y-c.height/2};
+}
+
+// рисование
+function draw(){
+ ctx.clearRect(0,0,c.width,c.height);
+ let m=cam();
+
+ // земля
+ ctx.fillStyle="#6fdc3c";
+ ctx.fillRect(0,0,c.width,c.height);
+
+ // дома
+ houses.forEach(h=>{
+  ctx.fillStyle="brown";
+  ctx.fillRect(h.x-15-m.x,h.y-15-m.y,30,30);
+ });
+
+ // NPC
+ npcs.forEach(n=>{
+  ctx.fillStyle="yellow";
+  ctx.fillRect(n.x-5-m.x,n.y-5-m.y,10,10);
+  ctx.fillStyle="white";
+  ctx.beginPath();
+  ctx.arc(n.x-m.x,n.y-10-m.y,4,0,6.28);
+  ctx.fill();
+ });
+
+ // пули
+ ctx.fillStyle="black";
+ bullets.forEach(b=>{
+  ctx.fillRect(b.x-m.x,b.y-m.y,5,5);
+ });
+
+ // игрок
+ ctx.fillStyle="blue";
+ ctx.fillRect(player.x-10-m.x,player.y-10-m.y,20,20);
+ ctx.fillStyle="white";
+ ctx.beginPath();
+ ctx.arc(player.x-m.x,player.y-15-m.y,5,0,6.28);
+ ctx.fill();
+}
+
+// цикл
+function loop(){
+ move();
+ update();
+ draw();
+ requestAnimationFrame(loop);
+}
+
+loop();
+</script>
 
 </body>
 </html>
