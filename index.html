@@ -1,18 +1,33 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Tycoon Game</title>
+<title>Мой Тайкун</title>
 <style>
 body { margin:0; overflow:hidden; font-family:sans-serif; }
+canvas { background:#6bdc6b; display:block; }
+
 #ui {
-  position:absolute; top:10px; left:10px;
-  background:rgba(0,0,0,0.6); color:white; padding:10px;
+ position:fixed;
+ top:10px;
+ left:10px;
+ background:rgba(0,0,0,0.6);
+ color:white;
+ padding:10px;
+ border-radius:10px;
 }
+
 #buttons {
-  position:absolute; right:10px; bottom:10px;
+ position:fixed;
+ bottom:10px;
+ right:10px;
 }
-button { margin:5px; padding:10px; }
+
+button {
+ margin:5px;
+ padding:10px;
+ font-size:14px;
+}
 </style>
 </head>
 <body>
@@ -21,7 +36,8 @@ button { margin:5px; padding:10px; }
 
 <div id="ui">
 💰 Деньги: <span id="money">0</span><br>
-🏠 Домов: <span id="houses">0</span>
+🏠 Дома: <span id="houses">0</span><br>
+📈 Доход: <span id="income">5</span>/сек
 </div>
 
 <div id="buttons">
@@ -33,132 +49,128 @@ button { margin:5px; padding:10px; }
 <script>
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
-
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-// загрузка сохранения
-let money = Number(localStorage.getItem("money")) || 0;
-let houses = Number(localStorage.getItem("houses")) || 0;
-let income = 5 + houses * 5;
-let cars = [];
+// ===== СОХРАНЕНИЕ =====
+let save = JSON.parse(localStorage.getItem("save")) || {
+ money: 100,
+ houses: 0,
+ income: 5,
+ cars: []
+};
 
-function save() {
-  localStorage.setItem("money", money);
-  localStorage.setItem("houses", houses);
-}
+// ===== ИГРОК =====
+let player = { x:300, y:300, speed:3 };
 
-// деньги каждую секунду
-setInterval(() => {
-  money += income;
-  updateUI();
-  save();
-}, 1000);
-
-function updateUI() {
-  document.getElementById("money").innerText = money;
-  document.getElementById("houses").innerText = houses;
-}
-
-// покупка дома
-function buyHouse() {
-  if (money >= 50) {
-    money -= 50;
-    houses++;
-    income += 5;
-    updateUI();
-  }
-}
-
-// улучшение
-function upgrade() {
-  if (money >= 100) {
-    money -= 100;
-    income += 10;
-    updateUI();
-  }
-}
-
-// машина
-function buyCar() {
-  if (money >= 60) {
-    money -= 60;
-    cars.push({ x: 0, y: Math.random()*canvas.height });
-    updateUI();
-  }
-}
-
-// игрок
-let player = { x: 200, y: 200 };
+// ===== УПРАВЛЕНИЕ =====
 let keys = {};
+addEventListener("keydown", e => keys[e.key]=true);
+addEventListener("keyup", e => keys[e.key]=false);
 
-document.addEventListener("keydown", e => keys[e.key] = true);
-document.addEventListener("keyup", e => keys[e.key] = false);
-
-// движение
-function move() {
-  if (keys["w"]) player.y -= 3;
-  if (keys["s"]) player.y += 3;
-  if (keys["a"]) player.x -= 3;
-  if (keys["d"]) player.x += 3;
+// ===== ФУНКЦИИ =====
+function buyHouse(){
+ if(save.money>=50){
+  save.money-=50;
+  save.houses++;
+  save.income+=2;
+ }
 }
 
-// рисуем игрока
-function drawPlayer() {
-  ctx.fillStyle = "blue";
-  ctx.fillRect(player.x, player.y, 20, 30);
-
-  ctx.fillStyle = "#f5c6a5";
-  ctx.beginPath();
-  ctx.arc(player.x+10, player.y-10, 10, 0, Math.PI*2);
-  ctx.fill();
+function upgrade(){
+ if(save.money>=100){
+  save.money-=100;
+  save.income+=5;
+ }
 }
 
-// город (дороги)
-function drawCity() {
-  ctx.fillStyle = "#777";
-  for (let i=0;i<canvas.width;i+=120){
-    ctx.fillRect(i,0,40,canvas.height);
-  }
-  for (let j=0;j<canvas.height;j+=120){
-    ctx.fillRect(0,j,canvas.width,40);
-  }
-}
-
-// дома
-function drawHouses() {
-  for (let i=0;i<houses;i++) {
-    ctx.fillStyle = "red";
-    ctx.fillRect(100 + i*40, 100, 30, 30);
-  }
-}
-
-// машины
-function drawCars() {
-  cars.forEach(c => {
-    ctx.fillStyle = "black";
-    ctx.fillRect(c.x, c.y, 30, 15);
-    c.x += 2;
-    if (c.x > canvas.width) c.x = 0;
+function buyCar(){
+ if(save.money>=60){
+  save.money-=60;
+  save.cars.push({
+   x:Math.random()*canvas.width,
+   y:Math.random()*canvas.height,
+   dir:Math.random()*2
   });
+ }
 }
 
-// цикл игры
-function loop() {
-  ctx.fillStyle = "#4caf50";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+// ===== ДЕНЬГИ КАЖДУЮ СЕКУНДУ =====
+setInterval(()=>{
+ save.money += save.income;
+ saveGame();
+},1000);
 
-  drawCity();
-  drawHouses();
-  drawCars();
-  move();
-  drawPlayer();
-
-  requestAnimationFrame(loop);
+// ===== СОХРАНИТЬ =====
+function saveGame(){
+ localStorage.setItem("save", JSON.stringify(save));
 }
 
-updateUI();
-loop();
+// ===== ОБНОВЛЕНИЕ =====
+function update(){
+ if(keys["w"]) player.y-=player.speed;
+ if(keys["s"]) player.y+=player.speed;
+ if(keys["a"]) player.x-=player.speed;
+ if(keys["d"]) player.x+=player.speed;
+
+ // движение машин
+ save.cars.forEach(car=>{
+  car.x += Math.cos(car.dir)*2;
+  car.y += Math.sin(car.dir)*2;
+
+  if(car.x<0||car.x>canvas.width) car.dir=Math.PI-car.dir;
+  if(car.y<0||car.y>canvas.height) car.dir=-car.dir;
+ });
+}
+
+// ===== РЕНДЕР =====
+function draw(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ // дороги (сетка)
+ ctx.fillStyle="#888";
+ for(let x=0;x<canvas.width;x+=100){
+  ctx.fillRect(x,0,20,canvas.height);
+ }
+ for(let y=0;y<canvas.height;y+=100){
+  ctx.fillRect(0,y,canvas.width,20);
+ }
+
+ // дома
+ for(let i=0;i<save.houses;i++){
+  ctx.fillStyle="red";
+  ctx.fillRect(100+i*30,100,20,20);
+ }
+
+ // машины
+ save.cars.forEach(car=>{
+  ctx.fillStyle="black";
+  ctx.fillRect(car.x,car.y,15,10);
+ });
+
+ // игрок
+ ctx.fillStyle="blue";
+ ctx.fillRect(player.x,player.y,20,30);
+
+ ctx.fillStyle="#f5cba7";
+ ctx.beginPath();
+ ctx.arc(player.x+10, player.y-5, 10, 0, Math.PI*2);
+ ctx.fill();
+
+ // UI
+ document.getElementById("money").innerText = save.money;
+ document.getElementById("houses").innerText = save.houses;
+ document.getElementById("income").innerText = save.income;
+}
+
+// ===== ЦИКЛ =====
+function gameLoop(){
+ update();
+ draw();
+ requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
 </script>
 
 </body>
