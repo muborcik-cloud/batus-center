@@ -2,13 +2,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Ultra Game</title>
+<title>Ultra City</title>
 <style>
 body{margin:0;overflow:hidden;font-family:sans-serif;}
 canvas{display:block;background:#6bdc6b;}
 #ui{position:fixed;top:10px;left:10px;background:rgba(0,0,0,0.6);color:white;padding:10px;}
 #buttons{position:fixed;bottom:10px;right:10px;}
 button{margin:4px;padding:8px;}
+#joy{
+ position:fixed;
+ left:20px;
+ bottom:20px;
+ width:80px;height:80px;
+ background:rgba(255,255,255,0.3);
+ border-radius:50%;
+}
 </style>
 </head>
 <body>
@@ -17,16 +25,19 @@ button{margin:4px;padding:8px;}
 
 <div id="ui">
 💰 <span id="money">0</span><br>
-📈 <span id="income">50</span>/сек
+📈 <span id="income">50</span>/сек<br>
+🚗 Нажми E чтобы сесть
 </div>
 
 <div id="buttons">
 <button onclick="mode='house'">🏠 Дом</button>
+<button onclick="mode='tower'">🏢 Башня</button>
 <button onclick="mode='shop'">🏪 Магазин</button>
-<button onclick="mode='hotel'">🏨 Отель</button>
 <button onclick="mode='car'">🚗 Машина</button>
 <button onclick="upgrade()">⬆️ Улучшить</button>
 </div>
+
+<div id="joy"></div>
 
 <script>
 const c=document.getElementById("game");
@@ -34,96 +45,143 @@ const ctx=c.getContext("2d");
 c.width=innerWidth;
 c.height=innerHeight;
 
-// ===== ДАННЫЕ =====
-let money=100;
-let income=50;
+// ===== СОХРАНЕНИЕ =====
+let save=JSON.parse(localStorage.getItem("save"))||{
+ money:200,
+ income:50,
+ buildings:[],
+ cars:[]
+};
+
 let mode=null;
+let player={x:0,y:0,speed:4,inCar:false,car:null};
+let keys={};
 
-let buildings=[];
-let cars=[];
+// NPC
 let npcs=[];
-
-// NPC люди
-for(let i=0;i<10;i++){
+for(let i=0;i<8;i++){
  npcs.push({x:Math.random()*1000,y:Math.random()*1000,dir:Math.random()*6});
 }
 
-// игрок
-let player={x:0,y:0,speed:4};
-
 // управление
-let keys={};
-addEventListener("keydown",e=>keys[e.key]=true);
+addEventListener("keydown",e=>{
+ keys[e.key]=true;
+
+ // сесть в машину
+ if(e.key==="e"){
+  save.cars.forEach(car=>{
+   let dx=car.x-player.x;
+   let dy=car.y-player.y;
+   if(Math.hypot(dx,dy)<40){
+    player.inCar=true;
+    player.car=car;
+   }
+  });
+ }
+});
 addEventListener("keyup",e=>keys[e.key]=false);
 
 // деньги
-setInterval(()=>{money+=income;},1000);
+setInterval(()=>{
+ save.money+=save.income;
+ saveGame();
+},1000);
 
-// клик (строительство)
+// сохранить
+function saveGame(){
+ localStorage.setItem("save",JSON.stringify(save));
+}
+
+// строительство
 c.addEventListener("click",e=>{
  let x=player.x+(e.clientX-c.width/2);
  let y=player.y+(e.clientY-c.height/2);
 
- if(mode==="house"&&money>=50){
-  money-=50;
-  buildings.push({x,y,type:"house"});
+ if(mode==="house"&&save.money>=50){
+  save.money-=50;
+  save.buildings.push({x,y,type:"house"});
  }
- if(mode==="shop"&&money>=80){
-  money-=80;
-  buildings.push({x,y,type:"shop"});
+ if(mode==="tower"&&save.money>=200){
+  save.money-=200;
+  save.buildings.push({x,y,type:"tower"});
  }
- if(mode==="hotel"&&money>=150){
-  money-=150;
-  buildings.push({x,y,type:"hotel"});
+ if(mode==="shop"&&save.money>=100){
+  save.money-=100;
+  save.buildings.push({x,y,type:"shop"});
  }
- if(mode==="car"&&money>=60){
-  money-=60;
-  cars.push({x,y,dir:Math.random()*6});
+ if(mode==="car"&&save.money>=60){
+  save.money-=60;
+  save.cars.push({x,y,dir:Math.random()*6});
  }
 });
 
 // улучшение
 function upgrade(){
- if(money>=100){
-  money-=100;
-  income+=20;
+ if(save.money>=100){
+  save.money-=100;
+  save.income+=20;
  }
 }
 
+// джойстик
+let joy=document.getElementById("joy");
+let joyActive=false,joyX=0,joyY=0;
+
+joy.addEventListener("touchstart",e=>{
+ joyActive=true;
+});
+joy.addEventListener("touchmove",e=>{
+ let t=e.touches[0];
+ joyX=t.clientX-60;
+ joyY=t.clientY-(c.height-60);
+});
+joy.addEventListener("touchend",()=>{
+ joyActive=false;
+ joyX=joyY=0;
+});
+
 // движение
 function update(){
- if(keys["w"])player.y-=player.speed;
- if(keys["s"])player.y+=player.speed;
- if(keys["a"])player.x-=player.speed;
- if(keys["d"])player.x+=player.speed;
+ let speed=player.inCar?6:4;
 
- cars.forEach(c=>{
-  c.x+=Math.cos(c.dir)*2;
-  c.y+=Math.sin(c.dir)*2;
+ if(keys["w"]||joyY<-10) player.y-=speed;
+ if(keys["s"]||joyY>10) player.y+=speed;
+ if(keys["a"]||joyX<-10) player.x-=speed;
+ if(keys["d"]||joyX>10) player.x+=speed;
+
+ // если в машине
+ if(player.inCar && player.car){
+  player.car.x=player.x;
+  player.car.y=player.y;
+ }
+
+ // машины
+ save.cars.forEach(car=>{
+  if(car!==player.car){
+   car.x+=Math.cos(car.dir)*2;
+   car.y+=Math.sin(car.dir)*2;
+  }
  });
 
+ // NPC
  npcs.forEach(n=>{
   n.x+=Math.cos(n.dir);
   n.y+=Math.sin(n.dir);
  });
 }
 
-// рисование человека
+// человек
 function drawHuman(x,y){
- // ноги
  ctx.fillStyle="black";
  ctx.fillRect(x-5,y+10,4,10);
  ctx.fillRect(x+1,y+10,4,10);
 
- // тело
  ctx.fillStyle="blue";
  ctx.fillRect(x-8,y-5,16,20);
 
- // руки
  ctx.fillRect(x-12,y,6,4);
  ctx.fillRect(x+6,y,6,4);
 
- // голова
  ctx.fillStyle="#f5c6a5";
  ctx.beginPath();
  ctx.arc(x,y-12,8,0,Math.PI*2);
@@ -158,15 +216,17 @@ function draw(){
  }
 
  // здания
- buildings.forEach(b=>{
-  if(b.type==="house")ctx.fillStyle="red";
-  if(b.type==="shop")ctx.fillStyle="blue";
-  if(b.type==="hotel")ctx.fillStyle="purple";
-  ctx.fillRect(b.x-camX,b.y-camY,30,30);
+ save.buildings.forEach(b=>{
+  if(b.type==="house") ctx.fillStyle="red";
+  if(b.type==="shop") ctx.fillStyle="blue";
+  if(b.type==="tower") ctx.fillStyle="purple";
+
+  let h=b.type==="tower"?80:30;
+  ctx.fillRect(b.x-camX,b.y-camY,30,h);
  });
 
  // машины
- cars.forEach(car=>{
+ save.cars.forEach(car=>{
   ctx.fillStyle="black";
   ctx.fillRect(car.x-camX,car.y-camY,20,10);
  });
@@ -180,8 +240,8 @@ function draw(){
  drawHuman(c.width/2,c.height/2);
 
  // UI
- moneySpan.innerText=Math.floor(money);
- incomeSpan.innerText=income;
+ document.getElementById("money").innerText=Math.floor(save.money);
+ document.getElementById("income").innerText=save.income;
 }
 
 // цикл
