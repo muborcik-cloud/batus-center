@@ -2,21 +2,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Ultra City</title>
+<title>City Builder</title>
 <style>
 body{margin:0;overflow:hidden;font-family:sans-serif;}
 canvas{display:block;background:#6bdc6b;}
-#ui{position:fixed;top:10px;left:10px;background:rgba(0,0,0,0.6);color:white;padding:10px;}
+#ui{position:fixed;top:10px;left:10px;background:rgba(0,0,0,.6);color:#fff;padding:10px;border-radius:10px;}
 #buttons{position:fixed;bottom:10px;right:10px;}
 button{margin:4px;padding:8px;}
-#joy{
- position:fixed;
- left:20px;
- bottom:20px;
- width:80px;height:80px;
- background:rgba(255,255,255,0.3);
- border-radius:50%;
-}
+#joy{position:fixed;left:20px;bottom:20px;width:90px;height:90px;background:rgba(255,255,255,.3);border-radius:50%;}
 </style>
 </head>
 <body>
@@ -25,16 +18,14 @@ button{margin:4px;padding:8px;}
 
 <div id="ui">
 💰 <span id="money">0</span><br>
-📈 <span id="income">50</span>/сек<br>
-🚗 Нажми E чтобы сесть
+📈 <span id="income">50</span>/сек
 </div>
 
 <div id="buttons">
-<button onclick="mode='house'">🏠 Дом</button>
-<button onclick="mode='tower'">🏢 Башня</button>
-<button onclick="mode='shop'">🏪 Магазин</button>
-<button onclick="mode='car'">🚗 Машина</button>
-<button onclick="upgrade()">⬆️ Улучшить</button>
+<button onclick="mode='house'">🏠 Дом (50)</button>
+<button onclick="mode='road'">🛣 Дорога (20)</button>
+<button onclick="mode='light'">🚦 Светофор (30)</button>
+<button onclick="mode='car'">🚗 Машина (60)</button>
 </div>
 
 <div id="joy"></div>
@@ -46,121 +37,90 @@ c.width=innerWidth;
 c.height=innerHeight;
 
 // ===== СОХРАНЕНИЕ =====
-let save=JSON.parse(localStorage.getItem("save"))||{
+let save=JSON.parse(localStorage.getItem("save2"))||{
  money:200,
  income:50,
  buildings:[],
+ roads:[],
+ lights:[],
  cars:[]
 };
 
+function saveGame(){
+ localStorage.setItem("save2",JSON.stringify(save));
+}
+
+// ===== ДАННЫЕ =====
 let mode=null;
-let player={x:0,y:0,speed:4,inCar:false,car:null};
+let player={x:0,y:0,speed:4};
 let keys={};
 
-// NPC
+// NPC люди
 let npcs=[];
-for(let i=0;i<8;i++){
+for(let i=0;i<10;i++){
  npcs.push({x:Math.random()*1000,y:Math.random()*1000,dir:Math.random()*6});
 }
 
-// управление
-addEventListener("keydown",e=>{
- keys[e.key]=true;
-
- // сесть в машину
- if(e.key==="e"){
-  save.cars.forEach(car=>{
-   let dx=car.x-player.x;
-   let dy=car.y-player.y;
-   if(Math.hypot(dx,dy)<40){
-    player.inCar=true;
-    player.car=car;
-   }
-  });
- }
-});
+// ===== УПРАВЛЕНИЕ =====
+addEventListener("keydown",e=>keys[e.key]=true);
 addEventListener("keyup",e=>keys[e.key]=false);
 
-// деньги
+// ===== ДЕНЬГИ =====
 setInterval(()=>{
  save.money+=save.income;
  saveGame();
 },1000);
 
-// сохранить
-function saveGame(){
- localStorage.setItem("save",JSON.stringify(save));
-}
-
-// строительство
+// ===== СТРОИТЬ =====
 c.addEventListener("click",e=>{
  let x=player.x+(e.clientX-c.width/2);
  let y=player.y+(e.clientY-c.height/2);
 
- if(mode==="house"&&save.money>=50){
+ if(mode==="house" && save.money>=50){
   save.money-=50;
-  save.buildings.push({x,y,type:"house"});
+  save.buildings.push({x,y});
  }
- if(mode==="tower"&&save.money>=200){
-  save.money-=200;
-  save.buildings.push({x,y,type:"tower"});
+
+ if(mode==="road" && save.money>=20){
+  save.money-=20;
+  save.roads.push({x,y});
  }
- if(mode==="shop"&&save.money>=100){
-  save.money-=100;
-  save.buildings.push({x,y,type:"shop"});
+
+ if(mode==="light" && save.money>=30){
+  save.money-=30;
+  save.lights.push({x,y});
  }
- if(mode==="car"&&save.money>=60){
+
+ if(mode==="car" && save.money>=60){
   save.money-=60;
   save.cars.push({x,y,dir:Math.random()*6});
  }
 });
 
-// улучшение
-function upgrade(){
- if(save.money>=100){
-  save.money-=100;
-  save.income+=20;
- }
-}
-
-// джойстик
+// ===== ДЖОЙСТИК =====
 let joy=document.getElementById("joy");
-let joyActive=false,joyX=0,joyY=0;
+let joyX=0,joyY=0;
 
-joy.addEventListener("touchstart",e=>{
- joyActive=true;
-});
 joy.addEventListener("touchmove",e=>{
  let t=e.touches[0];
  joyX=t.clientX-60;
  joyY=t.clientY-(c.height-60);
 });
 joy.addEventListener("touchend",()=>{
- joyActive=false;
  joyX=joyY=0;
 });
 
-// движение
+// ===== ДВИЖЕНИЕ =====
 function update(){
- let speed=player.inCar?6:4;
-
- if(keys["w"]||joyY<-10) player.y-=speed;
- if(keys["s"]||joyY>10) player.y+=speed;
- if(keys["a"]||joyX<-10) player.x-=speed;
- if(keys["d"]||joyX>10) player.x+=speed;
-
- // если в машине
- if(player.inCar && player.car){
-  player.car.x=player.x;
-  player.car.y=player.y;
- }
+ if(keys["w"]||joyY<-10) player.y-=player.speed;
+ if(keys["s"]||joyY>10) player.y+=player.speed;
+ if(keys["a"]||joyX<-10) player.x-=player.speed;
+ if(keys["d"]||joyX>10) player.x+=player.speed;
 
  // машины
  save.cars.forEach(car=>{
-  if(car!==player.car){
-   car.x+=Math.cos(car.dir)*2;
-   car.y+=Math.sin(car.dir)*2;
-  }
+  car.x+=Math.cos(car.dir)*2;
+  car.y+=Math.sin(car.dir)*2;
  });
 
  // NPC
@@ -168,9 +128,11 @@ function update(){
   n.x+=Math.cos(n.dir);
   n.y+=Math.sin(n.dir);
  });
+
+ // лёгкое движение NPC
 }
 
-// человек
+// ===== ЧЕЛОВЕК =====
 function drawHuman(x,y){
  ctx.fillStyle="black";
  ctx.fillRect(x-5,y+10,4,10);
@@ -188,41 +150,52 @@ function drawHuman(x,y){
  ctx.fill();
 }
 
-// рендер
+// ===== РЕНДЕР =====
 function draw(){
  ctx.clearRect(0,0,c.width,c.height);
 
  let camX=player.x-c.width/2;
  let camY=player.y-c.height/2;
 
+ // 🌳 деревья
+ ctx.fillStyle="green";
+ for(let i=0;i<50;i++){
+  let tx=i*120-2000;
+  let ty=(i*77)%2000-1000;
+  ctx.beginPath();
+  ctx.arc(tx-camX,ty-camY,20,0,Math.PI*2);
+  ctx.fill();
+ }
+
+ // ⛰ горы
+ ctx.fillStyle="#999";
+ for(let i=0;i<10;i++){
+  let x=i*300-1500;
+  ctx.beginPath();
+  ctx.moveTo(x-camX,300-camY);
+  ctx.lineTo(x+80-camX,150-camY);
+  ctx.lineTo(x+160-camX,300-camY);
+  ctx.fill();
+ }
+
  // дороги
- ctx.fillStyle="#777";
- for(let x=-2000;x<2000;x+=200){
-  ctx.fillRect(x-camX,-2000-camY,40,4000);
- }
- for(let y=-2000;y<2000;y+=200){
-  ctx.fillRect(-2000-camX,y-camY,4000,40);
- }
+ ctx.fillStyle="#555";
+ save.roads.forEach(r=>{
+  ctx.fillRect(r.x-camX,r.y-camY,40,40);
+ });
 
  // светофоры
- ctx.fillStyle="black";
- for(let x=-2000;x<2000;x+=200){
-  for(let y=-2000;y<2000;y+=200){
-   ctx.fillRect(x-camX,y-camY,10,20);
-   ctx.fillStyle="red";
-   ctx.fillRect(x-camX+2,y-camY+2,6,6);
-   ctx.fillStyle="black";
-  }
- }
+ save.lights.forEach(l=>{
+  ctx.fillStyle="black";
+  ctx.fillRect(l.x-camX,l.y-camY,10,20);
+  ctx.fillStyle="red";
+  ctx.fillRect(l.x-camX+2,l.y-camY+2,6,6);
+ });
 
- // здания
+ // дома
  save.buildings.forEach(b=>{
-  if(b.type==="house") ctx.fillStyle="red";
-  if(b.type==="shop") ctx.fillStyle="blue";
-  if(b.type==="tower") ctx.fillStyle="purple";
-
-  let h=b.type==="tower"?80:30;
-  ctx.fillRect(b.x-camX,b.y-camY,30,h);
+  ctx.fillStyle="red";
+  ctx.fillRect(b.x-camX,b.y-camY,30,30);
  });
 
  // машины
@@ -240,11 +213,11 @@ function draw(){
  drawHuman(c.width/2,c.height/2);
 
  // UI
- document.getElementById("money").innerText=Math.floor(save.money);
- document.getElementById("income").innerText=save.income;
+ money.innerText=Math.floor(save.money);
+ income.innerText=save.income;
 }
 
-// цикл
+// ===== ЦИКЛ =====
 function loop(){
  update();
  draw();
