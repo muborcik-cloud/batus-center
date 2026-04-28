@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Ultra City+</title>
+<title>My City Game</title>
 <style>
 body{margin:0;overflow:hidden;font-family:sans-serif;}
 canvas{display:block;background:#6bdc6b;}
-#ui{position:fixed;top:10px;left:10px;background:rgba(0,0,0,.6);color:white;padding:10px;}
+#ui{position:fixed;top:10px;left:10px;background:rgba(0,0,0,.6);color:#fff;padding:10px;}
 #buttons{position:fixed;bottom:10px;right:10px;}
 button{margin:4px;padding:8px;}
 </style>
@@ -17,13 +17,17 @@ button{margin:4px;padding:8px;}
 
 <div id="ui">
 💰 <span id="money">0</span><br>
-📈 <span id="income">50</span>/сек<br>
-E — машина | F — действие
+📈 <span id="income">50</span>/сек
 </div>
 
 <div id="buttons">
-<button onclick="mode='house'">🏠</button>
-<button onclick="mode='car'">🚗</button>
+<button onclick="mode='house'">🏠 Дом</button>
+<button onclick="mode='shop'">🏪 Магазин</button>
+<button onclick="mode='hotel'">🏨 Отель</button>
+<button onclick="mode='hospital'">🏥 Больница</button>
+<button onclick="mode='tower'">🏢 Башня</button>
+<button onclick="mode='car'">🚗 Машина</button>
+<button onclick="upgrade()">⬆️ Улучшить</button>
 </div>
 
 <script>
@@ -33,27 +37,24 @@ c.width=innerWidth;
 c.height=innerHeight;
 
 // сохранение
-let save=JSON.parse(localStorage.getItem("game"))||{
- money:200,income:50,buildings:[],cars:[]
+let save=JSON.parse(localStorage.getItem("city"))||{
+ money:200,
+ income:50,
+ buildings:[],
+ cars:[]
 };
 
 function saveGame(){
- localStorage.setItem("game",JSON.stringify(save));
+ localStorage.setItem("city",JSON.stringify(save));
 }
 
-let player={x:0,y:0,speed:4,inCar:false,car:null};
+let player={x:0,y:0,speed:4};
 let keys={},mode=null;
 
 // NPC
 let npcs=[];
-for(let i=0;i<8;i++){
- npcs.push({x:Math.random()*800,y:Math.random()*800});
-}
-
-// полиция
-let police=[];
-for(let i=0;i<3;i++){
- police.push({x:Math.random()*800,y:Math.random()*800});
+for(let i=0;i<10;i++){
+ npcs.push({x:Math.random()*1000,y:Math.random()*1000});
 }
 
 // деньги
@@ -63,28 +64,7 @@ setInterval(()=>{
 },1000);
 
 // управление
-addEventListener("keydown",e=>{
- keys[e.key]=true;
-
- if(e.key==="e"){
-  save.cars.forEach(car=>{
-   if(Math.hypot(car.x-player.x,car.y-player.y)<40){
-    player.inCar=true;
-    player.car=car;
-   }
-  });
- }
-
- // действие (стрельба просто эффект)
- if(e.key==="f"){
-  npcs.forEach(n=>{
-   if(Math.hypot(n.x-player.x,n.y-player.y)<60){
-    n.x+=Math.random()*100-50;
-    n.y+=Math.random()*100-50;
-   }
-  });
- }
-});
+addEventListener("keydown",e=>keys[e.key]=true);
 addEventListener("keyup",e=>keys[e.key]=false);
 
 // стройка
@@ -94,46 +74,58 @@ c.addEventListener("click",e=>{
 
  if(mode==="house"&&save.money>=50){
   save.money-=50;
-  save.buildings.push({x,y});
+  save.buildings.push({x,y,type:"house"});
  }
-
+ if(mode==="shop"&&save.money>=80){
+  save.money-=80;
+  save.buildings.push({x,y,type:"shop"});
+ }
+ if(mode==="hotel"&&save.money>=150){
+  save.money-=150;
+  save.buildings.push({x,y,type:"hotel"});
+ }
+ if(mode==="hospital"&&save.money>=150){
+  save.money-=150;
+  save.buildings.push({x,y,type:"hospital"});
+ }
+ if(mode==="tower"&&save.money>=200){
+  save.money-=200;
+  save.buildings.push({x,y,type:"tower"});
+ }
  if(mode==="car"&&save.money>=60){
   save.money-=60;
   save.cars.push({x,y});
  }
 });
 
+// улучшение
+function upgrade(){
+ if(save.money>=100){
+  save.money-=100;
+  save.income+=20;
+ }
+}
+
 // движение
 function update(){
- let speed=player.inCar?6:4;
+ if(keys["w"])player.y-=player.speed;
+ if(keys["s"])player.y+=player.speed;
+ if(keys["a"])player.x-=player.speed;
+ if(keys["d"])player.x+=player.speed;
 
- if(keys["w"])player.y-=speed;
- if(keys["s"])player.y+=speed;
- if(keys["a"])player.x-=speed;
- if(keys["d"])player.x+=speed;
-
- if(player.inCar&&player.car){
-  player.car.x=player.x;
-  player.car.y=player.y;
- }
-
- // полиция преследует
- police.forEach(p=>{
-  let dx=player.x-p.x;
-  let dy=player.y-p.y;
-  let d=Math.hypot(dx,dy);
-  p.x+=dx/d;
-  p.y+=dy/d;
+ save.cars.forEach(car=>{
+  car.x+=1;
+  if(car.x>2000)car.x=-2000;
  });
 }
 
 // человек
-function drawHuman(x,y,color="blue"){
+function drawHuman(x,y){
  ctx.fillStyle="black";
  ctx.fillRect(x-5,y+10,4,10);
  ctx.fillRect(x+1,y+10,4,10);
 
- ctx.fillStyle=color;
+ ctx.fillStyle="blue";
  ctx.fillRect(x-8,y-5,16,20);
 
  ctx.fillRect(x-12,y,6,4);
@@ -152,10 +144,25 @@ function draw(){
  let camX=player.x-c.width/2;
  let camY=player.y-c.height/2;
 
+ // дороги
+ ctx.fillStyle="#777";
+ for(let x=-2000;x<2000;x+=200){
+  ctx.fillRect(x-camX,-2000-camY,40,4000);
+ }
+ for(let y=-2000;y<2000;y+=200){
+  ctx.fillRect(-2000-camX,y-camY,4000,40);
+ }
+
  // здания
  save.buildings.forEach(b=>{
-  ctx.fillStyle="red";
-  ctx.fillRect(b.x-camX,b.y-camY,30,30);
+  if(b.type==="house")ctx.fillStyle="red";
+  if(b.type==="shop")ctx.fillStyle="blue";
+  if(b.type==="hotel")ctx.fillStyle="purple";
+  if(b.type==="hospital")ctx.fillStyle="white";
+  if(b.type==="tower")ctx.fillStyle="black";
+
+  let h=b.type==="tower"?80:30;
+  ctx.fillRect(b.x-camX,b.y-camY,30,h);
  });
 
  // машины
@@ -167,11 +174,8 @@ function draw(){
  // NPC
  npcs.forEach(n=>drawHuman(n.x-camX,n.y-camY));
 
- // полиция
- police.forEach(p=>drawHuman(p.x-camX,p.y-camY,"black"));
-
  // игрок
- drawHuman(c.width/2,c.height/2,"yellow");
+ drawHuman(c.width/2,c.height/2);
 
  money.innerText=Math.floor(save.money);
  income.innerText=save.income;
