@@ -1,9 +1,8 @@
-script.Parent.Touched:Connect(function(hit)
-    local player = game.Players:GetPlayerFromCharacter(hit.Parent)
-    if player then
-        local stats = player:FindFirstChild("leaderstats")
-        if stats then
-            stats.Money.Value += 100
-        end
-    end
-end)
+local player = game.Players.LocalPlayer
+local leaderstats = player:WaitForChild("leaderstats")
+local money = leaderstats:WaitForChild("Money")
+
+while true do
+    wait(1)
+    money.Value = money.Value + 10
+end
