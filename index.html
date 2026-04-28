@@ -2,10 +2,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Mini Tycoon</title>
+<title>Better Game</title>
 
 <style>
-body{margin:0;overflow:hidden;font-family:Arial;background:#87ceeb;}
+body{margin:0;overflow:hidden;font-family:Arial;}
 #ui{
  position:absolute;top:0;width:100%;
  background:#111;color:white;padding:8px;
@@ -36,7 +36,7 @@ body{margin:0;overflow:hidden;font-family:Arial;background:#87ceeb;}
 </div>
 
 <div id="joy"><div id="stick"></div></div>
-<button id="build">🏠 Построить</button>
+<button id="build">🏠 Дом</button>
 
 <canvas id="game"></canvas>
 
@@ -50,6 +50,15 @@ c.height=innerHeight;
 let player={x:1000,y:1000};
 let money=100;
 let houses=[];
+let trees=[];
+
+// создаём деревья
+for(let i=0;i<50;i++){
+ trees.push({
+  x:Math.random()*3000,
+  y:Math.random()*3000
+ });
+}
 
 // джойстик
 let joy={x:0,y:0};
@@ -58,7 +67,6 @@ const stick=document.getElementById("stick");
 document.getElementById("joy").addEventListener("touchmove",e=>{
  let t=e.touches[0];
  let r=e.target.getBoundingClientRect();
-
  let dx=t.clientX-(r.left+50);
  let dy=t.clientY-(r.top+50);
 
@@ -77,21 +85,23 @@ document.addEventListener("touchend",()=>{
 
 // движение
 function move(){
- player.x+=joy.x*3;
- player.y+=joy.y*3;
+ player.x+=joy.x*4;
+ player.y+=joy.y*4;
 }
 
 // построить дом
 build.onclick=()=>{
  if(money>=50){
-  houses.push({x:player.x,y:player.y});
+  houses.push({x:player.x,y:player.y,level:1});
   money-=50;
  }
 };
 
 // доход
 setInterval(()=>{
- money+=houses.length*5;
+ houses.forEach(h=>{
+  money+=h.level*2;
+ });
 },2000);
 
 // камера
@@ -104,19 +114,56 @@ function draw(){
  ctx.clearRect(0,0,c.width,c.height);
  let m=cam();
 
- // трава
- ctx.fillStyle="#6fdc3c";
- ctx.fillRect(0,0,c.width,c.height);
+ // трава (сеткой)
+ for(let x=0;x<c.width;x+=40){
+  for(let y=0;y<c.height;y+=40){
+   ctx.fillStyle=(x+y)%80==0?"#6fdc3c":"#62c932";
+   ctx.fillRect(x,y,40,40);
+  }
+ }
+
+ // деревья
+ trees.forEach(t=>{
+  ctx.fillStyle="green";
+  ctx.beginPath();
+  ctx.arc(t.x-m.x,t.y-m.y,15,0,Math.PI*2);
+  ctx.fill();
+
+  ctx.fillStyle="brown";
+  ctx.fillRect(t.x-5-m.x,t.y-m.y,10,20);
+ });
 
  // дома
  houses.forEach(h=>{
   ctx.fillStyle="brown";
-  ctx.fillRect(h.x-15-m.x,h.y-15-m.y,30,30);
+  ctx.fillRect(h.x-20-m.x,h.y-20-m.y,40,40);
+
+  ctx.fillStyle="red";
+  ctx.beginPath();
+  ctx.moveTo(h.x-25-m.x,h.y-20-m.y);
+  ctx.lineTo(h.x+25-m.x,h.y-20-m.y);
+  ctx.lineTo(h.x-m.x,h.y-40-m.y);
+  ctx.fill();
  });
 
- // игрок
+ // игрок (человек)
+ let px=player.x-m.x;
+ let py=player.y-m.y;
+
+ // ноги
+ ctx.fillStyle="black";
+ ctx.fillRect(px-5,py+10,5,10);
+ ctx.fillRect(px,py+10,5,10);
+
+ // тело
  ctx.fillStyle="blue";
- ctx.fillRect(player.x-10-m.x,player.y-10-m.y,20,20);
+ ctx.fillRect(px-10,py-10,20,20);
+
+ // голова
+ ctx.fillStyle="peachpuff";
+ ctx.beginPath();
+ ctx.arc(px,py-20,8,0,Math.PI*2);
+ ctx.fill();
 
  // UI
  document.getElementById("money").innerText=Math.floor(money);
