@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Город Тайкун</title>
+<title>Моя игра</title>
 <style>
 body { margin:0; overflow:hidden; font-family:sans-serif; }
 canvas { display:block; background:#6bdc6b; }
@@ -24,8 +24,8 @@ canvas { display:block; background:#6bdc6b; }
 }
 
 button {
- margin:5px;
- padding:10px;
+ margin:4px;
+ padding:8px;
 }
 </style>
 </head>
@@ -35,25 +35,29 @@ button {
 
 <div id="ui">
 💰 Деньги: <span id="money">0</span><br>
-🏠 Дома: <span id="houses">0</span>
+📈 Доход: <span id="income">10</span>/2 сек
 </div>
 
 <div id="buttons">
-<button onclick="buyHouse()">🏠 Дом (50)</button>
-<button onclick="buyCar()">🚗 Машина (60)</button>
+<button onclick="mode='house'">🏠 Дом (50)</button>
+<button onclick="mode='shop'">🏪 Магазин (80)</button>
+<button onclick="mode='hotel'">🏨 Отель (150)</button>
+<button onclick="mode='car'">🚗 Машина (60)</button>
+<button onclick="upgrade()">⬆️ Улучшить (100)</button>
 </div>
 
 <script>
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
-
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 // ===== ДАННЫЕ =====
 let money = 100;
-let houses = [];
+let income = 10;
+let buildings = [];
 let cars = [];
+let mode = null;
 
 // ===== ИГРОК =====
 let player = { x:0, y:0, speed:4 };
@@ -63,29 +67,44 @@ let keys = {};
 addEventListener("keydown", e => keys[e.key]=true);
 addEventListener("keyup", e => keys[e.key]=false);
 
-// ===== ФУНКЦИИ =====
-function buyHouse(){
- if(money>=50){
+// ===== СТРОИТЬ КЛИКОМ =====
+canvas.addEventListener("click", e=>{
+ let x = player.x + (e.clientX - canvas.width/2);
+ let y = player.y + (e.clientY - canvas.height/2);
+
+ if(mode==="house" && money>=50){
   money-=50;
-  houses.push({x:player.x, y:player.y});
+  buildings.push({x,y,type:"house",level:1});
  }
-}
 
-function buyCar(){
- if(money>=60){
+ if(mode==="shop" && money>=80){
+  money-=80;
+  buildings.push({x,y,type:"shop",level:1});
+ }
+
+ if(mode==="hotel" && money>=150){
+  money-=150;
+  buildings.push({x,y,type:"hotel",level:1});
+ }
+
+ if(mode==="car" && money>=60){
   money-=60;
-  cars.push({
-   x:player.x,
-   y:player.y,
-   dir:Math.random()*Math.PI*2
-  });
+  cars.push({x,y,dir:Math.random()*Math.PI*2});
+ }
+});
+
+// ===== УЛУЧШЕНИЕ =====
+function upgrade(){
+ if(money>=100){
+  money-=100;
+  income+=5;
  }
 }
 
-// деньги
+// ===== ДЕНЬГИ =====
 setInterval(()=>{
- money+=5;
-},1000);
+ money += income;
+},2000);
 
 // ===== ОБНОВЛЕНИЕ =====
 function update(){
@@ -104,7 +123,6 @@ function update(){
 function draw(){
  ctx.clearRect(0,0,canvas.width,canvas.height);
 
- // камера (игрок по центру)
  let camX = player.x - canvas.width/2;
  let camY = player.y - canvas.height/2;
 
@@ -117,10 +135,13 @@ function draw(){
   ctx.fillRect(-2000-camX, y-camY, 4000, 40);
  }
 
- // дома
- houses.forEach(h=>{
-  ctx.fillStyle="red";
-  ctx.fillRect(h.x-camX, h.y-camY, 30, 30);
+ // здания
+ buildings.forEach(b=>{
+  if(b.type==="house") ctx.fillStyle="red";
+  if(b.type==="shop") ctx.fillStyle="blue";
+  if(b.type==="hotel") ctx.fillStyle="purple";
+
+  ctx.fillRect(b.x-camX, b.y-camY, 30, 30);
  });
 
  // машины
@@ -130,7 +151,7 @@ function draw(){
  });
 
  // игрок
- ctx.fillStyle="blue";
+ ctx.fillStyle="yellow";
  ctx.fillRect(canvas.width/2, canvas.height/2, 20, 30);
 
  ctx.fillStyle="#f5cba7";
@@ -140,7 +161,7 @@ function draw(){
 
  // UI
  document.getElementById("money").innerText = money;
- document.getElementById("houses").innerText = houses.length;
+ document.getElementById("income").innerText = income;
 }
 
 // ===== ЦИКЛ =====
