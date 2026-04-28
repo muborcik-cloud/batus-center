@@ -2,153 +2,189 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>3D City PRO+</title>
+<title>3D Life Game</title>
 <style>
-body { margin:0; overflow:hidden; }
-#info{
- position:absolute;
- top:10px; left:10px;
- color:white;
- background:rgba(0,0,0,0.5);
- padding:10px;
+body{margin:0;overflow:hidden;}
+#joy{
+ position:absolute;bottom:20px;left:20px;
+ width:100px;height:100px;
+ background:rgba(255,255,255,0.3);
+ border-radius:50%;
+}
+#stick{
+ width:40px;height:40px;
+ background:white;border-radius:50%;
+ position:absolute;left:30px;top:30px;
 }
 </style>
 </head>
-
 <body>
 
-<div id="info">
-WASD — ходить<br>
-E — сесть/выйти из машины
-</div>
+<div id="joy"><div id="stick"></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.158/build/three.min.js"></script>
 
 <script>
 // сцена
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x87ceeb);
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x87ceeb);
 
 // камера
-const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
+const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
 
 // рендер
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(innerWidth, innerHeight);
+const renderer=new THREE.WebGLRenderer();
+renderer.setSize(innerWidth,innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // свет
-const light = new THREE.DirectionalLight(0xffffff,1);
+const light=new THREE.DirectionalLight(0xffffff,1);
 light.position.set(10,20,10);
 scene.add(light);
 
 // земля
-const ground = new THREE.Mesh(
+const ground=new THREE.Mesh(
  new THREE.PlaneGeometry(200,200),
  new THREE.MeshStandardMaterial({color:0x55aa55})
 );
-ground.rotation.x = -Math.PI/2;
+ground.rotation.x=-Math.PI/2;
 scene.add(ground);
 
-// игрок (тело + голова)
-const body = new THREE.Mesh(
- new THREE.BoxGeometry(1,1.5,1),
+// игрок (голова, тело, руки, ноги)
+const player=new THREE.Group();
+
+// тело
+let body=new THREE.Mesh(
+ new THREE.BoxGeometry(1,1.5,0.6),
  new THREE.MeshStandardMaterial({color:0x0000ff})
 );
-body.position.y = 0.75;
+body.position.y=1;
+player.add(body);
 
-const head = new THREE.Mesh(
- new THREE.SphereGeometry(0.5,16,16),
+// голова
+let head=new THREE.Mesh(
+ new THREE.SphereGeometry(0.4,16,16),
  new THREE.MeshStandardMaterial({color:0xffcc99})
 );
-head.position.y = 1.8;
-
-const player = new THREE.Group();
-player.add(body);
+head.position.y=2;
 player.add(head);
+
+// руки
+let armL=new THREE.Mesh(
+ new THREE.BoxGeometry(0.3,1,0.3),
+ new THREE.MeshStandardMaterial({color:0x0000ff})
+);
+armL.position.set(-0.8,1.2,0);
+player.add(armL);
+
+let armR=armL.clone();
+armR.position.x=0.8;
+player.add(armR);
+
+// ноги
+let legL=new THREE.Mesh(
+ new THREE.BoxGeometry(0.3,1,0.3),
+ new THREE.MeshStandardMaterial({color:0x000088})
+);
+legL.position.set(-0.3,0.3,0);
+player.add(legL);
+
+let legR=legL.clone();
+legR.position.x=0.3;
+player.add(legR);
+
 scene.add(player);
 
-// город
-for(let i=0;i<100;i++){
- let h = Math.random()*20+5;
- let b = new THREE.Mesh(
+// город (здания)
+for(let i=0;i<60;i++){
+ let h=Math.random()*10+5;
+ let b=new THREE.Mesh(
   new THREE.BoxGeometry(2,h,2),
   new THREE.MeshStandardMaterial({color:0x888888})
  );
- b.position.set(Math.random()*180-90,h/2,Math.random()*180-90);
+ b.position.set(Math.random()*100-50,h/2,Math.random()*100-50);
  scene.add(b);
 }
 
 // деревья
-for(let i=0;i<50;i++){
- let tree = new THREE.Mesh(
+for(let i=0;i<30;i++){
+ let t=new THREE.Mesh(
   new THREE.ConeGeometry(1,3,8),
   new THREE.MeshStandardMaterial({color:0x228B22})
  );
- tree.position.set(Math.random()*180-90,1.5,Math.random()*180-90);
- scene.add(tree);
+ t.position.set(Math.random()*100-50,1.5,Math.random()*100-50);
+ scene.add(t);
 }
 
-// машина
-const car = new THREE.Mesh(
- new THREE.BoxGeometry(2,1,1),
- new THREE.MeshStandardMaterial({color:0xff0000})
-);
-car.position.set(5,0.5,5);
-scene.add(car);
+// машины
+let cars=[];
+for(let i=0;i<6;i++){
+ let car=new THREE.Mesh(
+  new THREE.BoxGeometry(2,1,1),
+  new THREE.MeshStandardMaterial({color:0xff0000})
+ );
+ car.position.set(Math.random()*100-50,0.5,Math.random()*100-50);
+ scene.add(car);
+ cars.push(car);
+}
 
-let inCar=false;
+// джойстик
+let joy={x:0,y:0};
+const stick=document.getElementById("stick");
 
-// управление
-let keys={};
-document.addEventListener("keydown",e=>{
- keys[e.key]=true;
-
- if(e.key==="e"){
-  let dist = player.position.distanceTo(car.position);
-  if(dist<3){
-   inCar=!inCar;
-  }
- }
+document.getElementById("joy").addEventListener("touchmove",e=>{
+ let t=e.touches[0];
+ let r=e.target.getBoundingClientRect();
+ let dx=t.clientX-(r.left+50);
+ let dy=t.clientY-(r.top+50);
+ joy.x=dx/50;
+ joy.y=dy/50;
+ stick.style.left=(30+dx/2)+"px";
+ stick.style.top=(30+dy/2)+"px";
 });
-document.addEventListener("keyup",e=>keys[e.key]=false);
+
+document.addEventListener("touchend",()=>{
+ joy.x=0;joy.y=0;
+ stick.style.left="30px";
+ stick.style.top="30px";
+});
 
 // движение
 function move(){
- let speed = inCar ? 0.5 : 0.2;
+ player.position.x+=joy.x*0.3;
+ player.position.z+=joy.y*0.3;
 
- if(inCar){
-  if(keys["w"]) car.position.z-=speed;
-  if(keys["s"]) car.position.z+=speed;
-  if(keys["a"]) car.position.x-=speed;
-  if(keys["d"]) car.position.x+=speed;
-
-  player.position.copy(car.position);
- }else{
-  if(keys["w"]) player.position.z-=speed;
-  if(keys["s"]) player.position.z+=speed;
-  if(keys["a"]) player.position.x-=speed;
-  if(keys["d"]) player.position.x+=speed;
- }
+ // анимация ног
+ legL.rotation.x+=joy.y*0.1;
+ legR.rotation.x-=joy.y*0.1;
 }
 
 // камера
-function updateCamera(){
- camera.position.x = player.position.x;
- camera.position.z = player.position.z + 6;
- camera.position.y = player.position.y + 4;
+function cam(){
+ camera.position.x=player.position.x;
+ camera.position.z=player.position.z+5;
+ camera.position.y=3;
  camera.lookAt(player.position);
 }
 
+// машины двигаются
+function updateCars(){
+ cars.forEach(c=>{
+  c.position.x+=0.1;
+  if(c.position.x>50) c.position.x=-50;
+ });
+}
+
 // цикл
-function animate(){
- requestAnimationFrame(animate);
+function loop(){
+ requestAnimationFrame(loop);
  move();
- updateCamera();
+ cam();
+ updateCars();
  renderer.render(scene,camera);
 }
 
-animate();
+loop();
 </script>
 
 </body>
