@@ -2,41 +2,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>City Ultimate+</title>
-
+<title>City OneFile PRO</title>
 <style>
-body{margin:0;overflow:hidden;font-family:Arial;}
-
-#ui{
- position:absolute;top:0;width:100%;
- background:#111;color:white;padding:8px;
-}
-
-#joy{
- position:absolute;bottom:20px;left:20px;
- width:100px;height:100px;
- background:rgba(255,255,255,0.3);
- border-radius:50%;
-}
-
-#stick{
- width:40px;height:40px;
- background:white;border-radius:50%;
- position:absolute;left:30px;top:30px;
-}
-
-.btn{
- position:absolute;right:20px;
- padding:10px;
-}
-
-#build{bottom:220px;}
-#shop{bottom:160px;}
-#shoot{bottom:100px;}
-#upgrade{bottom:40px;}
+body{margin:0;overflow:hidden;font-family:Arial;background:#87ceeb;}
+#ui{position:absolute;top:0;width:100%;background:#111;color:#fff;padding:8px;z-index:10}
+#joy{position:absolute;bottom:20px;left:20px;width:110px;height:110px;background:rgba(255,255,255,.25);border-radius:50%}
+#stick{width:44px;height:44px;background:#fff;border-radius:50%;position:absolute;left:33px;top:33px}
+.btn{position:absolute;right:16px;padding:10px;font-size:16px}
+#build{bottom:220px} #shop{bottom:165px} #shoot{bottom:110px} #upgrade{bottom:55px}
 </style>
 </head>
-
 <body>
 
 <div id="ui">
@@ -46,7 +21,6 @@ body{margin:0;overflow:hidden;font-family:Arial;}
 </div>
 
 <div id="joy"><div id="stick"></div></div>
-
 <button class="btn" id="build">🏠</button>
 <button class="btn" id="shop">🛒</button>
 <button class="btn" id="shoot">🔫</button>
@@ -55,191 +29,219 @@ body{margin:0;overflow:hidden;font-family:Arial;}
 <canvas id="game"></canvas>
 
 <script>
-const c=document.getElementById("game");
-const ctx=c.getContext("2d");
+const c = document.getElementById("game");
+const ctx = c.getContext("2d");
+c.width = innerWidth; c.height = innerHeight;
 
-c.width=innerWidth;
-c.height=innerHeight;
+// --- мир ---
+let player={x:1200,y:1200};
+let money=200, level=1;
 
-let player={x:1000,y:1000};
-let money=200;
-let level=1;
+let houses=[], bullets=[];
+let npcs=[], cars=[], trees=[], buildings=[], roads=[], lights=[];
 
-let houses=[];
-let bullets=[];
-let npcs=[];
-let cars=[];
-
-// NPC
-for(let i=0;i<15;i++){
- npcs.push({
-  x:Math.random()*2000,
-  y:Math.random()*2000,
-  dx:Math.random()*2-1,
-  dy:Math.random()*2-1
+// генерация города
+for(let i=0;i<12;i++){
+ roads.push({x:0,y:i*240,w:2400,h:48});
+ roads.push({x:i*240,y:0,w:48,h:2400});
+}
+// башни (разные высоты)
+for(let i=0;i<70;i++){
+ let h=60+Math.random()*260;
+ buildings.push({
+  x:Math.random()*2400, y:Math.random()*2400,
+  w:30+Math.random()*30, h:h
  });
 }
-
-// машины (по дорогам)
-for(let i=0;i<6;i++){
+// деревья
+for(let i=0;i<50;i++){
+ trees.push({x:Math.random()*2400,y:Math.random()*2400});
+}
+// NPC
+for(let i=0;i<20;i++){
+ npcs.push({x:Math.random()*2400,y:Math.random()*2400,dx:Math.random()*2-1,dy:Math.random()*2-1});
+}
+// машины по линиям
+for(let i=0;i<10;i++){
  cars.push({
-  x:Math.random()*2000,
-  y:Math.floor(Math.random()*10)*200+20,
+  x:Math.random()*2400,
+  y:Math.floor(Math.random()*10)*240+20,
   speed:2+Math.random()*2
  });
 }
-
-// джойстик
-let joy={x:0,y:0};
-const stick=document.getElementById("stick");
-
-document.getElementById("joy").addEventListener("touchmove",e=>{
- let t=e.touches[0];
- let rect=e.target.getBoundingClientRect();
-
- let dx=t.clientX-(rect.left+50);
- let dy=t.clientY-(rect.top+50);
-
- joy.x=dx/50;
- joy.y=dy/50;
-
- stick.style.left=(30+dx/2)+"px";
- stick.style.top=(30+dy/2)+"px";
-});
-
-document.addEventListener("touchend",()=>{
- joy.x=0;joy.y=0;
- stick.style.left="30px";
- stick.style.top="30px";
-});
-
-// движение
-function move(){
- player.x+=joy.x*(2+level*0.3);
- player.y+=joy.y*(2+level*0.3);
+// светофоры
+for(let i=0;i<12;i++){
+ lights.push({
+  x:i*240+24, y:i*240+24,
+  state:Math.random()<0.5?0:1, // 0-красный,1-зелёный
+  t:0
+ });
 }
 
-// кнопки
+// --- джойстик ---
+let joy={x:0,y:0};
+const stick=document.getElementById("stick");
+document.getElementById("joy").addEventListener("touchmove",e=>{
+ let t=e.touches[0], r=e.target.getBoundingClientRect();
+ let dx=t.clientX-(r.left+55), dy=t.clientY-(r.top+55);
+ joy.x=Math.max(-1,Math.min(1,dx/55));
+ joy.y=Math.max(-1,Math.min(1,dy/55));
+ stick.style.left=(33+dx/2)+"px";
+ stick.style.top =(33+dy/2)+"px";
+});
+document.addEventListener("touchend",()=>{
+ joy.x=0; joy.y=0; stick.style.left="33px"; stick.style.top="33px";
+});
+
+// --- кнопки ---
 build.onclick=()=>{
- if(money>=100){
-  houses.push({x:player.x,y:player.y,level:1});
-  money-=100;
+ if(money>=120){
+  houses.push({x:player.x,y:player.y,lvl:1});
+  money-=120;
  }
 };
-
 shop.onclick=()=>{
- if(money>=200){
-  level++;
-  money-=200;
- }
+ if(money>=200){ level++; money-=200; }
 };
-
 upgrade.onclick=()=>{
- if(money>=300){
-  level+=2;
-  money-=300;
- }
+ if(money>=300){ level+=2; money-=300; }
 };
-
 shoot.onclick=()=>{
  bullets.push({x:player.x,y:player.y,dx:joy.x*10,dy:joy.y*10});
 };
 
-// обновление
-function update(){
+// --- логика ---
+function move(){
+ player.x+=joy.x*(2+level*0.35);
+ player.y+=joy.y*(2+level*0.35);
+}
+function cam(){ return {x:player.x-c.width/2,y:player.y-c.height/2}; }
 
+function update(){
  // доход
- houses.forEach(h=>{
-  money+=0.05*h.level;
- });
+ houses.forEach(h=> money+=0.04*h.lvl);
 
  // NPC
  npcs.forEach(n=>{
-  n.x+=n.dx;
-  n.y+=n.dy;
+  n.x+=n.dx; n.y+=n.dy;
+  if(Math.random()<0.02){ n.dx=Math.random()*2-1; n.dy=Math.random()*2-1; }
  });
 
- // машины
+ // машины + светофоры
+ lights.forEach(L=>{
+  L.t++; if(L.t>180){ L.t=0; L.state=1-L.state; }
+ });
  cars.forEach(car=>{
-  car.x+=car.speed;
-  if(car.x>2000) car.x=0;
+  // ищем ближайший светофор по линии
+  let stop=false;
+  for(let L of lights){
+    if(Math.abs(car.y-L.y)<30 && car.x<L.x && (L.x-car.x)<60 && L.state===0){
+      stop=true; break;
+    }
+  }
+  if(!stop) car.x+=car.speed;
+  if(car.x>2400) car.x=0;
  });
 
  // пули
- bullets.forEach(b=>{
-  b.x+=b.dx;
-  b.y+=b.dy;
- });
+ bullets.forEach(b=>{ b.x+=b.dx; b.y+=b.dy; });
 
  // попадания
  bullets.forEach(b=>{
   npcs.forEach(n=>{
    if(Math.hypot(b.x-n.x,b.y-n.y)<10){
-    n.x=Math.random()*2000;
-    n.y=Math.random()*2000;
+    n.x=Math.random()*2400; n.y=Math.random()*2400;
     money+=20;
    }
   });
  });
 
+ // UI
  document.getElementById("money").innerText=Math.floor(money);
  document.getElementById("houses").innerText=houses.length;
  document.getElementById("level").innerText=level;
 }
 
-// камера
-function cam(){
- return {x:player.x-c.width/2,y:player.y-c.height/2};
-}
-
-// рисование
+// --- псевдо-3D рисование ---
 function draw(){
  ctx.clearRect(0,0,c.width,c.height);
  let m=cam();
 
- // трава
+ // земля
  ctx.fillStyle="#6fdc3c";
  ctx.fillRect(0,0,c.width,c.height);
 
- // дороги
- ctx.fillStyle="#444";
- for(let i=0;i<10;i++){
-  ctx.fillRect(0-m.x,i*200-m.y,2000,40);
-  ctx.fillRect(i*200-m.x,0-m.y,40,2000);
- }
+ // дороги + разметка
+ ctx.fillStyle="#3a3a3a";
+ roads.forEach(r=>{
+  ctx.fillRect(r.x-m.x,r.y-m.y,r.w,r.h);
+  ctx.strokeStyle="#fff"; ctx.lineWidth=2;
+  for(let i=0;i<r.w;i+=40){
+    ctx.beginPath();
+    ctx.moveTo(r.x+i-m.x,r.y+r.h/2-m.y);
+    ctx.lineTo(r.x+i+20-m.x,r.y+r.h/2-m.y);
+    ctx.stroke();
+  }
+ });
+
+ // здания (тень + фасад = эффект высоты)
+ buildings.forEach(b=>{
+  let x=b.x-m.x, y=b.y-m.y;
+  ctx.fillStyle="rgba(0,0,0,0.25)";
+  ctx.fillRect(x+8,y+8,b.w,b.h); // тень
+  ctx.fillStyle="#8a8a8a";
+  ctx.fillRect(x,y,b.w,b.h);
+  // “окна”
+  ctx.fillStyle="#cfcfcf";
+  for(let yy=4; yy<b.h; yy+=14){
+    ctx.fillRect(x+4,y+yy, b.w-8, 2);
+  }
+ });
+
+ // деревья
+ trees.forEach(t=>{
+  ctx.fillStyle="#2e8b57";
+  ctx.beginPath();
+  ctx.arc(t.x-m.x,t.y-m.y,10,0,6.28);
+  ctx.fill();
+ });
 
  // дома
  houses.forEach(h=>{
-  ctx.fillStyle="brown";
-  ctx.fillRect(h.x-15-m.x,h.y-15-m.y,30,30);
+  ctx.fillStyle="#7b4a12";
+  ctx.fillRect(h.x-16-m.x,h.y-16-m.y,32,32);
+ });
+
+ // светофоры
+ lights.forEach(L=>{
+  ctx.fillStyle=L.state? "lime":"red";
+  ctx.fillRect(L.x-m.x-4,L.y-m.y-10,8,20);
  });
 
  // машины
  cars.forEach(car=>{
-  ctx.fillStyle="red";
-  ctx.fillRect(car.x-m.x,car.y-m.y,30,15);
+  ctx.fillStyle="#d33";
+  ctx.fillRect(car.x-m.x,car.y-m.y,30,14);
  });
 
- // NPC
+ // NPC (тело + голова)
  npcs.forEach(n=>{
-  ctx.fillStyle="blue";
-  ctx.fillRect(n.x-5-m.x,n.y-5-m.y,10,15);
-  ctx.fillStyle="white";
+  ctx.fillStyle="#2b6cff";
+  ctx.fillRect(n.x-5-m.x,n.y-5-m.y,10,14);
+  ctx.fillStyle="#fff";
   ctx.beginPath();
-  ctx.arc(n.x-m.x,n.y-10-m.y,4,0,6.28);
+  ctx.arc(n.x-m.x,n.y-10-m.y,5,0,6.28);
   ctx.fill();
  });
 
  // пули
- ctx.fillStyle="black";
- bullets.forEach(b=>{
-  ctx.fillRect(b.x-m.x,b.y-m.y,5,5);
- });
+ ctx.fillStyle="#000";
+ bullets.forEach(b=> ctx.fillRect(b.x-m.x,b.y-m.y,5,5));
 
  // игрок
- ctx.fillStyle="black";
- ctx.fillRect(player.x-5-m.x,player.y-5-m.y,10,15);
- ctx.fillStyle="white";
+ ctx.fillStyle="#111";
+ ctx.fillRect(player.x-5-m.x,player.y-5-m.y,10,14);
+ ctx.fillStyle="#fff";
  ctx.beginPath();
  ctx.arc(player.x-m.x,player.y-10-m.y,5,0,6.28);
  ctx.fill();
@@ -247,12 +249,9 @@ function draw(){
 
 // цикл
 function loop(){
- move();
- update();
- draw();
+ move(); update(); draw();
  requestAnimationFrame(loop);
 }
-
 loop();
 </script>
 
