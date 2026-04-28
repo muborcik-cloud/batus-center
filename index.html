@@ -1,5 +1,165 @@
-каждый 5 секунд по 5доларов
-купить дом за 50доларав
-улучшить дом за 100доларав
-купить машину 60доларав
-строить город
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Tycoon Game</title>
+<style>
+body { margin:0; overflow:hidden; font-family:sans-serif; }
+#ui {
+  position:absolute; top:10px; left:10px;
+  background:rgba(0,0,0,0.6); color:white; padding:10px;
+}
+#buttons {
+  position:absolute; right:10px; bottom:10px;
+}
+button { margin:5px; padding:10px; }
+</style>
+</head>
+<body>
+
+<canvas id="game"></canvas>
+
+<div id="ui">
+💰 Деньги: <span id="money">0</span><br>
+🏠 Домов: <span id="houses">0</span>
+</div>
+
+<div id="buttons">
+<button onclick="buyHouse()">🏠 Дом (50)</button>
+<button onclick="upgrade()">⬆️ Улучшить (100)</button>
+<button onclick="buyCar()">🚗 Машина (60)</button>
+</div>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+// загрузка сохранения
+let money = Number(localStorage.getItem("money")) || 0;
+let houses = Number(localStorage.getItem("houses")) || 0;
+let income = 5 + houses * 5;
+let cars = [];
+
+function save() {
+  localStorage.setItem("money", money);
+  localStorage.setItem("houses", houses);
+}
+
+// деньги каждую секунду
+setInterval(() => {
+  money += income;
+  updateUI();
+  save();
+}, 1000);
+
+function updateUI() {
+  document.getElementById("money").innerText = money;
+  document.getElementById("houses").innerText = houses;
+}
+
+// покупка дома
+function buyHouse() {
+  if (money >= 50) {
+    money -= 50;
+    houses++;
+    income += 5;
+    updateUI();
+  }
+}
+
+// улучшение
+function upgrade() {
+  if (money >= 100) {
+    money -= 100;
+    income += 10;
+    updateUI();
+  }
+}
+
+// машина
+function buyCar() {
+  if (money >= 60) {
+    money -= 60;
+    cars.push({ x: 0, y: Math.random()*canvas.height });
+    updateUI();
+  }
+}
+
+// игрок
+let player = { x: 200, y: 200 };
+let keys = {};
+
+document.addEventListener("keydown", e => keys[e.key] = true);
+document.addEventListener("keyup", e => keys[e.key] = false);
+
+// движение
+function move() {
+  if (keys["w"]) player.y -= 3;
+  if (keys["s"]) player.y += 3;
+  if (keys["a"]) player.x -= 3;
+  if (keys["d"]) player.x += 3;
+}
+
+// рисуем игрока
+function drawPlayer() {
+  ctx.fillStyle = "blue";
+  ctx.fillRect(player.x, player.y, 20, 30);
+
+  ctx.fillStyle = "#f5c6a5";
+  ctx.beginPath();
+  ctx.arc(player.x+10, player.y-10, 10, 0, Math.PI*2);
+  ctx.fill();
+}
+
+// город (дороги)
+function drawCity() {
+  ctx.fillStyle = "#777";
+  for (let i=0;i<canvas.width;i+=120){
+    ctx.fillRect(i,0,40,canvas.height);
+  }
+  for (let j=0;j<canvas.height;j+=120){
+    ctx.fillRect(0,j,canvas.width,40);
+  }
+}
+
+// дома
+function drawHouses() {
+  for (let i=0;i<houses;i++) {
+    ctx.fillStyle = "red";
+    ctx.fillRect(100 + i*40, 100, 30, 30);
+  }
+}
+
+// машины
+function drawCars() {
+  cars.forEach(c => {
+    ctx.fillStyle = "black";
+    ctx.fillRect(c.x, c.y, 30, 15);
+    c.x += 2;
+    if (c.x > canvas.width) c.x = 0;
+  });
+}
+
+// цикл игры
+function loop() {
+  ctx.fillStyle = "#4caf50";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  drawCity();
+  drawHouses();
+  drawCars();
+  move();
+  drawPlayer();
+
+  requestAnimationFrame(loop);
+}
+
+updateUI();
+loop();
+</script>
+
+</body>
+</html>
