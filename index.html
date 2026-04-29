@@ -2,54 +2,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ULTIMATE LEVEL</title>
-
+<title>My Real Game</title>
 <style>
-body { margin:0; overflow:hidden; }
-
-#ui{
- position:fixed;
- top:10px;
- left:10px;
- background:#000a;
- color:#fff;
- padding:10px;
- border-radius:10px;
- font-family:Arial;
-}
-
-#joy{
- position:fixed;
- bottom:40px;
- left:40px;
- width:120px;
- height:120px;
- border-radius:50%;
- background:#ffffff22;
-}
-
-#stick{
- position:absolute;
- width:50px;
- height:50px;
- border-radius:50%;
- background:white;
- left:35px;
- top:35px;
-}
+  body { margin:0; overflow:hidden; }
+  #ui {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: #0008;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: Arial;
+  }
 </style>
 </head>
 <body>
 
 <div id="ui">
-❤️ <span id="hp">100</span><br>
-💰 <span id="money">0</span><br>
-🚔 <span id="wanted">0</span>
+  ❤️ <span id="hp">100</span><br>
+  💰 <span id="money">0</span>
 </div>
 
-<div id="joy"><div id="stick"></div></div>
-
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
 <script src="app.js"></script>
 
 </body>
