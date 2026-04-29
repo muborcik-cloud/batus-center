@@ -2,54 +2,37 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>City Level 3</title>
+<title>City Level 4</title>
 <style>
-body { margin:0; overflow:hidden; background:#222; }
+body { margin:0; overflow:hidden; }
 canvas { display:block; }
 
 #ui {
-  position:fixed;
-  top:10px;
-  left:10px;
-  color:white;
-  background:rgba(0,0,0,0.5);
-  padding:10px;
-  border-radius:10px;
+ position:fixed; top:10px; left:10px;
+ color:white; background:rgba(0,0,0,0.6);
+ padding:10px; border-radius:10px;
 }
 
 #buttons {
-  position:fixed;
-  bottom:10px;
-  right:10px;
+ position:fixed; bottom:10px; right:10px;
 }
 
 button {
-  margin:5px;
-  padding:10px;
-  border:none;
-  border-radius:8px;
-  background:#444;
-  color:white;
+ padding:10px; margin:5px;
+ border:none; border-radius:8px;
+ background:#333; color:white;
 }
 
-/* джойстик */
-#joystick {
-  position:fixed;
-  bottom:40px;
-  left:40px;
-  width:100px;
-  height:100px;
-  background:rgba(255,255,255,0.1);
-  border-radius:50%;
+#joy {
+ position:fixed; bottom:40px; left:40px;
+ width:100px; height:100px;
+ border-radius:50%;
+ background:rgba(255,255,255,0.1);
 }
 #stick {
-  width:40px;
-  height:40px;
-  background:white;
-  border-radius:50%;
-  position:absolute;
-  left:30px;
-  top:30px;
+ width:40px; height:40px;
+ background:white; border-radius:50%;
+ position:absolute; left:30px; top:30px;
 }
 </style>
 </head>
@@ -59,195 +42,209 @@ button {
 
 <div id="ui">
 💰 <span id="money">0</span><br>
-🏠 <span id="houses">0</span>
+🏠 <span id="houses">0</span><br>
+⭐ Уровень: <span id="level">1</span>
 </div>
 
 <div id="buttons">
-<button onclick="buyHouse()">Дом</button>
-<button onclick="buyCar()">Машина</button>
-<button onclick="buyTower()">Башня</button>
-<button onclick="enterCar()">Сесть 🚗</button>
+<button onclick="buy('house')">Дом</button>
+<button onclick="buy('car')">Машина</button>
+<button onclick="buy('hotel')">Отель</button>
+<button onclick="enterCar()">🚗 Сесть</button>
 </div>
 
-<div id="joystick"><div id="stick"></div></div>
+<div id="joy"><div id="stick"></div></div>
 
 <script>
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+const c = game;
+const ctx = c.getContext("2d");
+c.width = innerWidth;
+c.height = innerHeight;
 
-let money = 0;
-let houses = [];
-let cars = [];
-let towers = [];
-let npcs = [];
-let police = [];
+// --- данные ---
+let money=0, level=1;
+let houses=[], cars=[], hotels=[], bullets=[];
+let police=[], npcs=[];
 
-let player = {x:300,y:300,speed:3,inCar:false};
+let player = {x:300,y:300,inCar:false};
 
-// 💾 загрузка
+// загрузка
 if(localStorage.save){
-  let s = JSON.parse(localStorage.save);
-  money = s.money;
-  houses = s.houses;
+ let s=JSON.parse(localStorage.save);
+ money=s.money; houses=s.houses;
 }
 
-// 💰 доход
+// доход
 setInterval(()=>{
-  money += 50;
-  save();
+ money += houses.length*5 + hotels.length*20 + 10;
+ save();
 },1000);
 
-// 💾 сохранение
 function save(){
-  localStorage.save = JSON.stringify({
-    money, houses
-  });
+ localStorage.save = JSON.stringify({money,houses});
 }
 
-// покупка
-function buyHouse(){
-  if(money>=50){
-    money-=50;
-    houses.push({x:rand(),y:rand()});
-  }
-}
-function buyCar(){
-  if(money>=100){
-    money-=100;
-    cars.push({x:rand(),y:rand()});
-  }
-}
-function buyTower(){
-  if(money>=200){
-    money-=200;
-    towers.push({x:rand(),y:rand()});
-  }
+// покупки
+function buy(type){
+ if(type=="house" && money>=50){
+  money-=50; houses.push(randObj());
+ }
+ if(type=="car" && money>=100){
+  money-=100; cars.push(randObj());
+ }
+ if(type=="hotel" && money>=200){
+  money-=200; hotels.push(randObj());
+ }
 }
 
-// 🚗 сесть в машину
-function enterCar(){
-  cars.forEach(c=>{
-    if(dist(player,c)<50){
-      player.inCar = true;
-    }
-  });
+// случайная позиция
+function randObj(){
+ return {x:Math.random()*c.width,y:Math.random()*c.height};
 }
-
-function rand(){ return Math.random()*canvas.width; }
-function dist(a,b){ return Math.hypot(a.x-b.x,a.y-b.y); }
 
 // NPC
-for(let i=0;i<15;i++){
-  npcs.push({x:rand(),y:rand(),dx:1,dy:1});
+for(let i=0;i<10;i++){
+ npcs.push({...randObj(),dx:1,dy:1});
 }
 
 // полиция
-for(let i=0;i<3;i++){
-  police.push({x:rand(),y:rand(),dx:2,dy:2});
+for(let i=0;i<4;i++){
+ police.push({...randObj(),dx:2,dy:2});
 }
 
-// 🚦 светофор
-let light = 0;
-setInterval(()=>{
-  light = (light+1)%2;
-},2000);
+// джойстик
+let joy={x:0,y:0};
+joyDiv.addEventListener("touchmove",e=>{
+ let t=e.touches[0];
+ joy.x=(t.clientX-90)/50;
+ joy.y=(t.clientY-90)/50;
+});
+joyDiv.addEventListener("touchend",()=>joy={x:0,y:0});
 
-// 📱 джойстик
-let joy = {x:0,y:0};
-let stick = document.getElementById("stick");
-
-document.getElementById("joystick").addEventListener("touchmove",e=>{
-  let t = e.touches[0];
-  joy.x = (t.clientX-90)/50;
-  joy.y = (t.clientY-90)/50;
-  stick.style.left = (30+joy.x*20)+"px";
-  stick.style.top = (30+joy.y*20)+"px";
+// управление
+document.addEventListener("click",e=>{
+ bullets.push({x:player.x,y:player.y,dx:5,dy:0});
 });
 
-document.getElementById("joystick").addEventListener("touchend",()=>{
-  joy.x=0; joy.y=0;
-  stick.style.left="30px";
-  stick.style.top="30px";
-});
+// сесть в машину
+function enterCar(){
+ cars.forEach(c=>{
+  if(dist(player,c)<50) player.inCar=true;
+ });
+}
 
+// расстояние
+function dist(a,b){
+ return Math.hypot(a.x-b.x,a.y-b.y);
+}
+
+// день/ночь
+let night=false;
+setInterval(()=>night=!night,5000);
+
+// обновление
 function update(){
-  let sp = player.inCar ? 6 : 3;
+ let sp = player.inCar?6:3;
+ player.x += joy.x*sp;
+ player.y += joy.y*sp;
 
-  player.x += joy.x*sp;
-  player.y += joy.y*sp;
+ // пули
+ bullets.forEach(b=>b.x+=b.dx);
 
-  npcs.forEach(n=>{
-    n.x+=n.dx; n.y+=n.dy;
-    if(n.x<0||n.x>canvas.width) n.dx*=-1;
-    if(n.y<0||n.y>canvas.height) n.dy*=-1;
-  });
+ // NPC
+ npcs.forEach(n=>{
+  n.x+=n.dx; n.y+=n.dy;
+ });
 
-  police.forEach(p=>{
-    p.x+=p.dx; p.y+=p.dy;
-  });
+ // полиция преследует
+ police.forEach(p=>{
+  let dx=player.x-p.x;
+  let dy=player.y-p.y;
+  let d=Math.hypot(dx,dy);
+  if(d<200){
+   p.x+=dx/d*2;
+   p.y+=dy/d*2;
+  }
+ });
+
+ // ловля
+ police.forEach(p=>{
+  if(dist(player,p)<20){
+   money = Math.max(0,money-100);
+  }
+ });
+
+ level = Math.floor(money/500)+1;
 }
 
+// рисование
 function draw(){
-  ctx.fillStyle="#4caf50";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+ ctx.fillStyle = night ? "#001" : "#4caf50";
+ ctx.fillRect(0,0,c.width,c.height);
 
-  // дороги
-  ctx.fillStyle="#777";
-  for(let i=0;i<canvas.width;i+=150){
-    ctx.fillRect(i,0,40,canvas.height);
-  }
-  for(let j=0;j<canvas.height;j+=150){
-    ctx.fillRect(0,j,canvas.width,40);
-  }
+ // дороги
+ ctx.fillStyle="#777";
+ for(let i=0;i<c.width;i+=150){
+  ctx.fillRect(i,0,40,c.height);
+ }
+ for(let j=0;j<c.height;j+=150){
+  ctx.fillRect(0,j,c.width,40);
+ }
 
-  // светофор
-  ctx.fillStyle = light ? "red":"green";
-  ctx.fillRect(50,50,20,40);
+ // дома
+ houses.forEach(h=>{
+  ctx.fillStyle="red";
+  ctx.fillRect(h.x,h.y,30,30);
+ });
 
-  houses.forEach(h=>{
-    ctx.fillStyle="red";
-    ctx.fillRect(h.x,h.y,30,30);
-  });
+ // отели
+ hotels.forEach(h=>{
+  ctx.fillStyle="purple";
+  ctx.fillRect(h.x,h.y,40,40);
+ });
 
-  towers.forEach(t=>{
-    ctx.fillStyle="black";
-    ctx.fillRect(t.x,t.y,20,60);
-  });
+ // машины
+ cars.forEach(c=>{
+  ctx.fillStyle="blue";
+  ctx.fillRect(c.x,c.y,40,20);
+ });
 
-  cars.forEach(c=>{
-    ctx.fillStyle="blue";
-    ctx.fillRect(c.x,c.y,40,20);
-  });
+ // полиция
+ police.forEach(p=>{
+  ctx.fillStyle="white";
+  ctx.fillRect(p.x,p.y,30,15);
+ });
 
-  police.forEach(p=>{
-    ctx.fillStyle="white";
-    ctx.fillRect(p.x,p.y,30,15);
-  });
+ // NPC
+ npcs.forEach(n=>{
+  ctx.fillStyle="yellow";
+  ctx.fillRect(n.x,n.y,8,8);
+ });
 
-  npcs.forEach(n=>{
-    ctx.fillStyle="yellow";
-    ctx.beginPath();
-    ctx.arc(n.x,n.y,5,0,6.28);
-    ctx.fill();
-  });
-
+ // пули
+ bullets.forEach(b=>{
   ctx.fillStyle="orange";
-  ctx.beginPath();
-  ctx.arc(player.x,player.y,10,0,6.28);
-  ctx.fill();
+  ctx.fillRect(b.x,b.y,5,5);
+ });
 
-  document.getElementById("money").innerText = money;
-  document.getElementById("houses").innerText = houses.length;
+ // игрок
+ ctx.fillStyle="black";
+ ctx.beginPath();
+ ctx.arc(player.x,player.y,10,0,6.28);
+ ctx.fill();
+
+ // UI
+ moneyEl.innerText=money;
+ housesEl.innerText=houses.length;
+ levelEl.innerText=level;
 }
 
+// цикл
 function loop(){
-  update();
-  draw();
-  requestAnimationFrame(loop);
+ update();
+ draw();
+ requestAnimationFrame(loop);
 }
-
 loop();
 </script>
 
