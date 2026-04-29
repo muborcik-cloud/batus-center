@@ -2,32 +2,47 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Real City</title>
+<title>Ultra City</title>
+
 <style>
 body { margin:0; overflow:hidden; }
+
 #ui{
- position:fixed; top:10px; left:10px;
- background:#0008; color:#fff;
- padding:10px; border-radius:10px;
+ position:fixed;
+ top:10px;
+ left:10px;
+ background:#0008;
+ color:#fff;
+ padding:10px;
+ border-radius:10px;
 }
+
 #joy{
- position:fixed; bottom:40px; left:40px;
- width:100px; height:100px;
+ position:fixed;
+ bottom:40px;
+ left:40px;
+ width:100px;
+ height:100px;
  border-radius:50%;
  background:#ffffff22;
 }
+
 #stick{
  position:absolute;
- width:40px; height:40px;
+ width:40px;
+ height:40px;
  border-radius:50%;
  background:white;
- left:30px; top:30px;
+ left:30px;
+ top:30px;
 }
 </style>
+
 </head>
 <body>
 
 <div id="ui">
+❤️ <span id="hp">100</span><br>
 💰 <span id="money">0</span><br>
 <button onclick="buyCar()">🚗 Машина</button>
 </div>
