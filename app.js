@@ -1,194 +1,139 @@
+// СЦЕНА
 const scene = new THREE.Scene();
-scene.fog = new THREE.Fog(0x87ceeb, 50, 800);
+scene.background = new THREE.Color(0x87ceeb);
 
-const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 3000);
+// КАМЕРА
+const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
+camera.position.set(0, 5, 10);
 
+// РЕНДЕР
 const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(innerWidth, innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// свет
-const sun = new THREE.DirectionalLight(0xffffff,1);
-sun.position.set(200,300,200);
-scene.add(sun);
-scene.add(new THREE.AmbientLight(0xffffff,0.3));
+// СВЕТ
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(10, 20, 10);
+scene.add(light);
 
-// земля
+scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+
+// ЗЕМЛЯ
 const ground = new THREE.Mesh(
- new THREE.PlaneGeometry(3000,3000),
- new THREE.MeshStandardMaterial({color:0x2ecc71})
+  new THREE.PlaneGeometry(200, 200),
+  new THREE.MeshStandardMaterial({color:0x228B22})
 );
 ground.rotation.x = -Math.PI/2;
 scene.add(ground);
 
-// город
-for(let i=0;i<300;i++){
- let h = Math.random()*150+20;
- let b = new THREE.Mesh(
-  new THREE.BoxGeometry(12,h,12),
-  new THREE.MeshStandardMaterial({
-   color:new THREE.Color().setHSL(Math.random(),0.5,0.5)
-  })
- );
- b.position.set(Math.random()*1000-500, h/2, Math.random()*1000-500);
- scene.add(b);
+// ДОРОГИ
+for (let i=-100;i<100;i+=10){
+  const road = new THREE.Mesh(
+    new THREE.BoxGeometry(200, 0.1, 2),
+    new THREE.MeshStandardMaterial({color:0x333333})
+  );
+  road.position.z = i;
+  scene.add(road);
+
+  const road2 = road.clone();
+  road2.rotation.y = Math.PI/2;
+  road2.position.x = i;
+  scene.add(road2);
 }
 
-// игрок
-const player = new THREE.Mesh(
- new THREE.CapsuleGeometry(0.6,2),
- new THREE.MeshStandardMaterial({color:0x0077ff})
+// ПЕРСОНАЖ (УЖЕ НЕ ПРОСТО КУБ!)
+const player = new THREE.Group();
+
+// тело
+const body = new THREE.Mesh(
+  new THREE.BoxGeometry(1,2,0.5),
+  new THREE.MeshStandardMaterial({color:0x0000ff})
 );
-player.position.y = 2;
+body.position.y = 1;
+player.add(body);
+
+// голова
+const head = new THREE.Mesh(
+  new THREE.SphereGeometry(0.5),
+  new THREE.MeshStandardMaterial({color:0xffcc99})
+);
+head.position.y = 2.5;
+player.add(head);
+
+// руки
+const arm = new THREE.Mesh(
+  new THREE.BoxGeometry(0.3,1,0.3),
+  new THREE.MeshStandardMaterial({color:0x0000ff})
+);
+arm.position.set(-0.8,1.2,0);
+player.add(arm);
+
+const arm2 = arm.clone();
+arm2.position.x = 0.8;
+player.add(arm2);
+
+// ноги
+const leg = new THREE.Mesh(
+  new THREE.BoxGeometry(0.4,1,0.4),
+  new THREE.MeshStandardMaterial({color:0x0000ff})
+);
+leg.position.set(-0.3,0,0);
+player.add(leg);
+
+const leg2 = leg.clone();
+leg2.position.x = 0.3;
+player.add(leg2);
+
 scene.add(player);
 
-// физика
-let vel = new THREE.Vector3();
-let angle = 0;
-
-// управление
-let dx=0,dz=0;
-
-document.getElementById("joy").addEventListener("touchmove", e=>{
- let t=e.touches[0];
- dx=(t.clientX-100)/80;
- dz=(t.clientY-(innerHeight-100))/80;
-});
-
-document.addEventListener("mousemove", e=>{
- angle += e.movementX*0.002;
-});
-
-// NPC
-let npcs=[];
-for(let i=0;i<60;i++){
- let n = player.clone();
- n.material = new THREE.MeshStandardMaterial({color:0x00ff00});
- n.position.set(Math.random()*500-250,2,Math.random()*500-250);
- scene.add(n);
- npcs.push(n);
-}
-
-// полиция
-let police=[];
-for(let i=0;i<10;i++){
- let p = new THREE.Mesh(
-  new THREE.BoxGeometry(2,1,4),
-  new THREE.MeshStandardMaterial({color:0x0000ff})
- );
- p.position.set(Math.random()*500-250,0,Math.random()*500-250);
- scene.add(p);
- police.push(p);
-}
-
-// машина
+// МАШИНА (уже форма машины)
 const car = new THREE.Mesh(
- new THREE.BoxGeometry(2,1,4),
- new THREE.MeshStandardMaterial({color:0xff0000})
+  new THREE.BoxGeometry(3,1,2),
+  new THREE.MeshStandardMaterial({color:0xff0000})
 );
-car.position.set(5,0,5);
+car.position.set(5,0.5,5);
 scene.add(car);
 
-let inCar=false;
-let carVel=0;
+// ДОМА
+for (let i=0;i<10;i++){
+  const house = new THREE.Mesh(
+    new THREE.BoxGeometry(3,5,3),
+    new THREE.MeshStandardMaterial({color:0x444444})
+  );
+  house.position.set(Math.random()*50-25,2.5,Math.random()*50-25);
+  scene.add(house);
+}
 
-// стрельба
-let bullets=[];
-document.addEventListener("click", ()=>{
- let b = new THREE.Mesh(
-  new THREE.SphereGeometry(0.2),
-  new THREE.MeshBasicMaterial({color:0xffff00})
- );
- b.position.copy(player.position);
- b.vel = new THREE.Vector3(Math.sin(angle),0,Math.cos(angle)).multiplyScalar(2);
- scene.add(b);
- bullets.push(b);
-});
-
-// вход в машину
-document.addEventListener("dblclick", ()=>{
- if(player.position.distanceTo(car.position)<4){
-  inCar=!inCar;
- }
-});
-
-// параметры
-let hp=100;
-let money=0;
-let wanted=0;
-
+// ДЕНЬГИ
+let money = 0;
 setInterval(()=>{
- money+=10;
- document.getElementById("money").innerText=money;
+  money++;
+  document.getElementById("money").innerText = money;
 },1000);
 
-// цикл
+// УПРАВЛЕНИЕ
+let keys = {};
+
+window.addEventListener("keydown", e=>keys[e.key]=true);
+window.addEventListener("keyup", e=>keys[e.key]=false);
+
+// ДВИЖЕНИЕ
 function update(){
+  if(keys["w"]) player.position.z -= 0.2;
+  if(keys["s"]) player.position.z += 0.2;
+  if(keys["a"]) player.position.x -= 0.2;
+  if(keys["d"]) player.position.x += 0.2;
 
- if(!inCar){
-  vel.x += Math.sin(angle)*dx*0.05;
-  vel.z += Math.cos(angle)*dx*0.05;
-
-  player.position.add(vel);
-  vel.multiplyScalar(0.9);
-
- }else{
-  carVel += dz*0.05;
-  carVel *= 0.95;
-
-  car.position.x += Math.sin(angle)*carVel;
-  car.position.z += Math.cos(angle)*carVel;
-
-  player.position.copy(car.position);
-
-  if(Math.abs(carVel)>0.3) wanted+=0.02;
- }
-
- // NPC идут к игроку
- npcs.forEach(n=>{
-  let dir = new THREE.Vector3().subVectors(player.position,n.position).normalize();
-  n.position.add(dir.multiplyScalar(0.03));
- });
-
- // полиция
- police.forEach(p=>{
-  p.position.lerp(player.position,0.02);
-
-  if(p.position.distanceTo(player.position)<3){
-   player.position.set(0,2,0);
-   wanted=0;
-  }
- });
-
- // пули
- bullets.forEach(b=>{
-  b.position.add(b.vel);
- });
-
- // урон
- if(vel.length()>0.8){
-  hp-=0.2;
-  if(hp<=0){
-   hp=100;
-   player.position.set(0,2,0);
-  }
- }
-
- document.getElementById("hp").innerText=Math.floor(hp);
- document.getElementById("wanted").innerText=wanted.toFixed(1);
-
- // камера
- camera.position.x = player.position.x + Math.sin(angle+1)*15;
- camera.position.z = player.position.z + Math.cos(angle+1)*15;
- camera.position.y = player.position.y + 8;
- camera.lookAt(player.position);
+  // камера за игроком
+  camera.position.x = player.position.x;
+  camera.position.z = player.position.z + 8;
+  camera.lookAt(player.position);
 }
 
-// рендер
+// АНИМАЦИЯ
 function animate(){
- requestAnimationFrame(animate);
- update();
- renderer.render(scene,camera);
+  requestAnimationFrame(animate);
+  update();
+  renderer.render(scene, camera);
 }
-
 animate();
