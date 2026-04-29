@@ -1,31 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-<meta charset="UTF-8">
-<title>My Real Game</title>
-<style>
-  body { margin:0; overflow:hidden; }
-  #ui {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    background: #0008;
-    color: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    font-family: Arial;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>My GTA Style Web Game</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #000; }
+        canvas { display: block; width: 100vw; height: 100vh; }
+    </style>
 </head>
 <body>
+    <!-- Место для игры -->
+    <canvas id="renderCanvas"></canvas>
 
-<div id="ui">
-  ❤️ <span id="hp">100</span><br>
-  💰 <span id="money">0</span>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
-<script src="app.js"></script>
-
+    <!-- Подключаем движок Babylon.js для 3D (как в GTA) -->
+    <script src="https://babylonjs.com"></script>
+    <script src="https://babylonjs.com"></script>
+    
+    <!-- Подключаем скрипт самой игры -->
+    <script src="game.js"></script>
 </body>
 </html>
