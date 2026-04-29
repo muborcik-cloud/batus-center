@@ -2,102 +2,123 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Моя игра</title>
+<title>Next Level Game</title>
 <style>
-body { margin:0; overflow:hidden; background:#6ccf5f; }
-#ui {
-  position:fixed; top:10px; left:10px;
-  background:#0008; color:#fff;
-  padding:10px; border-radius:10px;
-}
-button {
-  margin:5px;
-}
+body { margin:0; overflow:hidden; }
 </style>
 </head>
 <body>
 
-<div id="ui">
-💰 Деньги: <span id="money">0</span><br>
-🏠 Дома: <span id="houses">0</span><br>
-<button onclick="buyHouse()">Купить дом (50)</button>
-<button onclick="buyCar()">Машина (60)</button>
-</div>
-
-<canvas id="game"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158/examples/js/loaders/GLTFLoader.js"></script>
 
 <script>
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+let scene = new THREE.Scene();
+scene.background = new THREE.Color(0x87ceeb);
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+let camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
 
-let money = 0;
-let houses = 0;
-let cars = [];
+let renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth, innerHeight);
+document.body.appendChild(renderer.domElement);
 
-let player = {x:200, y:200};
+// свет
+let light = new THREE.DirectionalLight(0xffffff,1);
+light.position.set(10,20,10);
+scene.add(light);
 
-function updateUI(){
-  document.getElementById("money").innerText = money;
-  document.getElementById("houses").innerText = houses;
-}
+// земля
+let ground = new THREE.Mesh(
+ new THREE.PlaneGeometry(500,500),
+ new THREE.MeshStandardMaterial({color:0x228B22})
+);
+ground.rotation.x = -Math.PI/2;
+scene.add(ground);
 
-// деньги каждые 2 секунды
-setInterval(()=>{
-  money += 10;
-  updateUI();
-},2000);
+// загрузка моделей
+let loader = new THREE.GLTFLoader();
 
-function buyHouse(){
-  if(money >= 50){
-    money -= 50;
-    houses++;
-    updateUI();
-  }
-}
+let player, mixer;
+loader.load(
+ "https://threejs.org/examples/models/gltf/RobotExpressive/RobotExpressive.glb",
+ function(gltf){
+   player = gltf.scene;
+   player.scale.set(0.4,0.4,0.4);
+   scene.add(player);
 
-function buyCar(){
-  if(money >= 60){
-    money -= 60;
-    cars.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height});
-    updateUI();
-  }
-}
+   mixer = new THREE.AnimationMixer(player);
+   let action = mixer.clipAction(gltf.animations[0]);
+   action.play();
+ }
+);
+
+// машина
+let car = new THREE.Mesh(
+ new THREE.BoxGeometry(2,1,4),
+ new THREE.MeshStandardMaterial({color:0xff0000})
+);
+car.position.set(5,0.5,5);
+scene.add(car);
+
+let speed = 0;
+let angle = 0;
 
 // управление
+let keys = {};
 document.addEventListener("keydown", e=>{
-  if(e.key==="w") player.y-=10;
-  if(e.key==="s") player.y+=10;
-  if(e.key==="a") player.x-=10;
-  if(e.key==="d") player.x+=10;
+ keys[e.key.toLowerCase()] = true;
+});
+document.addEventListener("keyup", e=>{
+ keys[e.key.toLowerCase()] = false;
 });
 
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+camera.position.set(0,5,10);
 
-  // игрок
-  ctx.fillStyle="blue";
-  ctx.fillRect(player.x, player.y, 20, 20);
+let clock = new THREE.Clock();
 
-  // дома
-  for(let i=0;i<houses;i++){
-    ctx.fillStyle="red";
-    ctx.fillRect(100+i*30,100,20,20);
-  }
+function update(){
 
-  // машины
-  ctx.fillStyle="black";
-  cars.forEach(c=>{
-    ctx.fillRect(c.x, c.y, 25, 15);
-  });
+ // игрок
+ if(player){
+   let move = 0.1;
 
-  requestAnimationFrame(draw);
+   if(keys["w"]) player.position.z -= move;
+   if(keys["s"]) player.position.z += move;
+   if(keys["a"]) player.position.x -= move;
+   if(keys["d"]) player.position.x += move;
+
+   camera.position.lerp(
+     new THREE.Vector3(player.position.x,5,player.position.z+10),
+     0.1
+   );
+   camera.lookAt(player.position);
+ }
+
+ // машина (реальная езда)
+ if(keys["arrowup"]) speed += 0.02;
+ if(keys["arrowdown"]) speed -= 0.02;
+ if(keys["arrowleft"]) angle += 0.03;
+ if(keys["arrowright"]) angle -= 0.03;
+
+ speed *= 0.98;
+
+ car.rotation.y = angle;
+ car.position.x += Math.sin(angle)*speed;
+ car.position.z += Math.cos(angle)*speed;
+
+ // анимация
+ if(mixer){
+   mixer.update(clock.getDelta());
+ }
 }
 
-draw();
-updateUI();
+function animate(){
+ requestAnimationFrame(animate);
+ update();
+ renderer.render(scene, camera);
+}
+
+animate();
 </script>
 
 </body>
