@@ -1,144 +1,123 @@
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+// сцена
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x87ceeb);
 
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+// камера
+const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
+camera.position.set(0,10,15);
 
-let money = 0;
+// рендер
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(innerWidth, innerHeight);
+document.body.appendChild(renderer.domElement);
+
+// свет
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(10,20,10);
+scene.add(light);
+
+// земля
+const ground = new THREE.Mesh(
+ new THREE.PlaneGeometry(200,200),
+ new THREE.MeshLambertMaterial({color:0x55aa55})
+);
+ground.rotation.x = -Math.PI/2;
+scene.add(ground);
+
+// дороги
+const roadMat = new THREE.MeshBasicMaterial({color:0x444444});
+for(let i=-100;i<100;i+=20){
+ let road = new THREE.Mesh(new THREE.BoxGeometry(5,0.1,200), roadMat);
+ road.position.x = i;
+ scene.add(road);
+
+ let road2 = new THREE.Mesh(new THREE.BoxGeometry(200,0.1,5), roadMat);
+ road2.position.z = i;
+ scene.add(road2);
+}
+
+// здания
+for(let i=0;i<30;i++){
+ let b = new THREE.Mesh(
+  new THREE.BoxGeometry(5,Math.random()*10+5,5),
+  new THREE.MeshLambertMaterial({color:0x8888ff})
+ );
+ b.position.set(
+  Math.random()*100-50,
+  b.geometry.parameters.height/2,
+  Math.random()*100-50
+ );
+ scene.add(b);
+}
 
 // игрок
-let player = {
-  x:200,
-  y:200,
-  inCar:false,
-  car:null
-};
+const player = new THREE.Mesh(
+ new THREE.BoxGeometry(1,2,1),
+ new THREE.MeshLambertMaterial({color:0x0000ff})
+);
+player.position.y = 1;
+scene.add(player);
 
-// объекты
-let objects = [];
-let cars = [];
-
-// 💰 деньги
-setInterval(()=>{
-  money += 10;
-  document.getElementById("money").innerText = money;
-},1000);
-
-// картинки
-const imgs = {
- house:"https://cdn-icons-png.flaticon.com/512/69/69524.png",
- shop:"https://cdn-icons-png.flaticon.com/512/34/34627.png",
- hospital:"https://cdn-icons-png.flaticon.com/512/2967/2967350.png",
- car:"https://cdn-icons-png.flaticon.com/512/743/743922.png"
-};
-
-// покупка
-function buy(type){
+// машина
+let car = null;
+function buyCar(){
  if(money < 100) return;
  money -= 100;
 
- let obj = {
-   type,
-   x: player.x+60,
-   y: player.y
- };
-
- objects.push(obj);
-
- if(type==="car") cars.push(obj);
+ car = new THREE.Mesh(
+  new THREE.BoxGeometry(2,1,4),
+  new THREE.MeshLambertMaterial({color:0xff0000})
+ );
+ car.position.set(player.position.x,1,player.position.z);
+ scene.add(car);
 }
 
-// 🎮 джойстик
-let dx=0, dy=0;
+// деньги
+let money = 0;
+setInterval(()=>{
+ money += 5;
+ document.getElementById("money").innerText = money;
+},1000);
+
+// джойстик
+let dx=0, dz=0;
 const stick = document.getElementById("stick");
 
 document.getElementById("joy").addEventListener("touchmove", e=>{
  let t = e.touches[0];
+ dx = (t.clientX-80)/50;
+ dz = (t.clientY-(innerHeight-80))/50;
 
- dx = (t.clientX-80)/20;
- dy = (t.clientY-(innerHeight-80))/20;
-
- stick.style.left = (30+dx*10)+"px";
- stick.style.top = (30+dy*10)+"px";
+ stick.style.left = (30+dx*20)+"px";
+ stick.style.top = (30+dz*20)+"px";
 });
 
 document.getElementById("joy").addEventListener("touchend", ()=>{
- dx=0; dy=0;
+ dx=0; dz=0;
  stick.style.left="30px";
  stick.style.top="30px";
 });
 
-// сесть в машину
-document.addEventListener("click", ()=>{
- cars.forEach(c=>{
-   if(Math.abs(player.x-c.x)<40 && Math.abs(player.y-c.y)<40){
-     player.inCar = true;
-     player.car = c;
-   }
- });
-});
+// игра
+function animate(){
+ requestAnimationFrame(animate);
 
-// движение
-function update(){
- if(player.inCar){
-   player.car.x += dx*5;
-   player.car.y += dy*5;
-   player.x = player.car.x;
-   player.y = player.car.y;
+ if(car){
+  car.position.x += dx*0.5;
+  car.position.z += dz*0.5;
+
+  player.position.copy(car.position);
  } else {
-   player.x += dx*3;
-   player.y += dy*3;
+  player.position.x += dx*0.2;
+  player.position.z += dz*0.2;
  }
+
+ // камера за игроком
+ camera.position.x = player.position.x + 10;
+ camera.position.z = player.position.z + 10;
+ camera.lookAt(player.position);
+
+ renderer.render(scene, camera);
 }
 
-// рисование
-function draw(){
- ctx.clearRect(0,0,canvas.width,canvas.height);
-
- // дороги
- ctx.fillStyle="#888";
- for(let i=0;i<canvas.width;i+=150){
-   ctx.fillRect(i,0,40,canvas.height);
- }
- for(let i=0;i<canvas.height;i+=150){
-   ctx.fillRect(0,i,canvas.width,40);
- }
-
- // объекты
- objects.forEach(o=>{
-   let img = new Image();
-   img.src = imgs[o.type];
-   ctx.drawImage(img, o.x, o.y, 50,50);
- });
-
- // игрок (человечек)
- if(!player.inCar){
-   ctx.fillStyle="blue";
-   ctx.fillRect(player.x,player.y,20,20);
-
-   ctx.fillStyle="peachpuff";
-   ctx.beginPath();
-   ctx.arc(player.x+10,player.y-5,6,0,Math.PI*2);
-   ctx.fill();
-
-   ctx.strokeStyle="black";
-   ctx.beginPath();
-   ctx.moveTo(player.x,player.y+10);
-   ctx.lineTo(player.x-10,player.y+20);
-   ctx.moveTo(player.x+20,player.y+10);
-   ctx.lineTo(player.x+30,player.y+20);
-   ctx.moveTo(player.x+5,player.y+20);
-   ctx.lineTo(player.x,player.y+30);
-   ctx.moveTo(player.x+15,player.y+20);
-   ctx.lineTo(player.x+20,player.y+30);
-   ctx.stroke();
- }
-
- requestAnimationFrame(loop);
-}
-
-function loop(){
- update();
- draw();
-}
-loop();
+animate();
