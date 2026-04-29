@@ -1,1 +1,77 @@
+/* Общие настройки */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #050505;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Эффект свечения заголовка */
+.neon-text {
+    font-size: 3rem;
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #00aaff;
+    margin-top: 50px;
+    text-transform: uppercase;
+}
+
+header {
+    text-align: center;
+    padding: 50px 0;
+}
+
+/* Сетка с играми */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Красивые карточки */
+.game-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.4s;
+    backdrop-filter: blur(10px);
+}
+
+.game-item:hover {
+    transform: translateY(-15px);
+    border-color: #f0f;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+}
+
+.game-preview {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+/* Кнопка запуска */
+.play-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background: linear-gradient(90deg, #0ff, #f0f);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.play-btn:hover {
+    box-shadow: 0 0 15px #f0f;
+    filter: brightness(1.2);
+}
 
