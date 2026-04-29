@@ -1,14 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>City Game</title>
+<title>City Level 3</title>
 <style>
-body{margin:0;overflow:hidden;}
-canvas{display:block;background:#6bdc6b;}
-#ui{position:fixed;top:10px;left:10px;background:#0008;color:#fff;padding:10px;}
-button{margin:3px;}
-#buttons{position:fixed;bottom:10px;right:10px;}
+body { margin:0; overflow:hidden; background:#222; }
+canvas { display:block; }
+
+#ui {
+  position:fixed;
+  top:10px;
+  left:10px;
+  color:white;
+  background:rgba(0,0,0,0.5);
+  padding:10px;
+  border-radius:10px;
+}
+
+#buttons {
+  position:fixed;
+  bottom:10px;
+  right:10px;
+}
+
+button {
+  margin:5px;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:#444;
+  color:white;
+}
+
+/* джойстик */
+#joystick {
+  position:fixed;
+  bottom:40px;
+  left:40px;
+  width:100px;
+  height:100px;
+  background:rgba(255,255,255,0.1);
+  border-radius:50%;
+}
+#stick {
+  width:40px;
+  height:40px;
+  background:white;
+  border-radius:50%;
+  position:absolute;
+  left:30px;
+  top:30px;
+}
 </style>
 </head>
 <body>
@@ -16,120 +58,196 @@ button{margin:3px;}
 <canvas id="game"></canvas>
 
 <div id="ui">
-💰 <span id="money">0</span>
+💰 <span id="money">0</span><br>
+🏠 <span id="houses">0</span>
 </div>
 
 <div id="buttons">
-<button onclick="mode='house'">🏠</button>
-<button onclick="mode='hospital'">🏥</button>
-<button onclick="mode='car'">🚗</button>
+<button onclick="buyHouse()">Дом</button>
+<button onclick="buyCar()">Машина</button>
+<button onclick="buyTower()">Башня</button>
+<button onclick="enterCar()">Сесть 🚗</button>
 </div>
 
+<div id="joystick"><div id="stick"></div></div>
+
 <script>
-const c=document.getElementById("game");
-const ctx=c.getContext("2d");
-c.width=innerWidth;
-c.height=innerHeight;
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
-// картинки
-const imgHouse=new Image();
-imgHouse.src="https://cdn-icons-png.flaticon.com/128/69/69524.png";
+let money = 0;
+let houses = [];
+let cars = [];
+let towers = [];
+let npcs = [];
+let police = [];
 
-const imgHospital=new Image();
-imgHospital.src="https://cdn-icons-png.flaticon.com/128/2967/2967350.png";
+let player = {x:300,y:300,speed:3,inCar:false};
 
-const imgCar=new Image();
-imgCar.src="https://cdn-icons-png.flaticon.com/128/743/743131.png";
+// 💾 загрузка
+if(localStorage.save){
+  let s = JSON.parse(localStorage.save);
+  money = s.money;
+  houses = s.houses;
+}
 
-const imgPlayer=new Image();
-imgPlayer.src="https://cdn-icons-png.flaticon.com/128/4140/4140048.png";
-
-// данные
-let money=100;
-let buildings=[];
-let cars=[];
-let player={x:0,y:0};
-let keys={},mode=null;
-
-// деньги
+// 💰 доход
 setInterval(()=>{
- money+=50;
+  money += 50;
+  save();
 },1000);
 
-// управление
-addEventListener("keydown",e=>keys[e.key]=true);
-addEventListener("keyup",e=>keys[e.key]=false);
+// 💾 сохранение
+function save(){
+  localStorage.save = JSON.stringify({
+    money, houses
+  });
+}
 
-// клик (строить)
-c.onclick=e=>{
- let x=player.x+(e.clientX-c.width/2);
- let y=player.y+(e.clientY-c.height/2);
+// покупка
+function buyHouse(){
+  if(money>=50){
+    money-=50;
+    houses.push({x:rand(),y:rand()});
+  }
+}
+function buyCar(){
+  if(money>=100){
+    money-=100;
+    cars.push({x:rand(),y:rand()});
+  }
+}
+function buyTower(){
+  if(money>=200){
+    money-=200;
+    towers.push({x:rand(),y:rand()});
+  }
+}
 
- if(mode==="house" && money>=50){
-  money-=50;
-  buildings.push({x,y,type:"house"});
- }
- if(mode==="hospital" && money>=100){
-  money-=100;
-  buildings.push({x,y,type:"hospital"});
- }
- if(mode==="car" && money>=60){
-  money-=60;
-  cars.push({x,y});
- }
-};
+// 🚗 сесть в машину
+function enterCar(){
+  cars.forEach(c=>{
+    if(dist(player,c)<50){
+      player.inCar = true;
+    }
+  });
+}
 
-// движение
+function rand(){ return Math.random()*canvas.width; }
+function dist(a,b){ return Math.hypot(a.x-b.x,a.y-b.y); }
+
+// NPC
+for(let i=0;i<15;i++){
+  npcs.push({x:rand(),y:rand(),dx:1,dy:1});
+}
+
+// полиция
+for(let i=0;i<3;i++){
+  police.push({x:rand(),y:rand(),dx:2,dy:2});
+}
+
+// 🚦 светофор
+let light = 0;
+setInterval(()=>{
+  light = (light+1)%2;
+},2000);
+
+// 📱 джойстик
+let joy = {x:0,y:0};
+let stick = document.getElementById("stick");
+
+document.getElementById("joystick").addEventListener("touchmove",e=>{
+  let t = e.touches[0];
+  joy.x = (t.clientX-90)/50;
+  joy.y = (t.clientY-90)/50;
+  stick.style.left = (30+joy.x*20)+"px";
+  stick.style.top = (30+joy.y*20)+"px";
+});
+
+document.getElementById("joystick").addEventListener("touchend",()=>{
+  joy.x=0; joy.y=0;
+  stick.style.left="30px";
+  stick.style.top="30px";
+});
+
 function update(){
- if(keys["w"])player.y-=4;
- if(keys["s"])player.y+=4;
- if(keys["a"])player.x-=4;
- if(keys["d"])player.x+=4;
+  let sp = player.inCar ? 6 : 3;
+
+  player.x += joy.x*sp;
+  player.y += joy.y*sp;
+
+  npcs.forEach(n=>{
+    n.x+=n.dx; n.y+=n.dy;
+    if(n.x<0||n.x>canvas.width) n.dx*=-1;
+    if(n.y<0||n.y>canvas.height) n.dy*=-1;
+  });
+
+  police.forEach(p=>{
+    p.x+=p.dx; p.y+=p.dy;
+  });
 }
 
-// рисуем
 function draw(){
- ctx.clearRect(0,0,c.width,c.height);
+  ctx.fillStyle="#4caf50";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
 
- let camX=player.x-c.width/2;
- let camY=player.y-c.height/2;
+  // дороги
+  ctx.fillStyle="#777";
+  for(let i=0;i<canvas.width;i+=150){
+    ctx.fillRect(i,0,40,canvas.height);
+  }
+  for(let j=0;j<canvas.height;j+=150){
+    ctx.fillRect(0,j,canvas.width,40);
+  }
 
- // дороги
- ctx.fillStyle="#777";
- for(let x=-2000;x<2000;x+=200){
-  ctx.fillRect(x-camX,-2000-camY,40,4000);
- }
- for(let y=-2000;y<2000;y+=200){
-  ctx.fillRect(-2000-camX,y-camY,4000,40);
- }
+  // светофор
+  ctx.fillStyle = light ? "red":"green";
+  ctx.fillRect(50,50,20,40);
 
- // здания
- buildings.forEach(b=>{
-  if(b.type==="house")
-   ctx.drawImage(imgHouse,b.x-camX,b.y-camY,40,40);
-  if(b.type==="hospital")
-   ctx.drawImage(imgHospital,b.x-camX,b.y-camY,40,40);
- });
+  houses.forEach(h=>{
+    ctx.fillStyle="red";
+    ctx.fillRect(h.x,h.y,30,30);
+  });
 
- // машины
- cars.forEach(car=>{
-  ctx.drawImage(imgCar,car.x-camX,car.y-camY,40,20);
- });
+  towers.forEach(t=>{
+    ctx.fillStyle="black";
+    ctx.fillRect(t.x,t.y,20,60);
+  });
 
- // игрок
- ctx.drawImage(imgPlayer,c.width/2-20,c.height/2-20,40,40);
+  cars.forEach(c=>{
+    ctx.fillStyle="blue";
+    ctx.fillRect(c.x,c.y,40,20);
+  });
 
- moneyEl.innerText=money;
+  police.forEach(p=>{
+    ctx.fillStyle="white";
+    ctx.fillRect(p.x,p.y,30,15);
+  });
+
+  npcs.forEach(n=>{
+    ctx.fillStyle="yellow";
+    ctx.beginPath();
+    ctx.arc(n.x,n.y,5,0,6.28);
+    ctx.fill();
+  });
+
+  ctx.fillStyle="orange";
+  ctx.beginPath();
+  ctx.arc(player.x,player.y,10,0,6.28);
+  ctx.fill();
+
+  document.getElementById("money").innerText = money;
+  document.getElementById("houses").innerText = houses.length;
 }
 
-const moneyEl=document.getElementById("money");
-
-// цикл
 function loop(){
- update();
- draw();
- requestAnimationFrame(loop);
+  update();
+  draw();
+  requestAnimationFrame(loop);
 }
+
 loop();
 </script>
 
