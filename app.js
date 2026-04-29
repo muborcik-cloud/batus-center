@@ -1,116 +1,120 @@
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
 let money = 0;
-let houseCount = 0;
-let carCount = 0;
-
-// игрок
-const player = document.createElement("div");
-player.style.position = "absolute";
-player.style.width = "30px";
-player.style.height = "40px";
-player.style.background = "blue";
-player.style.top = "200px";
-player.style.left = "200px";
-document.body.appendChild(player);
-
-// списки
 let houses = [];
 let cars = [];
 let coins = [];
 
-// деньги пассивно
+const player = {
+  x: 200,
+  y: 200,
+  size: 20,
+  speed: 3
+};
+
+// управление
+let keys = {};
+document.addEventListener("keydown", e => keys[e.key] = true);
+document.addEventListener("keyup", e => keys[e.key] = false);
+
+// деньги
 setInterval(() => {
   money += 10;
   updateUI();
-}, 2000);
-
-// движение
-let speed = 10;
-document.addEventListener("keydown", (e) => {
-  let x = player.offsetLeft;
-  let y = player.offsetTop;
-
-  let s = e.shiftKey ? speed * 2 : speed;
-
-  if (e.key === "ArrowUp") player.style.top = (y - s) + "px";
-  if (e.key === "ArrowDown") player.style.top = (y + s) + "px";
-  if (e.key === "ArrowLeft") player.style.left = (x - s) + "px";
-  if (e.key === "ArrowRight") player.style.left = (x + s) + "px";
-});
+}, 1000);
 
 // монеты
 function spawnCoin(){
-  const coin = document.createElement("div");
-  coin.style.position = "absolute";
-  coin.style.width = "20px";
-  coin.style.height = "20px";
-  coin.style.background = "yellow";
-  coin.style.borderRadius = "50%";
-  coin.style.left = Math.random()*800 + "px";
-  coin.style.top = Math.random()*500 + "px";
-
-  document.body.appendChild(coin);
-  coins.push(coin);
+  coins.push({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height
+  });
 }
 setInterval(spawnCoin, 1500);
 
-// сбор
-setInterval(() => {
-  coins.forEach((coin, index) => {
-    let dx = player.offsetLeft - coin.offsetLeft;
-    let dy = player.offsetTop - coin.offsetTop;
-
-    if(Math.abs(dx) < 30 && Math.abs(dy) < 30){
-      money += 50;
-      coin.remove();
-      coins.splice(index,1);
-      updateUI();
-    }
-  });
-}, 100);
-
-// покупка дома (рядом с игроком)
-document.getElementById("buyHouse").onclick = () => {
-  if (money >= 200) {
+// покупки
+function buyHouse(){
+  if(money >= 200){
     money -= 200;
-
-    const house = document.createElement("div");
-    house.style.position = "absolute";
-    house.style.width = "50px";
-    house.style.height = "50px";
-    house.style.background = "brown";
-    house.style.left = (player.offsetLeft + 60) + "px";
-    house.style.top = player.offsetTop + "px";
-
-    document.body.appendChild(house);
-    houses.push(house);
-    houseCount++;
-    updateUI();
+    houses.push({x:player.x+50, y:player.y});
   }
-};
-
-// покупка машины
-document.getElementById("buyCar").onclick = () => {
-  if (money >= 300) {
+}
+function buyCar(){
+  if(money >= 300){
     money -= 300;
-
-    const car = document.createElement("div");
-    car.style.position = "absolute";
-    car.style.width = "60px";
-    car.style.height = "30px";
-    car.style.background = "red";
-    car.style.left = (player.offsetLeft + 60) + "px";
-    car.style.top = player.offsetTop + "px";
-
-    document.body.appendChild(car);
-    cars.push(car);
-    carCount++;
-    updateUI();
+    cars.push({x:player.x+50, y:player.y});
   }
-};
+}
 
 // обновление UI
 function updateUI(){
   document.getElementById("money").innerText = money;
-  document.getElementById("houses").innerText = houseCount;
-  document.getElementById("cars").innerText = carCount;
+  document.getElementById("houses").innerText = houses.length;
+  document.getElementById("cars").innerText = cars.length;
 }
+
+// логика
+function update(){
+  if(keys["ArrowUp"]) player.y -= player.speed;
+  if(keys["ArrowDown"]) player.y += player.speed;
+  if(keys["ArrowLeft"]) player.x -= player.speed;
+  if(keys["ArrowRight"]) player.x += player.speed;
+
+  // сбор монет
+  coins = coins.filter(c => {
+    let dx = player.x - c.x;
+    let dy = player.y - c.y;
+    if(Math.abs(dx)<20 && Math.abs(dy)<20){
+      money += 50;
+      return false;
+    }
+    return true;
+  });
+}
+
+// рисование
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  // монеты
+  ctx.fillStyle = "yellow";
+  coins.forEach(c => {
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, 8, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  // дома
+  ctx.fillStyle = "brown";
+  houses.forEach(h => {
+    ctx.fillRect(h.x, h.y, 30, 30);
+  });
+
+  // машины
+  ctx.fillStyle = "red";
+  cars.forEach(c => {
+    ctx.fillRect(c.x, c.y, 40, 20);
+  });
+
+  // игрок (уже как человечек)
+  ctx.fillStyle = "blue";
+  ctx.fillRect(player.x, player.y, 20, 20);
+
+  // голова
+  ctx.fillStyle = "peachpuff";
+  ctx.beginPath();
+  ctx.arc(player.x+10, player.y-5, 6, 0, Math.PI*2);
+  ctx.fill();
+}
+
+// главный цикл
+function loop(){
+  update();
+  draw();
+  requestAnimationFrame(loop);
+}
+loop();
