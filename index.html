@@ -2,30 +2,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Game</title>
+<title>Ultra Game</title>
 <style>
-body { margin:0; overflow:hidden; background:#7ec850; font-family:sans-serif; }
+body { margin:0; overflow:hidden; }
+canvas { display:block; background:#7ec850; }
 #ui {
  position:fixed;
  top:10px;
  left:10px;
- background:#000;
+ background:#000a;
  color:#fff;
  padding:10px;
+ font-family:sans-serif;
 }
 </style>
 </head>
 <body>
 
+<canvas id="game"></canvas>
+
 <div id="ui">
 💰 <span id="money">0</span><br>
-🏠 Домов: <span id="houses">0</span><br>
-🚗 Машин: <span id="cars">0</span><br><br>
-<button id="buyHouse">🏠 Дом (200)</button>
-<button id="buyCar">🚗 Машина (300)</button>
+🏠 Дом: <span id="houses">0</span><br>
+🚗 Машина: <span id="cars">0</span><br><br>
+<button onclick="buyHouse()">Дом</button>
+<button onclick="buyCar()">Машина</button>
 </div>
 
 <script src="app.js"></script>
-
 </body>
 </html>
