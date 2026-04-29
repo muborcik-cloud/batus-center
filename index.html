@@ -2,125 +2,102 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>3D City PRO</title>
+<title>Моя игра</title>
 <style>
-body{margin:0;overflow:hidden;}
-#ui{
- position:fixed;top:10px;left:10px;
- color:white;background:#0008;padding:10px;
+body { margin:0; overflow:hidden; background:#6ccf5f; }
+#ui {
+  position:fixed; top:10px; left:10px;
+  background:#0008; color:#fff;
+  padding:10px; border-radius:10px;
+}
+button {
+  margin:5px;
 }
 </style>
 </head>
 <body>
 
-<div id="ui">💰 <span id="money">0</span></div>
+<div id="ui">
+💰 Деньги: <span id="money">0</span><br>
+🏠 Дома: <span id="houses">0</span><br>
+<button onclick="buyHouse()">Купить дом (50)</button>
+<button onclick="buyCar()">Машина (60)</button>
+</div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.158/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.158/examples/js/loaders/GLTFLoader.js"></script>
+<canvas id="game"></canvas>
 
 <script>
-let scene=new THREE.Scene();
-scene.background=new THREE.Color(0x87ceeb);
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
 
-let camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
-let renderer=new THREE.WebGLRenderer();
-renderer.setSize(innerWidth,innerHeight);
-document.body.appendChild(renderer.domElement);
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-// свет
-let light=new THREE.DirectionalLight(0xffffff,1);
-light.position.set(5,10,5);
-scene.add(light);
+let money = 0;
+let houses = 0;
+let cars = [];
 
-// земля
-let ground=new THREE.Mesh(
- new THREE.PlaneGeometry(200,200),
- new THREE.MeshStandardMaterial({color:0x55aa55})
-);
-ground.rotation.x=-Math.PI/2;
-scene.add(ground);
+let player = {x:200, y:200};
 
-// загрузчик моделей
-let loader=new THREE.GLTFLoader();
-
-// 🧍 игрок (модель)
-let player;
-loader.load(
- "https://threejs.org/examples/models/gltf/RobotExpressive/RobotExpressive.glb",
- gltf=>{
-  player=gltf.scene;
-  player.scale.set(0.5,0.5,0.5);
-  scene.add(player);
- }
-);
-
-// 🚗 машина
-let car;
-loader.load(
- "https://threejs.org/examples/models/gltf/Flamingo.glb",
- gltf=>{
-  car=gltf.scene;
-  car.scale.set(0.02,0.02,0.02);
-  car.position.set(5,0,5);
-  scene.add(car);
- }
-);
-
-// 🏢 здания
-function createBuilding(x,z){
- let b=new THREE.Mesh(
-  new THREE.BoxGeometry(2,Math.random()*5+2,2),
-  new THREE.MeshStandardMaterial({color:0x888888})
- );
- b.position.set(x,b.geometry.parameters.height/2,z);
- scene.add(b);
+function updateUI(){
+  document.getElementById("money").innerText = money;
+  document.getElementById("houses").innerText = houses;
 }
 
-// город
-for(let i=-10;i<10;i++){
- for(let j=-10;j<10;j++){
-  if(Math.random()>0.6){
-   createBuilding(i*4,j*4);
-  }
- }
-}
-
-// деньги
-let money=0;
+// деньги каждые 2 секунды
 setInterval(()=>{
- money+=10;
- document.getElementById("money").innerText=money;
-},1000);
+  money += 10;
+  updateUI();
+},2000);
+
+function buyHouse(){
+  if(money >= 50){
+    money -= 50;
+    houses++;
+    updateUI();
+  }
+}
+
+function buyCar(){
+  if(money >= 60){
+    money -= 60;
+    cars.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height});
+    updateUI();
+  }
+}
 
 // управление
-let keys={};
-document.addEventListener("keydown",e=>keys[e.key]=true);
-document.addEventListener("keyup",e=>keys[e.key]=false);
+document.addEventListener("keydown", e=>{
+  if(e.key==="w") player.y-=10;
+  if(e.key==="s") player.y+=10;
+  if(e.key==="a") player.x-=10;
+  if(e.key==="d") player.x+=10;
+});
 
-camera.position.set(0,3,8);
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
-function update(){
- if(!player) return;
+  // игрок
+  ctx.fillStyle="blue";
+  ctx.fillRect(player.x, player.y, 20, 20);
 
- let speed=0.1;
+  // дома
+  for(let i=0;i<houses;i++){
+    ctx.fillStyle="red";
+    ctx.fillRect(100+i*30,100,20,20);
+  }
 
- if(keys["w"]) player.position.z-=speed;
- if(keys["s"]) player.position.z+=speed;
- if(keys["a"]) player.position.x-=speed;
- if(keys["d"]) player.position.x+=speed;
+  // машины
+  ctx.fillStyle="black";
+  cars.forEach(c=>{
+    ctx.fillRect(c.x, c.y, 25, 15);
+  });
 
- camera.position.x=player.position.x;
- camera.position.z=player.position.z+8;
- camera.lookAt(player.position);
+  requestAnimationFrame(draw);
 }
 
-// цикл
-function loop(){
- requestAnimationFrame(loop);
- update();
- renderer.render(scene,camera);
-}
-loop();
+draw();
+updateUI();
 </script>
 
 </body>
