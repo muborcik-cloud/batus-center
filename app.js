@@ -1,117 +1,105 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
 let money = 0;
-let houses = [];
-let cars = [];
-let coins = [];
 
-const player = {
-  x: 200,
-  y: 200,
-  size: 20,
-  speed: 3
+setInterval(()=>{
+  money += 10;
+  document.getElementById("money").innerText = money;
+},1000);
+
+// игрок (человечек)
+let player = {x:200, y:200};
+
+// объекты
+let objects = [];
+
+// картинки (реальные)
+const imgs = {
+  house: new Image(),
+  car: new Image(),
+  hospital: new Image(),
+  shop: new Image()
 };
 
-// управление
-let keys = {};
-document.addEventListener("keydown", e => keys[e.key] = true);
-document.addEventListener("keyup", e => keys[e.key] = false);
+imgs.house.src = "https://cdn-icons-png.flaticon.com/128/69/69524.png";
+imgs.car.src = "https://cdn-icons-png.flaticon.com/128/743/743922.png";
+imgs.hospital.src = "https://cdn-icons-png.flaticon.com/128/2967/2967350.png";
+imgs.shop.src = "https://cdn-icons-png.flaticon.com/128/3081/3081559.png";
 
-// деньги
-setInterval(() => {
-  money += 10;
-  updateUI();
-}, 1000);
+// покупка
+function buy(type){
+  if(money < 100) return;
+  money -= 100;
 
-// монеты
-function spawnCoin(){
-  coins.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height
+  objects.push({
+    type,
+    x: player.x + 60,
+    y: player.y
   });
 }
-setInterval(spawnCoin, 1500);
 
-// покупки
-function buyHouse(){
-  if(money >= 200){
-    money -= 200;
-    houses.push({x:player.x+50, y:player.y});
-  }
-}
-function buyCar(){
-  if(money >= 300){
-    money -= 300;
-    cars.push({x:player.x+50, y:player.y});
-  }
-}
+// 🎮 джойстик
+let joy = {x:0,y:0};
+const stick = document.getElementById("stick");
 
-// обновление UI
-function updateUI(){
-  document.getElementById("money").innerText = money;
-  document.getElementById("houses").innerText = houses.length;
-  document.getElementById("cars").innerText = cars.length;
-}
+document.getElementById("joystick").addEventListener("touchmove",(e)=>{
+  let t = e.touches[0];
+  joy.x = (t.clientX - 70)/30;
+  joy.y = (t.clientY - (innerHeight-70))/30;
 
-// логика
+  stick.style.left = (30 + joy.x*20)+"px";
+  stick.style.top = (30 + joy.y*20)+"px";
+});
+
+// движение
 function update(){
-  if(keys["ArrowUp"]) player.y -= player.speed;
-  if(keys["ArrowDown"]) player.y += player.speed;
-  if(keys["ArrowLeft"]) player.x -= player.speed;
-  if(keys["ArrowRight"]) player.x += player.speed;
-
-  // сбор монет
-  coins = coins.filter(c => {
-    let dx = player.x - c.x;
-    let dy = player.y - c.y;
-    if(Math.abs(dx)<20 && Math.abs(dy)<20){
-      money += 50;
-      return false;
-    }
-    return true;
-  });
+  player.x += joy.x*3;
+  player.y += joy.y*3;
 }
 
 // рисование
 function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  // монеты
-  ctx.fillStyle = "yellow";
-  coins.forEach(c => {
-    ctx.beginPath();
-    ctx.arc(c.x, c.y, 8, 0, Math.PI*2);
-    ctx.fill();
+  // объекты
+  objects.forEach(o=>{
+    ctx.drawImage(imgs[o.type], o.x, o.y, 40,40);
   });
 
-  // дома
-  ctx.fillStyle = "brown";
-  houses.forEach(h => {
-    ctx.fillRect(h.x, h.y, 30, 30);
-  });
-
-  // машины
-  ctx.fillStyle = "red";
-  cars.forEach(c => {
-    ctx.fillRect(c.x, c.y, 40, 20);
-  });
-
-  // игрок (уже как человечек)
-  ctx.fillStyle = "blue";
-  ctx.fillRect(player.x, player.y, 20, 20);
+  // человечек
+  // тело
+  ctx.fillStyle="blue";
+  ctx.fillRect(player.x,player.y,20,20);
 
   // голова
-  ctx.fillStyle = "peachpuff";
+  ctx.fillStyle="peachpuff";
   ctx.beginPath();
-  ctx.arc(player.x+10, player.y-5, 6, 0, Math.PI*2);
+  ctx.arc(player.x+10,player.y-5,6,0,Math.PI*2);
   ctx.fill();
+
+  // руки
+  ctx.strokeStyle="black";
+  ctx.beginPath();
+  ctx.moveTo(player.x,player.y+5);
+  ctx.lineTo(player.x-10,player.y+15);
+  ctx.moveTo(player.x+20,player.y+5);
+  ctx.lineTo(player.x+30,player.y+15);
+  ctx.stroke();
+
+  // ноги
+  ctx.beginPath();
+  ctx.moveTo(player.x+5,player.y+20);
+  ctx.lineTo(player.x,player.y+30);
+  ctx.moveTo(player.x+15,player.y+20);
+  ctx.lineTo(player.x+20,player.y+30);
+  ctx.stroke();
 }
 
-// главный цикл
+// цикл
 function loop(){
   update();
   draw();
