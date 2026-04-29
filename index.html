@@ -2,10 +2,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Ultra Game</title>
+<title>City Game</title>
 <style>
 body { margin:0; overflow:hidden; }
-canvas { display:block; background:#7ec850; }
+canvas { background:#7ec850; display:block; }
+
 #ui {
  position:fixed;
  top:10px;
@@ -13,7 +14,25 @@ canvas { display:block; background:#7ec850; }
  background:#000a;
  color:#fff;
  padding:10px;
- font-family:sans-serif;
+}
+
+#joystick {
+ position:fixed;
+ bottom:20px;
+ left:20px;
+ width:100px;
+ height:100px;
+ background:#0005;
+ border-radius:50%;
+}
+#stick {
+ width:40px;
+ height:40px;
+ background:#fff;
+ border-radius:50%;
+ position:absolute;
+ top:30px;
+ left:30px;
 }
 </style>
 </head>
@@ -22,12 +41,14 @@ canvas { display:block; background:#7ec850; }
 <canvas id="game"></canvas>
 
 <div id="ui">
-💰 <span id="money">0</span><br>
-🏠 Дом: <span id="houses">0</span><br>
-🚗 Машина: <span id="cars">0</span><br><br>
-<button onclick="buyHouse()">Дом</button>
-<button onclick="buyCar()">Машина</button>
+💰 <span id="money">0</span><br><br>
+<button onclick="buy('house')">🏠 Дом</button>
+<button onclick="buy('car')">🚗 Машина</button>
+<button onclick="buy('hospital')">🏥 Больница</button>
+<button onclick="buy('shop')">🏪 Магазин</button>
 </div>
+
+<div id="joystick"><div id="stick"></div></div>
 
 <script src="app.js"></script>
 </body>
