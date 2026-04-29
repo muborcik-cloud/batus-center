@@ -2,39 +2,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Ultra City</title>
-
+<title>3D City</title>
 <style>
-body { margin:0; overflow:hidden; background:#87ceeb; }
-
-#ui {
- position:fixed;
- top:10px;
- left:10px;
- background:#0008;
- color:white;
- padding:10px;
- border-radius:10px;
+body { margin:0; overflow:hidden; }
+#ui{
+ position:fixed; top:10px; left:10px;
+ background:#0008; color:#fff; padding:10px; border-radius:10px;
+ font-family:Arial;
 }
-
-#joy {
- position:fixed;
- bottom:40px;
- left:40px;
- width:100px;
- height:100px;
- background:#0004;
- border-radius:50%;
+#joy{
+ position:fixed; bottom:40px; left:40px;
+ width:100px; height:100px; border-radius:50%;
+ background:#ffffff22;
 }
-
-#stick {
- width:40px;
- height:40px;
- background:white;
- border-radius:50%;
- position:absolute;
- left:30px;
- top:30px;
+#stick{
+ position:absolute; width:40px; height:40px;
+ border-radius:50%; background:white; left:30px; top:30px;
 }
 </style>
 </head>
@@ -43,16 +26,12 @@ body { margin:0; overflow:hidden; background:#87ceeb; }
 
 <div id="ui">
 💰 <span id="money">0</span><br>
-<button onclick="buy('house')">🏠</button>
-<button onclick="buy('shop')">🏪</button>
-<button onclick="buy('hospital')">🏥</button>
-<button onclick="buy('car')">🚗</button>
+<button onclick="buyCar()">🚗 Купить машину</button>
 </div>
-
-<canvas id="game"></canvas>
 
 <div id="joy"><div id="stick"></div></div>
 
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script src="app.js"></script>
 
 </body>
