@@ -2,7 +2,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x87ceeb);
 
 const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 2000);
-camera.position.set(0,8,15);
+camera.position.set(0,6,10);
 
 const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(innerWidth, innerHeight);
@@ -13,14 +13,10 @@ const light = new THREE.DirectionalLight(0xffffff,1);
 light.position.set(50,100,50);
 scene.add(light);
 
-// земля (текстура)
-const tex = new THREE.TextureLoader().load("https://threejs.org/examples/textures/grasslight-big.jpg");
-tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-tex.repeat.set(50,50);
-
+// земля
 const ground = new THREE.Mesh(
  new THREE.PlaneGeometry(1000,1000),
- new THREE.MeshStandardMaterial({map:tex})
+ new THREE.MeshStandardMaterial({color:0x228B22})
 );
 ground.rotation.x = -Math.PI/2;
 scene.add(ground);
@@ -37,58 +33,68 @@ for(let i=-200;i<200;i+=40){
  scene.add(r2);
 }
 
-// здания (НЕ квадраты — разные)
-for(let i=0;i<80;i++){
- let h = Math.random()*80+20;
- let geo = new THREE.BoxGeometry(10, h, 10);
- let mat = new THREE.MeshStandardMaterial({
-  color: new THREE.Color(Math.random(),Math.random(),Math.random())
- });
- let b = new THREE.Mesh(geo, mat);
+// здания
+for(let i=0;i<60;i++){
+ let h = Math.random()*60+20;
+ let b = new THREE.Mesh(
+  new THREE.BoxGeometry(10,h,10),
+  new THREE.MeshStandardMaterial({color:0x333333})
+ );
  b.position.set(Math.random()*400-200, h/2, Math.random()*400-200);
  scene.add(b);
 }
 
-// игрок (нормальный вид)
-const player = new THREE.Group();
+// ЗДОРОВЬЕ
+let hp = 100;
+function updateHP(){
+ document.getElementById("hp").innerText = hp;
+}
+updateHP();
 
-const body = new THREE.Mesh(
- new THREE.CapsuleGeometry(0.5,1.5),
- new THREE.MeshStandardMaterial({color:0x0066ff})
+// БОЛЬНИЦА
+const hospital = new THREE.Mesh(
+ new THREE.BoxGeometry(20,10,20),
+ new THREE.MeshStandardMaterial({color:0xffffff})
 );
-body.position.y = 2;
-player.add(body);
+hospital.position.set(0,5,0);
+scene.add(hospital);
 
-const head = new THREE.Mesh(
- new THREE.SphereGeometry(0.4),
- new THREE.MeshStandardMaterial({color:0xffcc99})
-);
-head.position.y = 3.2;
-player.add(head);
-
+// ИГРОК (модель)
+let player = new THREE.Group();
 scene.add(player);
 
-// машина (более похожа)
-let car = new THREE.Group();
+const loader = new THREE.GLTFLoader();
 
-let base = new THREE.Mesh(
- new THREE.BoxGeometry(2,0.6,4),
+// модель человека
+loader.load(
+ "https://threejs.org/examples/models/gltf/RobotExpressive/RobotExpressive.glb",
+ (gltf)=>{
+  player.add(gltf.scene);
+  gltf.scene.scale.set(0.5,0.5,0.5);
+ }
+);
+
+// МАШИНА
+let car = new THREE.Mesh(
+ new THREE.BoxGeometry(2,1,4),
  new THREE.MeshStandardMaterial({color:0xff0000})
 );
-base.position.y = 0.5;
-car.add(base);
-
-let top = new THREE.Mesh(
- new THREE.BoxGeometry(1.5,0.7,2),
- new THREE.MeshStandardMaterial({color:0xaa0000})
-);
-top.position.y = 1.1;
-car.add(top);
-
 car.visible = false;
 scene.add(car);
 
 let inCar = false;
+
+// ПОЛИЦИЯ
+let police = [];
+for(let i=0;i<3;i++){
+ let p = new THREE.Mesh(
+  new THREE.BoxGeometry(1,2,1),
+  new THREE.MeshStandardMaterial({color:0x0000ff})
+ );
+ p.position.set(Math.random()*50,1,Math.random()*50);
+ scene.add(p);
+ police.push(p);
+}
 
 // деньги
 let money = 0;
@@ -107,37 +113,46 @@ function buyCar(){
 
 // управление
 let dx=0,dz=0;
-const stick = document.getElementById("stick");
 
 document.getElementById("joy").addEventListener("touchmove", e=>{
  let t = e.touches[0];
  dx = (t.clientX-80)/50;
  dz = (t.clientY-(innerHeight-80))/50;
- stick.style.left = (30+dx*20)+"px";
- stick.style.top = (30+dz*20)+"px";
 });
 
 document.getElementById("joy").addEventListener("touchend", ()=>{
  dx=0; dz=0;
- stick.style.left="30px";
- stick.style.top="30px";
 });
 
-// сесть в машину
+// посадка в машину
 document.addEventListener("click", ()=>{
  if(car.visible && player.position.distanceTo(car.position)<3){
   inCar = !inCar;
  }
 });
 
-// день/ночь
-let t=0;
-function dayNight(){
- t+=0.002;
- let v = (Math.sin(t)+1)/2;
- scene.background = new THREE.Color(v*0.5+0.2, v*0.7+0.3, v+0.5);
+// урон при движении
+function damage(){
+ if(Math.abs(dx)+Math.abs(dz) > 1.5){
+  hp -= 0.2;
+  if(hp <= 0){
+   // телепорт в больницу
+   player.position.set(0,0,0);
+   hp = 100;
+  }
+  updateHP();
+ }
 }
-setInterval(dayNight,50);
+
+// полиция ловит
+function policeAI(){
+ police.forEach(p=>{
+  let d = p.position.distanceTo(player.position);
+  if(d < 5){
+   player.position.set(0,0,0); // тюрьма (центр)
+  }
+ });
+}
 
 // игра
 function animate(){
@@ -152,8 +167,11 @@ function animate(){
   player.position.z += dz*0.2;
  }
 
- camera.position.x = player.position.x + 10;
- camera.position.z = player.position.z + 10;
+ damage();
+ policeAI();
+
+ camera.position.x = player.position.x + 8;
+ camera.position.z = player.position.z + 8;
  camera.lookAt(player.position);
 
  renderer.render(scene,camera);
