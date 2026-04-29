@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My City Game</title>
+<title>City Game</title>
 <style>
-body{margin:0;overflow:hidden;font-family:sans-serif;}
+body{margin:0;overflow:hidden;}
 canvas{display:block;background:#6bdc6b;}
-#ui{position:fixed;top:10px;left:10px;background:rgba(0,0,0,.6);color:#fff;padding:10px;}
+#ui{position:fixed;top:10px;left:10px;background:#0008;color:#fff;padding:10px;}
+button{margin:3px;}
 #buttons{position:fixed;bottom:10px;right:10px;}
-button{margin:4px;padding:8px;}
 </style>
 </head>
 <body>
@@ -16,18 +16,13 @@ button{margin:4px;padding:8px;}
 <canvas id="game"></canvas>
 
 <div id="ui">
-💰 <span id="money">0</span><br>
-📈 <span id="income">50</span>/сек
+💰 <span id="money">0</span>
 </div>
 
 <div id="buttons">
-<button onclick="mode='house'">🏠 Дом</button>
-<button onclick="mode='shop'">🏪 Магазин</button>
-<button onclick="mode='hotel'">🏨 Отель</button>
-<button onclick="mode='hospital'">🏥 Больница</button>
-<button onclick="mode='tower'">🏢 Башня</button>
-<button onclick="mode='car'">🚗 Машина</button>
-<button onclick="upgrade()">⬆️ Улучшить</button>
+<button onclick="mode='house'">🏠</button>
+<button onclick="mode='hospital'">🏥</button>
+<button onclick="mode='car'">🚗</button>
 </div>
 
 <script>
@@ -36,108 +31,63 @@ const ctx=c.getContext("2d");
 c.width=innerWidth;
 c.height=innerHeight;
 
-// сохранение
-let save=JSON.parse(localStorage.getItem("city"))||{
- money:200,
- income:50,
- buildings:[],
- cars:[]
-};
+// картинки
+const imgHouse=new Image();
+imgHouse.src="https://cdn-icons-png.flaticon.com/128/69/69524.png";
 
-function saveGame(){
- localStorage.setItem("city",JSON.stringify(save));
-}
+const imgHospital=new Image();
+imgHospital.src="https://cdn-icons-png.flaticon.com/128/2967/2967350.png";
 
-let player={x:0,y:0,speed:4};
+const imgCar=new Image();
+imgCar.src="https://cdn-icons-png.flaticon.com/128/743/743131.png";
+
+const imgPlayer=new Image();
+imgPlayer.src="https://cdn-icons-png.flaticon.com/128/4140/4140048.png";
+
+// данные
+let money=100;
+let buildings=[];
+let cars=[];
+let player={x:0,y:0};
 let keys={},mode=null;
-
-// NPC
-let npcs=[];
-for(let i=0;i<10;i++){
- npcs.push({x:Math.random()*1000,y:Math.random()*1000});
-}
 
 // деньги
 setInterval(()=>{
- save.money+=save.income;
- saveGame();
+ money+=50;
 },1000);
 
 // управление
 addEventListener("keydown",e=>keys[e.key]=true);
 addEventListener("keyup",e=>keys[e.key]=false);
 
-// стройка
-c.addEventListener("click",e=>{
+// клик (строить)
+c.onclick=e=>{
  let x=player.x+(e.clientX-c.width/2);
  let y=player.y+(e.clientY-c.height/2);
 
- if(mode==="house"&&save.money>=50){
-  save.money-=50;
-  save.buildings.push({x,y,type:"house"});
+ if(mode==="house" && money>=50){
+  money-=50;
+  buildings.push({x,y,type:"house"});
  }
- if(mode==="shop"&&save.money>=80){
-  save.money-=80;
-  save.buildings.push({x,y,type:"shop"});
+ if(mode==="hospital" && money>=100){
+  money-=100;
+  buildings.push({x,y,type:"hospital"});
  }
- if(mode==="hotel"&&save.money>=150){
-  save.money-=150;
-  save.buildings.push({x,y,type:"hotel"});
+ if(mode==="car" && money>=60){
+  money-=60;
+  cars.push({x,y});
  }
- if(mode==="hospital"&&save.money>=150){
-  save.money-=150;
-  save.buildings.push({x,y,type:"hospital"});
- }
- if(mode==="tower"&&save.money>=200){
-  save.money-=200;
-  save.buildings.push({x,y,type:"tower"});
- }
- if(mode==="car"&&save.money>=60){
-  save.money-=60;
-  save.cars.push({x,y});
- }
-});
-
-// улучшение
-function upgrade(){
- if(save.money>=100){
-  save.money-=100;
-  save.income+=20;
- }
-}
+};
 
 // движение
 function update(){
- if(keys["w"])player.y-=player.speed;
- if(keys["s"])player.y+=player.speed;
- if(keys["a"])player.x-=player.speed;
- if(keys["d"])player.x+=player.speed;
-
- save.cars.forEach(car=>{
-  car.x+=1;
-  if(car.x>2000)car.x=-2000;
- });
+ if(keys["w"])player.y-=4;
+ if(keys["s"])player.y+=4;
+ if(keys["a"])player.x-=4;
+ if(keys["d"])player.x+=4;
 }
 
-// человек
-function drawHuman(x,y){
- ctx.fillStyle="black";
- ctx.fillRect(x-5,y+10,4,10);
- ctx.fillRect(x+1,y+10,4,10);
-
- ctx.fillStyle="blue";
- ctx.fillRect(x-8,y-5,16,20);
-
- ctx.fillRect(x-12,y,6,4);
- ctx.fillRect(x+6,y,6,4);
-
- ctx.fillStyle="#f5c6a5";
- ctx.beginPath();
- ctx.arc(x,y-12,8,0,Math.PI*2);
- ctx.fill();
-}
-
-// рендер
+// рисуем
 function draw(){
  ctx.clearRect(0,0,c.width,c.height);
 
@@ -154,32 +104,25 @@ function draw(){
  }
 
  // здания
- save.buildings.forEach(b=>{
-  if(b.type==="house")ctx.fillStyle="red";
-  if(b.type==="shop")ctx.fillStyle="blue";
-  if(b.type==="hotel")ctx.fillStyle="purple";
-  if(b.type==="hospital")ctx.fillStyle="white";
-  if(b.type==="tower")ctx.fillStyle="black";
-
-  let h=b.type==="tower"?80:30;
-  ctx.fillRect(b.x-camX,b.y-camY,30,h);
+ buildings.forEach(b=>{
+  if(b.type==="house")
+   ctx.drawImage(imgHouse,b.x-camX,b.y-camY,40,40);
+  if(b.type==="hospital")
+   ctx.drawImage(imgHospital,b.x-camX,b.y-camY,40,40);
  });
 
  // машины
- save.cars.forEach(car=>{
-  ctx.fillStyle="black";
-  ctx.fillRect(car.x-camX,car.y-camY,20,10);
+ cars.forEach(car=>{
+  ctx.drawImage(imgCar,car.x-camX,car.y-camY,40,20);
  });
 
- // NPC
- npcs.forEach(n=>drawHuman(n.x-camX,n.y-camY));
-
  // игрок
- drawHuman(c.width/2,c.height/2);
+ ctx.drawImage(imgPlayer,c.width/2-20,c.height/2-20,40,40);
 
- money.innerText=Math.floor(save.money);
- income.innerText=save.income;
+ moneyEl.innerText=money;
 }
+
+const moneyEl=document.getElementById("money");
 
 // цикл
 function loop(){
