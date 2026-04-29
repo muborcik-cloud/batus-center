@@ -1,51 +1,21 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ULTRA GAMING PORTAL</title>
-    <!-- Подключаем наш второй файл со стилями -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Шрифт как в крутых играх -->
-    <link href="https://googleapis.com" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Game</title>
+
+<style>
+body { margin:0; overflow:hidden; }
+canvas { width:100vw; height:100vh; display:block; }
+</style>
+
 </head>
 <body>
 
-    <div class="video-bg">
-        <!-- Ссылка на красивое видео с YouTube на фоне (абстракция) -->
-        <iframe src="https://youtube.com" frameborder="0"></iframe>
-    </div>
+<canvas id="renderCanvas"></canvas>
 
-    <header>
-        <h1 class="neon-text">ULTRA GAMES</h1>
-        <p>Лучшие игры со всего мира</p>
-    </header>
-
-    <div class="container">
-        <!-- Карточка игры 1 -->
-        <div class="game-item">
-            <div class="game-preview" style="background-image: url('https://itch.zone');"></div>
-            <h3>Cyber Quest</h3>
-            <p>Уровень: Максимальный</p>
-            <a href="#" class="play-btn">ИГРАТЬ</a>
-        </div>
-
-        <!-- Карточка игры 2 -->
-        <div class="game-item">
-            <div class="game-preview" style="background-image: url('https://itch.zone');"></div>
-            <h3>Neon Runner</h3>
-            <p>Уровень: Миллиард</p>
-            <a href="#" class="play-btn">ИГРАТЬ</a>
-        </div>
-
-        <!-- Карточка игры 3 -->
-        <div class="game-item">
-            <div class="game-preview" style="background-image: url('https://itch.zone');"></div>
-            <h3>Space Battle</h3>
-            <p>Уровень: Ультра</p>
-            <a href="#" class="play-btn">ИГРАТЬ</a>
-        </div>
-    </div>
+<script src="https://cdn.babylonjs.com/babylon.js"></script>
+<script src="game.js"></script>
 
 </body>
 </html>
