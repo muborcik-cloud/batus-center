@@ -6,18 +6,29 @@ canvas.height = innerHeight;
 
 let money = 0;
 
+// камера
+let camera = {x:0,y:0};
+
+// игрок
+let player = {
+  x:200,
+  y:200,
+  inCar:false
+};
+
+// машины
+let cars = [];
+
+// объекты
+let objects = [];
+
+// деньги
 setInterval(()=>{
   money += 10;
   document.getElementById("money").innerText = money;
 },1000);
 
-// игрок (человечек)
-let player = {x:200, y:200};
-
-// объекты
-let objects = [];
-
-// картинки (реальные)
+// картинки
 const imgs = {
   house: new Image(),
   car: new Image(),
@@ -35,14 +46,20 @@ function buy(type){
   if(money < 100) return;
   money -= 100;
 
-  objects.push({
+  let obj = {
     type,
-    x: player.x + 60,
+    x: player.x + 100,
     y: player.y
-  });
+  };
+
+  objects.push(obj);
+
+  if(type === "car"){
+    cars.push(obj);
+  }
 }
 
-// 🎮 джойстик
+// джойстик
 let joy = {x:0,y:0};
 const stick = document.getElementById("stick");
 
@@ -55,48 +72,64 @@ document.getElementById("joystick").addEventListener("touchmove",(e)=>{
   stick.style.top = (30 + joy.y*20)+"px";
 });
 
-// движение
+// вход в машину
+function tryEnterCar(){
+  cars.forEach(car=>{
+    let dx = player.x - car.x;
+    let dy = player.y - car.y;
+
+    if(Math.abs(dx)<40 && Math.abs(dy)<40){
+      player.inCar = true;
+      player.car = car;
+    }
+  });
+}
+
+document.addEventListener("click", tryEnterCar);
+
+// обновление
 function update(){
-  player.x += joy.x*3;
-  player.y += joy.y*3;
+  if(player.inCar){
+    player.car.x += joy.x*5;
+    player.car.y += joy.y*5;
+    player.x = player.car.x;
+    player.y = player.car.y;
+  } else {
+    player.x += joy.x*3;
+    player.y += joy.y*3;
+  }
+
+  // камера следует
+  camera.x = player.x - canvas.width/2;
+  camera.y = player.y - canvas.height/2;
 }
 
 // рисование
 function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
+  // дороги (сеткой)
+  ctx.fillStyle="#999";
+  for(let i=-1000;i<2000;i+=200){
+    ctx.fillRect(i-camera.x, -1000-camera.y, 40, 3000);
+    ctx.fillRect(-1000-camera.x, i-camera.y, 3000, 40);
+  }
+
   // объекты
   objects.forEach(o=>{
-    ctx.drawImage(imgs[o.type], o.x, o.y, 40,40);
+    ctx.drawImage(imgs[o.type], o.x-camera.x, o.y-camera.y, 40,40);
   });
 
-  // человечек
-  // тело
-  ctx.fillStyle="blue";
-  ctx.fillRect(player.x,player.y,20,20);
+  // игрок
+  if(!player.inCar){
+    ctx.fillStyle="blue";
+    ctx.fillRect(player.x-camera.x,player.y-camera.y,20,20);
 
-  // голова
-  ctx.fillStyle="peachpuff";
-  ctx.beginPath();
-  ctx.arc(player.x+10,player.y-5,6,0,Math.PI*2);
-  ctx.fill();
-
-  // руки
-  ctx.strokeStyle="black";
-  ctx.beginPath();
-  ctx.moveTo(player.x,player.y+5);
-  ctx.lineTo(player.x-10,player.y+15);
-  ctx.moveTo(player.x+20,player.y+5);
-  ctx.lineTo(player.x+30,player.y+15);
-  ctx.stroke();
-
-  // ноги
-  ctx.beginPath();
-  ctx.moveTo(player.x+5,player.y+20);
-  ctx.lineTo(player.x,player.y+30);
-  ctx.moveTo(player.x+15,player.y+20);
-  ctx.lineTo(player.x+20,player.y+30);
-  ctx.stroke();
+    ctx.fillStyle="peachpuff";
+    ctx.beginPath();
+    ctx.arc(player.x-camera.x+10,player.y-camera.y-5,6,0,Math.PI*2);
+    ctx.fill();
+  }
 }
 
 // цикл
