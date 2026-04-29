@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Ultra City</title>
+<title>ULTIMATE LEVEL</title>
 
 <style>
 body { margin:0; overflow:hidden; }
@@ -11,47 +11,46 @@ body { margin:0; overflow:hidden; }
  position:fixed;
  top:10px;
  left:10px;
- background:#0008;
+ background:#000a;
  color:#fff;
  padding:10px;
  border-radius:10px;
+ font-family:Arial;
 }
 
 #joy{
  position:fixed;
  bottom:40px;
  left:40px;
- width:100px;
- height:100px;
+ width:120px;
+ height:120px;
  border-radius:50%;
  background:#ffffff22;
 }
 
 #stick{
  position:absolute;
- width:40px;
- height:40px;
+ width:50px;
+ height:50px;
  border-radius:50%;
  background:white;
- left:30px;
- top:30px;
+ left:35px;
+ top:35px;
 }
 </style>
-
 </head>
 <body>
 
 <div id="ui">
 ❤️ <span id="hp">100</span><br>
 💰 <span id="money">0</span><br>
-<button onclick="buyCar()">🚗 Машина</button>
+🚔 <span id="wanted">0</span>
 </div>
 
 <div id="joy"><div id="stick"></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/GLTFLoader.js"></script>
-
 <script src="app.js"></script>
+
 </body>
 </html>
