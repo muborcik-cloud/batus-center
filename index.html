@@ -2,54 +2,58 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>City Game</title>
+<title>Ultra City</title>
+
 <style>
-body { margin:0; overflow:hidden; }
-canvas { background:#7ec850; display:block; }
+body { margin:0; overflow:hidden; background:#87ceeb; }
 
 #ui {
  position:fixed;
  top:10px;
  left:10px;
- background:#000a;
- color:#fff;
+ background:#0008;
+ color:white;
  padding:10px;
+ border-radius:10px;
 }
 
-#joystick {
+#joy {
  position:fixed;
- bottom:20px;
- left:20px;
+ bottom:40px;
+ left:40px;
  width:100px;
  height:100px;
- background:#0005;
+ background:#0004;
  border-radius:50%;
 }
+
 #stick {
  width:40px;
  height:40px;
- background:#fff;
+ background:white;
  border-radius:50%;
  position:absolute;
- top:30px;
  left:30px;
+ top:30px;
 }
 </style>
 </head>
+
 <body>
+
+<div id="ui">
+💰 <span id="money">0</span><br>
+<button onclick="buy('house')">🏠</button>
+<button onclick="buy('shop')">🏪</button>
+<button onclick="buy('hospital')">🏥</button>
+<button onclick="buy('car')">🚗</button>
+</div>
 
 <canvas id="game"></canvas>
 
-<div id="ui">
-💰 <span id="money">0</span><br><br>
-<button onclick="buy('house')">🏠 Дом</button>
-<button onclick="buy('car')">🚗 Машина</button>
-<button onclick="buy('hospital')">🏥 Больница</button>
-<button onclick="buy('shop')">🏪 Магазин</button>
-</div>
-
-<div id="joystick"><div id="stick"></div></div>
+<div id="joy"><div id="stick"></div></div>
 
 <script src="app.js"></script>
+
 </body>
 </html>
