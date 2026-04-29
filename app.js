@@ -1,9 +1,17 @@
+// защита от ошибок
+window.onerror = function(e){
+ console.log("Ошибка:", e);
+};
+
+// сцена
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x87ceeb);
 
+// камера
 const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
 camera.position.set(0,10,15);
 
+// рендер
 const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(innerWidth, innerHeight);
 document.body.appendChild(renderer.domElement);
@@ -33,7 +41,7 @@ for(let i=-200;i<200;i+=30){
  scene.add(r2);
 }
 
-// небоскрёбы
+// здания
 for(let i=0;i<40;i++){
  let h = Math.random()*40+20;
  let b = new THREE.Mesh(
@@ -48,33 +56,27 @@ for(let i=0;i<40;i++){
  scene.add(b);
 }
 
-// загрузчик моделей
-const loader = new THREE.GLTFLoader();
-
-let player, car;
-
-// 🧍 игрок модель
-loader.load(
- "https://threejs.org/examples/models/gltf/RobotExpressive/RobotExpressive.glb",
- (gltf)=>{
-   player = gltf.scene;
-   player.scale.set(0.5,0.5,0.5);
-   player.position.set(0,0,0);
-   scene.add(player);
- }
+// fallback игрок (если модель не загрузится)
+let player = new THREE.Mesh(
+ new THREE.BoxGeometry(1,2,1),
+ new THREE.MeshStandardMaterial({color:0x0000ff})
 );
+player.position.y = 1;
+scene.add(player);
 
-// 🚗 машина модель
-function spawnCar(){
- loader.load(
-  "https://threejs.org/examples/models/gltf/Flamingo.glb",
-  (gltf)=>{
-    car = gltf.scene;
-    car.scale.set(0.05,0.05,0.05);
-    car.position.set(5,0,5);
-    scene.add(car);
-  }
+// машина
+let car = null;
+
+function buyCar(){
+ if(money < 100) return;
+ money -= 100;
+
+ car = new THREE.Mesh(
+  new THREE.BoxGeometry(2,1,4),
+  new THREE.MeshStandardMaterial({color:0xff0000})
  );
+ car.position.set(player.position.x,1,player.position.z);
+ scene.add(car);
 }
 
 // деньги
@@ -83,13 +85,6 @@ setInterval(()=>{
  money += 5;
  document.getElementById("money").innerText = money;
 },1000);
-
-// покупка машины
-function buyCar(){
- if(money < 100) return;
- money -= 100;
- spawnCar();
-}
 
 // джойстик
 let dx=0, dz=0;
@@ -110,36 +105,23 @@ document.getElementById("joy").addEventListener("touchend", ()=>{
  stick.style.top="30px";
 });
 
-// вход в дом (простая система)
-let inside = false;
-
-document.addEventListener("click", ()=>{
- if(!inside){
-   camera.position.set(0,5,0);
-   inside = true;
- } else {
-   camera.position.set(0,10,15);
-   inside = false;
- }
-});
-
-// игра
+// движение
 function animate(){
  requestAnimationFrame(animate);
 
- if(player){
-   player.position.x += dx*0.2;
-   player.position.z += dz*0.2;
-
-   camera.position.x = player.position.x + 10;
-   camera.position.z = player.position.z + 10;
-   camera.lookAt(player.position);
- }
-
  if(car){
-   car.position.x += dx*0.5;
-   car.position.z += dz*0.5;
+  car.position.x += dx*0.5;
+  car.position.z += dz*0.5;
+
+  player.position.copy(car.position);
+ } else {
+  player.position.x += dx*0.2;
+  player.position.z += dz*0.2;
  }
+
+ camera.position.x = player.position.x + 10;
+ camera.position.z = player.position.z + 10;
+ camera.lookAt(player.position);
 
  renderer.render(scene, camera);
 }
