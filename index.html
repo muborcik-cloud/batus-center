@@ -2,22 +2,50 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>My GTA Style Web Game</title>
-    <style>
-        body { margin: 0; overflow: hidden; background-color: #000; }
-        canvas { display: block; width: 100vw; height: 100vh; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULTRA GAMING PORTAL</title>
+    <!-- Подключаем наш второй файл со стилями -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Шрифт как в крутых играх -->
+    <link href="https://googleapis.com" rel="stylesheet">
 </head>
 <body>
-    <!-- Место для игры -->
-    <canvas id="renderCanvas"></canvas>
 
-    <!-- Подключаем движок Babylon.js для 3D (как в GTA) -->
-    <script src="https://babylonjs.com"></script>
-    <script src="https://babylonjs.com"></script>
-    
-    <!-- Подключаем скрипт самой игры -->
-    <script src="game.js"></script>
+    <div class="video-bg">
+        <!-- Ссылка на красивое видео с YouTube на фоне (абстракция) -->
+        <iframe src="https://youtube.com" frameborder="0"></iframe>
+    </div>
+
+    <header>
+        <h1 class="neon-text">ULTRA GAMES</h1>
+        <p>Лучшие игры со всего мира</p>
+    </header>
+
+    <div class="container">
+        <!-- Карточка игры 1 -->
+        <div class="game-item">
+            <div class="game-preview" style="background-image: url('https://itch.zone');"></div>
+            <h3>Cyber Quest</h3>
+            <p>Уровень: Максимальный</p>
+            <a href="#" class="play-btn">ИГРАТЬ</a>
+        </div>
+
+        <!-- Карточка игры 2 -->
+        <div class="game-item">
+            <div class="game-preview" style="background-image: url('https://itch.zone');"></div>
+            <h3>Neon Runner</h3>
+            <p>Уровень: Миллиард</p>
+            <a href="#" class="play-btn">ИГРАТЬ</a>
+        </div>
+
+        <!-- Карточка игры 3 -->
+        <div class="game-item">
+            <div class="game-preview" style="background-image: url('https://itch.zone');"></div>
+            <h3>Space Battle</h3>
+            <p>Уровень: Ультра</p>
+            <a href="#" class="play-btn">ИГРАТЬ</a>
+        </div>
+    </div>
+
 </body>
 </html>
